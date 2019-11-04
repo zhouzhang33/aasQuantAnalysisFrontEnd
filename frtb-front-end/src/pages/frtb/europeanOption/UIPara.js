@@ -1,3 +1,10 @@
+export var boDonglvQuMianChaZhiOptions=[
+  {key:'Linear of Delta',value:'Linear of Delta',label:'Linear of Delta'},
+];
+
+export var zheXianQuxianChaZhiOptions=[
+  {key:'Linear log normal',value:'Linear log normal',label:'Linear log normal'},
+];
 export var directionOptions=[
   {key:'Buy',value:'Buy',label:'Buy'},
   {key:'Sell',value:'Sell',label:'Sell'},
