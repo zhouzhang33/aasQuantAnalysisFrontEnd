@@ -52,6 +52,24 @@ export default {
         auth: false
       },
       component: () => import('@/pages/frtb/bond/index')
+    },
+    {
+      path: 'senarioAnalysis',
+      name: 'senarioAnalysis',
+      meta: {
+        title: 'Senario Analysis',
+        auth: false
+      },
+      component: () => import('@/pages/frtb/senarioAnalysis/index')
+    },
+    {
+      path: 'attribution',
+      name: 'attribution',
+      meta: {
+        title: 'Attribution',
+        auth: false
+      },
+      component: () => import('@/pages/frtb/attribution/index')
     }
   ]
 }

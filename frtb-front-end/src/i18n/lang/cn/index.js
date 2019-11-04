@@ -45,6 +45,8 @@ export default {
 
     frtb: 'FRTB',
     workflow: '任务列表',
+    senarioAnalysis:'情景分析',
+    attribution:'损益归因',
     fxfwd: '外汇远期',
     fxswap: '外汇利率互换',
     bond:'债券',
