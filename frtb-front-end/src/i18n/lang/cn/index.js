@@ -48,7 +48,7 @@ export default {
     senarioAnalysis:'情景分析',
     attribution:'损益归因',
     fxfwd: '外汇远期',
-    fxswap: '外汇利率互换',
+    fxswap: '外汇远掉期',
     bond:'债券',
     bermudanswap: 'Bermudan Swap',
     irsccs:'IRS CCS',

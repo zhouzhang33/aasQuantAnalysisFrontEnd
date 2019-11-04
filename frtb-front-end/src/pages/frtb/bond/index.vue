@@ -661,14 +661,14 @@
   .left-col2{
     height:40px;
     background:#454754;;
-    margin:auto;
+    margin:5px 0px 5px 0px;
     line-height: 40px;
     vertical-align: center;
   }
   .left-col1{
     height:40px;
     background:#312E30;
-    margin:auto;
+    margin:5px 0px 5px 0px;
     line-height: 40px;
     vertical-align: center;
   }

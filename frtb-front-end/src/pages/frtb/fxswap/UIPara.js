@@ -1,4 +1,4 @@
-export var currencyPairArray=[
+export var currencyPairOptions=[
   {
     key:'USD/CNY',
     label:'USD/CNY',
@@ -10,7 +10,45 @@ export var currencyPairArray=[
     value: 'USD/CAD',
   },
 ];
-
+export var yingYeRiGuiZeOptions=[
+  {
+    key:'调整至下一营业日',
+    label:'调整至下一营业日',
+    value:'调整至下一营业日',
+  },
+  {
+    key:'下一营业日(考虑月末)',
+    label:'下一营业日(考虑月末)',
+    value:'下一营业日(考虑月末)',
+  },
+  {
+    key:'下一营业日(考虑季末)',
+    label:'下一营业日(考虑季末)',
+    value:'下一营业日(考虑季末)',
+  },
+];
+export var jiXiTianShuFangshiOptions=[
+  {
+    key:'ACT/365',
+    label:'ACT/365',
+    value:'ACT/365',
+  },
+  {
+    key:'ACT/365(fixed)',
+    label:'ACT/36(fixed)5',
+    value:'ACT/365(fixed)',
+  },
+  {
+    key:'ACT/360',
+    label:'ACT/36',
+    value:'ACT/36',
+  },
+  {
+    key:'30/360',
+    label:'30/36',
+    value:'30/36',
+  },
+];
 export var nearPeriodOption=[
   {
     key:'SPOT',
@@ -33,6 +71,8 @@ export var currency1EarningCurveOptions = [
     label:'美元隐含利率曲线',
     value:'美元隐含利率曲线',
   },
+];
+export var currency2EarningCurveOptions = [
   {
     key:'人名币FR007收益利率曲线',
     label:'人名币FR007收益利率曲线',
@@ -70,8 +110,25 @@ export var curveNameOptions=[
 ];
 export var tradingTypeOptions=[
   {
-    key:'远期/掉期',
-    label:'远期/掉期',
-    value:'远期/掉期',
+    key:'远期',
+    label:'远期',
+    value:'远期',
+  },
+  {
+    key:'掉期',
+    label:'掉期',
+    value:'掉期',
+  },
+];
+export var tradingDirectionOptions=[
+  {
+    key:'买入',
+    label:'买入',
+    value:'买入',
+  },
+  {
+    key:'卖出',
+    label:'卖出',
+    value:'卖出',
   },
 ];

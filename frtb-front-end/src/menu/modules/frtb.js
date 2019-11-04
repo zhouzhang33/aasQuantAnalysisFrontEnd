@@ -4,7 +4,7 @@ export default {
   lang: 'menu.frtb',
   icon: 'pie-chart',
   children: (pre => [
-    { path: `${pre}fxfwd`, title: 'FX FWD', lang: 'menu.fxfwd', icon: 'bar-chart' },
+    // { path: `${pre}fxfwd`, title: 'FX FWD', lang: 'menu.fxfwd', icon: 'bar-chart' },
     { path: `${pre}fxswap`, title: 'FX FWD', lang: 'menu.fxswap', icon: 'bar-chart' },
     { path: `${pre}europeanOption`, title: 'European Option', lang: 'menu.europeanOption', icon: 'bar-chart' },
     { path: `${pre}irsccs`, title: 'IRS CCS', lang: 'menu.irsccs', icon: 'bar-chart' },
