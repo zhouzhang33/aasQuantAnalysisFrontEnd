@@ -6,7 +6,7 @@
 
                 <div class="my-collaps">
                     <el-collapse v-model="collapsActiveName" @change="handleChange">
-                        <el-collapse-item title="期权一" name="leg1">
+                        <el-collapse-item title="期权一输入" name="leg1">
 
                             <el-col :span="12">
                                 <div class="box-card-title">
@@ -285,7 +285,7 @@
 
 
                         </el-collapse-item>
-                        <el-collapse-item title="期权二" name="leg2">
+                        <el-collapse-item title="期权二输入" name="leg2">
 
                             <el-col :span="12">
                                 <div class="box-card-title">
@@ -615,7 +615,7 @@
                  </div>
             </div>
 
-            <div class="box-card" style="height:200px">
+            <div class="box-card" style="height:240px">
                 <div class="box-card-title">
                     <span>计算结果</span>
                 </div>
@@ -724,122 +724,137 @@
             </div>
 
             <el-col :span="12">
-                <div class="box-card" style="height:400px">
+                <div class="box-card" style="height:200px">
                     <div class="box-card-title">
-                        <el-checkbox-button v-model="DeltaHedge">
+                        <el-checkbox-button v-model="DeltaHedgeCalc" @click="clickDeltaHedgeCalc">
                             Delta Hedge
                         </el-checkbox-button>
                     </div>
-                    <div class="my-block">
-                        <el-col :span="4">
-                            <div class="left-col1">Spot Hedge头寸</div>
-                        </el-col>
-                        <el-col :span="5">
-                            <el-input-number
-                                    :controls="false"
-                                    class="oneContorls"
-                                    disabled
-                                    v-model="europeanResultLeg1.Rho"
-                            >
-                            </el-input-number>
-                        </el-col>
-                        <el-col :span="2">
-                            <el-tag class="oneContorls">
-                                USD
-                            </el-tag>
-                        </el-col>
-                    </div>
-                    <div class="my-block">
-                        <el-col :span="4">
-                            <div class="left-col1">Forward Hedge头寸</div>
-                        </el-col>
-                        <el-col :span="5">
-                            <el-input-number
-                                    :controls="false"
-                                    class="oneContorls"
-                                    disabled
-                                    v-model="europeanResultLeg1.Rho"
-                            >
-                            </el-input-number>
-                        </el-col>
-                        <el-col :span="2">
-                            <el-tag class="oneContorls">
-                                USD
-                            </el-tag>
-                        </el-col>
-                    </div>
+                    <div v-show="DeltaHedgeCalc === true">
+                        <div class="my-block" style="margin-top:10px">
+                            <el-col :span="5">
+                                <span class="left-col1">Spot Hedge头寸</span>
+                            </el-col>
+                            <el-col :span="5">
+                                <span class="left-col1" >
+                                <el-input-number
+                                        :controls="false"
+                                        class="oneContorls1"
+                                        disabled
+                                        v-model="europeanResultDeltaHedge.spotHedge"
+                                >
+                                </el-input-number>
+                                </span>
+                            </el-col>
 
+                            <el-col :span="2">
+                                <el-tag >
+                                    {{ europeanResultDeltaHedge.currencyUnit }}
+                                </el-tag>
+                            </el-col>
 
+                        </div>
+                        <div class="my-block" style="margin-top:10px">
+                            <el-col :span="5">
+                                <span class="left-col1">Forward Hedge头寸</span>
+                            </el-col>
+
+                            <el-col :span="5">
+                                <span class="left-col1">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls1"
+                                            disabled
+                                            v-model="europeanResultDeltaHedge.forwardHedge"
+                                    >
+                                    </el-input-number>
+                                </span>
+                            </el-col>
+                            <el-col :span="1">
+
+                                <el-tag>
+                                    {{ europeanResultVegaHedge.currencyUnit }}
+                                </el-tag>
+
+                            </el-col>
+
+                        </div>
+                    </div>
                 </div>
             </el-col>
             <el-col :span="12">
-                <div class="box-card" style="height:400px">
-                    <div class="box-card-title">
-                        <el-checkbox-button v-model="VegaHedge">
+                <div class="box-card" style="height:200px">
+                    <div class="box-card-title" >
+                        <el-checkbox-button v-model="VegaHedgeCalc" @click="clickVegaHedgeCalc">
                             Vega Hedge
                         </el-checkbox-button>
                     </div>
+                    <div v-show="VegaHedgeCalc === true">
+                        <div class="my-block" style="margin-top:10px">
+                            <el-col :span="4">
+                                <div class="left-col1">期权1类型</div>
+                                <div class="left-col2">期权2类型</div>
+                            </el-col>
+                            <el-col :span="7">
+                                <div class="left-col1" >
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls1"
+                                            disabled
+                                            v-model="europeanResultVegaHedge.option1Type"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col2" >
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls1"
+                                            disabled
+                                            v-model="europeanResultVegaHedge.option2Type"
+                                    >
+                                    </el-input-number>
+                                </div>
+                            </el-col>
 
-                    <div class="my-block">
-                        <el-col :span="4">
-                            <div class="left-col1">期权1类型</div>
-                            <div class="left-col1">期权2类型</div>
-                        </el-col>
-                        <el-col :span="7">
-                            <div class="left-col1" >
+                        </div>
+                        <div class="my-block" style="margin-top:10px">
+                            <el-col :span="4">
+                                <div class="left-col1">期权1本金</div>
+                                <div class="left-col2">期权2本金</div>
+                            </el-col>
+                            <el-col :span="5">
+                                <div class="left-col1">
                                 <el-input-number
                                         :controls="false"
-                                        class="oneContorls"
+                                        class="oneContorls1"
                                         disabled
-                                        v-model="europeanResultLeg1.Rho"
+                                        v-model="europeanResultVegaHedge.option1Amount"
                                 >
                                 </el-input-number>
-                            </div>
-                            <div class="left-col1" >
+                                </div>
+                                <div class="left-col2">
                                 <el-input-number
                                         :controls="false"
-                                        class="oneContorls"
+                                        class="oneContorls1"
                                         disabled
-                                        v-model="europeanResultLeg1.Rho"
+                                        v-model="europeanResultVegaHedge.option2Amount"
                                 >
                                 </el-input-number>
-                            </div>
-                        </el-col>
-
-                    </div>
-                    <div class="my-block">
-                        <el-col :span="4">
-                            <div class="left-col1">期权1本金</div>
-                            <div class="left-col2">期权2本金</div>
-                        </el-col>
-                        <el-col :span="5">
-                            <div class="left-col1">
-                            <el-input-number
-                                    :controls="false"
-                                    class="oneContorls"
-                                    disabled
-                                    v-model="europeanResultLeg1.Rho"
-                            >
-                            </el-input-number>
-                            </div>
-                            <div class="left-col2">
-                            <el-input-number
-                                    :controls="false"
-                                    class="oneContorls"
-                                    disabled
-                                    v-model="europeanResultLeg1.Rho"
-                            >
-                            </el-input-number>
-                            </div>
-                        </el-col>
-                        <el-col :span="2">
-                            <el-tag class="oneContorls">
-                                USD
-                            </el-tag>
-                            <el-tag class="oneContorls">
-                                USD
-                            </el-tag>
-                        </el-col>
+                                </div>
+                            </el-col>
+                            <el-col :span="2">
+                                <div class="left-col1">
+                                <el-tag>
+                                    {{ europeanResultVegaHedge.currencyUnit }}
+                                </el-tag>
+                                </div>
+                                <div class="left-col2">
+                                <el-tag>
+                                    {{ europeanResultVegaHedge.currencyUnit }}
+                                </el-tag>
+                                </div>
+                            </el-col>
+                        </div>
                     </div>
 
 
@@ -878,7 +893,7 @@
             { 'x': 3, 'y': 13, 'w': 9, 'h': 15.5, 'i': '4' },
           ],
           colNum: 12,
-          rowHeight: 42,
+          rowHeight: 41,
           isDraggable: false,
           isResizable: false,
           isMirrored: false,
@@ -943,26 +958,6 @@
 
           }],
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         europeanOptionLeg1Form:{
             currencyPair:'',
             direction:'',
@@ -1004,6 +999,27 @@
               benBiLiLvCurve:'人名币FR007收益利率曲线',
               benBiDaoQiYuanQiLiLv:'',
               waiBiDaoQiYuanQiLiLv:'',
+          },
+          DeltaHedgeCalc:true,
+          VegaHedgeCalc:false,
+          europeanResultDeltaHedge:{
+              spotHedge:'',
+              forwardHedge:'',
+              currencyUnit:'CNY'
+          },
+          europeanResultVegaHedge:{
+              option1Type:'',
+              option2Type:'',
+              option1Amount:'',
+              option2Amount:'',
+              currencyUnit:'CNY'
+          },
+          europeanResultVegaHedge:{
+              option1Type:'',
+              option1Amount:'',
+              option2Type:'',
+              option2Amount:'',
+              currencyUnit:'CNY'
           },
           europeanResultLeg1:{
               NPV:'',
@@ -1073,6 +1089,22 @@
     },
     methods: {
       // ****************************
+      clickVegaHedgeCalc(){
+           if(this.VegaHedgeCalc===true) {
+               this.VegaHedgeCalc = false;
+           }
+           else {
+               this.VegaHedgeCalc = true;
+           }
+        },
+        clickDeltaHedgeCalc(){
+            if(this.DeltaHedgeCalc===true) {
+                this.DeltaHedgeCalc = false;
+            }
+            else {
+                this.DeltaHedgeCalc = true;
+            }
+        },
       rowstyle (row) {
         if (row.rowIndex % 2 === 0) {
           return 'height:50px; background-color:#312E30;  text-align: left;color: white; border:0px; font-size: 16px'
@@ -1234,10 +1266,10 @@
         border-bottom-color: transparent;
         background: #333333;
         color: white;
-        font-size: 16px;
+        font-size: 20px;
     }
     .my-collaps .el-collapse-item__header {
-        font-size: 16px;
+        font-size: 20px;
         background: #333333;
         color: white;
         border-bottom: 1px solid transparent;
@@ -1248,7 +1280,13 @@
        border-bottom: 1px solid transparent;
     }
     .my-collaps .el-collapse {
-         border-top: 0px solid #EBEEF5;
-         border-bottom: 0px solid #EBEEF5;
+        border-top: 0px solid #EBEEF5;
+        border-bottom: 0px solid #EBEEF5;
+        border-radius: 5px;
+        /*padding: 5px;*/
+        //background-color: #2c2c41;
+
+        color: white;
+        margin: 2px 2px 0px 2px;
     }
 </style>
