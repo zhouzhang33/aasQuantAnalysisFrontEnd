@@ -3,791 +3,424 @@
         <d2-grid-layout
                 v-bind="layout"
                 @layout-updated="layoutUpdatedHandler">
-            <!--      <d2-grid-item-->
-            <!--              @move="moveHandler"-->
-            <!--              @moved="movedHandler"-->
-            <!--              @resize="resizeHandler"-->
-            <!--              @resized="resizedHandler"-->
-            <!--              >-->
-            <div style="padding:1px">
-            <el-col :span="24">
-              <div class='box-card' style="height:1005px;padding:0px 10px 0px 10px">
-                  <el-row>
-                      <div style="margin-top:10px">
-                          <!--            <el-form :inline="true" ref="swapFormBottomRef" :model="swapForm2" label-width="120px" style="width:90%" :label-position="left">-->
-                          <!--              <el-form-item label="">              -->
-                          <!--            </el-form>-->
-                          <span class="controls-a-line">选择记录</span>
-                          <span class="controls-a-line">
-                      <el-select
-                              placeholder="请选择记录"
-                              v-model="recordSelected"
-                              class="oneControlsLong"
-                      >
-                        <el-option
-                                :key="item.key"
-                                :label="item.label"
-                                :value="item.value"
-                                v-for="item in recordList"
-                        ></el-option>
-                     </el-select>
-                  </span>
-                          <span class="controls-a-line">
-                    <el-button
-                            type="infor"
-                    >
-                      保存记录
-                    </el-button>
-                  </span>
-                          <span class="controls-a-line">
-                    <el-button
-                            type="infor"
-                    >
-                      删除记录
-                    </el-button>
-                  </span>
-                          <span class="controls-a-line">
-                    <el-button
-                            type="infor"
-                    >
-                      清空记录
-                    </el-button>
-                  </span>
-
-                          <span class="controls-a-line" style="margin-left:50px">
-                     选择模板
-                   </span>
-
-                          <span class="controls-a-line">
-                    <el-select
-                            class="oneControlsLong"
-                            placeholder="请选择模板"
-                            v-model="templateSelected">
-                      <el-option
-                              :key="item.key"
-                              :label="item.label"
-                              :value="item.value"
-                              v-for="item in templateList"
-                      ></el-option>
-                   </el-select>
-                  </span>
-                      </div>
-                  </el-row>
-
-                  <el-row>
-                      <div style="margin-top:10px">
-                     <span class="controls-a-line">
-                       名义本金金额(万）
-                     </span>
-                          <span class="controls-a-line">
-                        <el-input-number
-                                class="oneControls"
-                                :controls="false"
-                                v-model="irsccsForm.nominalCaptial"
-                        >
-                        </el-input-number>
-                     </span>
-
-                          <span class="controls-a-line">
-                       币别
-                     </span>
-                          <span class="controls-a-line">
-                        <el-select
-                                class="oneControlsTiny"
-                                v-model="irsccsForm.currencyType"
-                                placeholder="请选择货币对">
-                            <el-option
-                                    v-for="item in currencyOption"
-                                    :key="item.key"
-                                    :label="item.label"
-                                    :value="item.value"
-                            ></el-option>
-                        </el-select>
-                     </span>
-                          <span class="controls-a-line">
-                       所在地
-                     </span>
-                          <span class="controls-a-line">
-                        <el-select
-                                class="oneControlsTiny"
-                                v-model="irsccsForm.tradeLocation"
-                                placeholder="选择所在地">
-                            <el-option
-                                    v-for="item in tradeLocationOption"
-                                    :key="item.key"
-                                    :label="item.label"
-                                    :value="item.value"
-                            ></el-option>
-                        </el-select>
-                     </span>
-                          <span class="controls-a-line">
-                       交易日
-                     </span>
-                          <span class="controls-a-line">
-                        <el-date-picker
-                                class="oneControls"
-                                placeholder="选择日期"
-                                type="date"
-                                v-model="irsccsForm.tradeDate">
-                        </el-date-picker>
-                     </span>
-                          <span class="controls-a-line">
-                       起息日
-                     </span>
-                          <span class="controls-a-line">
-                        <el-date-picker
-                                class="oneControls"
-                                placeholder="选择日期"
-                                type="date"
-                                v-model="irsccsForm.interestDate">
-                        </el-date-picker>
-                     </span>
-                          <span class="controls-a-line">
-                       到期日
-                     </span>
-                          <span class="controls-a-line">
-                        <el-date-picker
-                                class="oneControls"
-                                placeholder="选择日期"
-                                type="date"
-                                v-model="irsccsForm.dueDate">
-                        </el-date-picker>
-                     </span>
-                          <span class="controls-a-line">
-                       评估日
-                     </span>
-                          <span class="controls-a-line">
-                        <el-date-picker
-                                class="oneControls"
-                                placeholder="选择日期"
-                                type="date"
-                                v-model="irsccsForm.evaluationDate">
-                        </el-date-picker>
-                     </span>
-                      </div>
-                  </el-row>
-                      <div style="margin:50px 5px 0px 5px">
-                          <el-tabs v-model="activeTabName" style="width:100%">
-                              <el-tab-pane label="交易要素输入" name="交易要素输入">
-                                  <div class='box-card' style="height:500px">
-                                      <el-row>
-                                      <div >
-                                          <span>名义本金重置</span>
-                                      </div>
-                                      </el-row>
-                                      <el-row>
-                                      <div style="margin-top:20px">
-                                          <el-col :span="3">
-                                              <div class="left-col1"> 名义本金重置</div>
-                                              <div class="left-col1"> 重置状态</div>
-                                          </el-col>
-                                          <el-col :span="5">
-                                              <div>
-                                              <el-select class="oneControlsLong"
-                                                         placeholder="请选择"
-                                                         v-model="irsccsForm.resetNominalCapital">
-                                                  <el-option
-                                                          :key="item.key"
-                                                          :label="item.label"
-                                                          :value="item.value"
-                                                          v-for="item in resetNominalCapitalOption"
-                                                  ></el-option>
-                                              </el-select>
-                                              </div>
-                                              <div>
-                                                  <el-input-number
-                                                          class="oneControlsLong"
-                                                          :controls="false"
-                                                          v-model="irsccsForm.nominalCapitalResetFreq"
-                                                  >
-                                                  </el-input-number>
-                                              </div>
-                                          </el-col>
-                                          <el-col :span="3">
-                                              <div class="left-col1"> 首次名义本金重置日</div>
-                                              <div class="left-col1"> 名义本金重置比率(%)</div>
-                                          </el-col>
-                                          <el-col :span="5">
-                                              <div>
-                                                  <el-date-picker
-                                                          class="oneControlsLong"
-                                                          placeholder="选择日期"
-                                                          type="date"
-                                                          v-model="irsccsForm.firstNominalCapitalResetDate">
-                                                  </el-date-picker>
-                                              </div>
-                                              <div>
-                                                  <el-input-number
-                                                          class="oneControlsLong"
-                                                          :controls="false"
-                                                          v-model="irsccsForm.nominalCapitalResetRatio"
-                                                  >
-                                                  </el-input-number>
-                                              </div>
-                                          </el-col>
-                                          <el-col :span="3">
-                                              <div class="left-col1"> 名义本金重置频率</div>
-                                              <div class="left-col1"> 名义本金重置金额(万)</div>
-                                          </el-col>
-                                          <el-col :span="5">
-                                              <div>
-                                                  <el-input-number
-                                                          class="oneControlsLong"
-                                                          :controls="false"
-                                                          v-model="irsccsForm.nominalCapitalResetFreq"
-                                                  >
-                                                  </el-input-number>
-                                              </div>
-                                              <div>
-                                                  <el-input-number
-                                                          class="oneControlsLong"
-                                                          :controls="false"
-                                                          v-model="irsccsForm.nominalCapitalResetAmount"
-                                                  >
-                                                  </el-input-number>
-                                              </div>
-
-                                          </el-col>
-                                      </div>
-                                      </el-row>
-                                      <el-row>
-                                          <div style="margin-top:50px">
-                                          <el-col :span="12">
-                                              <el-col :span="12">
-                                                  <el-col :span="6">
-                                                      <div class="left-col2">本方</div>
-                                                      <div class="left-col2"> 利率设置</div>
-                                                      <div class="left-col2"> 固定利率（%）</div>
-                                                      <div class="left-col2"> 支付频率</div>
-                                                      <div class="left-col2"> 计息基准</div>
-                                                      <div class="left-col2"> 计息调整</div>
-                                                      <div class="left-col2"> 重置日调整</div>
-                                                      <div class="left-col2"> 首期起息日</div>
-                                                  </el-col>
-                                                  <el-col :span="18">
-                                                      <div>
-                                                          <el-select class="oneControlsLong"
-                                                                     placeholder="请选择"
-                                                                     v-model="irsccsForm.roleSelf">
-                                                              <el-option
-                                                                      :key="item.key"
-                                                                      :label="item.label"
-                                                                      :value="item.value"
-                                                                      v-for="item in tradeDirectionOption"
-                                                              ></el-option>
-                                                          </el-select>
-                                                      </div>
-                                                      <div>
-                                                          <el-select class="oneControlsLong"
-                                                                     placeholder="请选择"
-                                                                     v-model="irsccsForm.interestSetting">
-                                                              <el-option
-                                                                      :key="item.key"
-                                                                      :label="item.label"
-                                                                      :value="item.value"
-                                                                      v-for="item in interestSettingOption"
-                                                              ></el-option>
-                                                          </el-select>
-                                                      </div>
-                                                      <div>
-                                                          <el-input-number
-                                                                  class="oneControlsLong"
-                                                                  :controls="false"
-                                                                  v-model="irsccsForm.fixInterestRate"
-                                                          >
-                                                          </el-input-number>
-                                                      </div>
-                                                      <div>
-                                                          <el-select class="oneControlsLong"
-                                                                     placeholder="请选择"
-                                                                     v-model="irsccsForm.payFreq">
-                                                              <el-option
-                                                                      :key="item.key"
-                                                                      :label="item.label"
-                                                                      :value="item.value"
-                                                                      v-for="item in payFreqOption"
-                                                              ></el-option>
-                                                          </el-select>
-                                                      </div>
-                                                      <div>
-                                                          <el-select class="oneControlsLong"
-                                                                     placeholder="请选择"
-                                                                     v-model="irsccsForm.interestBaseline">
-                                                              <el-option
-                                                                      :key="item.key"
-                                                                      :label="item.label"
-                                                                      :value="item.value"
-                                                                      v-for="item in interestBaselineOption"
-                                                              ></el-option>
-                                                          </el-select>
-                                                      </div>
-                                                      <div>
-                                                          <el-select class="oneControlsLong"
-                                                                     placeholder="请选择"
-                                                                     v-model="irsccsForm.interestAdjustment">
-                                                              <el-option
-                                                                      :key="item.key"
-                                                                      :label="item.label"
-                                                                      :value="item.value"
-                                                                      v-for="item in interestAdjustmentOption"
-                                                              ></el-option>
-                                                          </el-select>
-                                                      </div>
-                                                      <div>
-                                                          <el-col :span="12">
-                                                              <el-select class="oneControls"
-                                                                         placeholder="请选择"
-                                                                         v-model="irsccsForm.resetDateAdjustment">
-                                                                  <el-option
-                                                                          :key="item.key"
-                                                                          :label="item.label"
-                                                                          :value="item.value"
-                                                                          v-for="item in resetDateAdjustmentOption"
-                                                                  ></el-option>
-                                                              </el-select>
-                                                          </el-col>
-                                                          <el-col :span="12">
-                                                              <span style="margin-right:5px">前</span>
-                                                              <el-input-number
-                                                                      :controls="false"
-                                                                      v-model="irsccsForm.resetDateAdjustmentDate"
-                                                                      class="oneControlsVeryTiny"
-                                                              >
-                                                              </el-input-number>
-                                                          </el-col>
-                                                      </div>
-                                                      <div>
-                                                          <el-date-picker
-                                                                  class="oneControlsLong"
-                                                                  placeholder="选择日期"
-                                                                  type="date"
-                                                                  v-model="irsccsForm.firstInterestDate">
-                                                          </el-date-picker>
-                                                      </div>
-                                                  </el-col>
-                                              </el-col>
-
-                                              <el-col :span="12">
-                                                  <div class="left-col2" style="color:transparent">a</div>
-                                                  <div class="left-col2" style="color:transparent">a</div>
-                                                  <div class="left-col2" style="color:transparent">a</div>
-                                                  <el-col :span="6">
-                                                      <div class="left-col2">重置频率</div>
-                                                      <div class="left-col2"> 计息方式</div>
-                                                      <div class="left-col2"> 支付日调整</div>
-                                                      <div class="left-col2"> 首次利率确定日</div>
-                                                      <div class="left-col2"> 期末畸零天期</div>
-                                                  </el-col>
-                                                  <el-col :span="18">
-                                                  <div>
-                                                      <el-select class="oneControlsLong"
-                                                                 placeholder="请选择"
-                                                                 v-model="irsccsForm.resetFreq">
-                                                          <el-option
-                                                                  :key="item.key"
-                                                                  :label="item.label"
-                                                                  :value="item.value"
-                                                                  v-for="item in resetFreqOption"
-                                                          ></el-option>
-                                                      </el-select>
-                                                  </div>
-                                                  <div>
-                                                      <el-select class="oneControlsLong"
-                                                                 placeholder="请选择"
-                                                                 v-model="irsccsForm.interestType">
-                                                          <el-option
-                                                                  :key="item.key"
-                                                                  :label="item.label"
-                                                                  :value="item.value"
-                                                                  v-for="item in interestTypeOption"
-                                                          ></el-option>
-                                                      </el-select>
-                                                  </div>
-                                                  <div>
-                                                      <el-select class="oneControlsLong"
-                                                                 placeholder="请选择"
-                                                                 v-model="irsccsForm.actualPayDateAdj">
-                                                          <el-option
-                                                                  :key="item.key"
-                                                                  :label="item.label"
-                                                                  :value="item.value"
-                                                                  v-for="item in actualPayDateAdjOption"
-                                                          ></el-option>
-                                                      </el-select>
-                                                  </div>
-
-                                                  <div>
-                                                      <el-date-picker
-                                                              class="oneControlsLong"
-                                                              placeholder="选择日期"
-                                                              type="date"
-                                                              v-model="irsccsForm.firstDeterminedInterestDate">
-                                                      </el-date-picker>
-                                                  </div>
-                                                  <div>
-                                                      <el-select class="oneControlsLong"
-                                                                 placeholder="请选择"
-                                                                 v-model="irsccsForm.endPeriodSpan">
-                                                          <el-option
-                                                                  :key="item.key"
-                                                                  :label="item.label"
-                                                                  :value="item.value"
-                                                                  v-for="item in endPeriodSpanOption"
-                                                          ></el-option>
-                                                      </el-select>
-                                                  </div>
-                                                  </el-col>
-                                              </el-col>
-                                          </el-col>
-
-                                          <el-col :span="12">
-                                              <el-col :span="12">
-                                                  <el-col :span="6">
-                                                      <div class="left-col2">本方</div>
-                                                      <div class="left-col2"> 利率设置</div>
-                                                      <div class="left-col2"> 浮动方向</div>
-                                                      <div class="left-col2"> 支付频率</div>
-                                                      <div class="left-col2"> 计息基准</div>
-                                                      <div class="left-col2"> 计息调整</div>
-                                                      <div class="left-col2"> 重置日调整</div>
-                                                      <div class="left-col2"> 首期起息日</div>
-                                                  </el-col>
-                                                  <el-col :span="18">
-                                                      <div>
-                                                          <el-select class="oneControlsLong"
-                                                                     placeholder="请选择"
-                                                                     v-model="irsccsForm.roleSelf2">
-                                                              <el-option
-                                                                      :key="item.key"
-                                                                      :label="item.label"
-                                                                      :value="item.value"
-                                                                      v-for="item in tradeDirectionOption"
-                                                              ></el-option>
-                                                          </el-select>
-                                                      </div>
-                                                      <div>
-                                                          <el-select class="oneControlsLong"
-                                                                     placeholder="请选择"
-                                                                     v-model="irsccsForm.interestSetting2">
-                                                              <el-option
-                                                                      :key="item.key"
-                                                                      :label="item.label"
-                                                                      :value="item.value"
-                                                                      v-for="item in interestSettingOption"
-                                                              ></el-option>
-                                                          </el-select>
-                                                      </div>
-
-
-                                                      <div>
-                                                          <el-select class="oneControlsLong"
-                                                                     placeholder="请选择"
-                                                                     v-model="irsccsForm.floatingInterestDir2">
-                                                              <el-option
-                                                                      :key="item.key"
-                                                                      :label="item.label"
-                                                                      :value="item.value"
-                                                                      v-for="item in floatingInterestDirOption"
-                                                              ></el-option>
-                                                          </el-select>                                                       .
-
-                                                      </div>
-
-
-                                                      <div>
-                                                          <el-select class="oneControlsLong"
-                                                                     placeholder="请选择"
-                                                                     v-model="irsccsForm.payFreq2">
-                                                              <el-option
-                                                                      :key="item.key"
-                                                                      :label="item.label"
-                                                                      :value="item.value"
-                                                                      v-for="item in payFreqOption"
-                                                              ></el-option>
-                                                          </el-select>
-                                                      </div>
-                                                      <div>
-                                                          <el-select class="oneControlsLong"
-                                                                     placeholder="请选择"
-                                                                     v-model="irsccsForm.interestBaseline2">
-                                                              <el-option
-                                                                      :key="item.key"
-                                                                      :label="item.label"
-                                                                      :value="item.value"
-                                                                      v-for="item in interestBaselineOption"
-                                                              ></el-option>
-                                                          </el-select>
-                                                      </div>
-                                                      <div>
-                                                          <el-select class="oneControlsLong"
-                                                                     placeholder="请选择"
-                                                                     v-model="irsccsForm.interestAdjustment2">
-                                                              <el-option
-                                                                      :key="item.key"
-                                                                      :label="item.label"
-                                                                      :value="item.value"
-                                                                      v-for="item in interestAdjustmentOption"
-                                                              ></el-option>
-                                                          </el-select>
-                                                      </div>
-                                                      <div>
-                                                          <el-col :span="12">
-                                                              <el-select class="oneControls"
-                                                                         placeholder="请选择"
-                                                                         v-model="irsccsForm.resetDateAdjustment2">
-                                                                  <el-option
-                                                                          :key="item.key"
-                                                                          :label="item.label"
-                                                                          :value="item.value"
-                                                                          v-for="item in resetDateAdjustmentOption"
-                                                                  ></el-option>
-                                                              </el-select>
-                                                          </el-col>
-                                                          <el-col :span="12">
-                                                              <span style="margin-right:5px">前</span>
-                                                              <el-input-number
-                                                                      :controls="false"
-                                                                      v-model="irsccsForm.resetDateAdjustmentDate2"
-                                                                      class="oneControlsVeryTiny"
-                                                              >
-                                                              </el-input-number>
-                                                          </el-col>
-                                                      </div>
-                                                      <div>
-                                                          <el-date-picker
-                                                                  class="oneControlsLong"
-                                                                  placeholder="选择日期"
-                                                                  type="date"
-                                                                  v-model="irsccsForm.firstInterestDate2">
-                                                          </el-date-picker>
-                                                      </div>
-                                                  </el-col>
-                                              </el-col>
-
-                                              <el-col :span="12">
-                                                  <div class="left-col2" style="color:transparent">a</div>
-                                                  <div class="left-col2" style="color:transparent">a</div>
-                                                  <el-col :span="6">
-                                                      <div class="left-col2"> 浮动利率(%)</div>
-                                                      <div class="left-col2"> 重置频率</div>
-                                                      <div class="left-col2"> 计息方式</div>
-                                                      <div class="left-col2"> 支付日调整</div>
-                                                      <div class="left-col2"> 首次利率确定日</div>
-                                                      <div class="left-col2"> 期末畸零天期</div>
-                                                  </el-col>
-                                                  <el-col :span="18">
-
-
-                                                      <div>
-                                                          <el-select class="oneControlsLong"
-                                                                     placeholder="请选择"
-                                                                     v-model="irsccsForm.floatingInterestRate2">
-                                                              <el-option
-                                                                      :key="item.key"
-                                                                      :label="item.label"
-                                                                      :value="item.value"
-                                                                      v-for="item in floatingInterestRateOption"
-                                                              ></el-option>
-                                                          </el-select>
-                                                      </div>
-
-
-                                                      <div>
-                                                          <el-select class="oneControlsLong"
-                                                                     placeholder="请选择"
-                                                                     v-model="irsccsForm.resetFreq2">
-                                                              <el-option
-                                                                      :key="item.key"
-                                                                      :label="item.label"
-                                                                      :value="item.value"
-                                                                      v-for="item in resetFreqOption"
-                                                              ></el-option>
-                                                          </el-select>
-                                                      </div>
-                                                      <div>
-                                                          <el-select class="oneControlsLong"
-                                                                     placeholder="请选择"
-                                                                     v-model="irsccsForm.interestType2">
-                                                              <el-option
-                                                                      :key="item.key"
-                                                                      :label="item.label"
-                                                                      :value="item.value"
-                                                                      v-for="item in interestTypeOption"
-                                                              ></el-option>
-                                                          </el-select>
-                                                      </div>
-                                                      <div>
-                                                          <el-select class="oneControlsLong"
-                                                                     placeholder="请选择"
-                                                                     v-model="irsccsForm.actualPayDateAdj2">
-                                                              <el-option
-                                                                      :key="item.key"
-                                                                      :label="item.label"
-                                                                      :value="item.value"
-                                                                      v-for="item in actualPayDateAdjOption"
-                                                              ></el-option>
-                                                          </el-select>
-                                                      </div>
-
-                                                      <div>
-                                                          <el-date-picker
-                                                                  class="oneControlsLong"
-                                                                  placeholder="选择日期"
-                                                                  type="date"
-                                                                  v-model="irsccsForm.firstDeterminedInterestDate2">
-                                                          </el-date-picker>
-                                                      </div>
-                                                      <div>
-                                                          <el-select class="oneControlsLong"
-                                                                     placeholder="请选择"
-                                                                     v-model="irsccsForm.endPeriodSpan2">
-                                                              <el-option
-                                                                      :key="item.key"
-                                                                      :label="item.label"
-                                                                      :value="item.value"
-                                                                      v-for="item in endPeriodSpanOption"
-                                                              ></el-option>
-                                                          </el-select>
-                                                      </div>
-                                                  </el-col>
-                                              </el-col>
-
-                                          </el-col>
-                                        </div>
-                                      </el-row>
-                                  </div>
-                              </el-tab-pane>
-                              <el-tab-pane label="折现零息曲线">折现零息曲线</el-tab-pane>
-                              <el-tab-pane label="远期推导曲线">角色管理</el-tab-pane>
-                              <el-tab-pane label="现金流">定时任务补偿</el-tab-pane>
-                              <el-tab-pane label="情景分析">现金流</el-tab-pane>
-                          </el-tabs>
-                      </div>
-                  <el-row>
-
-                      <div style="margin-top:50px">
-                          <el-col :span="5"><div style="color:transparent">a</div></el-col>
-                          <el-select class="controls-a-line"
-                                     placeholder="请选择"
-                                     v-model="irsccsForm.calculationMethod">
-                              <el-option
-                                      :key="item.key"
-                                      :label="item.label"
-                                      :value="item.value"
-                                      v-for="item in calculationMethodOption"
-                              ></el-option>
-                          </el-select>
-                          <el-button class="controls-a-line">试算</el-button>
-                          <span class="controls-a-line">NPV</span>
-                          <el-input-number
-                                  :controls="false"
-                                  v-model="irsccsForm.resetDateAdjustmentDate2"
-                                  class="controls-a-line"
-                          >
-                          </el-input-number>
-                          <span class="controls-a-line">DV</span>
-                          <el-input-number
-                                  :controls="false"
-                                  v-model="irsccsForm.resetDateAdjustmentDate2"
-                                  class="controls-a-line"
-                          >
-                          </el-input-number>
-                      </div>
-
-                  </el-row>
-
-               <el-row>
-                   <div style="margin-top:50px">
-                   <el-col :span="8">
-                       <div class="left-col1">货币1端: 本方</div>
-                       <div>
-                            <div>
-                                <el-col :span="6">
-                                    <div class="left-col1">NP1:</div>
-                                    <div class="left-col1">DV01:</div>
-                                </el-col>
-                                <el-col :span="18" class="oneControlsLong" >
-                                    <el-input-number
-                                            :controls="false"
-                                            v-model="irsccsForm.NPVCurrency1End"
-                                            class="oneControls"
-                                    >
-                                    </el-input-number>
-                                    <el-input-number
-                                            :controls="false"
-                                            v-model="irsccsForm.DVCurrency1End"
-                                            class="oneControls"
-                                    >
-                                    </el-input-number>
-                                </el-col>
+            <div class='box-card' style="height:60px">
+                <div class="my-block">
+                    <el-col :span="8">
+                        <el-col :span="8">
+                            <div class="left-col1">互换类型</div>
+                        </el-col>
+                        <el-col :span="16">
+                            <div class="left-col1">
+                                <el-select
+                                        placeholder="请选择记录"
+                                        v-model="recordSelected"
+                                        class="oneControls"
+                                >
+                                    <el-option
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                            v-for="item in recordList"
+                                    ></el-option>
+                                </el-select>
                             </div>
-                       </div>
-                   </el-col>
-
-                   <el-col :span="8">
-                       <div class="left-col1">货币2端: 本方</div>
-                       <div>
-                           <div>
-                               <el-col :span="6">
-                                   <div class="left-col1">NP1:</div>
-                                   <div class="left-col1">DV01:</div>
-                               </el-col>
-                               <el-col :span="18" class="oneControlsLong" >
-                                   <el-input-number
-                                           :controls="false"
-                                           v-model="irsccsForm.NPVCurrency2End"
-                                           class="oneControls"
-                                   >
-                                   </el-input-number>
-                                   <el-input-number
-                                           :controls="false"
-                                           v-model="irsccsForm.DVCurrency2End"
-                                           class="oneControls"
-                                   >
-                                   </el-input-number>
-                               </el-col>
-                           </div>
-                       </div>
-                   </el-col>
-
-                   <el-col :span="8">
-                       <div class="left-col1">汇总</div>
-                       <div>
-                           <div>
-                               <el-col :span="6">
-                                   <div class="left-col1">NP1:</div>
-                                   <div class="left-col1">DV01:</div>
-                               </el-col>
-                               <el-col :span="18" class="oneControlsLong" >
-                                   <el-input-number
-                                           :controls="false"
-                                           v-model="irsccsForm.NPVCurrencyAll"
-                                           class="oneControls"
-                                   >
-                                   </el-input-number>
-                                   <el-input-number
-                                           :controls="false"
-                                           v-model="irsccsForm.DVCurrencyAll"
-                                           class="oneControls"
-                                   >
-                                   </el-input-number>
-                               </el-col>
-                           </div>
-                       </div>
-                   </el-col>
-                   </div>
-               </el-row>
-
-
-
-
-
-
-
-
+                        </el-col>
+                    </el-col>
+                    <el-col :span="16">
+                        <div class="left-col1">
+                            <el-button type="infor">
+                                清空记录
+                            </el-button>
+                        </div>
+                    </el-col>
+                </div>
               </div>
-            </el-col>
-        </div>
+            <div class="box-card" style="height:60px">
+                <div class="my-block">
+                    <el-col :span="8">
+                        <el-col :span="8">
+                            <div class="left-col1">估值日</div>
+                        </el-col>
+                        <el-col :span="16">
+                            <div class="left-col1">
+                                <el-date-picker
+                                        class="oneControls"
+                                        placeholder="选择日期"
+                                        type="date"
+                                        v-model="irsccsFormLeg1.guZhiRi">
+                                </el-date-picker>
+                            </div>
+                        </el-col>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-col :span="8">
+                            <div class="left-col1">起息日</div>
+                        </el-col>
+                        <el-col :span="16">
+                            <div class="left-col1">
+                                <el-date-picker
+                                        class="oneControls"
+                                        placeholder="选择日期"
+                                        type="date"
+                                        v-model="irsccsFormLeg1.qiXiRi">
+                                </el-date-picker>
+                            </div>
+                        </el-col>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-col :span="8">
+                            <div class="left-col1">到期日</div>
+                        </el-col>
+                        <el-col :span="16">
+                            <div class="left-col1">
+                                <el-date-picker
+                                        class="oneControls"
+                                        placeholder="选择日期"
+                                        type="date"
+                                        v-model="irsccsFormLeg1.daoQiRi">
+                                </el-date-picker>
+                            </div>
+                        </el-col>
+                    </el-col>
+                </div>
+            </div>
+
+            <div class='box-card' style="height:500px">
+                <div class="box-card-title" >
+                    <span>交易要素</span>
+                </div>
+                <el-row>
+                    <div style="margin-top:50px">
+
+                        <el-col :span="11">
+                            <el-col :span="12">
+                                <el-col :span="8">
+                                    <div class="left-col2">收付方向</div>
+                                    <div class="left-col2">本金金额(万)</div>
+                                    <div class="left-col1" style="color:transparent">a</div>
+                                    <div class="left-col2">息票类型</div>
+                                    <div class="left-col2">付息频率</div>
+                                    <div class="left-col2">息票乘数</div>
+                                    <div class="left-col2">息票率乘数</div>
+                                    <div class="left-col2">首次付息日</div>
+                                </el-col>
+                                <el-col :span="16">
+                                    <div class="left-col1">
+                                        <el-select class="oneControls"
+                                                   placeholder="请选择"
+                                                   v-model="irsccsFormLeg1.direction">
+                                            <el-option
+                                                    :key="item.key"
+                                                    :label="item.label"
+                                                    :value="item.value"
+                                                    v-for="item in directionOptions"
+                                            ></el-option>
+                                        </el-select>
+                                    </div>
+                                    <div class="left-col2">
+                                        <el-input-number
+                                                :controls="false"
+                                                class="oneControls"
+                                                v-model="irsccsFormLeg1.Amount"
+                                        >
+                                        </el-input-number>
+                                    </div>
+                                    <div class="left-col1" style="color:transparent">a</div>
+                                    <div class="left-col1">
+                                        <el-select class="oneControls"
+                                                   placeholder="请选择"
+                                                   v-model="irsccsFormLeg1.xiPiaoLeiXing">
+                                            <el-option
+                                                    :key="item.key"
+                                                    :label="item.label"
+                                                    :value="item.value"
+                                                    v-for="item in xiPiaoLeiXingOptions"
+                                            ></el-option>
+                                        </el-select>
+                                    </div>
+                                    <div class="left-col1">
+                                        <el-select class="oneControls"
+                                                   placeholder="请选择"
+                                                   v-model="irsccsFormLeg1.fuXiPingLv">
+                                            <el-option
+                                                    :key="item.key"
+                                                    :label="item.label"
+                                                    :value="item.value"
+                                                    v-for="item in fuXiPingLvOptions"
+                                            ></el-option>
+                                        </el-select>
+                                    </div>
+                                    <div class="left-col1" >
+                                        <el-input-number
+                                                :controls="false"
+                                                class="oneContorls"
+                                                v-model="irsccsFormLeg1.xiPiaoLv"
+                                        >
+                                        </el-input-number>
+                                    </div>
+                                    <div class="left-col1" >
+                                        <el-input-number
+                                                :controls="false"
+                                                class="oneContorls"
+                                                v-model="irsccsFormLeg1.xiPiaoLvChengShu"
+                                        >
+                                        </el-input-number>
+                                    </div>
+                                    <div class="left-col2" >
+                                        <el-date-picker
+                                                class="oneContorls"
+                                                placeholder="选择日期"
+                                                type="date"
+                                                v-model="irsccsFormLeg1.shouCiFuXiRi">
+                                        </el-date-picker>
+                                    </div>
+                                </el-col>
+                            </el-col>
+                            <el-col :span="12">
+                                   <el-col :span="8">
+                                        <div class="left-col1" style="color:transparent">a</div>
+                                        <div class="left-col2"> 币种</div>
+                                        <div class="left-col1" style="color:transparent">a</div>
+                                       <div class="left-col1" style="color:transparent">a</div>
+                                        <div class="left-col2"> 计息方式</div>
+                                        <div class="left-col1" style="color:transparent">a</div>
+                                        <div class="left-col2"> 利差</div>
+                                        <div class="left-col2"> 尾付息日</div>
+                                   </el-col>
+                                <el-col :span="16">
+                                    <div class="left-col1" style="color:transparent">a</div>
+                                    <div class="left-col2">
+                                        <el-select class="oneControls"
+                                                   placeholder="请选择"
+                                                   v-model="irsccsFormLeg1.biZhong">
+                                            <el-option
+                                                    :key="item.key"
+                                                    :label="item.label"
+                                                    :value="item.value"
+                                                    v-for="item in currencyOptions"
+                                            ></el-option>
+                                        </el-select>
+                                    </div>
+                                    <div class="left-col1" style="color:transparent">a</div>
+                                    <div class="left-col1" style="color:transparent">a</div>
+                                    <div class="left-col2">
+                                        <el-select class="oneControls"
+                                                   placeholder="请选择"
+                                                   v-model="irsccsFormLeg1.jiXiFangShi">
+                                            <el-option
+                                                    :key="item.key"
+                                                    :label="item.label"
+                                                    :value="item.value"
+                                                    v-for="item in jiXiFangShiOptions"
+                                            ></el-option>
+                                        </el-select>
+                                    </div>
+                                    <div class="left-col1" style="color:transparent">a</div>
+                                    <div class="left-col1" >
+                                        <el-input-number
+                                                :controls="false"
+                                                class="oneContorls"
+                                                v-model="irsccsFormLeg1.liCha"
+                                        >
+                                        </el-input-number>
+                                    </div>
+                                    <div class="left-col2" >
+                                        <el-date-picker
+                                                class="oneContorls"
+                                                placeholder="选择日期"
+                                                type="date"
+                                                v-model="irsccsFormLeg1.weiciFuxiRi">
+                                        </el-date-picker>
+                                    </div>
+                                </el-col>
+                            </el-col>
+                        </el-col>
+                        <el-col :span="1">
+                            <div class="dividerStyle">a</div>
+                            <div class="dividerStyle">a</div>
+                            <div class="dividerStyle">a</div>
+                            <div class="dividerStyle">a</div>
+                            <div class="dividerStyle">a</div>
+                            <div class="dividerStyle">a</div>
+                            <div class="dividerStyle">a</div>
+                            <div class="dividerStyle">a</div>
+                        </el-col>
+                        <el-col :span="11">
+                            <el-col :span="12">
+                                <el-col :span="8">
+                                    <div class="left-col2">收付方向</div>
+                                    <div class="left-col2">本金金额(万)</div>
+                                    <div class="left-col1" style="color:transparent">a</div>
+                                    <div class="left-col2">息票类型</div>
+                                    <div class="left-col2">付息频率</div>
+                                    <div class="left-col2">息票乘数</div>
+                                    <div class="left-col2">息票率乘数</div>
+                                    <div class="left-col2">首次付息日</div>
+                                </el-col>
+                                <el-col :span="16">
+                                    <div class="left-col1">
+                                        <el-select class="oneControls"
+                                                   placeholder="请选择"
+                                                   v-model="irsccsFormLeg1.direction">
+                                            <el-option
+                                                    :key="item.key"
+                                                    :label="item.label"
+                                                    :value="item.value"
+                                                    v-for="item in directionOptions"
+                                            ></el-option>
+                                        </el-select>
+                                    </div>
+                                    <div class="left-col2">
+                                        <el-input-number
+                                                :controls="false"
+                                                class="oneControls"
+                                                v-model="irsccsFormLeg1.Amount"
+                                        >
+                                        </el-input-number>
+                                    </div>
+                                    <div class="left-col1" style="color:transparent">a</div>
+                                    <div class="left-col1">
+                                        <el-select class="oneControls"
+                                                   placeholder="请选择"
+                                                   v-model="irsccsFormLeg1.xiPiaoLeiXing">
+                                            <el-option
+                                                    :key="item.key"
+                                                    :label="item.label"
+                                                    :value="item.value"
+                                                    v-for="item in xiPiaoLeiXingOptions"
+                                            ></el-option>
+                                        </el-select>
+                                    </div>
+                                    <div class="left-col1">
+                                        <el-select class="oneControls"
+                                                   placeholder="请选择"
+                                                   v-model="irsccsFormLeg1.fuXiPingLv">
+                                            <el-option
+                                                    :key="item.key"
+                                                    :label="item.label"
+                                                    :value="item.value"
+                                                    v-for="item in fuXiPingLvOptions"
+                                            ></el-option>
+                                        </el-select>
+                                    </div>
+                                    <div class="left-col1" >
+                                        <el-input-number
+                                                :controls="false"
+                                                class="oneContorls"
+                                                v-model="irsccsFormLeg1.xiPiaoLv"
+                                        >
+                                        </el-input-number>
+                                    </div>
+                                    <div class="left-col1" >
+                                        <el-input-number
+                                                :controls="false"
+                                                class="oneContorls"
+                                                v-model="irsccsFormLeg1.xiPiaoLvChengShu"
+                                        >
+                                        </el-input-number>
+                                    </div>
+                                    <div class="left-col2" >
+                                        <el-date-picker
+                                                class="oneContorls"
+                                                placeholder="选择日期"
+                                                type="date"
+                                                v-model="irsccsFormLeg1.shouCiFuXiRi">
+                                        </el-date-picker>
+                                    </div>
+                                </el-col>
+                            </el-col>
+                            <el-col :span="12">
+                                <el-col :span="8">
+                                    <div class="left-col1" style="color:transparent">a</div>
+                                    <div class="left-col2"> 币种</div>
+                                    <div class="left-col1" style="color:transparent">a</div>
+                                    <div class="left-col1" style="color:transparent">a</div>
+                                    <div class="left-col2"> 计息方式</div>
+                                    <div class="left-col1" style="color:transparent">a</div>
+                                    <div class="left-col2"> 利差</div>
+                                    <div class="left-col2"> 尾付息日</div>
+                                </el-col>
+                                <el-col :span="16">
+                                    <div class="left-col1" style="color:transparent">a</div>
+                                    <div class="left-col2">
+                                        <el-select class="oneControls"
+                                                   placeholder="请选择"
+                                                   v-model="irsccsFormLeg1.biZhong">
+                                            <el-option
+                                                    :key="item.key"
+                                                    :label="item.label"
+                                                    :value="item.value"
+                                                    v-for="item in currencyOptions"
+                                            ></el-option>
+                                        </el-select>
+                                    </div>
+                                    <div class="left-col1" style="color:transparent">a</div>
+                                    <div class="left-col1" style="color:transparent">a</div>
+                                    <div class="left-col2">
+                                        <el-select class="oneControls"
+                                                   placeholder="请选择"
+                                                   v-model="irsccsFormLeg1.jiXiFangShi">
+                                            <el-option
+                                                    :key="item.key"
+                                                    :label="item.label"
+                                                    :value="item.value"
+                                                    v-for="item in jiXiFangShiOptions"
+                                            ></el-option>
+                                        </el-select>
+                                    </div>
+                                    <div class="left-col1" style="color:transparent">a</div>
+                                    <div class="left-col1" >
+                                        <el-input-number
+                                                :controls="false"
+                                                class="oneContorls"
+                                                v-model="irsccsFormLeg1.liCha"
+                                        >
+                                        </el-input-number>
+                                    </div>
+                                    <div class="left-col2" >
+                                        <el-date-picker
+                                                class="oneContorls"
+                                                placeholder="选择日期"
+                                                type="date"
+                                                v-model="irsccsFormLeg1.weiciFuxiRi">
+                                        </el-date-picker>
+                                    </div>
+                                </el-col>
+                            </el-col>
+                        </el-col>
+
+                    </div>
+                </el-row>
+            </div>
+            <div class='box-card' style="height:300px">
+                <el-col :span="11">
+                    <div class="box-card-title" >
+                        <span>定价要素</span>
+                    </div>
+                </el-col>
+                <el-col :span="1">
+                    <div class="dividerStyle">a</div>
+                </el-col>
+                <el-col :span="11">
+                    <div class="box-card-title" >
+                        <span>定价要素</span>
+                    </div>
+                </el-col>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </d2-grid-layout>
     </d2-container>
 </template>
@@ -849,51 +482,49 @@
           { key: 'tempalte1', label: 'tempalte1', value: 'tempalte1' }
         ],
         activeTabName:'交易要素输入',
-
-        irsccsForm:{
-          nominalCaptial:'',
-          currencyType:'人民币',
-          tradeLocation:'中国',
-          tradeDate: Date.now(),
-          interestDate:Date.now(),
-          dueDate:Date.now(),
-          evaluationDate:Date.now(),
-          resetNominalCapital:'否',
-          firstNominalCapitalResetDate:Date.now(),
-          nominalCapitalResetFreq:'0.1',
-          nominalCapitalResetStatus:'正常',
-          nominalCapitalResetRatio:'10',
-          nominalCapitalResetAmount:'1000',
-          roleSelf:'收取',
-          interestSetting:'固定利率',
-          fixInterestRate:'4.1',
-          payFreq:'1Y',
-          interestBaseline:'ACT/365',
-          interestAdjustment:'实际天数调整',
-          resetDateAdjustment:'本期初',
-          resetDateAdjustmentDate:'1',
-          firstInterestDate:Date.now(),
-          resetFreq:'1D',
-          interestType:'单利',
-          actualPayDateAdj:'经调整的下一营业日',
-          firstDeterminedInterestDate:Date.now(),
-          endPeriodSpan:'自成一期',
-          roleSelf2:'支付',
-          interestSetting2:'浮动利率',
-          floatingInterestDir2:'正浮动',
-          payFreq2:'1Y',
-          interestBaseline2:'ACT/365',
-          interestAdjustment2:'实际天数调整',
-          resetDateAdjustment2:'本期初',
-          resetDateAdjustmentDate2:'1',
-          firstInterestDate2:Date.now(),
-          resetFreq2:'1D',
-          interestType2:'单利',
-          actualPayDateAdj2:'经调整的下一营业日',
-          firstDeterminedInterestDate2:Date.now(),
-          endPeriodSpan2:'自成一期',
-          calculationMethod:'本币交易法'
+        irsccsFormLeg1:{
+            direction: '',
+            Amount:'',
+            biZhong:'',
+            xiPiaoLeiXing:'',
+            fuXiPingLv:'',
+            jiXiFangShi:'',
+            xiPiaoLv:'',
+            xiPiaoLvChengShu:'',
+            shouCiFuXiRi:'',
+            liCha:'',
+            weiciFuxiRi:'',
+            canKaoLiLv:'',
+            dingPanRiTiaoZheng:'',
+            jiXiJiZhun:'',
+            yingYeRiTiaoZheng:'',
+            jieJiaRi:'',
+            guZhiRi:'',
+            qiXiRi:'',
+            daoQiRi:'',
         },
+          irsccsFormLeg2:{
+              direction: '',
+              Amount:'',
+              biZhong:'',
+              xiPiaoLeiXing:'',
+              fuXiPingLv:'',
+              jiXiFangShi:'',
+              xiPiaoLv:'',
+              xiPiaoLvChengShu:'',
+              shouCiFuXiRi:'',
+              liCha:'',
+              weiciFuxiRi:'',
+              canKaoLiLv:'',
+              dingPanRiTiaoZheng:'',
+              jiXiJiZhun:'',
+              yingYeRiTiaoZheng:'',
+              jieJiaRi:'',
+              guZhiRi:'',
+              qiXiRi:'',
+              daoQiRi:'',
+          },
+
         irsccsResultForm:{
           NPV: '1',
           DV: '01',
@@ -982,34 +613,70 @@
             }
         }
     }
+    .dividerStyle{
+        height:45px;
+        margin: auto;
+        background:red;
+        width:5px;
+        color:transparent;
+        /*margin:5px 0px 5px 0px;*/
+    }
     .controls-a-line{
-      margin:10px 5px 5px 10px;
-    }
-    .form-num {
-        width: 220px;
-    }
-    .oneControlsLong {
-        width: 250px;
+        margin:10px 5px 5px 50px;
     }
     .oneControls {
-        width: 135px;
-    }
-    .oneControlTiny {
-        width: 80px;
-    }
-    .left-col1{
-        height:40px;
-        line-height: 40px;
-        vertical-align: center;
-        margin-left:50px;
+        width: 190px;
     }
     .left-col2{
         height:40px;
+        background:#454754;;
+        margin:5px 0px 5px 0px;
+        padding-left:20px;
         line-height: 40px;
         vertical-align: center;
     }
-    .oneControlsVeryTiny{
-        width:60px;
+    .my-block{
+        margin:0px 2px 0px 2px;
+        padding:0px 2px 0px 2px;
+    }
+    .left-col1{
+        height:40px;
+        background:#312E30;
+        margin:5px 0px 5px 0px;
+        padding-left:20px;
+        line-height: 40px;
+        vertical-align: center;
+    }
+    .right-col{
+        height:40px;
+        background:transparent;
+        margin:auto;
+        line-height: 40px;
+        vertical-align: center;
+
+    }
+    .middle-col{
+        height:40px;
+        margin:auto;
+        background:transparent;
+    }
+    .middle-col2{
+        height:40px;
+        margin:auto;
+        background:#454754;;
+    }
+    .twoControls {
+        width:108px;
+    }
+
+    .oneContorls {
+        width:190px;
+    }
+    .oneContorls1 {
+        width:150px;
+    }
+    .form-num{
+        width: 220px;
     }
 
 </style>

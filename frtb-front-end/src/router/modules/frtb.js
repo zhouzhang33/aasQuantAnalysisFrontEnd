@@ -70,6 +70,15 @@ export default {
         auth: false
       },
       component: () => import('@/pages/frtb/attribution/index')
+    },
+    {
+      path: 'swaption',
+      name: 'swaption',
+      meta: {
+        title: 'Swaption',
+        auth: false
+      },
+      component: () => import('@/pages/frtb/swaption/index')
     }
   ]
 }

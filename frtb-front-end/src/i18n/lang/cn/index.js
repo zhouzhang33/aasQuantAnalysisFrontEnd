@@ -50,6 +50,7 @@ export default {
     fxfwd: '外汇远期',
     fxswap: '外汇远掉期',
     bond:'债券',
+    swaption:'Swaption',
     bermudanswap: 'Bermudan Swap',
     irsccs:'IRS CCS',
     cds: 'CDS',

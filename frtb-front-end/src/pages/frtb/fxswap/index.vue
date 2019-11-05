@@ -897,25 +897,5 @@
 </style>
 
 <style lang="scss" >
-.box-card .el-form-item__label{
-  font-size:16px;
-  color:white;
-}
-  .box-card .el-radio__label {
-    font-size: 16px;
-    padding-left: 10px;
-    color:white;
-  }
-  .box-card .el-form--inline .el-form-item {
-    margin-right: 0px;
-  }
-  .box-card .el-input__inner {
-      background-color: #d0ceb6;
-  }
-  .box-card .el-input-number .el-input__inner {
-  text-align: left;
-}
-  .box-card .el-select__caret {
-      color: #222222!important;
-  }
+
 </style>

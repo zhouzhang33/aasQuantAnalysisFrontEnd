@@ -1,4 +1,13 @@
-export var currencyOption=[
+//
+export var directionOptions=[
+  {
+    key:'收取利息',  label:'收取利息', value:'收取利息',
+  },
+  {
+    key:'支付利息',  label:'支付利息', value:'支付利息',
+  },
+];
+export var currencyOptions=[
   {
     key:'人民币',
     label:'人民币',
@@ -10,6 +19,40 @@ export var currencyOption=[
     value:'美元',
   },
 ];
+export var xiPiaoLeiXingOptions=[
+  {
+    key:'固定',  label:'固定', value:'固定',
+  },
+  {
+    key:'浮动',  label:'浮动', value:'浮动',
+  },
+]
+export var fuXiPingLvOptions=[
+  {
+    key:'1M',  label:'1M', value:'1M',
+  },
+  {
+    key:'3M',  label:'3M', value:'3M',
+  },
+  {
+    key:'6M',  label:'6M', value:'6M',
+  },
+  {
+    key:'1Y',  label:'1Y', value:'1Y',
+  },
+]
+export var jiXiFangShiOptions=[
+  {
+    key:'单利',  label:'单利', value:'单利',
+  },
+  {
+    key:'复利',  label:'复利', value:'复利',
+  },
+]
+
+
+/////////////////////////
+
 export var tradeLocationOption=[
   {
     key:'中国',
