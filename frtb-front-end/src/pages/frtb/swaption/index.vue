@@ -10,13 +10,13 @@
             </div>
             <div class="my-block">
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                 <div class="left-col1">头寸</div>
                 <div class="left-col2">到期日</div>
                 <div class="left-col1">行权价</div>
                 <div class="left-col2">估值日</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-select
                             class="oneContorls"
@@ -58,13 +58,13 @@
               </el-col>
 
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1">交易类型</div>
                   <div class="left-col2">通知期限</div>
                   <div class="left-col1">交割方式</div>
                   <div class="left-col2" style="color:transparent">a</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-select
                             class="oneContorls"
@@ -109,13 +109,13 @@
               </el-col>
 
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1">交割日</div>
                   <div class="left-col2">交易对手</div>
                   <div class="left-col1">期权费</div>
                   <div class="left-col2" style="color:transparent">a</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-date-picker
                             class="oneContorls"
@@ -149,13 +149,13 @@
                 </el-col>
               </el-col>
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1">起息日</div>
                   <div class="left-col2">币种</div>
                   <div class="left-col1">期权费交付日</div>
                   <div class="left-col2" style="color:transparent">a</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-date-picker
                             class="oneContorls"
@@ -197,10 +197,10 @@
             </div>
             <div class="my-block">
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1">期权估值模型</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-select
                             class="oneContorls"
@@ -217,10 +217,10 @@
                 </el-col>
               </el-col>
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1">波动率类型</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-select
                             class="oneContorls"
@@ -244,10 +244,10 @@
             </div>
             <div class="my-block">
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1">票面利率</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-input-number
                             :controls="false"
@@ -259,10 +259,10 @@
                 </el-col>
               </el-col>
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1">支付频率</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-select
                             class="oneContorls"
@@ -279,10 +279,10 @@
                 </el-col>
               </el-col>
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1">计息天数方式</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-select
                             class="oneContorls"
@@ -299,10 +299,10 @@
                 </el-col>
               </el-col>
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1">营业日规则</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-select
                             class="oneContorls"
@@ -328,11 +328,11 @@
             </div>
             <div class="my-block">
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1">挂钩指数</div>
                   <div class="left-col2">支付频率</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-input
                             class="oneContorls"
@@ -356,11 +356,11 @@
                 </el-col>
               </el-col>
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1">浮动利率利差</div>
                   <div class="left-col2">计息天数方式</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-input-number
                             :controls="false"
@@ -385,11 +385,11 @@
                 </el-col>
               </el-col>
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1">杠杆率</div>
                   <div class="left-col2" style="color:transparent">a</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-input-number
                             :controls="false"
@@ -403,11 +403,11 @@
               </el-col>
 
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1">重置频率</div>
                   <div class="left-col2" style="color:transparent">a</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-select
                             class="oneContorls"
@@ -433,10 +433,10 @@
             </div>
             <div class="my-block">
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1">折现曲线</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-input
                             :controls="false"
@@ -448,10 +448,10 @@
                 </el-col>
               </el-col>
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1">远期曲线</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-input
                             :controls="false"
@@ -463,10 +463,10 @@
                 </el-col>
               </el-col>
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1">波动率曲面</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-input
                             :controls="false"
@@ -478,10 +478,10 @@
                 </el-col>
               </el-col>
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1" style="color:transparent">a</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" style="color:transparent">a</div>
                 </el-col>
               </el-col>
@@ -506,11 +506,11 @@
           </el-row>
             <el-row>
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1">平值行权价</div>
                   <div class="left-col2">NPV</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-input-number
                             :controls="false"
@@ -530,11 +530,11 @@
                 </el-col>
               </el-col>
                <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1">收益率</div>
                   <div class="left-col2">NPV(无费用)</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-input-number
                             :controls="false"
@@ -554,11 +554,11 @@
                 </el-col>
               </el-col>
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1">隐含波动率</div>
                   <div class="left-col2" style="color:transparent">a</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-input-number
                             :controls="false"
@@ -571,11 +571,11 @@
                 </el-col>
               </el-col>
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1">期权费</div>
                   <div class="left-col2" style="color:transparent">a</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-input-number
                             :controls="false"
@@ -591,10 +591,10 @@
 
             <el-row>
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1">DV01</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-input-number
                             :controls="false"
@@ -606,10 +606,10 @@
                 </el-col>
               </el-col>
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1">Gamma</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-input-number
                             :controls="false"
@@ -621,10 +621,10 @@
                 </el-col>
               </el-col>
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1">Vega</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-input-number
                             :controls="false"
@@ -636,10 +636,10 @@
                 </el-col>
               </el-col>
               <el-col :span="6">
-                <el-col :span="12">
+                <el-col :span="8">
                   <div class="left-col1">Theta</div>
                 </el-col>
-                <el-col :span="12">
+                <el-col :span="16">
                   <div class="left-col1" >
                     <el-input-number
                             :controls="false"

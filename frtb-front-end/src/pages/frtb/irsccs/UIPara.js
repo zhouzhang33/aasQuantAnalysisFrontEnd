@@ -50,6 +50,47 @@ export var jiXiFangShiOptions=[
   },
 ]
 
+export var jiXiTianShuFangshiOptions=[
+  {
+    key:'ACT/365',
+    label:'ACT/365',
+    value:'ACT/365',
+  },
+  {
+    key:'ACT/365(fixed)',
+    label:'ACT/36(fixed)5',
+    value:'ACT/365(fixed)',
+  },
+  {
+    key:'ACT/360',
+    label:'ACT/36',
+    value:'ACT/36',
+  },
+  {
+    key:'30/360',
+    label:'30/36',
+    value:'30/36',
+  },
+];
+export var jieJiaRiOptions=[
+  {
+    key:'北京',  label:'北京', value:'北京',
+  },
+];
+
+export var yingYeRiTiaoZhengOptions =[
+  {
+    key:'MF',  label:'MF', value:'MF',
+  },
+];
+export var targetOptions =[
+  {
+    key:'NPV',  label:'NPV', value:'NPV',
+  },
+  {
+    key:'利差',  label:'利差', value:'利差',
+  },
+];
 
 /////////////////////////
 

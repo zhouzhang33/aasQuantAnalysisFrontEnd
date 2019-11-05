@@ -3,8 +3,8 @@
         <d2-grid-layout
                 v-bind="layout"
                 @layout-updated="layoutUpdatedHandler">
-
                 <div class="my-collaps">
+                    <div class="box-card">
                     <el-collapse v-model="collapsActiveName" @change="handleChange">
                         <el-collapse-item title="期权一输入" name="leg1">
 
@@ -561,6 +561,7 @@
                             </el-col>
                         </el-collapse-item>
                     </el-collapse>
+                    </div>
                 </div>
             <div class="box-card" style="height:400px">
                 <div class="box-card-title">利率曲线</div>

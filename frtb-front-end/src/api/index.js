@@ -109,10 +109,10 @@ export function calcFxFWD (td, amount) {
 
 
 export function calcFXFWDSwap (td) {
-  var url_pre2 = "http://127.0.0.1:8000"
+  var url_pre2 = "http://127.0.0.1:8888"
   console.log(td,'calcFXFWDSwap')
   return request({
-    url: url_pre2+'/frtb/',
+    url: url_pre2+'/getFXFWDPricingResult?PricingType=GetNPV',
     //url:'http://47.102.152.250:9000/stockindex?code=sh000001',
     method: 'post',
     responseType: 'json',

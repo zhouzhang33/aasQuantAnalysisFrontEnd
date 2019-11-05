@@ -85,23 +85,22 @@
                 </div>
             </div>
 
-            <div class='box-card' style="height:500px">
+            <div class='box-card' style="height:470px">
                 <div class="box-card-title" >
                     <span>交易要素</span>
                 </div>
                 <el-row>
-                    <div style="margin-top:50px">
-
+                    <div>
                         <el-col :span="11">
                             <el-col :span="12">
                                 <el-col :span="8">
-                                    <div class="left-col2">收付方向</div>
+                                    <div class="left-col1">收付方向</div>
                                     <div class="left-col2">本金金额(万)</div>
                                     <div class="left-col1" style="color:transparent">a</div>
                                     <div class="left-col2">息票类型</div>
-                                    <div class="left-col2">付息频率</div>
+                                    <div class="left-col1">付息频率</div>
                                     <div class="left-col2">息票乘数</div>
-                                    <div class="left-col2">息票率乘数</div>
+                                    <div class="left-col1">息票率乘数</div>
                                     <div class="left-col2">首次付息日</div>
                                 </el-col>
                                 <el-col :span="16">
@@ -126,7 +125,7 @@
                                         </el-input-number>
                                     </div>
                                     <div class="left-col1" style="color:transparent">a</div>
-                                    <div class="left-col1">
+                                    <div class="left-col2">
                                         <el-select class="oneControls"
                                                    placeholder="请选择"
                                                    v-model="irsccsFormLeg1.xiPiaoLeiXing">
@@ -150,7 +149,7 @@
                                             ></el-option>
                                         </el-select>
                                     </div>
-                                    <div class="left-col1" >
+                                    <div class="left-col2" >
                                         <el-input-number
                                                 :controls="false"
                                                 class="oneContorls"
@@ -181,10 +180,10 @@
                                         <div class="left-col1" style="color:transparent">a</div>
                                         <div class="left-col2"> 币种</div>
                                         <div class="left-col1" style="color:transparent">a</div>
-                                       <div class="left-col1" style="color:transparent">a</div>
-                                        <div class="left-col2"> 计息方式</div>
-                                        <div class="left-col1" style="color:transparent">a</div>
-                                        <div class="left-col2"> 利差</div>
+                                       <div class="left-col2" style="color:transparent">a</div>
+                                        <div class="left-col1"> 计息方式</div>
+                                        <div class="left-col2" style="color:transparent">a</div>
+                                        <div class="left-col1"> 利差</div>
                                         <div class="left-col2"> 尾付息日</div>
                                    </el-col>
                                 <el-col :span="16">
@@ -202,8 +201,8 @@
                                         </el-select>
                                     </div>
                                     <div class="left-col1" style="color:transparent">a</div>
-                                    <div class="left-col1" style="color:transparent">a</div>
-                                    <div class="left-col2">
+                                    <div class="left-col2" style="color:transparent">a</div>
+                                    <div class="left-col1">
                                         <el-select class="oneControls"
                                                    placeholder="请选择"
                                                    v-model="irsccsFormLeg1.jiXiFangShi">
@@ -215,7 +214,7 @@
                                             ></el-option>
                                         </el-select>
                                     </div>
-                                    <div class="left-col1" style="color:transparent">a</div>
+                                    <div class="left-col2" style="color:transparent">a</div>
                                     <div class="left-col1" >
                                         <el-input-number
                                                 :controls="false"
@@ -248,13 +247,13 @@
                         <el-col :span="11">
                             <el-col :span="12">
                                 <el-col :span="8">
-                                    <div class="left-col2">收付方向</div>
+                                    <div class="left-col1">收付方向</div>
                                     <div class="left-col2">本金金额(万)</div>
                                     <div class="left-col1" style="color:transparent">a</div>
                                     <div class="left-col2">息票类型</div>
-                                    <div class="left-col2">付息频率</div>
+                                    <div class="left-col1">付息频率</div>
                                     <div class="left-col2">息票乘数</div>
-                                    <div class="left-col2">息票率乘数</div>
+                                    <div class="left-col1">息票率乘数</div>
                                     <div class="left-col2">首次付息日</div>
                                 </el-col>
                                 <el-col :span="16">
@@ -279,7 +278,7 @@
                                         </el-input-number>
                                     </div>
                                     <div class="left-col1" style="color:transparent">a</div>
-                                    <div class="left-col1">
+                                    <div class="left-col2">
                                         <el-select class="oneControls"
                                                    placeholder="请选择"
                                                    v-model="irsccsFormLeg1.xiPiaoLeiXing">
@@ -303,7 +302,7 @@
                                             ></el-option>
                                         </el-select>
                                     </div>
-                                    <div class="left-col1" >
+                                    <div class="left-col2" >
                                         <el-input-number
                                                 :controls="false"
                                                 class="oneContorls"
@@ -334,10 +333,10 @@
                                     <div class="left-col1" style="color:transparent">a</div>
                                     <div class="left-col2"> 币种</div>
                                     <div class="left-col1" style="color:transparent">a</div>
-                                    <div class="left-col1" style="color:transparent">a</div>
-                                    <div class="left-col2"> 计息方式</div>
-                                    <div class="left-col1" style="color:transparent">a</div>
-                                    <div class="left-col2"> 利差</div>
+                                    <div class="left-col2" style="color:transparent">a</div>
+                                    <div class="left-col1"> 计息方式</div>
+                                    <div class="left-col2" style="color:transparent">a</div>
+                                    <div class="left-col1"> 利差</div>
                                     <div class="left-col2"> 尾付息日</div>
                                 </el-col>
                                 <el-col :span="16">
@@ -355,8 +354,8 @@
                                         </el-select>
                                     </div>
                                     <div class="left-col1" style="color:transparent">a</div>
-                                    <div class="left-col1" style="color:transparent">a</div>
-                                    <div class="left-col2">
+                                    <div class="left-col2" style="color:transparent">a</div>
+                                    <div class="left-col1">
                                         <el-select class="oneControls"
                                                    placeholder="请选择"
                                                    v-model="irsccsFormLeg1.jiXiFangShi">
@@ -368,7 +367,7 @@
                                             ></el-option>
                                         </el-select>
                                     </div>
-                                    <div class="left-col1" style="color:transparent">a</div>
+                                    <div class="left-col2" style="color:transparent">a</div>
                                     <div class="left-col1" >
                                         <el-input-number
                                                 :controls="false"
@@ -392,35 +391,314 @@
                     </div>
                 </el-row>
             </div>
-            <div class='box-card' style="height:300px">
+            <div class='box-card' style="height:145px">
                 <el-col :span="11">
                     <div class="box-card-title" >
                         <span>定价要素</span>
                     </div>
+                    <div class="my-block">
+                        <el-col :span="12">
+                          <el-col :span="8">
+                            <div class="left-col1">计息基准</div>
+                            <div class="left-col2">节假日</div>
+                        </el-col>
+                          <el-col :span="16">
+                            <div class="left-col1" >
+                            <el-select class="oneControls"
+                                       placeholder="请选择"
+                                       v-model="irsccsFormLeg1.jiXiJiZhun">
+                                <el-option
+                                        :key="item.key"
+                                        :label="item.label"
+                                        :value="item.value"
+                                        v-for="item in jiXiTianShuFangshiOptions"
+                                ></el-option>
+                            </el-select>
+                            </div>
+                            <div class="left-col2" >
+                                <el-select class="oneControls"
+                                           placeholder="请选择"
+                                           v-model="irsccsFormLeg1.jieJiaRi">
+                                    <el-option
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                            v-for="item in jieJiaRiOptions"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                        </el-col>
+                        </el-col>
+                        <el-col :span="12">
+                            <el-col :span="8">
+                                <div class="left-col1">营业日调整</div>
+                                <div class="left-col2" style="color:transparent">a</div>
+                            </el-col>
+                            <el-col :span="16">
+                                <div class="left-col1" >
+                                    <el-select class="oneControls"
+                                               placeholder="请选择"
+                                               v-model="irsccsFormLeg1.yingYeRiTiaoZheng">
+                                        <el-option
+                                                :key="item.key"
+                                                :label="item.label"
+                                                :value="item.value"
+                                                v-for="item in yingYeRiTiaoZhengOptions"
+                                        ></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="left-col2" style="color:transparent">a</div>
+                            </el-col>
+                        </el-col>
+                    </div>
                 </el-col>
                 <el-col :span="1">
+                    <div class="dividerStyle">a</div>
+                    <div class="dividerStyle">a</div>
                     <div class="dividerStyle">a</div>
                 </el-col>
                 <el-col :span="11">
                     <div class="box-card-title" >
                         <span>定价要素</span>
                     </div>
+                    <div class="my-block">
+                        <el-col :span="12">
+                            <el-col :span="8">
+                                <div class="left-col1">计息基准</div>
+                                <div class="left-col2">节假日</div>
+                            </el-col>
+                            <el-col :span="16">
+                                <div class="left-col1" >
+                                    <el-select class="oneControls"
+                                               placeholder="请选择"
+                                               v-model="irsccsFormLeg1.jiXiJiZhun">
+                                        <el-option
+                                                :key="item.key"
+                                                :label="item.label"
+                                                :value="item.value"
+                                                v-for="item in jiXiTianShuFangshiOptions"
+                                        ></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="left-col2" >
+                                    <el-select class="oneControls"
+                                               placeholder="请选择"
+                                               v-model="irsccsFormLeg1.jieJiaRi">
+                                        <el-option
+                                                :key="item.key"
+                                                :label="item.label"
+                                                :value="item.value"
+                                                v-for="item in jieJiaRiOptions"
+                                        ></el-option>
+                                    </el-select>
+                                </div>
+                            </el-col>
+                        </el-col>
+                        <el-col :span="12">
+                            <el-col :span="8">
+                                <div class="left-col1">营业日调整</div>
+                                <div class="left-col2" style="color:transparent">a</div>
+                            </el-col>
+                            <el-col :span="16">
+                                <div class="left-col1" >
+                                    <el-select class="oneControls"
+                                               placeholder="请选择"
+                                               v-model="irsccsFormLeg1.yingYeRiTiaoZheng">
+                                        <el-option
+                                                :key="item.key"
+                                                :label="item.label"
+                                                :value="item.value"
+                                                v-for="item in yingYeRiTiaoZhengOptions"
+                                        ></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="left-col2" style="color:transparent">a</div>
+                            </el-col>
+                        </el-col>
+                    </div>
                 </el-col>
             </div>
 
+            <div class="box-card" style="height:105px">
+                <div class="box-card-title" >
+                    <span>计算结果</span>
+                </div>
+
+                <div class="my-block">
+                    <el-col :span="6">
+                        <el-col :span="8">
+                            <div class="left-col1">
+                                <el-button class="oneContorls">
+                                    计算
+                                </el-button>
+                            </div>
+                        </el-col>
+                        <el-col :span="16">
+                            <div class="left-col1" >
+                                <el-select class="oneContorls" v-model="irsccsResultForm.calculationTarget" placeholder="请选择">
+                                    <el-option
+                                            v-for="item in targetOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                        </el-col>
+                    </el-col>
+                    <el-col :span="6">
+                        <el-col :span="8">
+                            <div class="left-col1">NPV</div>
+
+                        </el-col>
+                        <el-col :span="16">
+                            <div class="left-col1" >
+                                <el-input-number
+                                        class="oneContorls"
+                                        :controls="false"
+                                        v-model="irsccsResultForm.NPV"
+                                >
+                                </el-input-number>
+                            </div>
+                        </el-col>
+                    </el-col>
+                    <el-col :span="6">
+                        <el-col :span="8">
+                            <div class="left-col1">应计利息</div>
+                        </el-col>
+                        <el-col :span="16">
+                            <div class="left-col1" >
+                                <el-input-number
+                                        class="oneContorls"
+                                        :controls="false"
+                                        v-model="irsccsResultForm.yinJiLiXi"
+                                >
+                                </el-input-number>
+                            </div>
+                        </el-col>
+                    </el-col>
+                    <el-col :span="6">
+                        <el-col :span="8">
+                            <div class="left-col1">DV01</div>
+                        </el-col>
+                        <el-col :span="16">
+                            <div class="left-col1" >
+                                <el-input-number
+                                        class="oneContorls"
+                                        :controls="false"
+                                        v-model="irsccsResultForm.DV01"
+                                >
+                                </el-input-number>
+                            </div>
+                        </el-col>
+                    </el-col>
+                </div>
+            </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
+            <div class="box-card" style="height:145px">
+                <el-col :span="11">
+                    <div class="box-card-title" >
+                        <span> {{ irsccsFormLeg1. direction}}端  </span>
+                    </div>
+                    <div class="my-block">
+                        <el-col :span="12">
+                            <el-col :span="8">
+                                <div class="left-col1">NPV</div>
+                                <div class="left-col2">DV01</div>
+                            </el-col>
+                            <el-col :span="16">
+                                <div class="left-col1" >
+                                    <el-input-number
+                                            class="oneContorls"
+                                            :controls="false"
+                                            v-model="irsccsResultForm.NPVLeg1"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col2" >
+                                    <el-input-number
+                                            class="oneContorls"
+                                            :controls="false"
+                                            v-model="irsccsResultForm.DV01Leg1"
+                                    >
+                                    </el-input-number>
+                                </div>
+                            </el-col>
+                        </el-col>
+                        <el-col :span="12">
+                            <el-col :span="8">
+                                <div class="left-col1">应计利息</div>
+                                <div class="left-col2" style="color:transparent">a</div>
+                            </el-col>
+                            <el-col :span="16">
+                                <div class="left-col1" >
+                                    <el-input-number
+                                            class="oneContorls"
+                                            :controls="false"
+                                            v-model="irsccsResultForm.yinJiLiXiLeg1"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col2" style="color:transparent">a</div>
+                            </el-col>
+                        </el-col>
+                    </div>
+                </el-col>
+                <el-col :span="1">
+                    <div class="dividerStyle">a</div>
+                    <div class="dividerStyle">a</div>
+                    <div class="dividerStyle">a</div>
+                </el-col>
+                <el-col :span="11">
+                    <div class="box-card-title" >
+                        <span> {{ irsccsFormLeg2. direction}}端  </span>
+                    </div>
+                    <div class="my-block">
+                        <el-col :span="12">
+                            <el-col :span="8">
+                                <div class="left-col1">NPV</div>
+                                <div class="left-col2">DV01</div>
+                            </el-col>
+                            <el-col :span="16">
+                                <div class="left-col1" >
+                                    <el-input-number
+                                            class="oneContorls"
+                                            :controls="false"
+                                            v-model="irsccsResultForm.NPVLeg1"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col2" >
+                                    <el-input-number
+                                            class="oneContorls"
+                                            :controls="false"
+                                            v-model="irsccsResultForm.DV01Leg1"
+                                    >
+                                    </el-input-number>
+                                </div>
+                            </el-col>
+                        </el-col>
+                        <el-col :span="12">
+                            <el-col :span="8">
+                                <div class="left-col1">应计利息</div>
+                                <div class="left-col2" style="color:transparent">a</div>
+                            </el-col>
+                            <el-col :span="16">
+                                <div class="left-col1" >
+                                    <el-input-number
+                                            class="oneContorls"
+                                            :controls="false"
+                                            v-model="irsccsResultForm.yinJiLiXiLeg1"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col2" style="color:transparent">a</div>
+                            </el-col>
+                        </el-col>
+                    </div>
+                </el-col>
+            </div>
         </d2-grid-layout>
     </d2-container>
 </template>
@@ -465,7 +743,7 @@
             { 'x': 3, 'y': 13, 'w': 9, 'h': 15.5, 'i': '4' },
           ],
           colNum: 12,
-          rowHeight: 32.5,
+          rowHeight: 34,
           isDraggable: false,
           isResizable: false,
           isMirrored: false,
@@ -483,7 +761,7 @@
         ],
         activeTabName:'交易要素输入',
         irsccsFormLeg1:{
-            direction: '',
+            direction: '收取利息',
             Amount:'',
             biZhong:'',
             xiPiaoLeiXing:'',
@@ -504,7 +782,7 @@
             daoQiRi:'',
         },
           irsccsFormLeg2:{
-              direction: '',
+              direction: '支付利息',
               Amount:'',
               biZhong:'',
               xiPiaoLeiXing:'',
@@ -527,13 +805,15 @@
 
         irsccsResultForm:{
           NPV: '1',
-          DV: '01',
-          NPVCurrency1End: '1',
-          DVCurrency1End: '2',
-          NPVCurrency2End: '3',
-          DVCurrency2End: '4',
-          NPVCurrencyAll: '5',
-          DVCurrencyAll: '6',
+          DV01: '1',
+          yinJiLiXi:'',
+          NPVLeg1: '1',
+          DV01Leg1: '1',
+          yinJiLiXiLeg1:'',
+          NPVLeg2: '1',
+          DV01Leg2: '1',
+          yinJiLiXiLeg2:'',
+          calculationTarget:'',
         }
 
 
@@ -616,7 +896,7 @@
     .dividerStyle{
         height:45px;
         margin: auto;
-        background:red;
+        background:#FFE600;
         width:5px;
         color:transparent;
         /*margin:5px 0px 5px 0px;*/
