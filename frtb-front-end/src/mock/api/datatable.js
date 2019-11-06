@@ -2,8 +2,8 @@ import data_a from  './table_data.json'
 import data_l from  './table_data_l.json'
 import data_s from  './table_data_s.json'
 import credit_examine from './credit_examine.json'
-import aml from './aml.json'
-import aml2 from './aml2.json'
+// import aml from './aml.json'
+// import aml2 from './aml2.json'
 // import frtbworkflow from './frtbworkflow'
 
 const frtbworkflow= [{
@@ -43,7 +43,7 @@ const frtbworkflow= [{
     progress: 100,
     details: 'View Details'
   },]
-}, 
+},
 {
   id: '30',
   name: 'LoadTrades',
@@ -488,6 +488,7 @@ export default [
         }
       };
     }
-  }
+  },
+
 
 ]

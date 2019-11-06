@@ -199,9 +199,7 @@
                   </div>
               </el-col>
                 </div>
-
-
-            <div class='box-card' style="height:155px">
+          <div class='box-card' style="height:155px">
                 <div class="box-card-title">
                     <span>近端</span>
                 </div>
@@ -217,7 +215,7 @@
                                     class="oneContorls"
                                     placeholder="选择日期"
                                     type="date"
-                                    v-model="swapForm.jinDuanQixiRi">
+                                    v-model="swapForm.jinDuanQiXiRi">
                             </el-date-picker>
                         </div>
                         <div class="left-col2" >
@@ -225,7 +223,7 @@
                                     class="oneContorls"
                                     placeholder="选择日期"
                                     type="date"
-                                    v-model="swapForm.jinDuanJiaogeRi">
+                                    v-model="swapForm.jinDuanJiaoGeRi">
                             </el-date-picker>
                         </div>
                     </el-col>
@@ -280,8 +278,7 @@
                 </el-col>
                 </div>
             </div>
-
-            <div class='box-card' style="height:155px">
+          <div class='box-card' style="height:155px">
                 <div class="box-card-title">
                     <span>远端</span>
                 </div>
@@ -320,7 +317,7 @@
                             <el-input-number
                                     :controls="false"
                                     class="oneContorls"
-                                    v-model="swapForm.waiBiyuanDuanJingE"
+                                    v-model="swapForm.waiBiYuanDuanJingE"
                             >
                             </el-input-number>
                         </div>
@@ -328,7 +325,7 @@
                             <el-input-number
                                     :controls="false"
                                     class="oneContorls"
-                                    v-model="swapForm.waiBiyuanDuanLiLv"
+                                    v-model="swapForm.waiBiYuaDuanLiLv"
                             >
                             </el-input-number>
                         </div>
@@ -336,15 +333,15 @@
                 </el-col>
                 <el-col :span="8">
                     <el-col :span="12">
-                        <div class="left-col1">本币近端金额</div>
-                        <div class="left-col2">本币近端利率</div>
+                        <div class="left-col1">本币远端金额</div>
+                        <div class="left-col2">本币远端利率</div>
                     </el-col>
                     <el-col :span="12">
                         <div class="left-col1" >
                             <el-input-number
                                     :controls="false"
                                     class="oneContorls"
-                                    v-model="swapForm.benBiyuanDuanJingE"
+                                    v-model="swapForm.benBiYuaDuanJingE"
                             >
                             </el-input-number>
                         </div>
@@ -352,7 +349,7 @@
                             <el-input-number
                                     :controls="false"
                                     class="oneContorls"
-                                    v-model="swapForm.benBiyuanDuanLiLv"
+                                    v-model="swapForm.benBiYuaDuanLiLv"
                             >
                             </el-input-number>
                         </div>
@@ -360,9 +357,6 @@
                 </el-col>
                 </div>
             </div>
-
-
-
           <div class='box-card' style="height:135px">
               <div class="box-card-title">
                   <span>计算结果</span>
@@ -406,9 +400,7 @@
 
             </div>
           </div>
-
-
-            <div class='box-card' style="height:385px">
+          <div class='box-card' style="height:385px">
                 <div class="box-card-title">
                     <span>套利空间计算</span>
                 </div>
@@ -513,18 +505,14 @@
                   </div>
 
               </div>
-
-        </el-col>
-
-
-
+       </el-col>
       </div>
-
       <div>
-            <el-dialog
+          <el-dialog
                     title="利率曲线"
                     :visible.sync="interestialogTableVisible"
                     :append-to-body="true"
+                    width="70%"
 
             >
                 <div class='box-card' style="height:100%">
@@ -535,8 +523,13 @@
                         :cell-style="rowstyle"
                         :header-cell-style="headerstyle"
                 >
-                    <el-table-column property="date" label="日期" ></el-table-column>
-                    <el-table-column property="rate" label="利率"></el-table-column>
+                    <el-table-column property="MarketDataType" label="MarketDataType" ></el-table-column>
+                    <el-table-column property="Source" label="Source"></el-table-column>
+                    <el-table-column property="Currency" label="Currency"></el-table-column>
+                    <el-table-column property="Tenor" label="Tenor"></el-table-column>
+                    <el-table-column property="ASK" label="ASK"></el-table-column>
+                    <el-table-column property="BID" label="BID"></el-table-column>
+                    <el-table-column property="MID" label="MID"></el-table-column>
                 </el-table>
                 </div>
             </el-dialog>
@@ -552,7 +545,8 @@
   import {
     pricing,
     calcFxFWD,
-    calcFXFWDSwap
+    calcFXFWDSwap,
+    getInterestCurve
   } from '@api/index'
   import Calendar from 'vue-calendar-component'
   import {
@@ -565,7 +559,7 @@
       curveNameOptions,
       tradingTypeOptions,
       tradingDirectionOptions,
-  } from './UIPara'
+  } from '../UIPara/UIPara'
   export default {
     components: {
       Calendar
@@ -595,39 +589,27 @@
         swapForm: {
               currencyPair: 'USD/CNY',
               tradingType: '掉期',
-              yuanDuanMaiMaiFanagxiang: '买入',
+              yuanDuanMaiMaiFanagxiang: '卖出外币',
               tradingDate: Date.now(),
               currency1InterestCurve: '美元隐含利率曲线',
               currency2InterestCurve: '人名币FR007收益利率曲线',
               intepolationType: '线性插值',
               jiXiTianShuFangshi: 'ACT/365',
               yingYeRiGuiZe: '调整至下一营业日',
-              jinDuanHuiLv: '',
-              yuanDuanHuiLv: '',
+              jinDuanHuiLv: 6542.1,
+              yuanDuanHuiLv: 6.5421,
               jinDuanQiXiRi:  Date.now(),
               jinDuanJiaoGeRi:  Date.now(),
-              waiBiJinDuanJingE: '',
-              waiBiJinDuanLiLv: '',
-              benBiJinDuanJingE: '',
-              benBiJinDuanLiLv: '',
-              waiBiYuanDuanJingE: '',
-              waiBiYuaDuanLiLv: '',
-              benBiYuaDuanJingE: '',
-              benBiYuaDuanLiLv: '',
-              jinDuanQixiRi: Date.now(),
-              jinDuanJiaogeRi: Date.now(),
-              waiBiJinDuanJingE: '',
-              waiBiJinDuanLiLv: '',
-              benBiJinDuanJingE: '',
-              benBiJinDuanLiLv: '',
+              waiBiJinDuanJingE: 1000,
+              waiBiJinDuanLiLv: 0.0201,
+              benBiJinDuanJingE: 6542.1,
+              benBiJinDuanLiLv: 0.021,
+              waiBiYuanDuanJingE: 6555.2,
+              waiBiYuaDuanLiLv: 0.0350,
+              benBiYuaDuanJingE: 100,
+              benBiYuaDuanLiLv: 0.024,
               yuanDuanQixiRi: Date.now(),
               yuanDuanJiaogeRi: Date.now(),
-              waiBiyuanDuanJingE: '',
-              waiBiyuanDuanLiLv: '',
-              benBiyuanDuanJingE: '',
-              benBiyuanDuanLiLv: '',
-
-
           },
           swapTaoLiForm:{
             waiBiLiLvCurve:'美元隐含利率曲线',
@@ -698,12 +680,33 @@
     methods: {
       // ****************************
         showWaibiInterestCurve(){
-            this.interestCurveData=this.interestWaiBiCurveData
-            this.interestialogTableVisible=true;
+            var self = this;
+            getInterestCurve('USD_OIS').then(res => {
+                self.interestCurveData = res.list;
+                console.log(self.MarketDataLeg1,'data');
 
+                // self.MarketDataLeg1.forEach(onerow => {
+                //     console.log( parseFloat(onerow['利率']),'floatnummber' )
+                //     data.push([onerow['日期'],parseFloat(onerow['利率'])])
+                // });
+                console.log(data,'data2')
+                // self.myechats.setOption({
+                //     series: [{
+                //         data: data
+                //     }]
+                // });
+
+            });
+
+           // this.interestCurveData=this.interestWaiBiCurveData
+            this.interestialogTableVisible=true;
         },
         showBenbiInterestCurve(){
-            this.interestCurveData=this.interestBenBiCurveData
+            var self = this;
+            getInterestCurve('CNY_Repo7D').then(res => {
+                self.interestCurveData = res.list;
+            });
+            // this.interestCurveData=this.interestWaiBiCurveData
             this.interestialogTableVisible=true;
         },
 

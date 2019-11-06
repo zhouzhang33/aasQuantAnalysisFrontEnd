@@ -172,8 +172,8 @@ export default {
         method: ""
       },
       // ************************* 表格数据 *******************
-
-      wrokflowTableData: [{
+      wrokflowTableData:null,
+      wrokflowTableData1: [{
         id: '20',
         name: 'LoadRates',
         status: 'success',
@@ -281,7 +281,7 @@ export default {
       // aml2().then(res => {
       //   console.log(res.list)
       // });
-
+      console.log('in get table')
       frtbWorkFlow().then(res => {
         self.wrokflowTableData = res.list;
       });

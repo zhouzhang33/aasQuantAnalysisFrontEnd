@@ -69,7 +69,7 @@
               <div class="box-card-title">
                 <span>  传入的参数  </span>
               </div>
-              <div id='leftCure' style='margin:5px;width:90%;height:300px'></div>
+              <div id='leftCure' style='margin:5px;width:800px;height:300px'></div>
             </div>
           </div>
           <div class="box-card" style="height:400px;padding-top:20px">
@@ -338,7 +338,7 @@ export default {
   .vue-grid-layout {
     //background-color: $color-bg;
     //
-    background-color: #222222;
+    background-color: #333333;
     border-radius: 4px;
     margin: -18px;
     .page_card {

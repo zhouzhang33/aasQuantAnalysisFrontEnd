@@ -1,16 +1,13 @@
 <template>
-  <d2-container :filename="filename" type="full" class="page" better-scroll>
-    <d2-grid-layout
-            v-bind="layout">
-      <div class="box-card" style="height:530px;width:100%">
-        <div class="box-card-title">
-          {{ curvename  }}
-        </div>
-        <div id='surfcurve' style='margin:5px;width:600px;height:500px'></div>
+
+      <div class="box-card" style="margin:auto;height:530px;width:90%">
+<!--        <div class="box-card-title">-->
+<!--          {{ curvename  }}-->
+<!--        </div>-->
+        <div id='surfcurve' style='margin:auto;width:600px;height:500px'></div>
       </div>
 <!--      </d2-grid-item>-->
-    </d2-grid-layout>
-  </d2-container>
+
 </template>
 
 <script>
@@ -30,7 +27,7 @@ export default {
   data () {
     return {
       filename: __filename,
-      // props:['curvename'],
+       props: ['curvename'],
       layout: {
         layout: [
           { 'x': 0, 'y': 0, 'w':  3, 'h': 13,'i': '0' },
@@ -49,7 +46,6 @@ export default {
         useCssTransforms: true
       },
     //这里是图标的options
-      curvename:'test',
       myechartSurf:null,
       echartSurfOption:{
         tooltip: {},

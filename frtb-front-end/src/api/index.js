@@ -85,6 +85,21 @@ export function frtbWorkFlow () {
   })
 }
 
+////frtb data function
+export function getDiscountCurve(){
+  return request({
+        url:'/frtbdata/discountcurve',
+        method:'get'
+      })
+}
+export function getInterestCurve(curveName){
+  return request({
+    url:'/frtbdata/'+curveName,
+    method:'get'
+  })
+}
+
+
 // *******************************
 var url_pre = "http://localhost:9990";
 export function cpus () {
@@ -119,3 +134,5 @@ export function calcFXFWDSwap (td) {
     data: td
   })
 }
+
+

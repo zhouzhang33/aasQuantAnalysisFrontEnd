@@ -1,0 +1,14 @@
+[
+{"MarketDataType":"Curve_CNY_Repo7D","Source":"BLOOMBERG","Currency":"CNY","Tenor":"ON","ASK":"0.0162","BID":"0.0162","MID":"0.0162"},
+{"MarketDataType":"Curve_CNY_Repo7D","Source":"BLOOMBERG","Currency":"CNY","Tenor":"7D","ASK":"0.0238","BID":"0.0238","MID":"0.0238"},
+{"MarketDataType":"Curve_CNY_Repo7D","Source":"BLOOMBERG","Currency":"CNY","Tenor":"3m","ASK":"0.02625","BID":"0.0257","MID":"0.025975"},
+{"MarketDataType":"Curve_CNY_Repo7D","Source":"BLOOMBERG","Currency":"CNY","Tenor":"6m","ASK":"0.0264","BID":"0.0254","MID":"0.0259"},
+{"MarketDataType":"Curve_CNY_Repo7D","Source":"BLOOMBERG","Currency":"CNY","Tenor":"9m","ASK":"0.0265","BID":"0.0255","MID":"0.026"},
+{"MarketDataType":"Curve_CNY_Repo7D","Source":"BLOOMBERG","Currency":"CNY","Tenor":"1y","ASK":"0.0266","BID":"0.0257","MID":"0.02615"},
+{"MarketDataType":"Curve_CNY_Repo7D","Source":"BLOOMBERG","Currency":"CNY","Tenor":"2y","ASK":"0.0271","BID":"0.0262","MID":"0.02665"},
+{"MarketDataType":"Curve_CNY_Repo7D","Source":"BLOOMBERG","Currency":"CNY","Tenor":"3y","ASK":"0.0279","BID":"0.02703","MID":"0.027465"},
+{"MarketDataType":"Curve_CNY_Repo7D","Source":"BLOOMBERG","Currency":"CNY","Tenor":"4y","ASK":"0.0288","BID":"0.02793","MID":"0.028365"},
+{"MarketDataType":"Curve_CNY_Repo7D","Source":"BLOOMBERG","Currency":"CNY","Tenor":"5y","ASK":"0.0291","BID":"0.029075","MID":"0.0290875"},
+{"MarketDataType":"Curve_CNY_Repo7D","Source":"BLOOMBERG","Currency":"CNY","Tenor":"7y","ASK":"0.0315","BID":"0.0295","MID":"0.0305"},
+{"MarketDataType":"Curve_CNY_Repo7D","Source":"BLOOMBERG","Currency":"CNY","Tenor":"10y","ASK":"0.0329","BID":"0.0309","MID":"0.0319"}
+]
