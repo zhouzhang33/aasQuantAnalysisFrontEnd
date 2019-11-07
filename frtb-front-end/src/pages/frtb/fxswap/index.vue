@@ -895,6 +895,9 @@
  .form-num{
    width: 220px;
  }
+  .curvebutton{
+      width:190px;
+  }
 </style>
 
 <style lang="scss" >

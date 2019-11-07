@@ -688,7 +688,7 @@
                 </div>
             </div>
             <el-col :span="12">
-                <div class="box-card" style="height:200px">
+                <div class="box-card" style="height:144px">
                     <div class="box-card-title">
                         <el-checkbox-button v-model="DeltaHedgeCalc" @click="clickDeltaHedgeCalc">
                             Delta Hedge
@@ -747,7 +747,7 @@
                 </div>
             </el-col>
             <el-col :span="12">
-                <div class="box-card" style="height:200px">
+                <div class="box-card" style="height:144px">
                     <div class="box-card-title" >
                         <el-checkbox-button v-model="VegaHedgeCalc" @click="clickVegaHedgeCalc">
                             Vega Hedge
@@ -1303,7 +1303,7 @@
         text-align: center;
     }
     .curvebutton{
-        width:200px;
+        width:190px;
     }
 </style>
 

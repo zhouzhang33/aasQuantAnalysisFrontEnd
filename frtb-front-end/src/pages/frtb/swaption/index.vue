@@ -445,7 +445,7 @@
                     </el-input>
                   </div>
                   <div class="left-col2">
-                    <el-button type="info" class="curvebutton" >查看折现曲线</el-button>
+                    <el-button type="info" class="curvebutton" @click="showBenbiInterestCurve">查看折现曲线</el-button>
                   </div>
                 </el-col>
               </el-col>
@@ -464,7 +464,7 @@
                     </el-input>
                   </div>
                   <div class="left-col2">
-                    <el-button type="info" class="curvebutton" >查看远期曲线</el-button>
+                    <el-button type="info" class="curvebutton" @click="showBenbiInterestCurve">查看远期曲线</el-button>
                   </div>
                 </el-col>
               </el-col>
@@ -500,7 +500,7 @@
             </div>
           </div>
           <!--定价结果-->
-          <div class="box-card" style="height:266px">
+          <div class="box-card" style="height:271px">
           <div class="box-card-title" style="margin-bottom:10px">
             定价结果
           </div>
@@ -740,7 +740,7 @@ export default {
           { 'x': 3, 'y': 13, 'w': 9, 'h': 15.5, 'i': '4' },
         ],
         colNum: 12,
-        rowHeight: 32,
+        rowHeight: 34,
         isDraggable: false,
         isResizable: false,
         isMirrored: false,
@@ -930,7 +930,7 @@ export default {
   width: 220px;
 }
 .curvebutton{
-  width:200px;
+  width:190px;
 }
 </style>
 

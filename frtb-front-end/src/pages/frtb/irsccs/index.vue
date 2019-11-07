@@ -662,7 +662,7 @@
                     </el-col>
                 </div>
             </div>
-            <div class="box-card" style="height:145px">
+            <div class="box-card" style="height:169px">
                 <el-col :span="11">
                     <div class="box-card-title" >
                         <span> {{ irsccsFormLeg1. direction}}端  </span>
@@ -1046,8 +1046,7 @@
         width: 220px;
     }
     .curvebutton{
-        width:200px;
-        text-align: center;
+        width:190px;
     }
 </style>
 

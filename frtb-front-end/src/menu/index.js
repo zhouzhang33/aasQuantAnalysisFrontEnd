@@ -80,6 +80,12 @@ export const menuHeader = [
     path: '/frtb/swaption',
     name: 'swaption'
   },
+  {
+    title: 'FX Digital Option',
+    icon: 'tachometer',
+    path: '/frtb/fxdigitaloption',
+    name: 'fxdigitaloption'
+  },
   frtbanalysis,
   frtbconfig,
 ]

@@ -289,6 +289,12 @@ export var volatilityTypeOptions=[
   },
 
 ]
+export var digitalOptionTypeOptions=[
+      {
+        key:'补充类型', label:'补充类型', value:'补充类型',
+      },
+
+]
 ///////////////////////////////////
 
 

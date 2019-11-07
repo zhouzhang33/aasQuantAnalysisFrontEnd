@@ -10,6 +10,7 @@ export default {
     { path: `${pre}irsccs`, title: 'IRS CCS', lang: 'menu.irsccs', icon: 'bar-chart' },
     { path: `${pre}bond`, title: 'Bond', lang: 'menu.bond', icon: 'bar-chart' },
     { path: `${pre}swaption`, title: 'Swaption', lang: 'menu.swaption', icon: 'bar-chart' },
+    { path: `${pre}fxdigitaloption`, title: 'FX Digital Option', lang: 'FX Digital Option', icon: 'bar-chart' },
     { path: `${pre}senarioAnalysis`, title: 'Senario Analysis', lang: 'menu.senarioAnalysis', icon: 'bar-chart' },
     { path: `${pre}attribution`, title: 'Attribution', lang: 'menu.attribution', icon: 'bar-chart' },
     { path: `${pre}bermudanswap`, title: 'FX FWD', lang: 'menu.bermudanswap', icon: 'bar-chart' },

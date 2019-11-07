@@ -55,6 +55,15 @@ export default {
       component: () => import('@/pages/frtb/swaption/index')
     },
     {
+      path: 'fxdigitaloption',
+      name: 'fxdigitaloption',
+      meta: {
+        title: 'FX Digital Option',
+        auth: false
+      },
+      component: () => import('@/pages/frtb/fxdigitaloption/index')
+    },
+    {
       path: 'senarioAnalysis',
       name: 'senarioAnalysis',
       meta: {
