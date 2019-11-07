@@ -9,7 +9,7 @@ import filters from './modules/filters'
 import business from './modules/business'
 import layoutHeaderAside from '@/layout/header-aside'
 import frtb from './modules/frtb'
-
+import frtbconfig from './modules/frtbconfig'
 /**
  * 在主框架内显示
  */
@@ -29,60 +29,7 @@ const frameIn = [
       //   },
       //   component: () => import('@/pages/index')
       // },
-      {
-        path: '/frtb/workflow',
-        name: 'index',
-        meta: {
-          title: '任务列表',
-          auth: true
-        },
-        component: () => import('@/pages/frtb/workflow')
-      },
-      {
-        path: '/frtb/MTM',
-        name: 'MTM',
-        meta: {
-          title: 'Market to Market',
-          auth: true
-        },
-        component: () => import('@/pages/frtb/MTM')
-      },
-      {
-        path: '/frtb/capital',
-        name: 'capital',
-        meta: {
-          title: 'Capital',
-          auth: true
-        },
-        component: () => import('@/pages/frtb/capital')
-      },
-      {
-        path: '/frtb/expshortfall',
-        name: 'expshortfall',
-        meta: {
-          title: 'Expeced Shortfall',
-          auth: true
-        },
-        component: () => import('@/pages/frtb/expshortfall')
-      },
-      {
-        path: '/frtb/stress',
-        name: 'stress',
-        meta: {
-          title: 'Stress',
-          auth: true
-        },
-        component: () => import('@/pages/frtb/stress')
-      },
-      {
-        path: '/frtb/marketstandard',
-        name: 'marketsd',
-        meta: {
-          title: 'Market Standard',
-          auth: true
-        },
-        component: () => import('@/pages/frtb/marketstandard')
-      },
+
       // 刷新页面 必须保留
       {
         path: 'refresh',
@@ -109,10 +56,8 @@ const frameIn = [
       }
     ]
   },
-
-  // bdcrisk,
-  // bdcmacro,
   frtb,
+  frtbconfig,
   playground,
   frame,
   d2Crud,

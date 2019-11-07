@@ -8,18 +8,10 @@ export default {
   redirect: { name: 'frtb' },
   component: layoutHeaderAside,
   children: [
-    {
-      path: 'fxfwd',
-      name: 'fxfwd',
-      meta: {
-        title: 'FRTB',
-        auth: false
-      },
-      component: () => import('@/pages/frtb/fxfwd/index')
-    },
+
     {
       path: 'fxswap',
-      name: 'fxswap',
+      name: 'index',
       meta: {
         title: 'FRTB',
         auth: false
@@ -54,6 +46,15 @@ export default {
       component: () => import('@/pages/frtb/bond/index')
     },
     {
+      path: 'swaption',
+      name: 'swaption',
+      meta: {
+        title: 'Swaption',
+        auth: false
+      },
+      component: () => import('@/pages/frtb/swaption/index')
+    },
+    {
       path: 'senarioAnalysis',
       name: 'senarioAnalysis',
       meta: {
@@ -71,14 +72,7 @@ export default {
       },
       component: () => import('@/pages/frtb/attribution/index')
     },
-    {
-      path: 'swaption',
-      name: 'swaption',
-      meta: {
-        title: 'Swaption',
-        auth: false
-      },
-      component: () => import('@/pages/frtb/swaption/index')
-    }
+
+
   ]
 }
