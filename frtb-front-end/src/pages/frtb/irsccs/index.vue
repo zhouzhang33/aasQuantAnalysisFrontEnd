@@ -28,7 +28,7 @@
                     </el-col>
                     <el-col :span="16">
                         <div class="left-col1">
-                            <el-button type="infor">
+                            <el-button type="infor" class="curvebutton">
                                 清空记录
                             </el-button>
                         </div>
@@ -87,9 +87,9 @@
             <div class="box-card" style="border:solid 1px #FFE600 ">
                 <el-tabs v-model="activeName"  @tab-click="handlePanelClick">
                     <el-tab-pane label="主页" name="main">
-                        <div style="height:615px">
+                        <div style="height:600px">
                             <div>
-                                <div class='box-card' style="height:470px">
+                                <div class='box-card' style="height:400px">
                                     <div class="box-card-title" >
                                         <span>交易要素</span>
                                     </div>
@@ -103,7 +103,8 @@
                                                         <div class="left-col1" style="color:transparent">a</div>
                                                         <div class="left-col2">息票类型</div>
                                                         <div class="left-col1">付息频率</div>
-                                                        <div class="left-col2">息票乘数</div>
+                                                        <div v-if="irsccsFormLeg1.xiPiaoLeiXing === '固定'" class="left-col2">息票率</div>
+                                                        <div v-else class="left-col2">参考利率</div>
                                                         <div class="left-col1">息票率乘数</div>
                                                         <div class="left-col2">首次付息日</div>
                                                     </el-col>
@@ -153,13 +154,25 @@
                                                                 ></el-option>
                                                             </el-select>
                                                         </div>
-                                                        <div class="left-col2" >
+                                                        <div class="left-col2"  v-if="irsccsFormLeg1.xiPiaoLeiXing === '固定'">
                                                             <el-input-number
                                                                     :controls="false"
                                                                     class="oneContorls"
                                                                     v-model="irsccsFormLeg1.xiPiaoLv"
                                                             >
                                                             </el-input-number>
+                                                        </div>
+                                                        <div class="left-col2"  v-else>
+                                                            <el-select class="oneControls"
+                                                                       placeholder="请选择"
+                                                                       v-model="irsccsFormLeg1.canKaoLiLv">
+                                                                <el-option
+                                                                        :key="item.key"
+                                                                        :label="item.label"
+                                                                        :value="item.value"
+                                                                        v-for="item in currency1EarningCurveOptions"
+                                                                ></el-option>
+                                                            </el-select>
                                                         </div>
                                                         <div class="left-col1" >
                                                             <el-input-number
@@ -186,7 +199,8 @@
                                                         <div class="left-col1" style="color:transparent">a</div>
                                                         <div class="left-col2" style="color:transparent">a</div>
                                                         <div class="left-col1"> 计息方式</div>
-                                                        <div class="left-col2" style="color:transparent">a</div>
+                                                        <div v-if="irsccsFormLeg1.xiPiaoLeiXing === '固定'" class="left-col2" style="color:transparent">a</div>
+                                                        <div v-else class="left-col2"> 定盘日调整</div>
                                                         <div class="left-col1"> 利差</div>
                                                         <div class="left-col2"> 尾付息日</div>
                                                     </el-col>
@@ -218,7 +232,15 @@
                                                                 ></el-option>
                                                             </el-select>
                                                         </div>
-                                                        <div class="left-col2" style="color:transparent">a</div>
+                                                        <div v-if="irsccsFormLeg1.xiPiaoLeiXing === '固定'" class="left-col2" style="color:transparent">a</div>
+                                                        <div v-else class="left-col2" >
+                                                            <el-input-number
+                                                                    :controls="false"
+                                                                    class="oneContorls"
+                                                                    v-model="irsccsFormLeg1.dingPanRiTiaoZheng"
+                                                            >
+                                                            </el-input-number>
+                                                        </div>
                                                         <div class="left-col1" >
                                                             <el-input-number
                                                                     :controls="false"
@@ -256,7 +278,8 @@
                                                         <div class="left-col1" style="color:transparent">a</div>
                                                         <div class="left-col2">息票类型</div>
                                                         <div class="left-col1">付息频率</div>
-                                                        <div class="left-col2">息票乘数</div>
+                                                        <div v-if="irsccsFormLeg2.xiPiaoLeiXing === '固定'" class="left-col2">息票率</div>
+                                                        <div v-else class="left-col2">参考利率</div>
                                                         <div class="left-col1">息票率乘数</div>
                                                         <div class="left-col2">首次付息日</div>
                                                     </el-col>
@@ -264,7 +287,7 @@
                                                         <div class="left-col1">
                                                             <el-select class="oneControls"
                                                                        placeholder="请选择"
-                                                                       v-model="irsccsFormLeg1.direction">
+                                                                       v-model="irsccsFormLeg2.direction">
                                                                 <el-option
                                                                         :key="item.key"
                                                                         :label="item.label"
@@ -277,7 +300,7 @@
                                                             <el-input-number
                                                                     :controls="false"
                                                                     class="oneControls"
-                                                                    v-model="irsccsFormLeg1.Amount"
+                                                                    v-model="irsccsFormLeg2.Amount"
                                                             >
                                                             </el-input-number>
                                                         </div>
@@ -285,7 +308,7 @@
                                                         <div class="left-col2">
                                                             <el-select class="oneControls"
                                                                        placeholder="请选择"
-                                                                       v-model="irsccsFormLeg1.xiPiaoLeiXing">
+                                                                       v-model="irsccsFormLeg2.xiPiaoLeiXing">
                                                                 <el-option
                                                                         :key="item.key"
                                                                         :label="item.label"
@@ -297,7 +320,7 @@
                                                         <div class="left-col1">
                                                             <el-select class="oneControls"
                                                                        placeholder="请选择"
-                                                                       v-model="irsccsFormLeg1.fuXiPingLv">
+                                                                       v-model="irsccsFormLeg2.fuXiPingLv">
                                                                 <el-option
                                                                         :key="item.key"
                                                                         :label="item.label"
@@ -306,19 +329,31 @@
                                                                 ></el-option>
                                                             </el-select>
                                                         </div>
-                                                        <div class="left-col2" >
+                                                        <div class="left-col2"  v-if="irsccsFormLeg2.xiPiaoLeiXing === '固定'">
                                                             <el-input-number
                                                                     :controls="false"
                                                                     class="oneContorls"
-                                                                    v-model="irsccsFormLeg1.xiPiaoLv"
+                                                                    v-model="irsccsFormLeg2.xiPiaoLv"
                                                             >
                                                             </el-input-number>
+                                                        </div>
+                                                        <div class="left-col2"  v-else>
+                                                            <el-select class="oneControls"
+                                                                       placeholder="请选择"
+                                                                       v-model="irsccsFormLeg2.canKaoLiLv">
+                                                                <el-option
+                                                                        :key="item.key"
+                                                                        :label="item.label"
+                                                                        :value="item.value"
+                                                                        v-for="item in currency1EarningCurveOptions"
+                                                                ></el-option>
+                                                            </el-select>
                                                         </div>
                                                         <div class="left-col1" >
                                                             <el-input-number
                                                                     :controls="false"
                                                                     class="oneContorls"
-                                                                    v-model="irsccsFormLeg1.xiPiaoLvChengShu"
+                                                                    v-model="irsccsFormLeg2.xiPiaoLvChengShu"
                                                             >
                                                             </el-input-number>
                                                         </div>
@@ -327,7 +362,7 @@
                                                                     class="oneContorls"
                                                                     placeholder="选择日期"
                                                                     type="date"
-                                                                    v-model="irsccsFormLeg1.shouCiFuXiRi">
+                                                                    v-model="irsccsFormLeg2.shouCiFuXiRi">
                                                             </el-date-picker>
                                                         </div>
                                                     </el-col>
@@ -339,7 +374,8 @@
                                                         <div class="left-col1" style="color:transparent">a</div>
                                                         <div class="left-col2" style="color:transparent">a</div>
                                                         <div class="left-col1"> 计息方式</div>
-                                                        <div class="left-col2" style="color:transparent">a</div>
+                                                        <div v-if="irsccsFormLeg2.xiPiaoLeiXing === '固定'" class="left-col2" style="color:transparent">a</div>
+                                                        <div v-else class="left-col2"> 定盘日调整</div>
                                                         <div class="left-col1"> 利差</div>
                                                         <div class="left-col2"> 尾付息日</div>
                                                     </el-col>
@@ -348,7 +384,7 @@
                                                         <div class="left-col2">
                                                             <el-select class="oneControls"
                                                                        placeholder="请选择"
-                                                                       v-model="irsccsFormLeg1.biZhong">
+                                                                       v-model="irsccsFormLeg2.biZhong">
                                                                 <el-option
                                                                         :key="item.key"
                                                                         :label="item.label"
@@ -362,7 +398,7 @@
                                                         <div class="left-col1">
                                                             <el-select class="oneControls"
                                                                        placeholder="请选择"
-                                                                       v-model="irsccsFormLeg1.jiXiFangShi">
+                                                                       v-model="irsccsFormLeg2.jiXiFangShi">
                                                                 <el-option
                                                                         :key="item.key"
                                                                         :label="item.label"
@@ -371,12 +407,23 @@
                                                                 ></el-option>
                                                             </el-select>
                                                         </div>
-                                                        <div class="left-col2" style="color:transparent">a</div>
+                                                        <div v-if="irsccsFormLeg2.xiPiaoLeiXing === '固定'" class="left-col2" style="color:transparent">a</div>
+                                                        <div v-else class="left-col2" >
+                                                            <el-input-number
+                                                                    :controls="false"
+                                                                    class="oneContorls"
+                                                                    v-model="irsccsFormLeg2.dingPanRiTiaoZheng"
+                                                            >
+                                                            </el-input-number>
+                                                        </div>
+
+
+
                                                         <div class="left-col1" >
                                                             <el-input-number
                                                                     :controls="false"
                                                                     class="oneContorls"
-                                                                    v-model="irsccsFormLeg1.liCha"
+                                                                    v-model="irsccsFormLeg2.liCha"
                                                             >
                                                             </el-input-number>
                                                         </div>
@@ -385,148 +432,147 @@
                                                                     class="oneContorls"
                                                                     placeholder="选择日期"
                                                                     type="date"
-                                                                    v-model="irsccsFormLeg1.weiciFuxiRi">
+                                                                    v-model="irsccsFormLeg2.weiciFuxiRi">
                                                             </el-date-picker>
                                                         </div>
                                                     </el-col>
                                                 </el-col>
                                             </el-col>
-
                                         </div>
                                     </el-row>
                                 </div>
-                                <div class='box-card' style="height:145px">
-                                    <el-col :span="11">
-                                        <div class="box-card-title" >
-                                            <span>定价要素</span>
-                                        </div>
-                                        <div class="my-block">
-                                            <el-col :span="12">
-                                                <el-col :span="8">
-                                                    <div class="left-col1">计息基准</div>
-                                                    <div class="left-col2">节假日</div>
+                                <div class='box-card' style="height:170px">
+                                        <el-col :span="11">
+                                            <div class="box-card-title" >
+                                                <span>定价要素</span>
+                                            </div>
+                                            <div class="my-block">
+                                                <el-col :span="12">
+                                                    <el-col :span="8">
+                                                        <div class="left-col1">计息基准</div>
+                                                        <div class="left-col2">节假日</div>
+                                                    </el-col>
+                                                    <el-col :span="16">
+                                                        <div class="left-col1" >
+                                                            <el-select class="oneControls"
+                                                                       placeholder="请选择"
+                                                                       v-model="irsccsFormLeg1.jiXiJiZhun">
+                                                                <el-option
+                                                                        :key="item.key"
+                                                                        :label="item.label"
+                                                                        :value="item.value"
+                                                                        v-for="item in jiXiTianShuFangshiOptions"
+                                                                ></el-option>
+                                                            </el-select>
+                                                        </div>
+                                                        <div class="left-col2" >
+                                                            <el-select class="oneControls"
+                                                                       placeholder="请选择"
+                                                                       v-model="irsccsFormLeg1.jieJiaRi">
+                                                                <el-option
+                                                                        :key="item.key"
+                                                                        :label="item.label"
+                                                                        :value="item.value"
+                                                                        v-for="item in jieJiaRiOptions"
+                                                                ></el-option>
+                                                            </el-select>
+                                                        </div>
+                                                    </el-col>
                                                 </el-col>
-                                                <el-col :span="16">
-                                                    <div class="left-col1" >
-                                                        <el-select class="oneControls"
-                                                                   placeholder="请选择"
-                                                                   v-model="irsccsFormLeg1.jiXiJiZhun">
-                                                            <el-option
-                                                                    :key="item.key"
-                                                                    :label="item.label"
-                                                                    :value="item.value"
-                                                                    v-for="item in jiXiTianShuFangshiOptions"
-                                                            ></el-option>
-                                                        </el-select>
-                                                    </div>
-                                                    <div class="left-col2" >
-                                                        <el-select class="oneControls"
-                                                                   placeholder="请选择"
-                                                                   v-model="irsccsFormLeg1.jieJiaRi">
-                                                            <el-option
-                                                                    :key="item.key"
-                                                                    :label="item.label"
-                                                                    :value="item.value"
-                                                                    v-for="item in jieJiaRiOptions"
-                                                            ></el-option>
-                                                        </el-select>
-                                                    </div>
+                                                <el-col :span="12">
+                                                    <el-col :span="8">
+                                                        <div class="left-col1">营业日调整</div>
+                                                        <div class="left-col2" style="color:transparent">a</div>
+                                                    </el-col>
+                                                    <el-col :span="16">
+                                                        <div class="left-col1" >
+                                                            <el-select class="oneControls"
+                                                                       placeholder="请选择"
+                                                                       v-model="irsccsFormLeg1.yingYeRiTiaoZheng">
+                                                                <el-option
+                                                                        :key="item.key"
+                                                                        :label="item.label"
+                                                                        :value="item.value"
+                                                                        v-for="item in yingYeRiGuiZeOptions"
+                                                                ></el-option>
+                                                            </el-select>
+                                                        </div>
+                                                        <div class="left-col2" style="color:transparent">a</div>
+                                                    </el-col>
                                                 </el-col>
-                                            </el-col>
-                                            <el-col :span="12">
-                                                <el-col :span="8">
-                                                    <div class="left-col1">营业日调整</div>
-                                                    <div class="left-col2" style="color:transparent">a</div>
+                                            </div>
+                                        </el-col>
+                                        <el-col :span="1">
+                                            <div class="dividerStyle">a</div>
+                                            <div class="dividerStyle">a</div>
+                                            <div class="dividerStyle">a</div>
+                                        </el-col>
+                                        <el-col :span="11">
+                                            <div class="box-card-title" >
+                                                <span>定价要素</span>
+                                            </div>
+                                            <div class="my-block">
+                                                <el-col :span="12">
+                                                    <el-col :span="8">
+                                                        <div class="left-col1">计息基准</div>
+                                                        <div class="left-col2">节假日</div>
+                                                    </el-col>
+                                                    <el-col :span="16">
+                                                        <div class="left-col1" >
+                                                            <el-select class="oneControls"
+                                                                       placeholder="请选择"
+                                                                       v-model="irsccsFormLeg1.jiXiJiZhun">
+                                                                <el-option
+                                                                        :key="item.key"
+                                                                        :label="item.label"
+                                                                        :value="item.value"
+                                                                        v-for="item in jiXiTianShuFangshiOptions"
+                                                                ></el-option>
+                                                            </el-select>
+                                                        </div>
+                                                        <div class="left-col2" >
+                                                            <el-select class="oneControls"
+                                                                       placeholder="请选择"
+                                                                       v-model="irsccsFormLeg1.jieJiaRi">
+                                                                <el-option
+                                                                        :key="item.key"
+                                                                        :label="item.label"
+                                                                        :value="item.value"
+                                                                        v-for="item in jieJiaRiOptions"
+                                                                ></el-option>
+                                                            </el-select>
+                                                        </div>
+                                                    </el-col>
                                                 </el-col>
-                                                <el-col :span="16">
-                                                    <div class="left-col1" >
-                                                        <el-select class="oneControls"
-                                                                   placeholder="请选择"
-                                                                   v-model="irsccsFormLeg1.yingYeRiTiaoZheng">
-                                                            <el-option
-                                                                    :key="item.key"
-                                                                    :label="item.label"
-                                                                    :value="item.value"
-                                                                    v-for="item in yingYeRiTiaoZhengOptions"
-                                                            ></el-option>
-                                                        </el-select>
-                                                    </div>
-                                                    <div class="left-col2" style="color:transparent">a</div>
+                                                <el-col :span="12">
+                                                    <el-col :span="8">
+                                                        <div class="left-col1">营业日调整</div>
+                                                        <div class="left-col2" style="color:transparent">a</div>
+                                                    </el-col>
+                                                    <el-col :span="16">
+                                                        <div class="left-col1" >
+                                                            <el-select class="oneControls"
+                                                                       placeholder="请选择"
+                                                                       v-model="irsccsFormLeg1.yingYeRiTiaoZheng">
+                                                                <el-option
+                                                                        :key="item.key"
+                                                                        :label="item.label"
+                                                                        :value="item.value"
+                                                                        v-for="item in yingYeRiGuiZeOptions"
+                                                                ></el-option>
+                                                            </el-select>
+                                                        </div>
+                                                        <div class="left-col2" style="color:transparent">a</div>
+                                                    </el-col>
                                                 </el-col>
-                                            </el-col>
-                                        </div>
-                                    </el-col>
-                                    <el-col :span="1">
-                                        <div class="dividerStyle">a</div>
-                                        <div class="dividerStyle">a</div>
-                                        <div class="dividerStyle">a</div>
-                                    </el-col>
-                                    <el-col :span="11">
-                                        <div class="box-card-title" >
-                                            <span>定价要素</span>
-                                        </div>
-                                        <div class="my-block">
-                                            <el-col :span="12">
-                                                <el-col :span="8">
-                                                    <div class="left-col1">计息基准</div>
-                                                    <div class="left-col2">节假日</div>
-                                                </el-col>
-                                                <el-col :span="16">
-                                                    <div class="left-col1" >
-                                                        <el-select class="oneControls"
-                                                                   placeholder="请选择"
-                                                                   v-model="irsccsFormLeg1.jiXiJiZhun">
-                                                            <el-option
-                                                                    :key="item.key"
-                                                                    :label="item.label"
-                                                                    :value="item.value"
-                                                                    v-for="item in jiXiTianShuFangshiOptions"
-                                                            ></el-option>
-                                                        </el-select>
-                                                    </div>
-                                                    <div class="left-col2" >
-                                                        <el-select class="oneControls"
-                                                                   placeholder="请选择"
-                                                                   v-model="irsccsFormLeg1.jieJiaRi">
-                                                            <el-option
-                                                                    :key="item.key"
-                                                                    :label="item.label"
-                                                                    :value="item.value"
-                                                                    v-for="item in jieJiaRiOptions"
-                                                            ></el-option>
-                                                        </el-select>
-                                                    </div>
-                                                </el-col>
-                                            </el-col>
-                                            <el-col :span="12">
-                                                <el-col :span="8">
-                                                    <div class="left-col1">营业日调整</div>
-                                                    <div class="left-col2" style="color:transparent">a</div>
-                                                </el-col>
-                                                <el-col :span="16">
-                                                    <div class="left-col1" >
-                                                        <el-select class="oneControls"
-                                                                   placeholder="请选择"
-                                                                   v-model="irsccsFormLeg1.yingYeRiTiaoZheng">
-                                                            <el-option
-                                                                    :key="item.key"
-                                                                    :label="item.label"
-                                                                    :value="item.value"
-                                                                    v-for="item in yingYeRiTiaoZhengOptions"
-                                                            ></el-option>
-                                                        </el-select>
-                                                    </div>
-                                                    <div class="left-col2" style="color:transparent">a</div>
-                                                </el-col>
-                                            </el-col>
-                                        </div>
-                                    </el-col>
-                                </div>
+                                            </div>
+                                        </el-col>
+                                    </div>
                             </div>
                         </div>
                     </el-tab-pane>
                     <el-tab-pane label="利率曲线" name="interestCurve">
-                        <div style="height:615px">
+                        <div style="height:600px">
                           <twocurves></twocurves>
                         </div>
                     </el-tab-pane>
@@ -540,10 +586,11 @@
                 </div>
 
                 <div class="my-block">
-                    <el-col :span="6">
+                    <el-col :span="11">
+                    <el-col :span="12">
                         <el-col :span="8">
                             <div class="left-col1">
-                                <el-button class="oneContorls">
+                                <el-button type='info' style="width:140px">
                                     计算
                                 </el-button>
                             </div>
@@ -552,7 +599,7 @@
                             <div class="left-col1" >
                                 <el-select class="oneContorls" v-model="irsccsResultForm.calculationTarget" placeholder="请选择">
                                     <el-option
-                                            v-for="item in targetOptions"
+                                            v-for="item in irstargetOptions"
                                             :key="item.key"
                                             :label="item.label"
                                             :value="item.value"
@@ -561,7 +608,7 @@
                             </div>
                         </el-col>
                     </el-col>
-                    <el-col :span="6">
+                    <el-col :span="12">
                         <el-col :span="8">
                             <div class="left-col1">NPV</div>
 
@@ -577,7 +624,12 @@
                             </div>
                         </el-col>
                     </el-col>
-                    <el-col :span="6">
+                    </el-col>
+                    <el-col :span="1">
+                        <div class="dividerStyle">a</div>
+                    </el-col>
+                    <el-col :span="11">
+                    <el-col :span="12">
                         <el-col :span="8">
                             <div class="left-col1">应计利息</div>
                         </el-col>
@@ -592,7 +644,7 @@
                             </div>
                         </el-col>
                     </el-col>
-                    <el-col :span="6">
+                    <el-col :span="12">
                         <el-col :span="8">
                             <div class="left-col1">DV01</div>
                         </el-col>
@@ -606,6 +658,7 @@
                                 </el-input-number>
                             </div>
                         </el-col>
+                    </el-col>
                     </el-col>
                 </div>
             </div>
@@ -726,28 +779,17 @@
 </template>
 
 <script>
-
-
-  import Calendar from 'vue-calendar-component'
   import {
-    currencyOption,
-    tradeLocationOption,
-    resetNominalCapitalOption,
-    nominalCapitalResetStatusOption,
-    tradeDirectionOption,
-    interestSettingOption,
-    payFreqOption,
-    interestBaselineOption,
-    interestAdjustmentOption,
-    resetDateAdjustmentOption,
-    resetFreqOption,
-    interestTypeOption,
-    actualPayDateAdjOption,
-    endPeriodSpanOption,
-    floatingInterestDirOption,
-    floatingInterestRateOption,
-    calculationMethodOption
-  } from './UIPara'
+      directionOptions,
+      xiPiaoLeiXingOptions,
+      fuXiPingLvOptions,
+      currencyOptions,
+      jiXiFangShiOptions,
+      jiXiTianShuFangshiOptions,
+      jieJiaRiOptions,
+      yingYeRiGuiZeOptions,
+      irstargetOptions,
+  } from '../UIPara/UIPara'
   import twocurves from './curve/twoCurves.vue'
   import test from './curve/twoCurves'
   export default {
@@ -767,7 +809,7 @@
             { 'x': 3, 'y': 13, 'w': 9, 'h': 15.5, 'i': '4' },
           ],
           colNum: 12,
-          rowHeight: 34,
+          rowHeight: 36,
           isDraggable: false,
           isResizable: false,
           isMirrored: false,
@@ -775,56 +817,58 @@
           margin: [2, 3],
           useCssTransforms: true
         },
-        recordSelected: '',
+
         recordList: [
-          { key: 'record1', label: 'record1', value: 'record1' }
+          { key: 'IRS', label: 'IRS', value: 'IRS' },
+          { key: 'CCS', label: 'CCS', value: 'CCS' }
         ],
-        templateSelected: '',
-        templateList:[
-          { key: 'tempalte1', label: 'tempalte1', value: 'tempalte1' }
-        ],
-        activeTabName:'交易要素输入',
+        // templateSelected: ''
+        // templateList:[
+        //   { key: 'tempalte1', label: 'tempalte1', value: 'tempalte1' }
+        // ],
+        recordSelected: 'IRS',
+        activeTabName:'record1',
         irsccsFormLeg1:{
             direction: '收取利息',
             Amount:'',
-            biZhong:'',
-            xiPiaoLeiXing:'',
-            fuXiPingLv:'',
-            jiXiFangShi:'',
-            xiPiaoLv:'',
-            xiPiaoLvChengShu:'',
-            shouCiFuXiRi:'',
-            liCha:'',
-            weiciFuxiRi:'',
-            canKaoLiLv:'',
-            dingPanRiTiaoZheng:'',
-            jiXiJiZhun:'',
-            yingYeRiTiaoZheng:'',
-            jieJiaRi:'',
-            guZhiRi:'',
-            qiXiRi:'',
-            daoQiRi:'',
+            biZhong:'美元',
+            xiPiaoLeiXing:'固定',
+            fuXiPingLv:'1M',
+            jiXiFangShi:'单利',
+            xiPiaoLv: '0.05',
+            xiPiaoLvChengShu:'1',
+            shouCiFuXiRi:Date.now(),
+            liCha:'5bp',
+            weiciFuxiRi: Date.now(),
+            canKaoLiLv:'Libor',
+            dingPanRiTiaoZheng:'2D',
+            jiXiJiZhun:'ACT/365',
+            yingYeRiTiaoZheng:'调整至下一营业日',
+            jieJiaRi:'北京',
+            guZhiRi:Date.now(),
+            qiXiRi:Date.now(),
+            daoQiRi:Date.now(),
         },
           irsccsFormLeg2:{
               direction: '支付利息',
               Amount:'',
-              biZhong:'',
-              xiPiaoLeiXing:'',
-              fuXiPingLv:'',
-              jiXiFangShi:'',
-              xiPiaoLv:'',
-              xiPiaoLvChengShu:'',
-              shouCiFuXiRi:'',
-              liCha:'',
-              weiciFuxiRi:'',
-              canKaoLiLv:'',
-              dingPanRiTiaoZheng:'',
-              jiXiJiZhun:'',
-              yingYeRiTiaoZheng:'',
-              jieJiaRi:'',
-              guZhiRi:'',
-              qiXiRi:'',
-              daoQiRi:'',
+              biZhong:'人民币',
+              xiPiaoLeiXing:'固定',
+              fuXiPingLv:'1M',
+              jiXiFangShi:'单利',
+              xiPiaoLv: '0.05',
+              xiPiaoLvChengShu:'1',
+              shouCiFuXiRi:Date.now(),
+              liCha:'5bp',
+              weiciFuxiRi: Date.now(),
+              canKaoLiLv:'Libor',
+              dingPanRiTiaoZheng:'2D',
+              jiXiJiZhun:'ACT/365',
+              yingYeRiTiaoZheng:'调整至下一营业日',
+              jieJiaRi:'北京',
+              guZhiRi:Date.now(),
+              qiXiRi:Date.now(),
+              daoQiRi:Date.now(),
           },
 
         irsccsResultForm:{
@@ -842,7 +886,15 @@
           activeName:'main',
           curveName:'InterestCurve',
           showCurveDiag:false,
-
+          directionOptions:directionOptions,
+          xiPiaoLeiXingOptions:xiPiaoLeiXingOptions,
+          fuXiPingLvOptions:fuXiPingLvOptions,
+          currencyOptions:currencyOptions,
+          jiXiFangShiOptions:jiXiFangShiOptions,
+          jiXiTianShuFangshiOptions:jiXiTianShuFangshiOptions,
+          jieJiaRiOptions:jieJiaRiOptions,
+          yingYeRiGuiZeOptions:yingYeRiGuiZeOptions,
+          irstargetOptions:irstargetOptions,
 
       }
     },
@@ -993,7 +1045,10 @@
     .form-num{
         width: 220px;
     }
-
+    .curvebutton{
+        width:200px;
+        text-align: center;
+    }
 </style>
 
 <style lang="scss">

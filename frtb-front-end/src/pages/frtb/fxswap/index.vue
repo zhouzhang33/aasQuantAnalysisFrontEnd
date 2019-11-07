@@ -543,8 +543,6 @@
 <script>
 
   import {
-    pricing,
-    calcFxFWD,
     calcFXFWDSwap,
     getInterestCurve
   } from '@api/index'

@@ -44,12 +44,11 @@
                 </el-input>
               </div>
               <div class="left-col1" >
-                <el-input-number
-                        :controls="false"
+                <el-input
                         class="oneContorls"
                         v-model="bondForm.remainingDate"
                 >
-                </el-input-number>
+                </el-input>
               </div>
               <div class="left-col2" >
                 <el-input-number
@@ -121,7 +120,7 @@
                 <div class="left-col1" >
                   <el-select class="oneContorls" v-model="bondForm.liLvFangShi" placeholder="请选择">
                     <el-option
-                            v-for="item in interestRateOptions"
+                            v-for="item in xiPiaoLeiXingOptions"
                             :key="item.key"
                             :label="item.label"
                             :value="item.value"
@@ -267,11 +266,20 @@
                       v-model="bondForm.fuXiPinLV"
               >
               </el-input-number>
+              <el-select class="oneContorls" v-model="bondForm.fuXiPinLV" placeholder="请选择">
+                <el-option
+                        v-for="item in fuXiPinLVOptions"
+                        :key="item.key"
+                        :label="item.label"
+                        :value="item.value"
+                ></el-option>
+              </el-select>
+
             </div>
             <div class="left-col2" >
               <el-select class="oneContorls" v-model="bondForm.jiXiTianShuFangshi" placeholder="请选择">
                 <el-option
-                        v-for="item in interestDateOptions"
+                        v-for="item in jiXiTianShuFangshiOptions"
                         :key="item.key"
                         :label="item.label"
                         :value="item.value"
@@ -281,7 +289,7 @@
             <div class="left-col1" >
               <el-select class="oneContorls" v-model="bondForm.yingYeRiGuiZe" placeholder="请选择">
                 <el-option
-                        v-for="item in openDayOptions"
+                        v-for="item in yingYeRiGuiZeOptions"
                         :key="item.key"
                         :label="item.label"
                         :value="item.value"
@@ -300,13 +308,14 @@
           <div class="box-card-title">
             <span>市场数据</span>
           </div>
-          <el-row>
-            <el-button class="controls-a-line">折现曲线</el-button>
-          </el-row>
+<!--          <el-row>-->
+<!--            <el-button class="controls-a-line">折现曲线</el-button>-->
+<!--          </el-row>-->
           <div class="my-block" style="margin-top:10px">
             <el-col :span="6">
               <el-col :span="8">
                 <div class="left-col1">收益率曲线名称</div>
+                <div class="left-col2" style="color:transparent">a</div>
               </el-col>
               <el-col :span="16">
                 <div class="left-col1" >
@@ -319,23 +328,30 @@
                     ></el-option>
                   </el-select>
                 </div>
+                <div class="left-col2" >
+                  <el-button type="info" class="oneContorls" >查看收益率曲线</el-button>
+                </div>
               </el-col>
             </el-col>
 <!--            2nd col-->
             <el-col :span="6">
               <el-col :span="8">
                 <div class="left-col1">基准利率参考曲线</div>
+                <div class="left-col2" style="color:transparent">a</div>
               </el-col>
               <el-col :span="16">
                 <div class="left-col1" >
                   <el-select class="oneContorls" v-model="bondForm.jiZhunLiLvCanKaoQuXian" placeholder="请选择">
                     <el-option
-                            v-for="item in baseInterestRateCurveOptions"
+                            v-for="item in curveNameOptions"
                             :key="item.key"
                             :label="item.label"
                             :value="item.value"
                     ></el-option>
                   </el-select>
+                </div>
+                <div class="left-col2" >
+                  <el-button type="info" class="oneContorls" @click="showbaseInterestCurve">查看利率率曲线</el-button>
                 </div>
               </el-col>
             </el-col>
@@ -343,17 +359,19 @@
             <el-col :span="6">
               <el-col :span="8">
                 <div class="left-col1">债券折现曲线(bp)</div>
+                <div class="left-col2" style="color:transparent">a</div>
               </el-col>
               <el-col :span="16">
                 <div class="left-col1" >
-                  <el-select class="oneContorls" v-model="bondForm.zhaiQuanZheXianQuXian" placeholder="请选择">
-                    <el-option
-                            v-for="item in boundDiscountCurveOptions"
-                            :key="item.key"
-                            :label="item.label"
-                            :value="item.value"
-                    ></el-option>
-                  </el-select>
+                    <el-input-number
+                            :controls="false"
+                            class="oneContorls"
+                            v-model="bondForm.zhaiQuanZheXianQuXian"
+                    >
+                    </el-input-number>
+                </div>
+                <div class="left-col2" >
+                  <el-button type="info" class="oneContorls">查看折现曲线</el-button>
                 </div>
               </el-col>
             </el-col>
@@ -361,6 +379,7 @@
             <el-col :span="6">
               <el-col :span="8">
                 <div class="left-col1">基准利率%</div>
+                <div class="left-col2" style="color:transparent">a</div>
               </el-col>
               <el-col :span="16">
                 <div class="left-col1" >
@@ -371,6 +390,7 @@
                   >
                   </el-input-number>
                 </div>
+                <div class="left-col2" style="color:transparent">a</div>
               </el-col>
             </el-col>
           </div>
@@ -386,9 +406,9 @@
         </div>
 
         <el-row>
-          <el-button class="controls-a-line">计算NPV</el-button>
-          <el-button class="controls-a-line">实时报价对比</el-button>
-          <el-button class="controls-a-line">债券收益散点图</el-button>
+          <el-button type="info" class="controls-a-line">计算NPV</el-button>
+          <el-button type="info" class="controls-a-line">实时报价对比</el-button>
+          <el-button type="info" class="controls-a-line">债券收益散点图</el-button>
         </el-row>
         <div style="margin-top:10px">
           <el-row>
@@ -493,10 +513,34 @@
             </el-col>
           </el-row>
         </div>
-
-
       </div>
+      <div>
+        <el-dialog
+                title="利率曲线"
+                :visible.sync="interestialogTableVisible"
+                :append-to-body="true"
+                width="70%"
 
+        >
+          <div class='box-card' style="height:100%">
+            <div class="box-card-title">{{ marketCurveName }}</div>
+
+            <el-table
+                    :data="interestCurveData"
+                    :cell-style="rowstyle"
+                    :header-cell-style="headerstyle"
+            >
+              <el-table-column property="MarketDataType" label="MarketDataType" ></el-table-column>
+              <el-table-column property="Source" label="Source"></el-table-column>
+              <el-table-column property="Currency" label="Currency"></el-table-column>
+              <el-table-column property="Tenor" label="Tenor"></el-table-column>
+              <el-table-column property="ASK" label="ASK"></el-table-column>
+              <el-table-column property="BID" label="BID"></el-table-column>
+              <el-table-column property="MID" label="MID"></el-table-column>
+            </el-table>
+          </div>
+        </el-dialog>
+      </div>
 
 
     </d2-grid-layout>
@@ -506,14 +550,20 @@
 <script>
 
   import {
-    pricing,
-    calcFxFWD
+    getInterestCurve
   } from '@api/index'
-  import Calendar from 'vue-calendar-component'
+import {
+  jiXiTianShuFangshiOptions,
+  yingYeRiGuiZeOptions,
+  bondEarningCurveOptions,
+  curveNameOptions,
+  xiPiaoLeiXingOptions,
+  fuXiPinLVOptions
+  } from '../UIPara/UIPara'
 
   export default {
     components: {
-      Calendar
+
     },
     data () {
       return {
@@ -567,35 +617,36 @@
             ]
           }],
         bondForm:{
-          bondCode:'',
-          bondRating:'',
-          remainingDate:'',
-          interestStartDate:'',
-          exerciseDate:'',
-          shouYiLv:'',
-          piaoMianZongE:'',
-          guZhiRi:'',
+          jiXiTianShuFangshi:'ACT/365',
+          yingYeRiGuiZe:'调整至下一营业日',
+          zhaiQuanShouYiLvQuXianMingCheng:'中债企业债到期收益率曲线',
+          jiZhunLiLvCanKaoQuXian:'人民币FR007收益曲线',
+          zhaiQuanZheXianQuXian:'曲线名称',
+
+          bondCode:'112074.SZ',
+          bondRating:'AA-',
+          remainingDate:'1.72Y',
+          interestStartDate:Date.now(),
+          exerciseDate:Date.now(),
+          shouYiLv:'0.05176',
+          piaoMianZongE:'1000',
+          guZhiRi:Date.now(),
           zhaiQuanJianCheng:'',
           piaoMianLiLv:'',
-          liLvFangShi:'',
-          jieSuanRi:'',
-          duiFuRi:'',
-          liCha:'',
-          jieSuanJingE:'',
-          shouCiJiZhunLiLvChongZhiRi:'',
+          liLvFangShi:'固定',
+          jieSuanRi:Date.now(),
+          duiFuRi:Date.now(),
+          liCha:'10',
+          jieSuanJingE:'1035203.4795',
+          shouCiJiZhunLiLvChongZhiRi:Date.now(),
           jiZhunLiLvChongZhiPingLv:'',
-          fuDongLiLvCha:'',
-          fuDongLiLvBeiShu:'',
-          fuDongLiLvShangXian:'',
-          fuDongLiLvXiaXian:'',
-          jixiRiTiaoZheng:'',
-          fuxiRiTiaoZheng:'',
-          fuXiPinLV:'',
-          jiXiTianShuFangshi:'',
-          yingYeRiGuiZe:'',
-          zhaiQuanShouYiLvQuXianMingCheng:'',
-          jiZhunLiLvCanKaoQuXian:'',
-          zhaiQuanZheXianQuXian:'',
+          fuDongLiLvCha:'10',
+          fuDongLiLvBeiShu:'1',
+          fuDongLiLvShangXian:'11',
+          fuDongLiLvXiaXian:'1',
+          jixiRiTiaoZheng:'1D',
+          fuxiRiTiaoZheng:'1',
+          fuXiPinLV:'按季度',
           jiZhunLiLv:'',
         },
         bondResultForm:{
@@ -607,17 +658,39 @@
           DV01:'',
           tuXing:'',
           VaR:'',
-        }
-
-
-
-
-
+        },
+        interestCurveData:null,
+        interestialogTableVisible:false,
+        marketCurveName:'',
+        jiXiTianShuFangshiOptions:jiXiTianShuFangshiOptions,
+        yingYeRiGuiZeOptions:yingYeRiGuiZeOptions,
+        bondEarningCurveOptions:bondEarningCurveOptions,
+        curveNameOptions:curveNameOptions,
+        xiPiaoLeiXingOptions:xiPiaoLeiXingOptions,
+        fuXiPinLVOptions:fuXiPinLVOptions
       }
     },
     mounted () {
     },
     methods: {
+   // API
+      showbaseInterestCurve(){
+        var self = this;
+        var curvename='CNY_Repo7D';
+        if (this.bondForm.jiZhunLiLvCanKaoQuXian==='人民币FR007收益利率曲线'){
+          curvename='CNY_Repo7D';
+        }else if(this.bondForm.jiZhunLiLvCanKaoQuXian==='美元OIS曲线'){
+          curvename='USD_OIS';
+        }
+        console.log(curvename,'name')
+        getInterestCurve(curvename).then(res => {
+          self.interestCurveData = res.list;
+        });
+        this.marketCurveName = this.bondForm.jiZhunLiLvCanKaoQuXian;
+        // this.interestCurveData=this.interestWaiBiCurveData
+        this.interestialogTableVisible=true;
+      },
+
       // ****************************
       rowstyle(row) {
         if (row.rowIndex % 2 === 0) {

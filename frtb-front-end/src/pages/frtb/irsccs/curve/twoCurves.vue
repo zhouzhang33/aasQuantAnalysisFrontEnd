@@ -1,10 +1,8 @@
 <template>
-  <d2-container :filename="filename" type="full" class="page" better-scroll>
-    <d2-grid-layout
-            v-bind="layout">
-      <div>
+
+      <div style="height:100%;overflow: auto">
         <el-col :span="12">
-          <div class="box-card" style="height:575px">
+          <div class="box-card">
             <div class="box-card-title">
               <span>  传入的参数  </span>
             </div>
@@ -72,14 +70,14 @@
               <div id='leftCure' style='margin:5px;width:800px;height:300px'></div>
             </div>
           </div>
-          <div class="box-card" style="height:400px;padding-top:20px">
+          <div class="box-card" style="height:200px;padding-top:20px">
             <div style="margin:auto">
               <el-row>
                 <el-table
                         :data="MarketDataLeg1"
                         :cell-style="rowstyle"
                         :header-cell-style="headerstyle"
-                        style="width:95%"
+                        style="width:95%;"
                 >
                   <el-table-column
                           label="期限"
@@ -225,8 +223,7 @@
 
 
 <!--      </d2-grid-item>-->
-    </d2-grid-layout>
-  </d2-container>
+
 </template>
 
 <script>

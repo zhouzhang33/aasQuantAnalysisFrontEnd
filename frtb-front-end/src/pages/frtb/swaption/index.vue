@@ -1,8 +1,7 @@
 <template>
   <d2-container :filename="filename" type="full" class="page" better-scroll>
     <d2-grid-layout
-            v-bind="layout"
-            @layout-updated="layoutUpdatedHandler">
+            v-bind="layout">
         <div>
           <div class="box-card" style="height:230px">
             <div class="box-card-title">
@@ -71,7 +70,7 @@
                             v-model="swaptionForm.jiaoYiLeiXing"
                             placeholder="请选择">
                       <el-option
-                              v-for="item in jiaoYiLeiXingOptions"
+                              v-for="item in swaptionTradingTypeOptions"
                               :key="item.key"
                               :label="item.label"
                               :value="item.value"
@@ -84,7 +83,7 @@
                             v-model="swaptionForm.tongZhiQiXian"
                             placeholder="请选择">
                       <el-option
-                              v-for="item in tongZhiQiXianOptions"
+                              v-for="item in notificationDateOption"
                               :key="item.key"
                               :label="item.label"
                               :value="item.value"
@@ -130,7 +129,7 @@
                           v-model="swaptionForm.jiaoYiDuiShou"
                           placeholder="请选择">
                     <el-option
-                            v-for="item in jiaoYiDuiShouOptions"
+                            v-for="item in swaptionJiaoYiDuiShouOptions"
                             :key="item.key"
                             :label="item.label"
                             :value="item.value"
@@ -170,7 +169,7 @@
                             v-model="swaptionForm.biZhong"
                             placeholder="请选择">
                       <el-option
-                              v-for="item in biZhongOptions"
+                              v-for="item in currencyOptions"
                               :key="item.key"
                               :label="item.label"
                               :value="item.value"
@@ -207,7 +206,7 @@
                             v-model="swaptionForm.qiQuanGuZhiMoXing"
                             placeholder="请选择">
                       <el-option
-                              v-for="item in qiQuanGuZhiMoXingOptions"
+                              v-for="item in swaptionPricingModelOptions"
                               :key="item.key"
                               :label="item.label"
                               :value="item.value"
@@ -227,7 +226,7 @@
                             v-model="swaptionForm.boDongLvLeXing"
                             placeholder="请选择">
                       <el-option
-                              v-for="item in qiQuanGuZhiMoXingOptions"
+                              v-for="item in volatilityTypeOptions"
                               :key="item.key"
                               :label="item.label"
                               :value="item.value"
@@ -269,7 +268,7 @@
                             v-model="swaptionForm.zhiFuPingLv"
                             placeholder="请选择">
                       <el-option
-                              v-for="item in zhiFuPingLvOptions"
+                              v-for="item in fuXiPinLVOptions"
                               :key="item.key"
                               :label="item.label"
                               :value="item.value"
@@ -346,7 +345,7 @@
                             v-model="swaptionForm.zhiFuPingLvFuDongDuan"
                             placeholder="请选择">
                       <el-option
-                              v-for="item in zhiFuPingLvOptions"
+                              v-for="item in fuXiPinLVOptions"
                               :key="item.key"
                               :label="item.label"
                               :value="item.value"
@@ -401,7 +400,6 @@
                   <div class="left-col2" style="color:transparent">a</div>
                 </el-col>
               </el-col>
-
               <el-col :span="6">
                 <el-col :span="8">
                   <div class="left-col1">重置频率</div>
@@ -414,7 +412,7 @@
                             v-model="swaptionForm.chongZhiPinLv"
                             placeholder="请选择">
                       <el-option
-                              v-for="item in chongZhiPinLvOptions"
+                              v-for="item in fuXiPinLVOptions"
                               :key="item.key"
                               :label="item.label"
                               :value="item.value"
@@ -427,7 +425,7 @@
             </div>
           </div>
           <!--市场数据-->
-          <div class="box-card" style="height:96px">
+          <div class="box-card" style="height:145px">
             <div class="box-card-title">
               市场数据
             </div>
@@ -435,6 +433,7 @@
               <el-col :span="6">
                 <el-col :span="8">
                   <div class="left-col1">折现曲线</div>
+                  <div class="left-col2" style="color:transparent">a</div>
                 </el-col>
                 <el-col :span="16">
                   <div class="left-col1" >
@@ -445,11 +444,15 @@
                     >
                     </el-input>
                   </div>
+                  <div class="left-col2">
+                    <el-button type="info" class="curvebutton" >查看折现曲线</el-button>
+                  </div>
                 </el-col>
               </el-col>
               <el-col :span="6">
                 <el-col :span="8">
                   <div class="left-col1">远期曲线</div>
+                  <div class="left-col2" style="color:transparent">a</div>
                 </el-col>
                 <el-col :span="16">
                   <div class="left-col1" >
@@ -460,11 +463,15 @@
                     >
                     </el-input>
                   </div>
+                  <div class="left-col2">
+                    <el-button type="info" class="curvebutton" >查看远期曲线</el-button>
+                  </div>
                 </el-col>
               </el-col>
               <el-col :span="6">
                 <el-col :span="8">
                   <div class="left-col1">波动率曲面</div>
+                  <div class="left-col2" style="color:transparent">a</div>
                 </el-col>
                 <el-col :span="16">
                   <div class="left-col1" >
@@ -475,14 +482,19 @@
                     >
                     </el-input>
                   </div>
+                  <div class="left-col2">
+                    <el-button type="info" class="curvebutton" @click="showVolatilityCurve">动率曲面</el-button>
+                  </div>
                 </el-col>
               </el-col>
               <el-col :span="6">
                 <el-col :span="8">
                   <div class="left-col1" style="color:transparent">a</div>
+                  <div class="left-col2" style="color:transparent">a</div>
                 </el-col>
                 <el-col :span="16">
                   <div class="left-col1" style="color:transparent">a</div>
+                  <div class="left-col2" style="color:transparent">a</div>
                 </el-col>
               </el-col>
             </div>
@@ -496,10 +508,10 @@
             <div>
               <el-col>
                 <el-col :span="4">
-                  <el-button class="controls-a-line">计算NPV</el-button>
+                  <el-button type="info" class="controls-a-line curvebutton">计算NPV</el-button>
                 </el-col>
                 <el-col :span="4">
-                  <el-button class="controls-a-line">推导隐含波动率</el-button>
+                  <el-button ctype="info" class="controls-a-line curvebutton">推导隐含波动率</el-button>
                 </el-col>
               </el-col>
             </div>
@@ -653,7 +665,39 @@
             </el-row>
           </div>
         </div>
+      <div>
+        <el-dialog
+                title="利率曲线"
+                :visible.sync="interestialogTableVisible"
+                :append-to-body="true"
+                width="70%"
 
+        >
+          <div class='box-card' style="height:100%">
+            <div class="box-card-title"> {{ dialogName }}</div>
+            <div v-if="showtable === true">
+              <el-table
+                      :data="interestCurveData"
+                      :cell-style="rowstyle"
+                      :header-cell-style="headerstyle"
+              >
+                <el-table-column property="MarketDataType" label="MarketDataType" ></el-table-column>
+                <el-table-column property="Source" label="Source"></el-table-column>
+                <el-table-column property="Currency" label="Currency"></el-table-column>
+                <el-table-column property="Tenor" label="Tenor"></el-table-column>
+                <el-table-column property="ASK" label="ASK"></el-table-column>
+                <el-table-column property="BID" label="BID"></el-table-column>
+                <el-table-column property="MID" label="MID"></el-table-column>
+              </el-table>
+            </div>
+            <div v-else>
+              <div style="margin-top:20px">
+                <survecurve :curvename="dialogName" style="width:99%;height:100%"/>
+              </div>
+            </div>
+          </div>
+        </el-dialog>
+      </div>
 
 <!--      </d2-grid-item>-->
     </d2-grid-layout>
@@ -663,14 +707,26 @@
 <script>
 
 import {
-  pricing,
-  calcFxFWD
+  getInterestCurve
 } from '@api/index'
-import Calendar from 'vue-calendar-component'
+import survecurve from '../UIPara/surf'
+import {
+  touCunOptions,
+  swaptionTradingTypeOptions,
+  notificationDateOption,
+  jiaoGeFangShiOptions,
+  swaptionJiaoYiDuiShouOptions,
+  currencyOptions,
+  swaptionPricingModelOptions,
+  volatilityTypeOptions,
+  fuXiPinLVOptions,
+  jiXiTianShuFangshiOptions,
+  yingYeRiGuiZeOptions,
+} from '../UIPara/UIPara'
 
 export default {
   components: {
-    Calendar
+    survecurve
   },
   data () {
     return {
@@ -693,31 +749,31 @@ export default {
         useCssTransforms: true
       },
       swaptionForm: {
-        touCun:'',
-        jiaoYiLeiXing:'',
-        jiaoGeRi:'',
-        qiXiRi:'',
-        daoQiRi:'',
+        touCun:'10000',
+        jiaoYiLeiXing:'1Y',
+        jiaoGeRi:Date.now(),
+        qiXiRi:Date.now(),
+        daoQiRi:Date.now(),
         tongZhiQiXian:'0D',
-        jiaoYiDuiShou:'',
-        biZhong:'',
+        jiaoYiDuiShou:'平安国际',
+        biZhong:'人民币',
         xingQuanJia:'',
-        jiaoGeFangShi:'',
-        qiQuanFei:'',
+        jiaoGeFangShi:'本金交割',
+        qiQuanFei:0.00,
         qiQuanFeiJiaoFuRi:'',
-        guZhiRi:'',
-        qiQuanGuZhiMoXing:'',
-        boDongLvLeXing:'',
+        guZhiRi:Date.now(),
+        qiQuanGuZhiMoXing:'Black-Scholes',
+        boDongLvLeXing:'Lognormal',
         piaoMianLiLv: '',
         zhiFuPingLv:'按季度',
-        jiXiTianShuFangshi:'',
-        yingYeRiGuiZe:'',
+        jiXiTianShuFangshi:'ACT/365',
+        yingYeRiGuiZe:'调整至下一营业日',
         guaGouZhiShu:'',
         fuDongLiLvLiCha:'',
         gangGanLv:'',
-        chongZhiPinLv:'',
-        zhiFuPingLvFuDongDuan:'',
-        jiXiTianShuFangShiFuDongDuan:'',
+        chongZhiPinLv:'按季度',
+        zhiFuPingLvFuDongDuan:'按年',
+        jiXiTianShuFangShiFuDongDuan:'ACT/365',
         zheXianQuXian:'',
         yuanQiQuXian:'',
         boDongLvQuMian:''
@@ -734,14 +790,64 @@ export default {
       Theta:'',
       shouYiLv:'',
       yinHanBoDongLv:'',
-
-    }
+    },
+      touCunOptions:touCunOptions,
+      swaptionTradingTypeOptions:swaptionTradingTypeOptions,
+      notificationDateOption:notificationDateOption,
+      jiaoGeFangShiOptions:jiaoGeFangShiOptions,
+      swaptionJiaoYiDuiShouOptions:swaptionJiaoYiDuiShouOptions,
+      currencyOptions:currencyOptions,
+      swaptionPricingModelOptions:swaptionPricingModelOptions,
+      volatilityTypeOptions:volatilityTypeOptions,
+      fuXiPinLVOptions:fuXiPinLVOptions,
+      jiXiTianShuFangshiOptions:jiXiTianShuFangshiOptions,
+      yingYeRiGuiZeOptions:yingYeRiGuiZeOptions,
+      fuXiPinLVOptions:fuXiPinLVOptions,
+      interestialogTableVisible:false,
+      showtable:true,
+      dialogName:'',
+      interestCurveData:null,
     }
   },
   mounted () {
   },
   methods: {
-    // ****************************
+    showBenbiInterestCurve(){
+      var self = this;
+      getInterestCurve('CNY_Repo7D').then(res => {
+        self.interestCurveData = res.list;
+
+      });
+      this.dialogName='本币利率曲线';
+      // this.interestCurveData=this.interestWaiBiCurveData
+      this.interestialogTableVisible=true;
+      this.showtable=true
+    },
+    showVolatilityCurve(){
+      console.log('in volatility curve')
+      this.showtable=false;
+      this.dialogName='波动率曲面';
+      this.interestialogTableVisible=true;
+
+
+    },
+    rowstyle (row) {
+      if (row.rowIndex % 2 === 0) {
+        return 'height:50px; background-color:#312E30;  text-align: left;color: white; border:0px; font-size: 16px'
+      } else {
+        return 'height:50px; background-color:#454754;  text-align: left;color: white; border:0px; font-size: 16px'
+      }
+    },
+    rowstyleInfo (row) {
+      if (row.rowIndex % 2 === 0) {
+        return 'height:50px; background-color:#312E30;  text-align: left;color: white; border:0px; font-size: 16px'
+      } else {
+        return 'height:50px; background-color:#454754;  text-align: left;color: white; border:0px; font-size: 16px'
+      }
+    },
+    headerstyle (row) {
+      return 'height:50px; background-color:#454754;  text-align: left;color: white; border:0px; font-size: 16px'
+    },
   }
 }
 </script>
@@ -823,7 +929,9 @@ export default {
 .form-num{
   width: 220px;
 }
-
+.curvebutton{
+  width:200px;
+}
 </style>
 
 <style lang="scss" >

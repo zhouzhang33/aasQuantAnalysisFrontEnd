@@ -52,7 +52,7 @@ export var qiQuanGuZhiMoXingOptions=[
     },
 ]
 
-export var qiQuanGuZhiMoXingOptions=[
+export var swaptionPricingModelOptions=[
     {
         key:'Lognormal', label:'Lognormal', value:'Lognormal',
     },

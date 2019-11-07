@@ -905,7 +905,7 @@
             { 'x': 3, 'y': 13, 'w': 9, 'h': 15.5, 'i': '4' },
           ],
           colNum: 12,
-          rowHeight: 33,
+          rowHeight: 31,
           isDraggable: false,
           isResizable: false,
           isMirrored: false,

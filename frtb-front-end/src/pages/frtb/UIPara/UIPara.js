@@ -94,14 +94,15 @@ export var currency1EarningCurveOptions = [
   {
     key:'自定义',
     label:'自定义',
+
     value:'自定义',
   },
 ];
 export var currency2EarningCurveOptions = [
   {
-    key:'人名币FR007收益利率曲线',
-    label:'人名币FR007收益利率曲线',
-    value:'人名币FR007收益利率曲线',
+    key:'人民币FR007收益利率曲线',
+    label:'人民币FR007收益利率曲线',
+    value:'人民币FR007收益利率曲线',
   },
   {
     key:'Shibor',
@@ -167,6 +168,127 @@ export var tradingDirectionOptions=[
     value:'卖出外币',
   },
 ];
+export var directionOptions=[
+  {
+    key:'收取利息',  label:'收取利息', value:'收取利息',
+  },
+  {
+    key:'支付利息',  label:'支付利息', value:'支付利息',
+  },
+];
+export var xiPiaoLeiXingOptions=[
+  {
+    key:'固定',  label:'固定', value:'固定',
+  },
+  {
+    key:'浮动',  label:'浮动', value:'浮动',
+  },
+]
+export var fuXiPingLvOptions=[
+  {
+    key:'1M',  label:'1M', value:'1M',
+  },
+  {
+    key:'3M',  label:'3M', value:'3M',
+  },
+  {
+    key:'6M',  label:'6M', value:'6M',
+  },
+  {
+    key:'1Y',  label:'1Y', value:'1Y',
+  },
+]
+export var currencyOptions=[
+  {
+    key:'人民币',
+    label:'人民币',
+    value:'人民币',
+  },
+  {
+    key:'美元',
+    label:'美元',
+    value:'美元',
+  },
+];
+export var jiXiFangShiOptions=[
+  {
+    key:'单利',  label:'单利', value:'单利',
+  },
+  {
+    key:'复利',  label:'复利', value:'复利',
+  },
+]
+export var jieJiaRiOptions=[
+  {
+    key:'北京',  label:'北京', value:'北京',
+  },
+];
+// export var yingYeRiTiaoZhengOptions =[
+//   {
+//     key:'MF',  label:'MF', value:'MF',
+//   },
+// ];
+export var irstargetOptions =[
+  {
+    key:'NPV',  label:'NPV', value:'NPV',
+  },
+  {
+    key:'利差',  label:'利差', value:'利差',
+  },
+];
+export var bondEarningCurveOptions=[
+  {key:'中债企业债到期收益率曲线',value:'中债企业债到期收益率曲线',label:'中债企业债到期收益率曲线'},
+]
+export var fuXiPinLVOptions=[
+  {key:'按年',value:'按年',label:'按年'},
+  {key:'按半年',value:'按半年',label:'按半年'},
+  {key:'按季度',value:'按季度',label:'按季度'},
+  {key:'按月',value:'按月',label:'按月'},
+]
+
+export var touCunOptions=[
+  {
+    key:'10000', label:'10000', value:'10000',
+  },
+]
+export var swaptionTradingTypeOptions=[
+  {
+    key:'1Y', label:'1Y', value:'1Y',
+  },
+  {
+    key:'5Y', label:'5Y', value:'5Y',
+  },
+]
+export var notificationDateOption=[
+  {
+    key:'0D', label:'0D', value:'0D',
+  },
+]
+export var jiaoGeFangShiOptions=[
+  {
+    key:'本金交割', label:'本金交割', value:'本金交割',
+  },
+  {
+    key:'利差交割', label:'利差交割', value:'利差交割',
+  },
+]
+export var swaptionJiaoYiDuiShouOptions=[
+  {
+    key:'平安国际', label:'平安国际', value:'平安国际',
+  },
+]
+export var swaptionPricingModelOptions=[
+  {
+    key:'Black-Scholes', label:'Black-Scholes', value:'Black-Scholes',
+  },
+
+]
+export var volatilityTypeOptions=[
+  {
+    key:'Lognormal', label:'Lognormal', value:'Lognormal',
+  },
+
+]
 ///////////////////////////////////
 
 
