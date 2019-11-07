@@ -1,13 +1,202 @@
 <template>
   <d2-container :filename="filename" type="full" class="page" better-scroll>
     <d2-grid-layout
-            v-bind="layout">
-      <div class="box-card" style="height:530px;width:100%">
-        <div class="box-card-title">
-          {{ curvename  }}
+            v-bind="layout"
+            @layout-updated="layoutUpdatedHandler">
+
+        <div>
+          <el-col :span="4">
+            <div class="right-column">
+              <div class='box-card' style="height:925px">
+                <div class="box-card-title">
+                  交易类型选取
+                </div>
+                <el-col>
+                  <div class="right-col-s">
+                    <div class="box-card-title">
+                      <el-checkbox-button class="controls-a-line-attr" v-model="isSwap" @click="clickSwap">外汇远掉期</el-checkbox-button>
+                    </div>
+                  </div>
+                  <div class="right-col-s">
+                    <div class="box-card-title">
+                      <el-checkbox-button class="controls-a-line-attr" v-model="isEuropeanOption" @click="clickEuropeanOption">外汇欧式期权</el-checkbox-button>
+                    </div>
+                  </div>
+                  <div class="right-col-s">
+                    <div class="box-card-title">
+                      <el-checkbox-button class="controls-a-line-attr" v-model="isIrsCcs" @click="clickIrsCcs">IRS/CCS</el-checkbox-button>
+                    </div>
+                  </div>
+                  <div class="right-col-s">
+                    <div class="box-card-title">
+                      <el-checkbox-button class="controls-a-line-attr" v-model="isBond" @click="clickBond">债券</el-checkbox-button>
+                    </div>
+                  </div>
+                </el-col>
+              </div>
+            </div>
+          </el-col>
+
+          <el-col :span="10">
+            <div class="left-column">
+              <div class='box-card' style="height:925px">
+                <el-row>
+                  <div v-show="isSwap === true">
+                    <el-col :span="10">
+                      <div style="padding:30px">
+                        <div class="box-card-title">
+                          <span>外汇远掉期风险因子设定</span>
+                        </div>
+                        <el-col :span="12">
+                          <div class="left-col1-s">风险因子</div>
+                          <div class="left-col2-s">变动幅度</div>
+                        </el-col>
+                        <el-col :span="12">
+                          <div class="left-col1-s">
+                            <el-select
+                                    class="oneContorls"
+                                    v-model="swapScenario.RiskType"
+                                    placeholder="请选择">
+                              <el-option
+                                      v-for="item in swapScenarioOptions"
+                                      :key="item.key"
+                                      :label="item.label"
+                                      :value="item.value"
+                              ></el-option>
+                            </el-select>
+                          </div>
+                          <div class="left-col2-s">
+                            <el-input-number
+                                    :controls="false"
+                                    class="oneContorls"
+                                    v-model="swapScenario.Change"
+                            >
+                            </el-input-number>
+                          </div>
+                        </el-col>
+                      </div>
+                    </el-col>
+                  </div>
+                </el-row>
+                <el-row>
+                  <div v-show="isEuropeanOption === true">
+                    <el-col :span="10">
+                      <div style="padding:30px">
+                        <div class="box-card-title">
+                          <span>外汇欧式期权风险因子设定</span>
+                        </div>
+                        <el-col :span="12">
+                          <div class="left-col1-s">风险因子</div>
+                          <div class="left-col2-s">变动幅度</div>
+                        </el-col>
+                        <el-col :span="12">
+                          <div class="left-col1-s">
+                            <el-select
+                                    class="oneContorls"
+                                    v-model="europeanOptionScenario.RiskType"
+                                    placeholder="请选择">
+                              <el-option
+                                      v-for="item in europeanOptionScenarioOptions"
+                                      :key="item.key"
+                                      :label="item.label"
+                                      :value="item.value"
+                              ></el-option>
+                            </el-select>
+                          </div>
+                          <div class="left-col2-s">
+                            <el-input-number
+                                    :controls="false"
+                                    class="oneContorls"
+                                    v-model="europeanOptionScenario.Change"
+                            >
+                            </el-input-number>
+                          </div>
+                        </el-col>
+                      </div>
+                    </el-col>
+                  </div>
+                </el-row>
+                <el-row>
+                  <div v-show="isIrsCcs === true">
+                    <el-col :span="10">
+                      <div style="padding:30px">
+                        <div class="box-card-title">
+                          <span>IRS/CCS风险因子设定</span>
+                        </div>
+                        <el-col :span="12">
+                          <div class="left-col1-s">风险因子</div>
+                          <div class="left-col2-s">变动幅度</div>
+                        </el-col>
+                        <el-col :span="12">
+                          <div class="left-col1-s">
+                            <el-select
+                                    class="oneContorls"
+                                    v-model="irsccsScenario.RiskType"
+                                    placeholder="请选择">
+                              <el-option
+                                      v-for="item in irsccsScenarioOptions"
+                                      :key="item.key"
+                                      :label="item.label"
+                                      :value="item.value"
+                              ></el-option>
+                            </el-select>
+                          </div>
+                          <div class="left-col2-s">
+                            <el-input-number
+                                    :controls="false"
+                                    class="oneContorls"
+                                    v-model="irsccsScenario.Change"
+                            >
+                            </el-input-number>
+                          </div>
+                        </el-col>
+                      </div>
+                    </el-col>
+                  </div>
+                </el-row>
+                <el-row>
+                  <div v-show="isBond === true">
+                    <el-col :span="10">
+                      <div style="padding:30px">
+                        <div class="box-card-title">
+                          <span>债券风险因子设定</span>
+                        </div>
+                        <el-col :span="12">
+                          <div class="left-col1-s">风险因子</div>
+                          <div class="left-col2-s">变动幅度</div>
+                        </el-col>
+                        <el-col :span="12">
+                          <div class="left-col1-s">
+                            <el-select
+                                    class="oneContorls"
+                                    v-model="bondScenario.RiskType"
+                                    placeholder="请选择">
+                              <el-option
+                                      v-for="item in bondScenarioOptions"
+                                      :key="item.key"
+                                      :label="item.label"
+                                      :value="item.value"
+                              ></el-option>
+                            </el-select>
+                          </div>
+                          <div class="left-col2-s">
+                            <el-input-number
+                                    :controls="false"
+                                    class="oneContorls"
+                                    v-model="bondScenario.Change"
+                            >
+                            </el-input-number>
+                          </div>
+                        </el-col>
+                      </div>
+                    </el-col>
+                  </div>
+                </el-row>
+              </div>
+            </div>
+          </el-col>
+
         </div>
-        <div id='surfcurve' style='margin:5px;width:600px;height:500px'></div>
-      </div>
 <!--      </d2-grid-item>-->
     </d2-grid-layout>
   </d2-container>
@@ -19,18 +208,15 @@ import {
   pricing,
   calcFxFWD
 } from '@api/index'
-
-import echarts from 'echarts'
-import 'echarts-gl'
+import Calendar from 'vue-calendar-component'
 
 export default {
   components: {
-
+    Calendar
   },
   data () {
     return {
       filename: __filename,
-      // props:['curvename'],
       layout: {
         layout: [
           { 'x': 0, 'y': 0, 'w':  3, 'h': 13,'i': '0' },
@@ -48,96 +234,72 @@ export default {
         margin: [2, 3],
         useCssTransforms: true
       },
-    //这里是图标的options
-      curvename:'test',
-      myechartSurf:null,
-      echartSurfOption:{
-        tooltip: {},
-        backgroundColor: 'transparent',
-        visualMap: {
-          show: false,
-          dimension: 2,
-          min: -1,
-          max: 1,
-          inRange: {
-            color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
-          }
-        },
-        xAxis3D: {
-          type: 'value',
-          nameTextStyle:{
-            color:'white'
-          },
-          axisLine:{
-            lineStyle:{
-              color:'white'
-            }
-          }
-        },
-        yAxis3D: {
-          type: 'value',
-          nameTextStyle:{
-            color:'white'
-          },
-          axisLine:{
-            lineStyle:{
-              color:'white'
-            }
-          }
-        },
-        zAxis3D: {
-          type: 'value',
-          nameTextStyle:{
-            color:'white'
-          },
-          axisLine:{
-            lineStyle:{
-              color:'white'
-            }
-          }
-        },
-        grid3D: {
-          viewControl: {
-            // projection: 'orthographic'
-          },
-          height:'95%'
-        },
-        series: [{
-          type: 'surface',
-          wireframe: {
-            // show: false
-          },
-          equation: {
-            x: {
-              step: 0.05
-            },
-            y: {
-              step: 0.05
-            },
-            z: function (x, y) {
-              if (Math.abs(x) < 0.1 && Math.abs(y) < 0.1) {
-                return '-';
-              }
-              return Math.sin(x * Math.PI) * Math.sin(y * Math.PI);
-            }
-          }
-        }]
+      isSwap:false,
+      isEuropeanOption:false,
+      isIrsCcs:false,
+      isBond:false,
+      swapScenario: {
+        RiskType:'',
+        Change:'',
+      },
+      europeanOptionScenario: {
+        RiskType:'',
+        Change:'',
+      },
+      irsccsScenario: {
+        RiskType:'',
+        Change:'',
+      },
+      bondScenario: {
+        RiskType:'',
+        Change:'',
       },
     }
   },
   mounted () {
-    this.myechartSurf=echarts.init(document.getElementById('surfcurve'));
-    this.myechartSurf.setOption(this.echartSurfOption);
   },
   methods: {
     // ****************************
-    setEchartOptions(data){
-      this.myechats.setOption(this.echartSurfOption);
-      this.myechats.setOption({
-        series: [{
-          data: data
-        }]
-      });
+    clickSwap(){
+      if(this.isSwap === true){
+        this.isSwap = false;
+      }
+      else{
+        this.isSwap = true;
+      }
+    },
+    clickEuropeanOption(){
+      if(this.isEuropeanOption===true){
+        this.isEuropeanOption = false;
+      }
+      else{
+        this.isEuropeanOption = true;
+      }
+    },
+    clickIrsCcs(){
+      if(this.isIrsCcs===true){
+        this.isIrsCcs = false;
+      }
+      else{
+        this.isIrsCcs = true;
+      }
+    },
+    clickBond(){
+      if(this.isBond===true){
+        this.isBond = false;
+      }
+      else{
+        this.isBond = true;
+      }
+    },
+    layoutUpdatedHandler (newLayout) {
+      //console.group("layoutUpdatedHandler");
+      newLayout.forEach(e => {
+        console.log(
+                `{'x': ${e.x}, 'y': ${e.y}, 'w': ${e.w}, 'h': ${e.h}, 'i': '${e.i}'},`
+        )
+      })
+      console.groupEnd()
     },
   }
 }
@@ -163,7 +325,37 @@ export default {
     }
   }
 }
+.right-col-s{
+  height:80px;
+  background:transparent;
+  margin:auto;
+  line-height: 200px;
+  vertical-align: center;
 
+}
+.left-col1-s{
+  height:40px;
+  background:#312E30;
+  margin:5px 0px 5px 0px;
+  padding-left:20px;
+  line-height: 40px;
+  vertical-align: center;
+  font-size:16px;
+  color:white;
+}
+.left-col2-s{
+  height:40px;
+  background:#454754;;
+  margin:5px 0px 5px 0px;
+  padding-left:20px;
+  line-height: 40px;
+  vertical-align: center;
+  font-size:16px;
+  color:white;
+}
+.oneContorls {
+  width:190px;
+}
 </style>
 
 <style lang="scss" >

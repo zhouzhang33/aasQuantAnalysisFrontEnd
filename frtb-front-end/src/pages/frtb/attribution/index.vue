@@ -1,228 +1,346 @@
-<template>
+<template xmlns:el-col="http://www.w3.org/1999/html">
   <d2-container :filename="filename" type="full" class="page" better-scroll>
     <d2-grid-layout
-            v-bind="layout">
-      <div>
-        <el-col :span="12">
-          <div class="box-card" style="height:575px">
-            <div class="box-card-title">
-              <span>  传入的参数  </span>
-            </div>
-            <el-row>
-              <el-col :span="12">
-                <el-col :span="8">
-                  <div class="left-col1">曲线名称</div>
-                  <div class="left-col2">日期准则</div>
-                  <div class="left-col1">平移类型</div>
-                  <div class="left-col2">平移数值</div>
-                </el-col>
-                <el-col :span="16">
-                  <div class="left-col1">
-                    <el-select class="oneControls"
-                               placeholder="请选择"
-                               v-model="curveLeg1.curveName">
-                      <el-option
-                              :key="item.key"
-                              :label="item.label"
-                              :value="item.value"
-                              v-for="item in curveNameOptions"
-                      ></el-option>
-                    </el-select>
+            v-bind="layout"
+            @layout-updated="layoutUpdatedHandler">
+        <div>
+          <el-col :span="4">
+            <div class="right-column">
+              <div class='box-card' style="height:925px">
+                <div class="box-card-title">
+                  交易类型选取及参数录入
+                </div>
+                <el-col>
+                  <div class="right-col-attr">
+                    <div class="box-card-title">
+                      <el-checkbox-button class="controls-a-line-attr" v-model="isSwap" @click="clickSwap">外汇远掉期</el-checkbox-button>
+                    </div>
                   </div>
-                  <div class="left-col2">
-                    <el-select class="oneControls"
-                               placeholder="请选择"
-                               v-model="curveLeg1.riQiZhunZe">
-                      <el-option
-                              :key="item.key"
-                              :label="item.label"
-                              :value="item.value"
-                              v-for="item in jiXiTianShuFangshiOptions"
-                      ></el-option>
-                    </el-select>
+                  <div class="right-col-attr">
+                    <div class="box-card-title">
+                      <el-checkbox-button class="controls-a-line-attr" v-model="isEuropeanOption" @click="clickEuropeanOption">外汇欧式期权</el-checkbox-button>
+                    </div>
                   </div>
-                  <div class="left-col1">
-                    <el-select class="oneControls"
-                               placeholder="请选择"
-                               disabled
-                               v-model="curveLeg1.quXianPingYiLeiXing">
-                    </el-select>
+                  <div class="right-col-attr">
+                    <div class="box-card-title">
+                      <el-checkbox-button class="controls-a-line-attr" v-model="isIrsCcs" @click="clickIrsCcs">IRS/CCS</el-checkbox-button>
+                    </div>
                   </div>
-                  <div class="left-col2" >
-                    <el-input
-                            class="oneControls"
-                            v-model="curveLeg1.quXianPingYiShuZhi"
-                    >
-                    </el-input>
+                  <div class="right-col-attr">
+                    <div class="box-card-title">
+                      <el-checkbox-button class="controls-a-line-attr" v-model="isBond" @click="clickBond">债券</el-checkbox-button>
+                    </div>
                   </div>
                 </el-col>
-              </el-col>
-              <el-col :span="12">
-                <div class="left-col1" style="color:transparent">a </div>
-                <div class="left-col2" style="color:transparent">a </div>
-                <div class="left-col1" style="color:transparent">a </div>
-                <div class="left-col2" style="color:transparent">a </div>
-              </el-col>
-            </el-row>
-  <!--          这里是曲线-->
-            <div>
-              <div class="box-card-title">
-                <span>  传入的参数  </span>
               </div>
-              <div id='leftCure' style='margin:5px;width:90%;height:300px'></div>
             </div>
-          </div>
-          <div class="box-card" style="height:400px;padding-top:20px">
-            <div style="margin:auto">
-              <el-row>
-                <el-table
-                        :data="MarketDataLeg1"
-                        :cell-style="rowstyle"
-                        :header-cell-style="headerstyle"
-                        style="width:95%"
-                >
-                  <el-table-column
-                          label="期限"
-                          prop="期限"
-                  >
-                  </el-table-column>
-                  <el-table-column
-                          label="日期"
-                          prop="日期"
-                  >
-                  </el-table-column>
-                  <el-table-column
-                          label="利率"
-                          prop="利率"
-                  >
-                  </el-table-column>
-                  <el-table-column
-                          label="平移后利率"
-                          prop="平移后利率"
-                  >
-                  </el-table-column>
-                  <el-table-column
-                          label="贴现率"
-                          prop="贴现率"
-                  >
-                  </el-table-column>
-                </el-table>
-              </el-row>
-            </div>
-          </div>
-        </el-col>
+          </el-col>
 
-        <el-col :span="12">
-          <div class="box-card" style="height:575px">
-            <div class="box-card-title">
-              <span>  传入的参数  </span>
-            </div>
-            <el-row>
-              <el-col :span="12">
-                <el-col :span="8">
-                  <div class="left-col1">曲线名称</div>
-                  <div class="left-col2">日期准则</div>
-                  <div class="left-col1">平移类型</div>
-                  <div class="left-col2">平移数值</div>
-                </el-col>
-                <el-col :span="16">
-                  <div class="left-col1">
-                    <el-select class="oneControls"
-                               placeholder="请选择"
-                               v-model="curveLeg1.curveName">
-                      <el-option
-                              :key="item.key"
-                              :label="item.label"
-                              :value="item.value"
-                              v-for="item in curveNameOptions"
-                      ></el-option>
-                    </el-select>
+          <el-col :span="8">
+            <div class="left-column">
+              <div class='box-card' style="height:925px">
+               <el-row>
+                  <div v-show="isSwap === true">
+                    <el-col :span="10">
+                      <div style="padding:30px">
+                        <div class="box-card-title">
+                          <span>外汇远掉期日期选取</span>
+                        </div>
+                        <el-col :span="12">
+                          <div class="left-col1-attr">起始日</div>
+                          <div class="left-col2-attr">终止日</div>
+                        </el-col>
+                        <el-col :span="12">
+                          <div class="left-col1-attr">
+                            <el-date-picker
+                                    class="oneContorls-attr"
+                                    placeholder="选择日期"
+                                    type="date"
+                                    v-model="swapForm.tradingDate">
+                            </el-date-picker>
+                          </div>
+                          <div class="left-col2-attr">
+                            <el-date-picker
+                                    class="oneContorls-attr"
+                                    placeholder="选择日期"
+                                    type="date"
+                                    v-model="swapForm.tradingDate">
+                            </el-date-picker>
+                          </div>
+                        </el-col>
+                      </div>
+                    </el-col>
                   </div>
-                  <div class="left-col2">
-                    <el-select class="oneControls"
-                               placeholder="请选择"
-                               v-model="curveLeg1.riQiZhunZe">
-                      <el-option
-                              :key="item.key"
-                              :label="item.label"
-                              :value="item.value"
-                              v-for="item in jiXiTianShuFangshiOptions"
-                      ></el-option>
-                    </el-select>
+               </el-row>
+                <el-row>
+                  <div v-show="isEuropeanOption === true">
+                    <el-col :span="10">
+                      <div style="padding:30px">
+                        <div class="box-card-title">
+                          <span>外汇欧式期权日期选取</span>
+                        </div>
+                        <el-col :span="12">
+                          <div class="left-col1-attr">起始日</div>
+                          <div class="left-col2-attr">终止日</div>
+                        </el-col>
+                        <el-col :span="12">
+                          <div class="left-col1-attr" >
+                            <el-date-picker
+                                    class="oneContorls-attr"
+                                    placeholder="选择日期"
+                                    type="date"
+                                    v-model="europeanOptionForm.tradeDate">
+                            </el-date-picker>
+                          </div>
+                          <div class="left-col2-attr">
+                            <el-date-picker
+                                    class="oneContorls-attr"
+                                    placeholder="选择日期"
+                                    type="date"
+                                    v-model="europeanOptionForm.tradeDate">
+                            </el-date-picker>
+                          </div>
+                        </el-col>
+                      </div>
+                    </el-col>
                   </div>
-                  <div class="left-col1">
-                    <el-select class="oneControls"
-                               placeholder="请选择"
-                               disabled
-                               v-model="curveLeg1.quXianPingYiLeiXing">
-                    </el-select>
+                </el-row>
+                <el-row>
+                  <div v-show="isIrsCcs === true">
+                    <el-col :span="10">
+                      <div style="padding:30px">
+                        <div class="box-card-title">
+                          <span>IRS/CCS日期选取</span>
+                        </div>
+                        <el-col :span="12">
+                          <div class="left-col1-attr">起始日</div>
+                          <div class="left-col2-attr">终止日</div>
+                        </el-col>
+                        <el-col :span="12">
+                          <div class="left-col1-attr">
+                            <el-date-picker
+                                    class="oneContorls-attr"
+                                    placeholder="选择日期"
+                                    type="date"
+                                    v-model="irsccsForm.evaluationDate">
+                            </el-date-picker>
+                          </div>
+                          <div class="left-col2-attr">
+                            <el-date-picker
+                                    class="oneContorls-attr"
+                                    placeholder="选择日期"
+                                    type="date"
+                                    v-model="irsccsForm.evaluationDate">
+                            </el-date-picker>
+                          </div>
+                        </el-col>
+                      </div>
+                    </el-col>
                   </div>
-                  <div class="left-col2" >
-                    <el-input
-                            class="oneControls"
-                            v-model="curveLeg1.quXianPingYiShuZhi"
-                    >
-                    </el-input>
+                </el-row>
+                <el-row>
+                  <div v-show="isBond === true">
+                    <el-col :span="10">
+                      <div style="padding:30px">
+                        <div class="box-card-title">
+                          <span>债券日期选取</span>
+                        </div>
+                        <el-col :span="12">
+                          <div class="left-col1-attr">起始日</div>
+                          <div class="left-col2-attr">终止日</div>
+                        </el-col>
+                        <el-col :span="12">
+                          <div class="left-col1-attr">
+                            <el-date-picker
+                                    class="oneContorls-attr"
+                                    placeholder="选择日期"
+                                    type="date"
+                                    v-model="bondForm.guZhiRi">
+                            </el-date-picker>
+                          </div>
+                          <div class="left-col2-attr">
+                            <el-date-picker
+                                    class="oneContorls-attr"
+                                    placeholder="选择日期"
+                                    type="date"
+                                    v-model="bondForm.guZhiRi">
+                            </el-date-picker>
+                          </div>
+                        </el-col>
+                      </div>
+                    </el-col>
                   </div>
-                </el-col>
-              </el-col>
-              <el-col :span="12">
-                <div class="left-col1" style="color:transparent">a </div>
-                <div class="left-col2" style="color:transparent">a </div>
-                <div class="left-col1" style="color:transparent">a </div>
-                <div class="left-col2" style="color:transparent">a </div>
-              </el-col>
-            </el-row>
-            <!--          这里是曲线-->
-            <div>
-              <div class="box-card-title">
-                <span>  传入的参数  </span>
+                </el-row>
+                <div v-show="isSwap===true||isEuropeanOption===true||isIrsCcs===true||isBond===true">
+                  <el-row>
+                    <el-button class="controls-a-line-attr-btm">归因计算</el-button>
+                  </el-row>
+                </div>
               </div>
-              <div id='rightCure' style='margin:5px;width:90%;height:300px'></div>
             </div>
-          </div>
-          <div class="box-card" style="height:400px;padding-top:20px">
-            <div style="margin:auto">
-              <el-row>
-                <el-table
-                        :data="MarketDataLeg1"
-                        :cell-style="rowstyle"
-                        :header-cell-style="headerstyle"
-                        style="width:95%"
-                >
-                  <el-table-column
-                          label="期限"
-                          prop="期限"
-                  >
-                  </el-table-column>
-                  <el-table-column
-                          label="日期"
-                          prop="日期"
-                  >
-                  </el-table-column>
-                  <el-table-column
-                          label="利率"
-                          prop="利率"
-                  >
-                  </el-table-column>
-                  <el-table-column
-                          label="平移后利率"
-                          prop="平移后利率"
-                  >
-                  </el-table-column>
-                  <el-table-column
-                          label="贴现率"
-                          prop="贴现率"
-                  >
-                  </el-table-column>
-                </el-table>
-              </el-row>
+          </el-col>
+
+          <el-col :span="12">
+            <div v-show="isSwap===true">
+              <div style="margin-top:10px">
+                <el-col :span="24">
+                  <div style="padding:30px">
+                    <div class="box-card-title">
+                      <span>外汇远掉期归因分析结果</span>
+                    </div>
+                    <el-table
+                            :data="fxAttrData"
+                            :cell-style="rowstyle"
+                            :header-cell-style="headerstyle"
+                            style="width:100%"
+                    >
+                      <el-table-column
+                              label="TimeChange"
+                              prop="TimeChange"
+                      >
+                      </el-table-column>
+                      <el-table-column
+                              label="FXRate"
+                              prop="FXRate"
+                      >
+                      </el-table-column>
+                      <el-table-column
+                              label="IRCurve"
+                              prop="IRCurve"
+                      >
+                      </el-table-column>
+                      <el-table-column
+                              label="TotalFVChange"
+                              prop="TotalFVChange"
+                      >
+                      </el-table-column>
+                    </el-table>
+                  </div>
+                </el-col>
+              </div>
             </div>
-          </div>
-        </el-col>
+            <div v-show="isEuropeanOption===true">
+              <div style="margin-top:10px">
+                <el-col :span="24">
+                  <div style="padding:30px">
+                    <div class="box-card-title">
+                      <span>外汇欧式期权归因分析结果</span>
+                    </div>
+                    <el-table
+                            :data="fxEuropeanOptionAttrData"
+                            :cell-style="rowstyle"
+                            :header-cell-style="headerstyle"
+                            style="width:100%"
+                    >
+                      <el-table-column
+                              label="TimeChange"
+                              prop="TimeChange"
+                      >
+                      </el-table-column>
+                      <el-table-column
+                              label="FXRate"
+                              prop="FXRate"
+                      >
+                      </el-table-column>
+                      <el-table-column
+                              label="IRCurve"
+                              prop="IRCurve"
+                      >
+                      </el-table-column>
+                      <el-table-column
+                              label="Volatility"
+                              prop="Volatility"
+                      >
+                      </el-table-column>
+                      <el-table-column
+                              label="TotalFVChange"
+                              prop="TotalFVChange"
+                      >
+                      </el-table-column>
+                    </el-table>
+                  </div>
+                </el-col>
+              </div>
+            </div>
+            <div v-show="isIrsCcs===true">
+              <div style="margin-top:10px">
+                <el-col :span="24">
+                  <div style="padding:30px">
+                    <div class="box-card-title">
+                      <span>IRS/CCS归因分析结果</span>
+                    </div>
+                    <el-table
+                            :data="IrsCcsAttrData"
+                            :cell-style="rowstyle"
+                            :header-cell-style="headerstyle"
+                            style="width:100%"
+                    >
+                      <el-table-column
+                              label="TimeChange"
+                              prop="TimeChange"
+                      >
+                      </el-table-column>
+                      <el-table-column
+                              label="FXRate"
+                              prop="FXRate"
+                      >
+                      </el-table-column>
+                      <el-table-column
+                              label="IRCurve"
+                              prop="IRCurve"
+                      >
+                      </el-table-column>
+                      <el-table-column
+                              label="TotalFVChange"
+                              prop="TotalFVChange"
+                      >
+                      </el-table-column>
+                    </el-table>
+                  </div>
+                </el-col>
+              </div>
+            </div>
+            <div v-show="isBond===true">
+              <div style="margin-top:10px">
+                <el-col :span="24">
+                  <div style="padding:30px">
+                    <div class="box-card-title">
+                      <span>债券归因分析结果</span>
+                    </div>
+                    <el-table
+                            :data="BondAttrData"
+                            :cell-style="rowstyle"
+                            :header-cell-style="headerstyle"
+                            style="width:100%"
+                    >
+                      <el-table-column
+                              label="TimeChange"
+                              prop="TimeChange"
+                      >
+                      </el-table-column>
+                      <el-table-column
+                              label="FXRate"
+                              prop="FXRate"
+                      >
+                      </el-table-column>
+                      <el-table-column
+                              label="Yield"
+                              prop="Yield"
+                      >
+                      </el-table-column>
+                      <el-table-column
+                              label="TotalFVChange"
+                              prop="TotalFVChange"
+                      >
+                      </el-table-column>
+                    </el-table>
+                  </div>
+                </el-col>
+              </div>
+            </div>
+          </el-col>
 
-      </div>
-
+        </div>
 
 <!--      </d2-grid-item>-->
     </d2-grid-layout>
@@ -232,28 +350,24 @@
 <script>
 
 import {
-  getDiscountCurve,
+  pricing,
+  calcFxFWD
 } from '@api/index'
 import Calendar from 'vue-calendar-component'
-import echarts from 'echarts'
-import {
-  echartOptionLeft,
-  jiXiTianShuFangshiOptions,
-  curveNameOptions,
-} from "./UIPara"
+
 export default {
   components: {
     Calendar
   },
-  data () {
+  data: function () {
     return {
       filename: __filename,
       layout: {
         layout: [
-          { 'x': 0, 'y': 0, 'w':  3, 'h': 13,'i': '0' },
+          { 'x': 0, 'y': 0, 'w': 3, 'h': 13, 'i': '0' },
           { 'x': 0, 'y': 13, 'w': 3, 'h': 15.5, 'i': '1' },
-          { 'x': 3, 'y': 0, 'w': 6,  'h': 13, 'i': '2' },
-          { 'x': 9, 'y': 0, 'w': 3,  'h': 13, 'i': '3' },
+          { 'x': 3, 'y': 0, 'w': 6, 'h': 13, 'i': '2' },
+          { 'x': 9, 'y': 0, 'w': 3, 'h': 13, 'i': '3' },
           { 'x': 3, 'y': 13, 'w': 9, 'h': 15.5, 'i': '4' },
         ],
         colNum: 12,
@@ -265,70 +379,215 @@ export default {
         margin: [2, 3],
         useCssTransforms: true
       },
+      isSwap:false,
+      isEuropeanOption:false,
+      isIrsCcs:false,
+      isBond:false,
+      swapForm: {
+        currencyPair: 'USD/CNY',
+        tradingType: '掉期',
+        yuanDuanMaiMaiFanagxiang: '买入',
+        tradingDate: Date.now(),
+        currency1InterestCurve: '美元隐含利率曲线',
+        currency2InterestCurve: '人名币FR007收益利率曲线',
+        intepolationType: '线性插值',
+        jiXiTianShuFangshi: 'ACT/365',
+        yingYeRiGuiZe: '调整至下一营业日',
+        jinDuanHuiLv: '',
+        yuanDuanHuiLv: '',
+        jinDuanQiXiRi: Date.now(),
+        jinDuanJiaoGeRi: Date.now(),
+        waiBiJinDuanJingE: '',
+        waiBiJinDuanLiLv: '',
+        benBiJinDuanJingE: '',
+        benBiJinDuanLiLv: '',
+        waiBiYuanDuanJingE: '',
+        waiBiYuaDuanLiLv: '',
+        benBiYuaDuanJingE: '',
+        benBiYuaDuanLiLv: '',
+        jinDuanQixiRi: Date.now(),
+        jinDuanJiaogeRi: Date.now(),
+        waiBiJinDuanJingE: '',
+        waiBiJinDuanLiLv: '',
+        benBiJinDuanJingE: '',
+        benBiJinDuanLiLv: '',
+        yuanDuanQixiRi: Date.now(),
+        yuanDuanJiaogeRi: Date.now(),
+        waiBiyuanDuanJingE: '',
+        waiBiyuanDuanLiLv: '',
+        benBiyuanDuanJingE: '',
+        benBiyuanDuanLiLv: '',
 
-      curveLeg1:{
-        curveName:'',
-        riQiZhunZe:'',
-        quXianPingYiLeiXing:'平行',
-        quXianPingYiShuZhi:'0bp',
       },
-      MarketDataLeg1:null,
-      myechats:null,
-      myechatsRight:null,
-      echartOptionLeft:echartOptionLeft,
-      curveNameOptions:curveNameOptions,
-      jiXiTianShuFangshiOptions:jiXiTianShuFangshiOptions,
+      europeanOptionForm: {
+        currencyPair: '',
+        direction: '',
+        optionType: '',
+        tradeDate: '',
+        expireDate: '',
+        jiaoGeDate: '',
+        benbiQiQuanJingE: '',
+        waibiQiQuanJingE: '',
+        volatility: '',
+        xingQuanJia: '',
+        qiQuanFei: '',
+        jiXiTianShuFangshi: 'ACT/365',
+        yingYeRiGuiZe: '调整至下一营业日',
+        boDonglvQuMianChaZhi: 'Linear of delta',
+        zheXianQuxianChaZhi: 'Linear log normal',
+        waiBiLiLvCurve: '美元隐含利率曲线',
+        benBiLiLvCurve: '人名币FR007收益利率曲线',
+        benBiDaoQiYuanQiLiLv: '',
+        waiBiDaoQiYuanQiLiLv: '',
+      },
+      irsccsForm: {
+        nominalCaptial: '',
+        currencyType: '人民币',
+        tradeLocation: '中国',
+        tradeDate: Date.now(),
+        interestDate: Date.now(),
+        dueDate: Date.now(),
+        evaluationDate: Date.now(),
+        resetNominalCapital: '否',
+        firstNominalCapitalResetDate: Date.now(),
+        nominalCapitalResetFreq: '0.1',
+        nominalCapitalResetStatus: '正常',
+        nominalCapitalResetRatio: '10',
+        nominalCapitalResetAmount: '1000',
+        roleSelf: '收取',
+        interestSetting: '固定利率',
+        fixInterestRate: '4.1',
+        payFreq: '1Y',
+        interestBaseline: 'ACT/365',
+        interestAdjustment: '实际天数调整',
+        resetDateAdjustment: '本期初',
+        resetDateAdjustmentDate: '1',
+        firstInterestDate: Date.now(),
+        resetFreq: '1D',
+        interestType: '单利',
+        actualPayDateAdj: '经调整的下一营业日',
+        firstDeterminedInterestDate: Date.now(),
+        endPeriodSpan: '自成一期',
+        roleSelf2: '支付',
+        interestSetting2: '浮动利率',
+        floatingInterestDir2: '正浮动',
+        payFreq2: '1Y',
+        interestBaseline2: 'ACT/365',
+        interestAdjustment2: '实际天数调整',
+        resetDateAdjustment2: '本期初',
+        resetDateAdjustmentDate2: '1',
+        firstInterestDate2: Date.now(),
+        resetFreq2: '1D',
+        interestType2: '单利',
+        actualPayDateAdj2: '经调整的下一营业日',
+        firstDeterminedInterestDate2: Date.now(),
+        endPeriodSpan2: '自成一期',
+        calculationMethod: '本币交易法',
+      },
+      bondForm: {
+        bondCode: '',
+        bondRating: '',
+        remainingDate: '',
+        interestStartDate: '',
+        exerciseDate: '',
+        shouYiLv: '',
+        piaoMianZongE: '',
+        guZhiRi: '',
+        zhaiQuanJianCheng: '',
+        piaoMianLiLv: '',
+        liLvFangShi: '',
+        jieSuanRi: '',
+        duiFuRi: '',
+        liCha: '',
+        jieSuanJingE: '',
+        shouCiJiZhunLiLvChongZhiRi: '',
+        jiZhunLiLvChongZhiPingLv: '',
+        fuDongLiLvCha: '',
+        fuDongLiLvBeiShu: '',
+        fuDongLiLvShangXian: '',
+        fuDongLiLvXiaXian: '',
+        jixiRiTiaoZheng: '',
+        fuxiRiTiaoZheng: '',
+        fuXiPinLV: '',
+        jiXiTianShuFangshi: '',
+        yingYeRiGuiZe: '',
+        zhaiQuanShouYiLvQuXianMingCheng: '',
+        jiZhunLiLvCanKaoQuXian: '',
+        zhaiQuanZheXianQuXian: '',
+        jiZhunLiLv: '',
+      },
+      fxAttrData:[
+        {TimeChange:0,FXRate:0,IRCurve:0,TotalFVChange:0},
+      ],
+      fxEuropeanOptionAttrData:[
+        {TimeChange:0,FXRate:0,IRCurve:0,Volatility:0,TotalFVChange:0},
+      ],
+      IrsCcsAttrData:[
+        {TimeChange:0,FXRate:0,IRCurve:0,TotalFVChange:0},
+      ],
+      BondAttrData:[
+        {TimeChange:0,FXRate:0,Yield:0,TotalFVChange:0},
+      ],
+
     }
   },
   mounted () {
-    this.myechats = echarts.init(document.getElementById('leftCure'));
-    this.myechats.setOption(this.echartOptionLeft);
-    this.getTableData();
-    console.log(this.MarketDataLeg1,'log')
   },
   methods: {
-    // restful api
-    getTableData(){
-      var self = this;
-      // var options={
-      //   series:{
-      //     name:'贴现利率',
-      //     type:'line',
-      //     data:[],
-      //   }
-      //
-      // }
-      var data=[];
-      getDiscountCurve().then(res => {
-        self.MarketDataLeg1 = res.list;
-        console.log(self.MarketDataLeg1,'data');
-
-        self.MarketDataLeg1.forEach(onerow => {
-          console.log( parseFloat(onerow['利率']),'floatnummber' )
-          data.push([onerow['日期'],parseFloat(onerow['利率'])])
-        });
-        console.log(data,'data2')
-        self.myechats.setOption({
-            series: [{
-              data: data
-            }]
-        });
-
-      });
-
-    },
-
     // ****************************
-    rowstyle(row) {
+    clickSwap(){
+      if(this.isSwap === true){
+        this.isSwap = false;
+      }
+      else{
+        this.isSwap = true;
+      }
+    },
+    clickEuropeanOption(){
+      if(this.isEuropeanOption===true){
+        this.isEuropeanOption = false;
+      }
+      else{
+        this.isEuropeanOption = true;
+      }
+    },
+    clickIrsCcs(){
+      if(this.isIrsCcs===true){
+        this.isIrsCcs = false;
+      }
+      else{
+        this.isIrsCcs = true;
+      }
+    },
+    clickBond(){
+      if(this.isBond===true){
+        this.isBond = false;
+      }
+      else{
+        this.isBond = true;
+      }
+    },
+    clickSwaption(){
+      this.clickSwaption()
+    },
+    rowstyle(row){
       if (row.rowIndex % 2 === 0) {
-        return "height:50px; background-color:#312E30;  text-align: left;color: white; border:0px; font-size: 16px";
+        return "height:30px; background-color:#312E30;  text-align: left;color: white; border:0px; font-size: 16px";
       } else {
-        return "height:50px; background-color:#454754;  text-align: left;color: white; border:0px; font-size: 16px";
+        return "height:30px; background-color:#454754;  text-align: left;color: white; border:0px; font-size: 16px";
       }
     },
     headerstyle(row) {
       return "height:30px; background-color:#454754;  text-align: left;color: white; border:0px; font-size: 16px";
     },
+    layoutUpdatedHandler (newLayout) {
+      console.group('layoutUpdatedHandler')
+      newLayout.forEach(e => {
+        console.log(`{'x': ${e.x}, 'y': ${e.y}, 'w': ${e.w}, 'h': ${e.h}, 'i': '${e.i}'},`)
+      })
+      console.groupEnd()
+    },
+
   }
 }
 </script>
@@ -354,62 +613,42 @@ export default {
   }
 }
 
-.controls-a-line{
-  margin:10px 5px 5px 50px;
-}
-.oneControls {
-  width: 135px;
-}
-.left-col2{
-  height:40px;
-  background:#454754;;
-  margin:5px 0px 5px 0px;
-  padding-left:20px;
-  line-height: 40px;
+.right-col-attr{
+  height:80px;
+  background:transparent;
+  margin:auto;
+  line-height: 200px;
   vertical-align: center;
+
 }
-.my-block{
-  margin:0px 2px 0px 2px;
-  padding:0px 2px 0px 2px;
+.controls-a-line-attr{
+  margin:0px 60px 60px 20px;
 }
-.left-col1{
+.controls-a-line-attr-btm{
+  margin:50px 60px 60px 500px;
+}
+.left-col1-attr{
   height:40px;
   background:#312E30;
   margin:5px 0px 5px 0px;
   padding-left:20px;
   line-height: 40px;
   vertical-align: center;
+  font-size:16px;
+  color:white;
 }
-.right-col{
+.left-col2-attr{
   height:40px;
-  background:transparent;
-  margin:auto;
+  background:#454754;;
+  margin:5px 0px 5px 0px;
+  padding-left:20px;
   line-height: 40px;
   vertical-align: center;
-
+  font-size:16px;
+  color:white;
 }
-.middle-col{
-  height:40px;
-  margin:auto;
-  background:transparent;
-}
-.middle-col2{
-  height:40px;
-  margin:auto;
-  background:#454754;;
-}
-.twoControls {
-  width:108px;
-}
-
-.oneContorls {
+.oneContorls-attr {
   width:190px;
-}
-.oneContorls1 {
-  width:150px;
-}
-.form-num{
-  width: 220px;
 }
 </style>
 
