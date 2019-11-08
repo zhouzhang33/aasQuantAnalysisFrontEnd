@@ -2279,6 +2279,7 @@
                     </el-col>
                 </div>
             </div>
+            <el-row>
             <el-col :span="12">
                 <div class="box-card" style="height:165px">
                     <div class="box-card-title">
@@ -2342,7 +2343,7 @@
                     </div>
                 </div>
             </el-col>
-            <el-row>
+
             <el-col :span="12">
                 <div class="box-card" style="height:165px">
                     <div class="box-card-title" >
