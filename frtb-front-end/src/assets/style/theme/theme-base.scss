@@ -78,6 +78,9 @@
 .box-card .el-input__prefix, .el-input__suffi {
   color: #222222;
 }
+.box-card .el-input.is-disabled .el-input__inner{
+  color:black!important;
+}
 .box-card-content{
   padding: 20px 20px;
 }

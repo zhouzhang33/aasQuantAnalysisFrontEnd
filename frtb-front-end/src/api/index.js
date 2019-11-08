@@ -93,9 +93,11 @@ export function getDiscountCurve(){
       })
 }
 export function getInterestCurve(curveName){
+  console.log('getInterestCurve')
   return request({
     url:'/frtbdata/getMarketData?curvename='+curveName,
-    method:'get'
+    method:'get',
+    data:null
   })
 }
 export function SavePricing(foldername,td){
@@ -107,20 +109,18 @@ export function SavePricing(foldername,td){
   })
 }
 //*************************
-//后端API
-var url_pre = 'http://127.0.0.1:8081'
+//mock API
 export function getFXFWDPricingResult(type,td){
   return request({
-    url:url_pre + '/getFXFWDPricingResult?PricingType='+type,
+    url:'/frtbdata/getFXFWDPricingResult?PricingType='+type,
     method:'get',
     responseType: 'json',
     data: td
   })
 }
-
 export function getEuroOptionPricingResult(type,td){
   return request({
-    url:url_pre + '/getEuroOptionPricingResult?PricingType='+type,
+    url: '/frtbdata/getEuroOptionPricingResult?PricingType='+type,
     method:'get',
     responseType: 'json',
     data: td
@@ -128,7 +128,7 @@ export function getEuroOptionPricingResult(type,td){
 }
 export function getIRSCCSPricingResult(type,td){
   return request({
-    url:url_pre + '/getIRSCCSPricingResult?PricingType='+type,
+    url: '/frtbdata/getIRSCCSPricingResult?PricingType='+type,
     method:'get',
     responseType: 'json',
     data: td
@@ -136,28 +136,82 @@ export function getIRSCCSPricingResult(type,td){
 }
 export function getBondPricingResult(type,td){
   return request({
-    url:url_pre + '/getBondPricingResult?PricingType='+type,
+    url: '/frtbdata/getBondPricingResult?PricingType='+type,
     method:'get',
     responseType: 'json',
     data: td
   })
 }
-export function getSwaptionPricingresult(type,td){
+export function getSwaptionPricingResult(type,td){
   return request({
-    url:url_pre + '/getSwaptionPricingresult?PricingType='+type,
+    url: '/frtbdata/getSwaptionPricingResult?PricingType='+type,
     method:'get',
     responseType: 'json',
     data: td
   })
 }
-export function getFXDigitalPricingresult(type,td){
+export function getFXDigitalPricingResult(type,td){
   return request({
-    url:url_pre + '/getFXFWDPricingResult?PricingType='+type,
+    url: '/frtbdata/getFXDigitalPricingResult?PricingType='+type,
     method:'get',
     responseType: 'json',
     data: td
   })
 }
+//
+
+ //*************************
+// //后端API
+// var url_pre = 'http://127.0.0.1:8081'
+// export function getFXFWDPricingResult(type,td){
+//   return request({
+//     url:url_pre + '/getFXFWDPricingResult?PricingType='+type,
+//     method:'get',
+//     responseType: 'json',
+//     data: td
+//   })
+// }
+//
+// export function getEuroOptionPricingResult(type,td){
+//   return request({
+//     url:url_pre + '/getEuroOptionPricingResult?PricingType='+type,
+//     method:'get',
+//     responseType: 'json',
+//     data: td
+//   })
+// }
+// export function getIRSCCSPricingResult(type,td){
+//   return request({
+//     url:url_pre + '/getIRSCCSPricingResult?PricingType='+type,
+//     method:'get',
+//     responseType: 'json',
+//     data: td
+//   })
+// }
+// export function getBondPricingResult(type,td){
+//   return request({
+//     url:url_pre + '/getBondPricingResult?PricingType='+type,
+//     method:'get',
+//     responseType: 'json',
+//     data: td
+//   })
+// }
+// export function getSwaptionPricingresult(type,td){
+//   return request({
+//     url:url_pre + '/getSwaptionPricingresult?PricingType='+type,
+//     method:'get',
+//     responseType: 'json',
+//     data: td
+//   })
+// }
+// export function getFXDigitalPricingresult(type,td){
+//   return request({
+//     url:url_pre + '/getFXFWDPricingResult?PricingType='+type,
+//     method:'get',
+//     responseType: 'json',
+//     data: td
+//   })
+// }
 // *******************************
 export function cpus () {
   return request({

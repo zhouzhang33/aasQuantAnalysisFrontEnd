@@ -406,9 +406,9 @@
         </div>
 
         <el-row>
-          <el-button type="info" class="controls-a-line">计算NPV</el-button>
-          <el-button type="info" class="controls-a-line">实时报价对比</el-button>
-          <el-button type="info" class="controls-a-line">债券收益散点图</el-button>
+          <el-button type="info" class="controls-a-line" @click="calcPricing">计算NPV</el-button>
+          <el-button type="info" class="controls-a-line" @click="compareResult">实时报价对比</el-button>
+          <el-button type="info" class="controls-a-line" @click="showEarningCurve">债券收益散点图</el-button>
         </el-row>
         <div style="margin-top:10px">
           <el-row>
@@ -550,7 +550,9 @@
 <script>
 
   import {
-    getInterestCurve
+    getInterestCurve,
+    getBondPricingResult,
+    SavePricing
   } from '@api/index'
 import {
   jiXiTianShuFangshiOptions,
@@ -560,6 +562,11 @@ import {
   xiPiaoLeiXingOptions,
   fuXiPinLVOptions
   } from '../UIPara/UIPara'
+import {
+  bondResultForm,
+  bondForm
+} from '../UIPara/FRTBParam'
+
 
   export default {
     components: {
@@ -616,49 +623,7 @@ import {
             }
             ]
           }],
-        bondForm:{
-          jiXiTianShuFangshi:'ACT/365',
-          yingYeRiGuiZe:'调整至下一营业日',
-          zhaiQuanShouYiLvQuXianMingCheng:'中债企业债到期收益率曲线',
-          jiZhunLiLvCanKaoQuXian:'人民币FR007收益曲线',
-          zhaiQuanZheXianQuXian:'曲线名称',
 
-          bondCode:'112074.SZ',
-          bondRating:'AA-',
-          remainingDate:'1.72Y',
-          interestStartDate:Date.now(),
-          exerciseDate:Date.now(),
-          shouYiLv:'0.05176',
-          piaoMianZongE:'1000',
-          guZhiRi:Date.now(),
-          zhaiQuanJianCheng:'',
-          piaoMianLiLv:'',
-          liLvFangShi:'固定',
-          jieSuanRi:Date.now(),
-          duiFuRi:Date.now(),
-          liCha:'10',
-          jieSuanJingE:'1035203.4795',
-          shouCiJiZhunLiLvChongZhiRi:Date.now(),
-          jiZhunLiLvChongZhiPingLv:'',
-          fuDongLiLvCha:'10',
-          fuDongLiLvBeiShu:'1',
-          fuDongLiLvShangXian:'11',
-          fuDongLiLvXiaXian:'1',
-          jixiRiTiaoZheng:'1D',
-          fuxiRiTiaoZheng:'1',
-          fuXiPinLV:'按季度',
-          jiZhunLiLv:'',
-        },
-        bondResultForm:{
-          quanJia:'',
-          maishiJiuQi:'',
-          jingJia:'',
-          xiuZhengJiuQi:'',
-          yingJiLiXi:'',
-          DV01:'',
-          tuXing:'',
-          VaR:'',
-        },
         interestCurveData:null,
         interestialogTableVisible:false,
         marketCurveName:'',
@@ -667,13 +632,38 @@ import {
         bondEarningCurveOptions:bondEarningCurveOptions,
         curveNameOptions:curveNameOptions,
         xiPiaoLeiXingOptions:xiPiaoLeiXingOptions,
-        fuXiPinLVOptions:fuXiPinLVOptions
+        fuXiPinLVOptions:fuXiPinLVOptions,
+        bondResultForm:bondResultForm,
+        bondForm:bondForm
       }
     },
     mounted () {
     },
     methods: {
    // API
+      compareResult(){
+        console.log('compareResult')
+      },
+      showEarningCurve(){
+        console.log('showEarningCurve')
+      },
+
+      calcPricing() {
+        console.log('call pricing')
+        getBondPricingResult('NPV',this.bondForm).then(res => {
+          var keys = Object.keys(res['Result']);
+          for(var i=0; i<keys.length; i++){
+            this.bondResultForm[keys[i]]=res['Result'][keys[i]];
+          }
+
+        }).catch(function (error) {
+          console.log(error);
+          vm.errorMsg = error;
+        });
+        var data={name:Date.now(),Input:this.swapForm,Result:this.swapFormResult};
+        SavePricing('bond',data)
+
+      },
       showbaseInterestCurve(){
         var self = this;
         var curvename='CNY_Repo7D';

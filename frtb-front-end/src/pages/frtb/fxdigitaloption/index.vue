@@ -281,7 +281,7 @@
         </div>
         <div class="my-block">
           <div style="margin-top:50px">
-            <el-button type="info" class="curvebutton" >计算NPV</el-button>
+            <el-button type="info" class="curvebutton" @click="calcPricing" >计算NPV</el-button>
           </div>
           <div style="margin-top:50px">
           <el-col :span="6">
@@ -418,7 +418,9 @@
 <script>
 
 import {
-  getInterestCurve
+  getInterestCurve,
+  getFXDigitalPricingResult,
+  SavePricing
 } from '@api/index'
 import survecurve from '../UIPara/surf'
 import {
@@ -429,6 +431,10 @@ import {
   digitalOptionTypeOptions
 } from '../UIPara/UIPara'
 
+import {
+  digitaloptionForm,
+  digitaloptionResultForm
+} from '../UIPara/FRTBParam'
 export default {
   components: {
     survecurve
@@ -453,33 +459,7 @@ export default {
         margin: [2, 3],
         useCssTransforms: true
       },
-      digitaloptionForm:{
-        guZhiRi:Date.now(),
-        currencyPair:'USD/CNY',
-        digitalOptionType:'',
-        qiXiRi:Date.now(),
-        benBiJingE:'',
-        maiMaiFangXiang:'买入外币',
-        jiaoGeRi:Date.now(),
-        waiBiJinE:'',
-        optionDirection:'买入外币',
-        daoQiRi:Date.now(),
-        xingQuanJia:1.1,
-        yingYeRiGuiZe:'调整至下一营业日',
-        jiXiTianShuFangshi:"调整至下一营业日",
-        benBiDaoQiYuanQiLiLv:'',
-        waiBiDaoQiYuanQiLiLv:'',
-        waiBiDaoJiQiJiaGe:'0'
-      },
-      digitaloptionResultForm:{
-        NPV:'0',
-        Vega:'0',
-        Delta:'0',
-        Theta:'0',
-        Gamma:'0',
-        Rho1:'0',
-        Rho2:'0',
-      },
+
       currencyPairOptions:currencyPairOptions,
       tradingDirectionOptions:tradingDirectionOptions,
       yingYeRiGuiZeOptions:yingYeRiGuiZeOptions,
@@ -489,12 +469,32 @@ export default {
       showtable:true,
       interestialogTableVisible:false,
       digitalOptionTypeOptions:digitalOptionTypeOptions,
+      digitaloptionForm:digitaloptionForm,
+      digitaloptionResultForm:digitaloptionResultForm
     }
   },
   mounted () {
   },
   methods: {
     ////api
+    calcPricing(){
+      console.log('call pricing')
+      getFXDigitalPricingResult('NPV',this.digitaloptionForm).then(res => {
+        console.log(res, 'res')
+        var keys = Object.keys(res['Result']);
+        for(var i=0; i<keys.length; i++){
+          // console.log({"key": keys[i], "value": res[keys[i]]})
+          // this.resultData1[i] = {"key": keys[i], "value": res['FX'][keys[i]]}
+          this.digitaloptionResultForm[keys[i]]=res['Result'][keys[i]];
+        }
+
+      }).catch(function (error) {
+        console.log(error);
+        vm.errorMsg = error;
+      });
+      var data={name:Date.now(),Input:this.digitaloptionForm,Result:this.digitaloptionResultForm};
+      SavePricing('digitaloption',data)
+    },
     showBenbiInterestCurve(){
       var self = this;
       getInterestCurve('CNY_Repo7D').then(res => {
@@ -622,7 +622,7 @@ export default {
     width: 220px;
   }
   .curvebutton{
-    width:200px;
+    width:190px;
     text-align: center;
   }
 }

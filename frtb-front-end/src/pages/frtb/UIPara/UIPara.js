@@ -134,14 +134,19 @@ export var intepolationTypeOptions = [
 ]
 export var curveNameOptions=[
   {
-    key:'美元OIS曲线',
+    key:'USD_OIS',
     label:'美元OIS曲线',
-    value:'美元OIS曲线',
+    value:'USD_OIS',
   },
   {
-    key:'人民币FR007收益曲线',
+    key:'CNY_Repo7D',
     label:'人民币FR007收益曲线',
-    value:'人民币FR007收益曲线',
+    value:'CNY_Repo7D',
+  },
+  {
+    key:'discountCurve',
+    label:'贴现利率',
+    value:'discountCurve',
   },
 ];
 export var tradingTypeOptions=[
@@ -300,6 +305,98 @@ export var digitalOptionTypeOptions=[
 
 export var echartOption = {
   title: {
+
+    textStyle:{
+      color: "white",
+    },
+
+
+  },
+  legend:{
+    show:true,
+    y:'bottom',
+    orient:'horizontal',
+    textStyle:{
+      color:"white",
+      fontSize:16
+
+    }
+  },
+
+  tooltip: {
+    trigger: 'axis',
+    // formatter: function (params) {
+    //     params = params[0];
+    //
+    //     return params.value[1] +'yuan';
+    // },
+    // axisPointer: {
+    //     animation: false
+    // }
+  },
+  grid: {
+    left: '3%',
+    right: '1%',
+    bottom: '15%',
+    top:'10%',
+    containLabel: true
+  },
+  xAxis: {
+    name: '日期',
+    nameLocation:'center',
+    nameGap:30,
+    textStyle:{
+      color:"white",
+      fontSize:16
+    },
+    type: 'time',
+    splitLine: {
+      show: false
+    },
+    nameTestStyle:{
+      color:'#FFFFFF'
+    },
+    axisLine:{
+      lineStyle:{
+        color:'white',  //坐标轴的颜色
+        width:1,
+      },
+    },
+  },
+  yAxis: {
+    name: '利率',
+    nameLocation:'center',
+    nameGap:30,
+    type: 'value',
+    //boundaryGap: [0, '100%'],
+    splitLine: {
+      show: false
+    },
+    axisLabel:{
+      formatter:'{value}%'
+    },
+    axisLine:{
+      lineStyle:{
+        color:'white',  //坐标轴的颜色
+        width:1,
+      }
+    },
+    nameTestStyle:{
+      color:'#FFFFFF'
+    },
+  },
+  series: [
+    {
+      name:'贴现利率',
+      type:'line',
+      data:[['2017/1/25','5.5%']]
+    },
+  ]
+
+};
+
+export var echartOptionRight = {
+  title: {
     //text: 'CPU资源',
     textStyle:{
       color: "white",
@@ -389,7 +486,6 @@ export var echartOption = {
       data:[[1,5.5],[5,5.5],[7,5.5],[9,9.5],[10,10.5]]
     },
   ]
-
 };
 export var echartSurfoption = {
   tooltip: {},

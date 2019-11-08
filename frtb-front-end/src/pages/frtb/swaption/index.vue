@@ -508,10 +508,10 @@
             <div>
               <el-col>
                 <el-col :span="4">
-                  <el-button type="info" class="controls-a-line curvebutton">计算NPV</el-button>
+                  <el-button type="info" class="controls-a-line curvebutton" @click="calcPricing">计算NPV</el-button>
                 </el-col>
                 <el-col :span="4">
-                  <el-button ctype="info" class="controls-a-line curvebutton">推导隐含波动率</el-button>
+                  <el-button type="info" class="controls-a-line curvebutton" @click="calcHiddenVolatility">推导隐含波动率</el-button>
                 </el-col>
               </el-col>
             </div>
@@ -611,7 +611,7 @@
                     <el-input-number
                             :controls="false"
                             class="oneContorls"
-                            v-model="swaptionForm.DV01"
+                            v-model="swaptionResultForm.DV01"
                     >
                     </el-input-number>
                   </div>
@@ -626,7 +626,7 @@
                     <el-input-number
                             :controls="false"
                             class="oneContorls"
-                            v-model="swaptionForm.Gamma"
+                            v-model="swaptionResultForm.Gamma"
                     >
                     </el-input-number>
                   </div>
@@ -641,7 +641,7 @@
                     <el-input-number
                             :controls="false"
                             class="oneContorls"
-                            v-model="swaptionForm.Vega"
+                            v-model="swaptionResultForm.Vega"
                     >
                     </el-input-number>
                   </div>
@@ -656,7 +656,7 @@
                     <el-input-number
                             :controls="false"
                             class="oneContorls"
-                            v-model="swaptionForm.Theta"
+                            v-model="swaptionResultForm.Theta"
                     >
                     </el-input-number>
                   </div>
@@ -707,7 +707,8 @@
 <script>
 
 import {
-  getInterestCurve
+  getInterestCurve,
+  getSwaptionPricingResult
 } from '@api/index'
 import survecurve from '../UIPara/surf'
 import {
@@ -723,6 +724,11 @@ import {
   jiXiTianShuFangshiOptions,
   yingYeRiGuiZeOptions,
 } from '../UIPara/UIPara'
+
+import {
+  swaptionForm,
+  swaptionResultForm
+} from '../UIPara/FRTBParam'
 
 export default {
   components: {
@@ -748,49 +754,7 @@ export default {
         margin: [2, 3],
         useCssTransforms: true
       },
-      swaptionForm: {
-        touCun:'10000',
-        jiaoYiLeiXing:'1Y',
-        jiaoGeRi:Date.now(),
-        qiXiRi:Date.now(),
-        daoQiRi:Date.now(),
-        tongZhiQiXian:'0D',
-        jiaoYiDuiShou:'平安国际',
-        biZhong:'人民币',
-        xingQuanJia:'',
-        jiaoGeFangShi:'本金交割',
-        qiQuanFei:0.00,
-        qiQuanFeiJiaoFuRi:'',
-        guZhiRi:Date.now(),
-        qiQuanGuZhiMoXing:'Black-Scholes',
-        boDongLvLeXing:'Lognormal',
-        piaoMianLiLv: '',
-        zhiFuPingLv:'按季度',
-        jiXiTianShuFangshi:'ACT/365',
-        yingYeRiGuiZe:'调整至下一营业日',
-        guaGouZhiShu:'',
-        fuDongLiLvLiCha:'',
-        gangGanLv:'',
-        chongZhiPinLv:'按季度',
-        zhiFuPingLvFuDongDuan:'按年',
-        jiXiTianShuFangShiFuDongDuan:'ACT/365',
-        zheXianQuXian:'',
-        yuanQiQuXian:'',
-        boDongLvQuMian:''
 
-      },
-    swaptionResultForm:{
-        pingZhiXingQuanJia:'',
-      NPV:'',
-      DV01:'',
-      NPVWuFeiYong:'',
-      qiQuanFei:'',
-      Gamma:'',
-      Vega:'',
-      Theta:'',
-      shouYiLv:'',
-      yinHanBoDongLv:'',
-    },
       touCunOptions:touCunOptions,
       swaptionTradingTypeOptions:swaptionTradingTypeOptions,
       notificationDateOption:notificationDateOption,
@@ -807,11 +771,32 @@ export default {
       showtable:true,
       dialogName:'',
       interestCurveData:null,
+      swaptionForm:swaptionForm,
+      swaptionResultForm:swaptionResultForm
     }
   },
   mounted () {
   },
   methods: {
+    calcHiddenVolatility(){
+      console.log('calcHiddenVolatility');
+
+    },
+    calcPricing(){
+      console.log('call pricing')
+      getSwaptionPricingResult('NPV',this.swaptionForm).then(res => {
+        var keys = Object.keys(res['Result']);
+        for(var i=0; i<keys.length; i++){
+          this.swaptionResultForm[keys[i]]=res['Result'][keys[i]];
+        }
+
+      }).catch(function (error) {
+        console.log(error);
+        vm.errorMsg = error;
+      });
+      var data={name:Date.now(),Input:this.swapForm,Result:this.swapFormResult};
+      SavePricing('fxswap',data)
+    },
     showBenbiInterestCurve(){
       var self = this;
       getInterestCurve('CNY_Repo7D').then(res => {

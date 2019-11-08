@@ -390,8 +390,8 @@
                   >
                   </el-input-number>
                   <span>
-                  <el-radio v-model="calcUnit" label="CYN"></el-radio>
-                  <el-radio v-model="calcUnit" label="USD"></el-radio>
+                  <el-radio v-model="swapFormResult.calcUnit" label="CYN"></el-radio>
+                  <el-radio v-model="swapFormResult.calcUnit" label="USD"></el-radio>
                  </span>
                   <el-button class="controls-a-line" type="info" @click="calcPricing">计算NPV</el-button>
                   <el-button class="controls-a-line" type="info" @click="getSystemEarningRate">计算隐含利率曲线</el-button>
@@ -409,10 +409,10 @@
                   <el-col :span="16" style="color:transparent">a</el-col>
                   <el-col :span="7">
                       <span>
-                         <el-radio v-model="swapTaoLiFormResult.calcNPVUnit" label="CYN"></el-radio>
-                         <el-radio v-model="swapTaoLiFormResult.calcNPVUnit" label="USD"></el-radio>
+                         <el-radio v-model="swapFormResult.calcTaoliUnit" label="CYN"></el-radio>
+                         <el-radio v-model="swapFormResult.calcTaoliUnit" label="USD"></el-radio>
                       </span>
-                      <el-button class="controls-a-line" type="info"@click="">计算套利空间</el-button>
+                      <el-button class="controls-a-line" type="info"@click="calcTaoLiKongJian">计算套利空间</el-button>
                   </el-col>
               </el-row>
 
@@ -424,7 +424,7 @@
                           </el-col>
                           <el-col :span="12" >
                               <div class="left-col1" >
-                                  <el-select   class="oneContorls" v-model="swapTaoLiForm.waiBiLiLvCurve" placeholder="选择曲线名称">
+                                  <el-select   class="oneContorls" v-model="swapForm.waiBiLiLvCurve" placeholder="选择曲线名称">
                                       <el-option
                                               class="oneContorls"
                                               v-for="item in currency1EarningCurveOptions"
@@ -435,7 +435,7 @@
                                   </el-select>
                               </div>
                               <div class="left-col2" >
-                                  <el-select  class="oneContorls" v-model="swapTaoLiForm.benBiLiLvCurve" placeholder="选择曲线名称">
+                                  <el-select  class="oneContorls" v-model="swapForm.benBiLiLvCurve" placeholder="选择曲线名称">
                                       <el-option
                                               v-for="item in currency2EarningCurveOptions"
                                               :key="item.key"
@@ -457,7 +457,7 @@
                                           :controls="false"
                                           class="oneContorls"
                                           disabled
-                                          v-model="swapTaoLiFormResult.PV1"
+                                          v-model="swapFormResult.PV1Taoli"
                                   >
                                   </el-input-number>
                               </div>
@@ -466,7 +466,7 @@
                                           :controls="false"
                                           class="oneContorls"
                                           disabled
-                                          v-model="swapTaoLiFormResult.PV2"
+                                          v-model="swapFormResult.PV2Taoli"
                                   >
                                   </el-input-number>
                               </div>
@@ -487,7 +487,7 @@
                                           disabled
                                           :controls="false"
                                           class="oneContorls"
-                                          v-model="swapTaoLiFormResult.NPV"
+                                          v-model="swapFormResult.NPVTaoli"
                                   >
                                   </el-input-number>
                               </div>
@@ -496,7 +496,7 @@
                                           :controls="false"
                                           disabled
                                           class="oneContorls"
-                                          v-model="swapTaoLiFormResult.taoLiKongJian"
+                                          v-model="swapFormResult.taoLiKongJian"
                                   >
                                   </el-input-number>
                               </div>
@@ -543,10 +543,10 @@
 <script>
 
   import {
-    calcFXFWDSwap,
-    getInterestCurve
+    getFXFWDPricingResult,
+    getInterestCurve,
+    SavePricing
   } from '@api/index'
-  import Calendar from 'vue-calendar-component'
   import {
       currencyPairOptions,
       yingYeRiGuiZeOptions,
@@ -558,9 +558,12 @@
       tradingTypeOptions,
       tradingDirectionOptions,
   } from '../UIPara/UIPara'
+  import {
+      swapFormResult,
+      swapForm,
+  }from '../UIPara/FRTBParam'
   export default {
     components: {
-      Calendar
     },
     data () {
       return {
@@ -584,48 +587,6 @@
         },
         labelPostion:'left',
         interestialogTableVisible:false,
-        swapForm: {
-              currencyPair: 'USD/CNY',
-              tradingType: '掉期',
-              yuanDuanMaiMaiFanagxiang: '卖出外币',
-              tradingDate: Date.now(),
-              currency1InterestCurve: '美元隐含利率曲线',
-              currency2InterestCurve: '人名币FR007收益利率曲线',
-              intepolationType: '线性插值',
-              jiXiTianShuFangshi: 'ACT/365',
-              yingYeRiGuiZe: '调整至下一营业日',
-              jinDuanHuiLv: 6542.1,
-              yuanDuanHuiLv: 6.5421,
-              jinDuanQiXiRi:  Date.now(),
-              jinDuanJiaoGeRi:  Date.now(),
-              waiBiJinDuanJingE: 1000,
-              waiBiJinDuanLiLv: 0.0201,
-              benBiJinDuanJingE: 6542.1,
-              benBiJinDuanLiLv: 0.021,
-              waiBiYuanDuanJingE: 6555.2,
-              waiBiYuaDuanLiLv: 0.0350,
-              benBiYuaDuanJingE: 100,
-              benBiYuaDuanLiLv: 0.024,
-              yuanDuanQixiRi: Date.now(),
-              yuanDuanJiaogeRi: Date.now(),
-          },
-          swapTaoLiForm:{
-            waiBiLiLvCurve:'美元隐含利率曲线',
-            benBiLiLvCurve:'人名币FR007收益利率曲线',
-          },
-          swapFormResult: {
-              PV1: '',
-              PV2: '',
-              NPV: '',
-          },
-          swapTaoLiFormResult: {
-              PV1: '',
-              PV2: '',
-              NPV: '',
-              taoLiKongJian:'',
-              calcNPVUnit:'CYN'
-        },
-        costResult:'',
         calcUnit:'CYN',
         currencyPairOptions: currencyPairOptions,
         yingYeRiGuiZeOptions:yingYeRiGuiZeOptions,
@@ -636,183 +597,142 @@
         curveNameOptions:curveNameOptions,
         tradingTypeOptions: tradingTypeOptions,
         tradingDirectionOptions:tradingDirectionOptions,
-        interestCurveData:'',
-         interestBenBiCurveData: [{
-              date: '2016-05-02',
-              rate: '6',
-
-          }, {
-              date: '2017-05-04',
-              rate: '6.1',
-
-          }, {
-              date: '2018-05-01',
-              rate: '6.2',
-
-          }, {
-              date: '2019-05-03',
-              rate: '6.3',
-
-          }],
-        interestWaiBiCurveData: [{
-            date: '2016-05-02',
-            rate: '8',
-
-        }, {
-            date: '2017-05-04',
-            rate: '8.1',
-
-        }, {
-            date: '2018-05-01',
-            rate: '8.2',
-
-        }, {
-            date: '2019-05-03',
-            rate: '8.3',
-
-        }],
+        interestCurveData:null,
+        swapFormResult: swapFormResult,
+        swapForm:swapForm,
       }
     },
     mounted () {
     },
     methods: {
       // ****************************
-        showWaibiInterestCurve(){
+        showWaibiInterestCurve() {
             var self = this;
             getInterestCurve('USD_OIS').then(res => {
                 self.interestCurveData = res.list;
-                console.log(self.MarketDataLeg1,'data');
-
-                // self.MarketDataLeg1.forEach(onerow => {
-                //     console.log( parseFloat(onerow['利率']),'floatnummber' )
-                //     data.push([onerow['日期'],parseFloat(onerow['利率'])])
-                // });
-                console.log(data,'data2')
-                // self.myechats.setOption({
-                //     series: [{
-                //         data: data
-                //     }]
-                // });
-
+                console.log(res.list,'return Curve')
+                console.log(self.interestCurveData,'return Curve')
             });
-
-           // this.interestCurveData=this.interestWaiBiCurveData
-            this.interestialogTableVisible=true;
+            this.interestialogTableVisible = true;
         },
-        showBenbiInterestCurve(){
+        showBenbiInterestCurve() {
             var self = this;
             getInterestCurve('CNY_Repo7D').then(res => {
                 self.interestCurveData = res.list;
             });
-            // this.interestCurveData=this.interestWaiBiCurveData
-            this.interestialogTableVisible=true;
+            this.interestialogTableVisible = true;
+        },
+        resetInputs() {
+            this.swapForm.currencyPair = 'USD/CNY';
+            this.swapForm.tradingType = '掉期';
+            this.swapForm.yuanDuanMaiMaiFanagxiang = '卖出外币';
+            this.swapForm.tradingDate = Date.now();
+            this.swapForm.currency1InterestCurve = '美元隐含利率曲线';
+            this.swapForm.currency2InterestCurve = '人名币FR007收益利率曲线';
+            this.swapForm.intepolationType = '线性插值';
+            this.swapForm.jiXiTianShuFangshi = 'ACT/365';
+            this.swapForm.yingYeRiGuiZe = '调整至下一营业日';
+            this.swapForm.jinDuanHuiLv = 0;
+            this.swapForm.yuanDuanHuiLv = 0;
+            this.swapForm.jinDuanQiXiRi = Date.now();
+            this.swapForm.jinDuanJiaoGeRi = Date.now();
+            this.swapForm.waiBiJinDuanJingE = 0;
+            this.swapForm.waiBiJinDuanLiLv = 0;
+            this.swapForm.benBiJinDuanJingE = 0;
+            this.swapForm.benBiJinDuanLiLv = 0;
+            this.swapForm.waiBiYuanDuanJingE = 0;
+            this.swapForm.waiBiYuaDuanLiLv = 0;
+            this.swapForm.benBiYuaDuanJingE = 0;
+            this.swapForm.benBiYuaDuanLiLv = 0;
+            this.swapForm.yuanDuanQixiRi = Date.now();
+            this.swapForm.yuanDuanJiaogeRi = Date.now();
+            this.swapForm.waiBiLiLvCurve = '美元隐含利率曲线';
+            this.swapForm.benBiLiLvCurve = '人名币FR007收益利率曲线';
+        },
+        getSystemEarningRate() {
+            //这里是call API
+            this.swapForm.currentInterestRate = 1;
+            this.swapForm.nearInterestRate = 1;
+            this.swapForm.farInterestRate = 1;
+        },
+        calcTaoLiKongJian() {
+            console.log('call pricing')
+            getFXFWDPricingResult('TaoLi',this.swapForm).then(res => {
+                var keys = Object.keys(res['Result']);
+                for(var i=0; i<keys.length; i++){
+                    // console.log({"key": keys[i], "value": res[keys[i]]})
+                    // this.resultData1[i] = {"key": keys[i], "value": res['FX'][keys[i]]}
+                    this.swapFormResult[keys[i]]=res['Result'][keys[i]];
+                }
+            }).catch(function (error) {
+                console.log(error);
+                vm.errorMsg = error;
+            });
+        },
+        calcPricing() {
+            console.log('call pricing')
+            getFXFWDPricingResult('NPV',this.swapForm).then(res => {
+                console.log(res, 'res')
+                var keys = Object.keys(res['Result']);
+                for(var i=0; i<keys.length; i++){
+                    // console.log({"key": keys[i], "value": res[keys[i]]})
+                    // this.resultData1[i] = {"key": keys[i], "value": res['FX'][keys[i]]}
+                    this.swapFormResult[keys[i]]=res['Result'][keys[i]];
+                }
+
+            }).catch(function (error) {
+                console.log(error);
+                vm.errorMsg = error;
+            });
+            var data={name:Date.now(),Input:this.swapForm,Result:this.swapFormResult};
+            SavePricing('fxswap',data)
+
         },
 
 
-      rowstyle(row) {
-        if (row.rowIndex % 2 === 0) {
-          return "height:50px; background-color:#312E30;  text-align: left;color: white; border:0px; font-size: 16px";
-        } else {
-          return "height:50px; background-color:#454754;  text-align: left;color: white; border:0px; font-size: 16px";
-        }
-      },
-      rowstyleInfo(row) {
-        if (row.rowIndex % 2 === 0) {
-          return "height:50px; background-color:#312E30;  text-align: left;color: white; border:0px; font-size: 16px";
-        } else {
-          return "height:50px; background-color:#454754;  text-align: left;color: white; border:0px; font-size: 16px";
-        }
-      },
-      headerstyle(row) {
-        return "height:50px; background-color:#454754;  text-align: left;color: white; border:0px; font-size: 16px";
-      },
-      // 测试代码
-      layoutUpdatedHandler(newLayout) {
-        //console.group("layoutUpdatedHandler");
-        newLayout.forEach(e => {
-          console.log(
-                  `{'x': ${e.x}, 'y': ${e.y}, 'w': ${e.w}, 'h': ${e.h}, 'i': '${e.i}'},`
-          );
-        });
-        console.groupEnd();
-      },
-      resizeHandler(i, newH, newW) {
-        this.log("resizeHandler", `i: ${i}, newH: ${newH}, newW: ${newW}`);
-      },
-      moveHandler(i, newX, newY) {
-        this.log("moveHandler", `i: ${i}, newX: ${newX}, newY: ${newY}`);
-      },
-      resizedHandler(i, newH, newW, newHPx, newWPx) {
-        this.log(
+// style code
+        rowstyle(row) {
+            if (row.rowIndex % 2 === 0) {
+                return "height:50px; background-color:#312E30;  text-align: left;color: white; border:0px; font-size: 16px";
+            } else {
+                return "height:50px; background-color:#454754;  text-align: left;color: white; border:0px; font-size: 16px";
+            }
+        },
+        rowstyleInfo(row) {
+            if (row.rowIndex % 2 === 0) {
+                return "height:50px; background-color:#312E30;  text-align: left;color: white; border:0px; font-size: 16px";
+            } else {
+                return "height:50px; background-color:#454754;  text-align: left;color: white; border:0px; font-size: 16px";
+            }
+        },
+        headerstyle(row) {
+            return "height:50px; background-color:#454754;  text-align: left;color: white; border:0px; font-size: 16px";
+        },
+        // 测试代码
+        layoutUpdatedHandler(newLayout) {
+            //console.group("layoutUpdatedHandler");
+            newLayout.forEach(e => {
+                console.log(
+                    `{'x': ${e.x}, 'y': ${e.y}, 'w': ${e.w}, 'h': ${e.h}, 'i': '${e.i}'},`
+                );
+            });
+            console.groupEnd();
+        },
+        resizeHandler(i, newH, newW) {
+            this.log("resizeHandler", `i: ${i}, newH: ${newH}, newW: ${newW}`);
+        },
+        moveHandler(i, newX, newY) {
+            this.log("moveHandler", `i: ${i}, newX: ${newX}, newY: ${newY}`);
+        },
+        resizedHandler(i, newH, newW, newHPx, newWPx) {
+            this.log(
                 "resizedHandler",
                 `i: ${i}, newH: ${newH}, newW: ${newW}, newHPx: ${newHPx}, newWPx: ${newWPx}`
-        );
-      },
-      movedHandler(i, newX, newY) {
-        this.log("movedHandler", `i: ${i}, newX: ${newX}, newY: ${newY}`);
-      },
-      resetInputs(){
-        this.currencyPair='USD/CNY';
-        this.tradingType='掉期';
-        this.yuanDuanMaiMaiFanagxiang='买入';
-        this.tradingDate=Date.now();
-        this.currency1InterestCurve='美元隐含利率曲线';
-        this.currency2InterestCurve='人名币FR007收益利率曲线';
-        this.intepolationType='线性插值';
-        this.jiXiTianShuFangshi='ACT/365';
-        this.yingYeRiGuiZe='调整至下一营业日';
-        this.jinDuanHuiLv='';
-        this.yuanDuanHuiLv='';
-        this.jinDuanQiXiRi= Date.now();
-        this.jinDuanJiaoGeRi= Date.now();
-        this.waiBiJinDuanJingE='';
-        this.waiBiJinDuanLiLv='';
-        this.benBiJinDuanJingE='';
-        this.benBiJinDuanLiLv='';
-        this.waiBiYuanDuanJingE='';
-        this.waiBiYuaDuanLiLv='';
-        this.benBiYuaDuanJingE='';
-        this.benBiYuaDuanLiLv='';
-        this.jinDuanQixiRi=Date.now();
-        this.jinDuanJiaogeRi=Date.now();
-        this.waiBiJinDuanJingE='';
-        this.waiBiJinDuanLiLv='';
-        this.benBiJinDuanJingE='';
-        this.benBiJinDuanLiLv='';
-        this.yuanDuanQixiRi=Date.now();
-        this.yuanDuanJiaogeRi=Date.now();
-        this.waiBiyuanDuanJingE='';
-        this.waiBiyuanDuanLiLv='';
-        this.benBiyuanDuanJingE='';
-        this.benBiyuanDuanLiLv='';
-      },
-      getSystemEarningRate() {
-        //这里是call API
-        this.swapForm.currentInterestRate=1;
-        this.swapForm.nearInterestRate=1;
-        this.swapForm.farInterestRate=1;
-      },
-
-      calcTaoLiKongJian(){
-          console.log('call pricing')
-          calcFXFWDSwap(this.swapForm).then(res => {
-              console.log(res,'res')
-          }).catch(function (error){
-              console.log(error);
-              vm.errorMsg = error;
-          });
-      },
-
-      calcPricing() {
-        console.log('call pricing')
-        calcFXFWDSwap(this.swapForm).then(res => {
-          console.log(res,'res')
-        }).catch(function (error){
-          console.log(error);
-          vm.errorMsg = error;
-        });
-      }
-
+            );
+        },
+        movedHandler(i, newX, newY) {
+            this.log("movedHandler", `i: ${i}, newX: ${newX}, newY: ${newY}`);
+        },
     }
   }
 </script>

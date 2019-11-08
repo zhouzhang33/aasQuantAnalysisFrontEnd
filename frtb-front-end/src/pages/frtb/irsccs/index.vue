@@ -28,9 +28,10 @@
                     </el-col>
                     <el-col :span="16">
                         <div class="left-col1">
-                            <el-button type="infor" class="curvebutton">
-                                清空记录
-                            </el-button>
+                            <span style="color:transparent">a</span>
+<!--                            <el-button type="infor" class="curvebutton">-->
+<!--                                清空记录-->
+<!--                            </el-button>-->
                         </div>
                     </el-col>
                 </div>
@@ -590,7 +591,7 @@
                     <el-col :span="12">
                         <el-col :span="8">
                             <div class="left-col1">
-                                <el-button type='info' style="width:140px">
+                                <el-button type='info' style="width:120px" @click="calcPricing">
                                     计算
                                 </el-button>
                             </div>
@@ -626,7 +627,7 @@
                     </el-col>
                     </el-col>
                     <el-col :span="1">
-                        <div class="dividerStyle">a</div>
+                        <div style="color:transparent">a</div>
                     </el-col>
                     <el-col :span="11">
                     <el-col :span="12">
@@ -791,117 +792,98 @@
       irstargetOptions,
   } from '../UIPara/UIPara'
   import twocurves from './curve/twoCurves.vue'
-  import test from './curve/twoCurves'
+  import {
+      getIRSCCSPricingResult,
+      SavePricing
+  } from '@api/index'
+  import {
+      irsccsResultForm,
+      irsccsFormLeg2,
+      irsccsFormLeg1
+  } from '../UIPara/FRTBParam'
+
   export default {
     components: {
         twocurves,
-        test
     },
     data () {
       return {
-        filename: __filename,
-        layout: {
-          layout: [
-            { 'x': 0, 'y': 0, 'w': 3, 'h': 13, 'i': '0' },
-            { 'x': 0, 'y': 13, 'w': 3, 'h': 15.5, 'i': '1' },
-            { 'x': 3, 'y': 0, 'w': 6, 'h': 13, 'i': '2' },
-            { 'x': 9, 'y': 0, 'w': 3, 'h': 13, 'i': '3' },
-            { 'x': 3, 'y': 13, 'w': 9, 'h': 15.5, 'i': '4' },
-          ],
-          colNum: 12,
-          rowHeight: 36,
-          isDraggable: false,
-          isResizable: false,
-          isMirrored: false,
-          verticalCompact: true,
-          margin: [2, 3],
-          useCssTransforms: true
-        },
-
-        recordList: [
-          { key: 'IRS', label: 'IRS', value: 'IRS' },
-          { key: 'CCS', label: 'CCS', value: 'CCS' }
-        ],
-        // templateSelected: ''
-        // templateList:[
-        //   { key: 'tempalte1', label: 'tempalte1', value: 'tempalte1' }
-        // ],
-        recordSelected: 'IRS',
-        activeTabName:'record1',
-        irsccsFormLeg1:{
-            direction: '收取利息',
-            Amount:'',
-            biZhong:'美元',
-            xiPiaoLeiXing:'固定',
-            fuXiPingLv:'1M',
-            jiXiFangShi:'单利',
-            xiPiaoLv: '0.05',
-            xiPiaoLvChengShu:'1',
-            shouCiFuXiRi:Date.now(),
-            liCha:'5bp',
-            weiciFuxiRi: Date.now(),
-            canKaoLiLv:'Libor',
-            dingPanRiTiaoZheng:'2D',
-            jiXiJiZhun:'ACT/365',
-            yingYeRiTiaoZheng:'调整至下一营业日',
-            jieJiaRi:'北京',
-            guZhiRi:Date.now(),
-            qiXiRi:Date.now(),
-            daoQiRi:Date.now(),
-        },
-          irsccsFormLeg2:{
-              direction: '支付利息',
-              Amount:'',
-              biZhong:'人民币',
-              xiPiaoLeiXing:'固定',
-              fuXiPingLv:'1M',
-              jiXiFangShi:'单利',
-              xiPiaoLv: '0.05',
-              xiPiaoLvChengShu:'1',
-              shouCiFuXiRi:Date.now(),
-              liCha:'5bp',
-              weiciFuxiRi: Date.now(),
-              canKaoLiLv:'Libor',
-              dingPanRiTiaoZheng:'2D',
-              jiXiJiZhun:'ACT/365',
-              yingYeRiTiaoZheng:'调整至下一营业日',
-              jieJiaRi:'北京',
-              guZhiRi:Date.now(),
-              qiXiRi:Date.now(),
-              daoQiRi:Date.now(),
+          filename: __filename,
+          layout: {
+              layout: [
+                  {'x': 0, 'y': 0, 'w': 3, 'h': 13, 'i': '0'},
+                  {'x': 0, 'y': 13, 'w': 3, 'h': 15.5, 'i': '1'},
+                  {'x': 3, 'y': 0, 'w': 6, 'h': 13, 'i': '2'},
+                  {'x': 9, 'y': 0, 'w': 3, 'h': 13, 'i': '3'},
+                  {'x': 3, 'y': 13, 'w': 9, 'h': 15.5, 'i': '4'},
+              ],
+              colNum: 12,
+              rowHeight: 36,
+              isDraggable: false,
+              isResizable: false,
+              isMirrored: false,
+              verticalCompact: true,
+              margin: [2, 3],
+              useCssTransforms: true
           },
 
-        irsccsResultForm:{
-          NPV: '1',
-          DV01: '1',
-          yinJiLiXi:'',
-          NPVLeg1: '1',
-          DV01Leg1: '1',
-          yinJiLiXiLeg1:'',
-          NPVLeg2: '1',
-          DV01Leg2: '1',
-          yinJiLiXiLeg2:'',
-          calculationTarget:'',
-        },
-          activeName:'main',
-          curveName:'InterestCurve',
-          showCurveDiag:false,
-          directionOptions:directionOptions,
-          xiPiaoLeiXingOptions:xiPiaoLeiXingOptions,
-          fuXiPingLvOptions:fuXiPingLvOptions,
-          currencyOptions:currencyOptions,
-          jiXiFangShiOptions:jiXiFangShiOptions,
-          jiXiTianShuFangshiOptions:jiXiTianShuFangshiOptions,
-          jieJiaRiOptions:jieJiaRiOptions,
-          yingYeRiGuiZeOptions:yingYeRiGuiZeOptions,
-          irstargetOptions:irstargetOptions,
+          recordList: [
+              {key: 'IRS', label: 'IRS', value: 'IRS'},
+              {key: 'CCS', label: 'CCS', value: 'CCS'}
+          ],
+          // templateSelected: ''
+          // templateList:[
+          //   { key: 'tempalte1', label: 'tempalte1', value: 'tempalte1' }
+          // ],
+          recordSelected: 'IRS',
+          activeTabName: 'record1',
 
+          activeName: 'main',
+          curveName: 'InterestCurve',
+          showCurveDiag: false,
+          directionOptions: directionOptions,
+          xiPiaoLeiXingOptions: xiPiaoLeiXingOptions,
+          fuXiPingLvOptions: fuXiPingLvOptions,
+          currencyOptions: currencyOptions,
+          jiXiFangShiOptions: jiXiFangShiOptions,
+          jiXiTianShuFangshiOptions: jiXiTianShuFangshiOptions,
+          jieJiaRiOptions: jieJiaRiOptions,
+          yingYeRiGuiZeOptions: yingYeRiGuiZeOptions,
+          irstargetOptions: irstargetOptions,
+          irsccsResultForm: irsccsResultForm,
+          irsccsFormLeg2: irsccsFormLeg2,
+          irsccsFormLeg1: irsccsFormLeg1
       }
     },
     mounted () {
     },
     methods: {
       // ****************************
+        calcPricing(){
+            console.log('call pricing')
+            var data={
+                'leg1':this.irsccsFormLeg1,
+                'leg2':this.irsccsFormLeg2
+            }
+            getIRSCCSPricingResult(this.irsccsResultForm.calculationTarget,data).then(res => {
+                console.log(res, 'res')
+                var keys = Object.keys(res['Result']);
+                for(var i=0; i<keys.length; i++){
+                    // console.log({"key": keys[i], "value": res[keys[i]]})
+                    // this.resultData1[i] = {"key": keys[i], "value": res['FX'][keys[i]]}
+                    this.irsccsResultForm[keys[i]]=res['Result'][keys[i]];
+                }
+
+            }).catch(function (error) {
+                console.log(error);
+                vm.errorMsg = error;
+            });
+            var data={name:Date.now(),Input:this.swapForm,Result:this.swapFormResult};
+            SavePricing('irsccs',data)
+        },
+
+
+     //////
       handlePanelClick(tab, event) {
             console.log(tab, event);
      },

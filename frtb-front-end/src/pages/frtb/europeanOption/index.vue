@@ -586,7 +586,7 @@
                 </div>
                 <div style="margin:20px 0px 20px 5px">
                     <el-row>
-                        <el-col :span="6"><el-button type="info" class="curvebutton">计算NPV</el-button></el-col>
+                        <el-col :span="6"><el-button type="info" class="curvebutton" @click="calcNPV">计算NPV</el-button></el-col>
                         <el-col :span="6"><el-button type="info" class="curvebutton">倒算行权价</el-button></el-col>
                         <el-col :span="6"><el-button type="info" class="curvebutton">清空</el-button></el-col>
                         <el-col :span="6"><el-button type="info" class="curvebutton" @click="switchLegs">交换输入</el-button></el-col>
@@ -688,11 +688,15 @@
                 </div>
             </div>
             <el-col :span="12">
-                <div class="box-card" style="height:144px">
+                <div class="box-card" style="height:172px">
                     <div class="box-card-title">
                         <el-checkbox-button v-model="DeltaHedgeCalc" @click="clickDeltaHedgeCalc">
                             Delta Hedge
                         </el-checkbox-button>
+                        <span  class="controls-a-line" v-show="DeltaHedgeCalc === true">
+                            <el-button type='info' class="curvebutton" @click="calculateDeltaHedge">计算</el-button>
+                        </span>
+
                     </div>
                     <div v-show="DeltaHedgeCalc === true">
                         <div style="margin:20px 0px 20px 5px">
@@ -747,11 +751,14 @@
                 </div>
             </el-col>
             <el-col :span="12">
-                <div class="box-card" style="height:144px">
+                <div class="box-card" style="height:172px">
                     <div class="box-card-title" >
                         <el-checkbox-button v-model="VegaHedgeCalc" @click="clickVegaHedgeCalc">
                             Vega Hedge
                         </el-checkbox-button>
+                        <span  class="controls-a-line" v-show="VegaHedgeCalc === true">
+                            <el-button type='info' class="curvebutton" @click="calculateVegaHedge">计算</el-button>
+                        </span>
                     </div>
                     <div v-show="VegaHedgeCalc === true">
                         <div style="margin:20px 0px 20px 5px">
@@ -761,22 +768,20 @@
                             </el-col>
                             <el-col :span="7">
                                 <div class="left-col1" >
-                                    <el-input-number
-                                            :controls="false"
+                                    <el-input
                                             class="oneContorls1"
                                             disabled
                                             v-model="europeanResultVegaHedge.option1Type"
                                     >
-                                    </el-input-number>
+                                    </el-input>
                                 </div>
                                 <div class="left-col2" >
-                                    <el-input-number
-                                            :controls="false"
-                                            class="oneContorls1"
+                                    <el-input
+                                             class="oneContorls1"
                                             disabled
                                             v-model="europeanResultVegaHedge.option2Type"
                                     >
-                                    </el-input-number>
+                                    </el-input>
                                 </div>
                             </el-col>
 
@@ -824,7 +829,6 @@
 
                 </div>
             </el-col>
-
             <div>
                 <el-dialog
                         title="利率曲线"
@@ -858,18 +862,15 @@
                     </div>
                 </el-dialog>
             </div>
-
-
         </d2-grid-layout>
     </d2-container>
 </template>
 
 <script>
   import {
-    pricing,
-    calcFxFWD,
-    getInterestCurve
-
+    getInterestCurve,
+    getEuroOptionPricingResult,
+    SavePricing
   } from '@api/index'
   import echarts from 'echarts'
   import 'echarts-gl'
@@ -887,8 +888,16 @@
       echartOption,
       echartSurfoption
   } from '../UIPara/UIPara'
+  import {
+      europeanResultDeltaHedge,
+      europeanResultVegaHedge,
+      europeanResultLeg1,
+      europeanResultLeg2,
+      europeanOptionLeg1Form,
+      europeanOptionLeg2Form
+  }
+  from '../UIPara/FRTBParam'
   import survecurve from '../UIPara/surf'
-
   export default {
     components: {
         survecurve
@@ -905,7 +914,7 @@
             { 'x': 3, 'y': 13, 'w': 9, 'h': 15.5, 'i': '4' },
           ],
           colNum: 12,
-          rowHeight: 31,
+          rowHeight: 32,
           isDraggable: false,
           isResizable: false,
           isMirrored: false,
@@ -918,163 +927,12 @@
         recordList: [
           { key: 'record1', label: 'record1', value: 'record1' }
         ],
-        huiLvYuanQiCurveData: [{
-              date: '2016-05-02',
-              rate: '7',
-
-          }, {
-              date: '2017-05-04',
-              rate: '7.1',
-
-          }, {
-              date: '2018-05-01',
-              rate: '7.2',
-
-          }, {
-              date: '2019-05-03',
-              rate: '7.3',
-
-          }],
-         benBiYuanQiCurveData: [{
-              date: '2016-05-02',
-              rate: '6',
-
-          }, {
-              date: '2017-05-04',
-              rate: '6.1',
-
-          }, {
-              date: '2018-05-01',
-              rate: '6.2',
-
-          }, {
-              date: '2019-05-03',
-              rate: '6.3',
-
-          }],
-          waiBiYuanQiCurveData: [{
-              date: '2016-05-02',
-              rate: '8',
-
-          }, {
-              date: '2017-05-04',
-              rate: '8.1',
-
-          }, {
-              date: '2018-05-01',
-              rate: '8.2',
-
-          }, {
-              date: '2019-05-03',
-              rate: '8.3',
-
-          }],
-          interestialogTableVisible:false,
-        europeanOptionLeg1Form:{
-            currencyPair:'USD/CNY',
-            direction:'Buy',
-            optionType:'Call',
-            tradeDate: Date.now(),
-            expireDate: Date.now(),
-            jiaoGeDate: Date.now(),
-            benbiQiQuanJingE:'',
-            waibiQiQuanJingE:'',
-            volatility:'0.01987',
-            xingQuanJia:'',
-            qiQuanFei:'',
-            jiXiTianShuFangshi: 'ACT/365',
-            yingYeRiGuiZe: '调整至下一营业日',
-            boDonglvQuMianChaZhi:'Linear of delta',
-            zheXianQuxianChaZhi:'Linear log normal',
-            waiBiLiLvCurve:'美元隐含利率曲线',
-            benBiLiLvCurve:'人名币FR007收益利率曲线',
-            benBiDaoQiYuanQiLiLv:'',
-            waiBiDaoQiYuanQiLiLv:'',
-        },
-          europeanOptionLeg2Form:{
-              currencyPair:'USD/CNY',
-              direction:'Buy',
-              optionType:'Call',
-              tradeDate: Date.now(),
-              expireDate: Date.now(),
-              jiaoGeDate: Date.now(),
-              benbiQiQuanJingE:'',
-              waibiQiQuanJingE:'',
-              volatility:'0.01987',
-              xingQuanJia:'',
-              qiQuanFei:'',
-              jiXiTianShuFangshi: 'ACT/365',
-              yingYeRiGuiZe: '调整至下一营业日',
-              boDonglvQuMianChaZhi:'Linear of delta',
-              zheXianQuxianChaZhi:'Linear log normal',
-              waiBiLiLvCurve:'美元隐含利率曲线',
-              benBiLiLvCurve:'人名币FR007收益利率曲线',
-              benBiDaoQiYuanQiLiLv:'',
-              waiBiDaoQiYuanQiLiLv:'',
-          },
-          DeltaHedgeCalc:true,
-          VegaHedgeCalc:false,
-          europeanResultDeltaHedge:{
-              spotHedge:'',
-              forwardHedge:'',
-              currencyUnit:'CNY'
-          },
-          europeanResultVegaHedge:{
-              option1Type:'',
-              option2Type:'',
-              option1Amount:'',
-              option2Amount:'',
-              currencyUnit:'CNY'
-          },
-          europeanResultVegaHedge:{
-              option1Type:'',
-              option1Amount:'',
-              option2Type:'',
-              option2Amount:'',
-              currencyUnit:'CNY'
-          },
-          europeanResultLeg1:{
-              NPV:'',
-              Delta:'',
-              Gamma:'',
-              Vega:'',
-              Theta:'',
-              Rho:'',
-          },
-          europeanResultLeg2:{
-              NPV:'',
-              Delta:'',
-              Gamma:'',
-              Vega:'',
-              Theta:'',
-              Rho:'',
-          },
-        europeanResult1:{
-          fwd:'1.19289/1.19291',
-          fwdPoint:'.7588/.7588',
-          vol:'7.27/8.68 %',
-          cost:'1831.00/2192.00',
-          counterQty:'1.2M USD',
-          delta:'50.43/50.53 %',
-          gamma:'.80132',
-          vega:'.00025',
-          theta:'-.00103',
-          DTE:'1 DAY',
-          fromATMPercent:'0.00 %',
-          probPercent:'40.32 %',
-          premiumDate:'May 09,2018',
-          deliveryDate:'May 10 2018',
-          greeksDelta:'50.48%',
-          greeksGamma:'80132',
-          greekPSI:'-.00002',
-          greekRho:'00002',
-          greekTheta:'-.00103',
-          greekVega:'.00025',
-        },
+       interestialogTableVisible:false,
+        DeltaHedgeCalc:true,
+        VegaHedgeCalc:false,
         InputDataTableOpt: {height: '290'},
         myechats:null,
         myechartSurf:null,
-
         currencyPairOptions:currencyPairOptions,
         callPutOptions:callPutOptions,
         zheXianQuxianChaZhiOptions:zheXianQuxianChaZhiOptions,
@@ -1088,21 +946,20 @@
         echartOption:echartOption,
         echartSurfoption:echartSurfoption,
         interestCurveData:null,
-          showtable:true,
-          dialogName:'',
+        showtable:true,
+        dialogName:'',
+        europeanResultDeltaHedge:europeanResultDeltaHedge,
+        europeanResultVegaHedge:europeanResultVegaHedge,
+        europeanResultLeg1:europeanResultLeg1,
+        europeanResultLeg2:europeanResultLeg2,
+        europeanOptionLeg1Form: europeanOptionLeg1Form,
+        europeanOptionLeg2Form: europeanOptionLeg2Form
       }
     },
     mounted () {
-      // //console.log(this.echartSurfoption)
-      // this.myechartSurf=echarts.init(document.getElementById('marketSurf'));
-      // this.myechartSurf.setOption(this.echartSurfoption);
-      //
-      // this.myechats = echarts.init(document.getElementById('resource'));
-      // this.myechats.setOption(this.echartOption);
-
-
     },
     methods: {
+
       // ****************************
        clickVegaHedgeCalc(){
            if(this.VegaHedgeCalc===true) {
@@ -1120,9 +977,104 @@
                 this.DeltaHedgeCalc = true;
             }
         },
+        switchLegs()
+        {
+            if(this.collapsActiveName=== 'leg1'){
+                this.collapsActiveName='leg2';
+            }else{
+                this.collapsActiveName='leg1';
+            }
+        },
+//api
+        calculateDeltaHedge(){
+            console.log('call pricing')
+            getEuroOptionPricingResult('DeltaHedge',this.europeanOptionLeg1Form).then(res => {
+                console.log(res, 'res')
+                var keys = Object.keys(res['Result']);
+                for(var i=0; i<keys.length; i++){
+                    this.europeanResultDeltaHedge[keys[i]]=res['Result'][keys[i]];
+                }
+
+            }).catch(function (error) {
+                console.log(error);
+                vm.errorMsg = error;
+            });
+            var data={name:Date.now(),Input:[this.europeanOptionLeg1Form,
+                    this.europeanOptionLeg2Form],Result:[this.europeanResultLeg1,this.europeanResultLeg2,
+                    this.europeanResultDeltaHedge,this.europeanResultVegaHedge]};
+            SavePricing('europeanoption',data)
+        },
+
+        calculateVegaHedge(){
+            console.log('call pricing')
+            getEuroOptionPricingResult('VegaHedge',this.europeanOptionLeg1Form).then(res => {
+                console.log(res, 'res')
+                var keys = Object.keys(res['Result']);
+                for(var i=0; i<keys.length; i++){
+                    this.europeanResultVegaHedge[keys[i]]=res['Result'][keys[i]];
+                }
+            }).catch(function (error) {
+                console.log(error);
+                vm.errorMsg = error;
+            });
+            var data={name:Date.now(),Input:[this.europeanOptionLeg1Form,
+                    this.europeanOptionLeg2Form],Result:[this.europeanResultLeg1,this.europeanResultLeg2,
+                    this.europeanResultDeltaHedge,this.europeanResultVegaHedge]};
+            SavePricing('europeanoption',data)
+        },
+        calcNPV(){
+            var putForm=null;
+           if(this.collapsActiveName === 'leg1') {
+               putForm = this.europeanOptionLeg1Form;
+           }
+           else {
+               putForm = this.europeanOptionLeg2Form;
+           }
+            getEuroOptionPricingResult('NPV',putForm).then(res => {
+                console.log(res, 'res')
+                var keys = Object.keys(res['Result']);
+                for(var i=0; i<keys.length; i++){
+                    this.europeanResultLeg1[keys[i]]=res['Result'][keys[i]];
+                }
+            }).catch(function (error) {
+                console.log(error);
+                vm.errorMsg = error;
+            });
+        },
+        showWaibiInterestCurve(){
+            var self = this;
+            getInterestCurve('USD_OIS').then(res => {
+                self.interestCurveData = res.list;
+                self.dialogName='外币利率曲线';
+            });
+            // this.interestCurveData=this.interestWaiBiCurveData
+            this.interestialogTableVisible=true;
+            this.showtable=true
+        },
+        showBenbiInterestCurve(){
+            var self = this;
+            getInterestCurve('CNY_Repo7D').then(res => {
+                self.interestCurveData = res.list;
+            });
+            this.dialogName='本币利率曲线';
+            // this.interestCurveData=this.interestWaiBiCurveData
+            this.interestialogTableVisible=true;
+            this.showtable=true
+        },
+        showVolatilityCurve(){
+            this.interestialogTableVisible=true;
+            this.showtable=false;
+            this.dialogName='波动率曲面';
+        },
 
 
 
+
+
+
+
+
+//style API
       rowstyle (row) {
         if (row.rowIndex % 2 === 0) {
           return 'height:50px; background-color:#312E30;  text-align: left;color: white; border:0px; font-size: 16px'
@@ -1165,49 +1117,7 @@
       movedHandler (i, newX, newY) {
         this.log('movedHandler', `i: ${i}, newX: ${newX}, newY: ${newY}`)
       },
-      switchLegs()
-      {
-           if(this.collapsActiveName=== 'leg1'){
-               this.collapsActiveName='leg2';
-           }else{
-               this.collapsActiveName='leg1';
-           }
-      },
-//api
-        showWaibiInterestCurve(){
-            var self = this;
-            getInterestCurve('USD_OIS').then(res => {
-                self.interestCurveData = res.list;
 
-                // self.MarketDataLeg1.forEach(onerow => {
-                //     console.log( parseFloat(onerow['利率']),'floatnummber' )
-                //     data.push([onerow['日期'],parseFloat(onerow['利率'])])
-                // });
-                self.dialogName='外币利率曲线';
-
-
-            });
-
-            // this.interestCurveData=this.interestWaiBiCurveData
-            this.interestialogTableVisible=true;
-            this.showtable=true
-        },
-        showBenbiInterestCurve(){
-            var self = this;
-            getInterestCurve('CNY_Repo7D').then(res => {
-                self.interestCurveData = res.list;
-
-            });
-            this.dialogName='本币利率曲线';
-            // this.interestCurveData=this.interestWaiBiCurveData
-            this.interestialogTableVisible=true;
-            this.showtable=true
-        },
-        showVolatilityCurve(){
-            this.interestialogTableVisible=true;
-            this.showtable=false;
-            this.dialogName='波动率曲面';
-        }
 //end methods
     }
   }

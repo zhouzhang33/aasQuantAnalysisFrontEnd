@@ -1,10 +1,9 @@
 <template>
-
       <div style="height:100%;overflow: auto">
         <el-col :span="12">
           <div class="box-card">
             <div class="box-card-title">
-              <span>  传入的参数  </span>
+              <span>  利率曲线 </span>
             </div>
             <el-row>
               <el-col :span="12">
@@ -18,7 +17,8 @@
                   <div class="left-col1">
                     <el-select class="oneControls"
                                placeholder="请选择"
-                               v-model="curveLeg1.curveName">
+                               v-model="curveLeg1.curveName"
+                               @change="getLeftCurve">
                       <el-option
                               :key="item.key"
                               :label="item.label"
@@ -49,6 +49,7 @@
                   <div class="left-col2" >
                     <el-input
                             class="oneControls"
+                            disabled
                             v-model="curveLeg1.quXianPingYiShuZhi"
                     >
                     </el-input>
@@ -63,16 +64,14 @@
               </el-col>
             </el-row>
   <!--          这里是曲线-->
-            <div>
-              <div class="box-card-title">
-                <span>  传入的参数  </span>
-              </div>
-              <div id='leftCure' style='margin:5px;width:800px;height:300px'></div>
-            </div>
+<!--            <div>-->
+<!--              <div id='leftCure' style='margin:5px;width:800px;height:300px'></div>-->
+<!--            </div>-->
           </div>
           <div class="box-card" style="height:200px;padding-top:20px">
-            <div style="margin:auto">
+             <div style="margin:auto">
               <el-row>
+                <div v-if="curveLeg1.curveName==='discountCurve'">
                 <el-table
                         :data="MarketDataLeg1"
                         :cell-style="rowstyle"
@@ -105,15 +104,31 @@
                   >
                   </el-table-column>
                 </el-table>
+               </div>
+                <div v-else>
+                  <el-table
+                          :data="MarketDataLeg1"
+                          :cell-style="rowstyle"
+                          :header-cell-style="headerstyle"
+                  >
+                    <el-table-column property="MarketDataType" label="MarketDataType" ></el-table-column>
+                    <el-table-column property="Source" label="Source"></el-table-column>
+                    <el-table-column property="Currency" label="Currency"></el-table-column>
+                    <el-table-column property="Tenor" label="Tenor"></el-table-column>
+                    <el-table-column property="ASK" label="ASK"></el-table-column>
+                    <el-table-column property="BID" label="BID"></el-table-column>
+                    <el-table-column property="MID" label="MID"></el-table-column>
+                  </el-table>
+                </div>
               </el-row>
             </div>
           </div>
         </el-col>
 
         <el-col :span="12">
-          <div class="box-card" style="height:575px">
+          <div class="box-card">
             <div class="box-card-title">
-              <span>  传入的参数  </span>
+              <span>  利率曲线 </span>
             </div>
             <el-row>
               <el-col :span="12">
@@ -127,7 +142,8 @@
                   <div class="left-col1">
                     <el-select class="oneControls"
                                placeholder="请选择"
-                               v-model="curveLeg1.curveName">
+                               v-model="curveLeg2.curveName"
+                               @change="getRightCurve">
                       <el-option
                               :key="item.key"
                               :label="item.label"
@@ -139,7 +155,7 @@
                   <div class="left-col2">
                     <el-select class="oneControls"
                                placeholder="请选择"
-                               v-model="curveLeg1.riQiZhunZe">
+                               v-model="curveLeg2.riQiZhunZe">
                       <el-option
                               :key="item.key"
                               :label="item.label"
@@ -152,13 +168,14 @@
                     <el-select class="oneControls"
                                placeholder="请选择"
                                disabled
-                               v-model="curveLeg1.quXianPingYiLeiXing">
+                               v-model="curveLeg2.quXianPingYiLeiXing">
                     </el-select>
                   </div>
                   <div class="left-col2" >
                     <el-input
                             class="oneControls"
-                            v-model="curveLeg1.quXianPingYiShuZhi"
+                            disabled
+                            v-model="curveLeg2.quXianPingYiShuZhi"
                     >
                     </el-input>
                   </div>
@@ -172,48 +189,62 @@
               </el-col>
             </el-row>
             <!--          这里是曲线-->
-            <div>
-              <div class="box-card-title">
-                <span>  传入的参数  </span>
-              </div>
-              <div id='rightCure' style='margin:5px;width:90%;height:300px'></div>
-            </div>
+            <!--            <div>-->
+            <!--              <div id='leftCure' style='margin:5px;width:800px;height:300px'></div>-->
+            <!--            </div>-->
           </div>
-          <div class="box-card" style="height:400px;padding-top:20px">
+          <div class="box-card" style="height:200px;padding-top:20px">
             <div style="margin:auto">
               <el-row>
-                <el-table
-                        :data="MarketDataLeg1"
-                        :cell-style="rowstyle"
-                        :header-cell-style="headerstyle"
-                        style="width:95%"
-                >
-                  <el-table-column
-                          label="期限"
-                          prop="期限"
+                <div v-if="curveLeg2.curveName==='discountCurve'">
+                  <el-table
+                          :data="MarketDataLeg2"
+                          :cell-style="rowstyle"
+                          :header-cell-style="headerstyle"
+                          style="width:95%;"
                   >
-                  </el-table-column>
-                  <el-table-column
-                          label="日期"
-                          prop="日期"
+                    <el-table-column
+                            label="期限"
+                            prop="期限"
+                    >
+                    </el-table-column>
+                    <el-table-column
+                            label="日期"
+                            prop="日期"
+                    >
+                    </el-table-column>
+                    <el-table-column
+                            label="利率"
+                            prop="利率"
+                    >
+                    </el-table-column>
+                    <el-table-column
+                            label="平移后利率"
+                            prop="平移后利率"
+                    >
+                    </el-table-column>
+                    <el-table-column
+                            label="贴现率"
+                            prop="贴现率"
+                    >
+                    </el-table-column>
+                  </el-table>
+                </div>
+                <div v-else>
+                  <el-table
+                          :data="MarketDataLeg2"
+                          :cell-style="rowstyle"
+                          :header-cell-style="headerstyle"
                   >
-                  </el-table-column>
-                  <el-table-column
-                          label="利率"
-                          prop="利率"
-                  >
-                  </el-table-column>
-                  <el-table-column
-                          label="平移后利率"
-                          prop="平移后利率"
-                  >
-                  </el-table-column>
-                  <el-table-column
-                          label="贴现率"
-                          prop="贴现率"
-                  >
-                  </el-table-column>
-                </el-table>
+                    <el-table-column property="MarketDataType" label="MarketDataType" ></el-table-column>
+                    <el-table-column property="Source" label="Source"></el-table-column>
+                    <el-table-column property="Currency" label="Currency"></el-table-column>
+                    <el-table-column property="Tenor" label="Tenor"></el-table-column>
+                    <el-table-column property="ASK" label="ASK"></el-table-column>
+                    <el-table-column property="BID" label="BID"></el-table-column>
+                    <el-table-column property="MID" label="MID"></el-table-column>
+                  </el-table>
+                </div>
               </el-row>
             </div>
           </div>
@@ -230,17 +261,18 @@
 
 import {
   getDiscountCurve,
+  getInterestCurve
 } from '@api/index'
-import Calendar from 'vue-calendar-component'
+
 import echarts from 'echarts'
 import {
-  echartOptionLeft,
+  echartOption,
   jiXiTianShuFangshiOptions,
   curveNameOptions,
-} from "./UIPara"
+} from "../../UIPara/UIPara"
 export default {
   components: {
-    Calendar
+
   },
   data () {
     return {
@@ -264,27 +296,52 @@ export default {
       },
 
       curveLeg1:{
-        curveName:'',
-        riQiZhunZe:'',
+        curveName:'CNY_Repo7D',
+        riQiZhunZe:'ACT/365',
+        quXianPingYiLeiXing:'平行',
+        quXianPingYiShuZhi:'0bp',
+      },
+      curveLeg2:{
+        curveName:'CNY_Repo7D',
+        riQiZhunZe:'ACT/365',
         quXianPingYiLeiXing:'平行',
         quXianPingYiShuZhi:'0bp',
       },
       MarketDataLeg1:null,
-      myechats:null,
-      myechatsRight:null,
-      echartOptionLeft:echartOptionLeft,
+      MarketDataLeg2:null,
+      // myechats:null,
+      // myechatsRight:null,
+      // echartOption:echartOption,
       curveNameOptions:curveNameOptions,
       jiXiTianShuFangshiOptions:jiXiTianShuFangshiOptions,
     }
   },
   mounted () {
-    this.myechats = echarts.init(document.getElementById('leftCure'));
-    this.myechats.setOption(this.echartOptionLeft);
-    this.getTableData();
-    console.log(this.MarketDataLeg1,'log')
+    // this.myechats = echarts.init(document.getElementById('leftCure'));
+    // this.myechats.setOption(this.echartOption);
+    // this.getTableData();
+    // console.log(this.MarketDataLeg1,'log')
+    this.curveLeg1.curveName='CNY_Repo7D'
+    this.getLeftCurve()
+    this.curveLeg2.curveName='CNY_Repo7D'
+    this.getRightCurve()
   },
   methods: {
     // restful api
+    getLeftCurve() {
+      var self = this;
+      getInterestCurve(this.curveLeg1.curveName).then(res => {
+        self.MarketDataLeg1 = res.list;
+        console.log(self.MarketDataLeg1,'return Curve')
+      });
+    },
+    getRightCurve() {
+      var self = this;
+      getInterestCurve(this.curveLeg2.curveName).then(res => {
+        self.MarketDataLeg2 = res.list;
+        console.log(self.MarketDataLeg2,'return Curve')
+      });
+    },
     getTableData(){
       var self = this;
       // var options={
