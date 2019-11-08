@@ -118,7 +118,12 @@
                   </el-input-number>
                 </div>
                 <div class="left-col1" >
-                  <el-select class="oneContorls" v-model="bondForm.liLvFangShi" placeholder="请选择">
+                  <el-select
+                          filterable
+                          allow-create
+                          default-first-option
+                          class="oneContorls"
+                          v-model="bondForm.liLvFangShi" placeholder="请选择">
                     <el-option
                             v-for="item in xiPiaoLeiXingOptions"
                             :key="item.key"
@@ -266,7 +271,11 @@
                       v-model="bondForm.fuXiPinLV"
               >
               </el-input-number>
-              <el-select class="oneContorls" v-model="bondForm.fuXiPinLV" placeholder="请选择">
+              <el-select
+                      filterable
+                      allow-create
+                      default-first-option
+                      class="oneContorls" v-model="bondForm.fuXiPinLV" placeholder="请选择">
                 <el-option
                         v-for="item in fuXiPinLVOptions"
                         :key="item.key"
@@ -277,7 +286,11 @@
 
             </div>
             <div class="left-col2" >
-              <el-select class="oneContorls" v-model="bondForm.jiXiTianShuFangshi" placeholder="请选择">
+              <el-select
+                      filterable
+                      allow-create
+                      default-first-option
+                      class="oneContorls" v-model="bondForm.jiXiTianShuFangshi" placeholder="请选择">
                 <el-option
                         v-for="item in jiXiTianShuFangshiOptions"
                         :key="item.key"
@@ -287,7 +300,11 @@
               </el-select>
             </div>
             <div class="left-col1" >
-              <el-select class="oneContorls" v-model="bondForm.yingYeRiGuiZe" placeholder="请选择">
+              <el-select
+                      filterable
+                      allow-create
+                      default-first-option
+                      class="oneContorls" v-model="bondForm.yingYeRiGuiZe" placeholder="请选择">
                 <el-option
                         v-for="item in yingYeRiGuiZeOptions"
                         :key="item.key"
@@ -319,7 +336,11 @@
               </el-col>
               <el-col :span="16">
                 <div class="left-col1" >
-                  <el-select class="oneContorls" v-model="bondForm.zhaiQuanShouYiLvQuXianMingCheng" placeholder="请选择">
+                  <el-select
+                          filterable
+                          allow-create
+                          default-first-option
+                          class="oneContorls" v-model="bondForm.zhaiQuanShouYiLvQuXianMingCheng" placeholder="请选择">
                     <el-option
                             v-for="item in bondEarningCurveOptions"
                             :key="item.key"
@@ -341,7 +362,11 @@
               </el-col>
               <el-col :span="16">
                 <div class="left-col1" >
-                  <el-select class="oneContorls" v-model="bondForm.jiZhunLiLvCanKaoQuXian" placeholder="请选择">
+                  <el-select
+                          filterable
+                          allow-create
+                          default-first-option
+                          class="oneContorls" v-model="bondForm.jiZhunLiLvCanKaoQuXian" placeholder="请选择">
                     <el-option
                             v-for="item in curveNameOptions"
                             :key="item.key"

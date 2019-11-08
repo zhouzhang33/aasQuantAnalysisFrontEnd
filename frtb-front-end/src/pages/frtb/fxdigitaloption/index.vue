@@ -22,6 +22,9 @@
               </div>
               <div class="left-col2">
               <el-select
+                      filterable
+                      allow-create
+                      default-first-option
                       class="oneContorls"
                       v-model="digitaloptionForm.currencyPair"
                       placeholder="请选择">
@@ -35,6 +38,9 @@
               </div>
               <div class="left-col1">
                 <el-select
+                        filterable
+                        allow-create
+                        default-first-option
                         class="oneContorls"
                         v-model="digitaloptionForm.digitalOptionType"
                         placeholder="请选择">
@@ -76,6 +82,9 @@
               </div>
               <div class="left-col1" >
                 <el-select
+                        filterable
+                        allow-create
+                        default-first-option
                         class="oneContorls"
                         v-model="digitaloptionForm.maiMaiFangXiang"
                         placeholder="请选择">
@@ -115,6 +124,9 @@
               </div>
               <div class="left-col1">
                 <el-select
+                        filterable
+                        allow-create
+                        default-first-option
                         class="oneContorls"
                         v-model="digitaloptionForm.optionDirection"
                         placeholder="请选择">
@@ -168,7 +180,11 @@
             </el-col>
             <el-col :span="16">
               <div class="left-col1" >
-                <el-select class="oneControls"
+                <el-select
+                        filterable
+                        allow-create
+                        default-first-option
+                        class="oneControls"
                            placeholder="请选择"
                            v-model="digitaloptionForm.yingYeRiGuiZe">
                   <el-option
@@ -189,7 +205,11 @@
             </el-col>
             <el-col :span="16">
               <div class="left-col1" >
-                <el-select class="oneControls"
+                <el-select
+                        filterable
+                        allow-create
+                        default-first-option
+                        class="oneControls"
                            placeholder="请选择"
                            v-model="digitaloptionForm.jiXiTianShuFangshi">
                   <el-option

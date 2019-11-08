@@ -22,6 +22,9 @@
                     <el-col :span="12">
                         <div class="left-col1" >
                             <el-select
+                                    filterable
+                                    allow-create
+                                    default-first-option
                                     class="oneContorls"
                                     v-model="swapForm.currencyPair"
                                     placeholder="请选择">
@@ -35,6 +38,9 @@
                         </div>
                         <div class="left-col2" >
                             <el-select
+                                    filterable
+                                    allow-create
+                                    default-first-option
                                     class="oneContorls"
                                     v-model="swapForm.tradingType"
                                     placeholder="请选择">
@@ -48,6 +54,9 @@
                         </div>
                         <div class="left-col1" >
                             <el-select
+                                    filterable
+                                    allow-create
+                                    default-first-option
                                     class="oneContorls"
                                     v-model="swapForm.yuanDuanMaiMaiFanagxiang"
                                     placeholder="请选择">
@@ -69,6 +78,9 @@
                         </div>
                         <div class="left-col1" >
                             <el-select
+                                    filterable
+                                    allow-create
+                                    default-first-option
                                     class="oneContorls"
                                     v-model="swapForm.currency1InterestCurve"
                                     placeholder="请选择">
@@ -82,6 +94,9 @@
                         </div>
                         <div class="left-col2" >
                             <el-select
+                                    filterable
+                                    allow-create
+                                    default-first-option
                                     class="oneContorls"
                                     v-model="swapForm.currency2InterestCurve"
                                     placeholder="请选择">
@@ -114,6 +129,9 @@
                   <el-col :span="12">
                       <div class="left-col1" >
                           <el-select
+                                  filterable
+                                  allow-create
+                                  default-first-option
                                   class="oneContorls"
                                   v-model="swapForm.intepolationType"
                                   placeholder="请选择">
@@ -127,6 +145,9 @@
                       </div>
                       <div class="left-col2" >
                           <el-select
+                                  filterable
+                                  allow-create
+                                  default-first-option
                                   class="oneContorls"
                                   v-model="swapForm.jiXiTianShuFangshi"
                                   placeholder="请选择">
@@ -140,6 +161,9 @@
                       </div>
                       <div class="left-col1" >
                           <el-select
+                                  filterable
+                                  allow-create
+                                  default-first-option
                                   class="oneContorls"
                                   v-model="swapForm.yingYeRiGuiZe"
                                   placeholder="请选择">
@@ -424,7 +448,11 @@
                           </el-col>
                           <el-col :span="12" >
                               <div class="left-col1" >
-                                  <el-select   class="oneContorls" v-model="swapForm.waiBiLiLvCurve" placeholder="选择曲线名称">
+                                  <el-select
+                                          filterable
+                                          allow-create
+                                          default-first-option
+                                          class="oneContorls" v-model="swapForm.waiBiLiLvCurve" placeholder="选择曲线名称">
                                       <el-option
                                               class="oneContorls"
                                               v-for="item in currency1EarningCurveOptions"
@@ -435,7 +463,11 @@
                                   </el-select>
                               </div>
                               <div class="left-col2" >
-                                  <el-select  class="oneContorls" v-model="swapForm.benBiLiLvCurve" placeholder="选择曲线名称">
+                                  <el-select
+                                          filterable
+                                          allow-create
+                                          default-first-option
+                                          class="oneContorls" v-model="swapForm.benBiLiLvCurve" placeholder="选择曲线名称">
                                       <el-option
                                               v-for="item in currency2EarningCurveOptions"
                                               :key="item.key"
@@ -600,6 +632,7 @@
         interestCurveData:null,
         swapFormResult: swapFormResult,
         swapForm:swapForm,
+        options:'',
       }
     },
     mounted () {
@@ -688,6 +721,8 @@
             SavePricing('fxswap',data)
 
         },
+        //selection
+
 
 
 // style code

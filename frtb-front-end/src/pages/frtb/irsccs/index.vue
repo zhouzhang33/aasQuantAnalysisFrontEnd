@@ -12,6 +12,9 @@
                         <el-col :span="16">
                             <div class="left-col1">
                                 <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
                                         placeholder="请选择记录"
                                         v-model="recordSelected"
                                         class="oneControls"
@@ -111,7 +114,11 @@
                                                     </el-col>
                                                     <el-col :span="16">
                                                         <div class="left-col1">
-                                                            <el-select class="oneControls"
+                                                            <el-select
+                                                                    filterable
+                                                                    allow-create
+                                                                    default-first-option
+                                                                    class="oneControls"
                                                                        placeholder="请选择"
                                                                        v-model="irsccsFormLeg1.direction">
                                                                 <el-option
@@ -132,7 +139,11 @@
                                                         </div>
                                                         <div class="left-col1" style="color:transparent">a</div>
                                                         <div class="left-col2">
-                                                            <el-select class="oneControls"
+                                                            <el-select
+                                                                    filterable
+                                                                    allow-create
+                                                                    default-first-option
+                                                                    class="oneControls"
                                                                        placeholder="请选择"
                                                                        v-model="irsccsFormLeg1.xiPiaoLeiXing">
                                                                 <el-option
@@ -144,7 +155,11 @@
                                                             </el-select>
                                                         </div>
                                                         <div class="left-col1">
-                                                            <el-select class="oneControls"
+                                                            <el-select
+                                                                    filterable
+                                                                    allow-create
+                                                                    default-first-option
+                                                                    class="oneControls"
                                                                        placeholder="请选择"
                                                                        v-model="irsccsFormLeg1.fuXiPingLv">
                                                                 <el-option
@@ -164,7 +179,11 @@
                                                             </el-input-number>
                                                         </div>
                                                         <div class="left-col2"  v-else>
-                                                            <el-select class="oneControls"
+                                                            <el-select
+                                                                    filterable
+                                                                    allow-create
+                                                                    default-first-option
+                                                                    class="oneControls"
                                                                        placeholder="请选择"
                                                                        v-model="irsccsFormLeg1.canKaoLiLv">
                                                                 <el-option
@@ -208,7 +227,11 @@
                                                     <el-col :span="16">
                                                         <div class="left-col1" style="color:transparent">a</div>
                                                         <div class="left-col2">
-                                                            <el-select class="oneControls"
+                                                            <el-select
+                                                                    filterable
+                                                                    allow-create
+                                                                    default-first-option
+                                                                    class="oneControls"
                                                                        placeholder="请选择"
                                                                        v-model="irsccsFormLeg1.biZhong">
                                                                 <el-option
@@ -222,7 +245,11 @@
                                                         <div class="left-col1" style="color:transparent">a</div>
                                                         <div class="left-col2" style="color:transparent">a</div>
                                                         <div class="left-col1">
-                                                            <el-select class="oneControls"
+                                                            <el-select
+                                                                    filterable
+                                                                    allow-create
+                                                                    default-first-option
+                                                                    class="oneControls"
                                                                        placeholder="请选择"
                                                                        v-model="irsccsFormLeg1.jiXiFangShi">
                                                                 <el-option
@@ -286,7 +313,11 @@
                                                     </el-col>
                                                     <el-col :span="16">
                                                         <div class="left-col1">
-                                                            <el-select class="oneControls"
+                                                            <el-select
+                                                                    filterable
+                                                                    allow-create
+                                                                    default-first-option
+                                                                    class="oneControls"
                                                                        placeholder="请选择"
                                                                        v-model="irsccsFormLeg2.direction">
                                                                 <el-option
@@ -339,7 +370,11 @@
                                                             </el-input-number>
                                                         </div>
                                                         <div class="left-col2"  v-else>
-                                                            <el-select class="oneControls"
+                                                            <el-select
+                                                                    filterable
+                                                                    allow-create
+                                                                    default-first-option
+                                                                    class="oneControls"
                                                                        placeholder="请选择"
                                                                        v-model="irsccsFormLeg2.canKaoLiLv">
                                                                 <el-option
@@ -383,7 +418,11 @@
                                                     <el-col :span="16">
                                                         <div class="left-col1" style="color:transparent">a</div>
                                                         <div class="left-col2">
-                                                            <el-select class="oneControls"
+                                                            <el-select
+                                                                    filterable
+                                                                    allow-create
+                                                                    default-first-option
+                                                                    class="oneControls"
                                                                        placeholder="请选择"
                                                                        v-model="irsccsFormLeg2.biZhong">
                                                                 <el-option
@@ -397,7 +436,11 @@
                                                         <div class="left-col1" style="color:transparent">a</div>
                                                         <div class="left-col2" style="color:transparent">a</div>
                                                         <div class="left-col1">
-                                                            <el-select class="oneControls"
+                                                            <el-select
+                                                                    filterable
+                                                                    allow-create
+                                                                    default-first-option
+                                                                    class="oneControls"
                                                                        placeholder="请选择"
                                                                        v-model="irsccsFormLeg2.jiXiFangShi">
                                                                 <el-option
@@ -455,7 +498,11 @@
                                                     </el-col>
                                                     <el-col :span="16">
                                                         <div class="left-col1" >
-                                                            <el-select class="oneControls"
+                                                            <el-select
+                                                                    filterable
+                                                                    allow-create
+                                                                    default-first-option
+                                                                    class="oneControls"
                                                                        placeholder="请选择"
                                                                        v-model="irsccsFormLeg1.jiXiJiZhun">
                                                                 <el-option
@@ -467,7 +514,11 @@
                                                             </el-select>
                                                         </div>
                                                         <div class="left-col2" >
-                                                            <el-select class="oneControls"
+                                                            <el-select
+                                                                    filterable
+                                                                    allow-create
+                                                                    default-first-option
+                                                                    class="oneControls"
                                                                        placeholder="请选择"
                                                                        v-model="irsccsFormLeg1.jieJiaRi">
                                                                 <el-option
@@ -487,7 +538,11 @@
                                                     </el-col>
                                                     <el-col :span="16">
                                                         <div class="left-col1" >
-                                                            <el-select class="oneControls"
+                                                            <el-select
+                                                                    filterable
+                                                                    allow-create
+                                                                    default-first-option
+                                                                    class="oneControls"
                                                                        placeholder="请选择"
                                                                        v-model="irsccsFormLeg1.yingYeRiTiaoZheng">
                                                                 <el-option
@@ -520,7 +575,11 @@
                                                     </el-col>
                                                     <el-col :span="16">
                                                         <div class="left-col1" >
-                                                            <el-select class="oneControls"
+                                                            <el-select
+                                                                    filterable
+                                                                    allow-create
+                                                                    default-first-option
+                                                                    class="oneControls"
                                                                        placeholder="请选择"
                                                                        v-model="irsccsFormLeg1.jiXiJiZhun">
                                                                 <el-option
@@ -532,7 +591,11 @@
                                                             </el-select>
                                                         </div>
                                                         <div class="left-col2" >
-                                                            <el-select class="oneControls"
+                                                            <el-select
+                                                                    filterable
+                                                                    allow-create
+                                                                    default-first-option
+                                                                    class="oneControls"
                                                                        placeholder="请选择"
                                                                        v-model="irsccsFormLeg1.jieJiaRi">
                                                                 <el-option
@@ -552,7 +615,11 @@
                                                     </el-col>
                                                     <el-col :span="16">
                                                         <div class="left-col1" >
-                                                            <el-select class="oneControls"
+                                                            <el-select
+                                                                    filterable
+                                                                    allow-create
+                                                                    default-first-option
+                                                                    class="oneControls"
                                                                        placeholder="请选择"
                                                                        v-model="irsccsFormLeg1.yingYeRiTiaoZheng">
                                                                 <el-option
@@ -598,7 +665,11 @@
                         </el-col>
                         <el-col :span="16">
                             <div class="left-col1" >
-                                <el-select class="oneContorls" v-model="irsccsResultForm.calculationTarget" placeholder="请选择">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls" v-model="irsccsResultForm.calculationTarget" placeholder="请选择">
                                     <el-option
                                             v-for="item in irstargetOptions"
                                             :key="item.key"

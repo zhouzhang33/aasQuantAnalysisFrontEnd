@@ -3,562 +3,2153 @@
         <d2-grid-layout
                 v-bind="layout"
                 @layout-updated="layoutUpdatedHandler">
-            <div class="my-collaps">
-                <div class="box-card">
-                    <el-collapse v-model="collapsActiveName" accordion>
-                        <el-collapse-item title="期权一输入" name="leg1">
+<!--            <div class="my-collaps">-->
+<!--                <div class="box-card">-->
+<!--                    <el-collapse v-model="collapsActiveName" accordion>-->
+<!--                        <el-collapse-item title="期权一输入" name="leg1">-->
 
-                            <el-col :span="12">
-                                <div class="box-card-title">
-                                    <span>交易要素</span>
-                                </div>
-                                <div class="my-block">
-                                    <el-col :span="12">
-                                        <el-col :span="12">
-                                            <div class="left-col1">货币对</div>
-                                            <div class="left-col2">买卖方向</div>
-                                            <div class="left-col1">期权类型</div>
-                                            <div class="left-col2">交易日</div>
-                                            <div class="left-col1">到期日</div>
-                                            <div class="left-col2">交割日</div>
-                                        </el-col>
-                                        <el-col :span="12">
-                                            <div class="left-col1">
-                                                <el-select
-                                                        class="oneContorls"
-                                                        v-model="europeanOptionLeg1Form.currencyPair"
-                                                        placeholder="请选择">
-                                                    <el-option
-                                                            v-for="item in currencyPairOptions"
-                                                            :key="item.key"
-                                                            :label="item.label"
-                                                            :value="item.value"
-                                                    ></el-option>
-                                                </el-select>
-                                            </div>
-                                            <div class="left-col2">
-                                                <el-select
-                                                        class="oneContorls"
-                                                        v-model="europeanOptionLeg1Form.direction"
-                                                        placeholder="请选择">
-                                                    <el-option
-                                                            v-for="item in tradingDirectionOptions"
-                                                            :key="item.key"
-                                                            :label="item.label"
-                                                            :value="item.value"
-                                                    ></el-option>
-                                                </el-select>
-                                            </div>
-                                            <div class="left-col1">
-                                                <el-select
-                                                        class="oneContorls"
-                                                        v-model="europeanOptionLeg1Form.optionType"
-                                                        placeholder="请选择">
-                                                    <el-option
-                                                            v-for="item in callPutOptions"
-                                                            :key="item.key"
-                                                            :label="item.label"
-                                                            :value="item.value"
-                                                    ></el-option>
-                                                </el-select>
-                                            </div>
-                                            <div class="left-col2">
-                                                <el-date-picker
-                                                        class="oneContorls"
-                                                        placeholder="选择日期"
-                                                        type="date"
-                                                        v-model="europeanOptionLeg1Form.tradeDate">
-                                                </el-date-picker>
-                                            </div>
-                                            <div class="left-col1">
-                                                <el-date-picker
-                                                        class="oneContorls"
-                                                        placeholder="选择日期"
-                                                        type="date"
-                                                        v-model="europeanOptionLeg1Form.expireDate">
-                                                </el-date-picker>
-                                            </div>
-                                            <div class="left-col2">
-                                                <el-date-picker
-                                                        class="oneContorls"
-                                                        placeholder="选择日期"
-                                                        type="date"
-                                                        v-model="europeanOptionLeg1Form.jiaoGeDate">
-                                                </el-date-picker>
-                                            </div>
-                                        </el-col>
-                                    </el-col>
-                                    <!--                           第二列 -->
-                                    <el-col :span="12">
-                                        <el-col :span="12">
-                                            <div class="left-col1">本币期权金额</div>
-                                            <div class="left-col2">外币期权金额</div>
-                                            <div class="left-col1">波动率(%)</div>
-                                            <div class="left-col2">行权价</div>
-                                            <div class="left-col1">期权费</div>
-                                            <div class="left-col2" style="color:transparent">a</div>
-                                        </el-col>
-                                        <el-col :span="12">
-                                            <div class="left-col1">
-                                                <el-input-number
-                                                        :controls="false"
-                                                        class="oneContorls"
-                                                        v-model="europeanOptionLeg1Form.benbiQiQuanJingE"
-                                                >
-                                                </el-input-number>
-                                            </div>
-                                            <div class="left-col2">
-                                                <el-input-number
-                                                        :controls="false"
-                                                        class="oneContorls"
-                                                        v-model="europeanOptionLeg1Form.waibiQiQuanJingE"
-                                                >
-                                                </el-input-number>
-                                            </div>
-                                            <div class="left-col1">
-                                                <el-input-number
-                                                        :controls="false"
-                                                        class="oneContorls"
-                                                        v-model="europeanOptionLeg1Form.volatility"
-                                                >
-                                                </el-input-number>
-                                            </div>
-                                            <div class="left-col2">
-                                                <el-input-number
-                                                        :controls="false"
-                                                        class="oneContorls"
-                                                        v-model="europeanOptionLeg1Form.xingQuanJia"
-                                                >
-                                                </el-input-number>
-                                            </div>
-                                            <div class="left-col1">
-                                                <el-input-number
-                                                        :controls="false"
-                                                        class="oneContorls"
-                                                        v-model="europeanOptionLeg1Form.qiQuanFei"
-                                                >
-                                                </el-input-number>
-                                            </div>
-                                            <div class="left-col2" style="color:transparent">a</div>
-                                        </el-col>
-                                    </el-col>
-                                </div>
-                            </el-col>
-                            <!--            定价参数-->
-                            <el-col :span="6">
-                                <div class="box-card-title">
-                                    <span>定价参数</span>
-                                </div>
-                                <div class="my-block">
-                                    <el-col :span="12">
-                                        <div class="left-col1">计息天数方式</div>
-                                        <div class="left-col2">营业日规则</div>
-                                        <div class="left-col1">波动率曲面插值方法</div>
-                                        <div class="left-col2">折现曲线插值方法</div>
-                                        <div class="left-col1" style="color:transparent">a</div>
-                                        <div class="left-col2" style="color:transparent">a</div>
-                                    </el-col>
-                                    <el-col :span="12">
-                                        <div class="left-col1">
-                                            <el-select
-                                                    class="oneContorls"
-                                                    v-model="europeanOptionLeg1Form.jiXiTianShuFangshi"
-                                                    placeholder="请选择">
-                                                <el-option
-                                                        v-for="item in jiXiTianShuFangshiOptions"
-                                                        :key="item.key"
-                                                        :label="item.label"
-                                                        :value="item.value"
-                                                ></el-option>
-                                            </el-select>
-                                        </div>
+<!--                            <el-col :span="12">-->
+<!--                                <div class="box-card-title">-->
+<!--                                    <span>交易要素</span>-->
+<!--                                </div>-->
+<!--                                <div class="my-block">-->
+<!--                                    <el-col :span="12">-->
+<!--                                        <el-col :span="12">-->
+<!--                                            <div class="left-col1">货币对</div>-->
+<!--                                            <div class="left-col2">买卖方向</div>-->
+<!--                                            <div class="left-col1">期权类型</div>-->
+<!--                                            <div class="left-col2">交易日</div>-->
+<!--                                            <div class="left-col1">到期日</div>-->
+<!--                                            <div class="left-col2">交割日</div>-->
+<!--                                        </el-col>-->
+<!--                                        <el-col :span="12">-->
+<!--                                            <div class="left-col1">-->
+<!--                                                <el-select-->
+<!--                                                        filterable-->
+<!--                                                        allow-create-->
+<!--                                                        default-first-option-->
+<!--                                                        class="oneContorls"-->
+<!--                                                        v-model="europeanOptionLeg1Form.currencyPair"-->
+<!--                                                        placeholder="请选择">-->
+<!--                                                    <el-option-->
+<!--                                                            v-for="item in currencyPairOptions"-->
+<!--                                                            :key="item.key"-->
+<!--                                                            :label="item.label"-->
+<!--                                                            :value="item.value"-->
+<!--                                                    ></el-option>-->
+<!--                                                </el-select>-->
+<!--                                            </div>-->
+<!--                                            <div class="left-col2">-->
+<!--                                                <el-select-->
+<!--                                                        filterable-->
+<!--                                                        allow-create-->
+<!--                                                        default-first-option-->
+<!--                                                        class="oneContorls"-->
+<!--                                                        v-model="europeanOptionLeg1Form.direction"-->
+<!--                                                        placeholder="请选择">-->
+<!--                                                    <el-option-->
+<!--                                                            v-for="item in tradingDirectionOptions"-->
+<!--                                                            :key="item.key"-->
+<!--                                                            :label="item.label"-->
+<!--                                                            :value="item.value"-->
+<!--                                                    ></el-option>-->
+<!--                                                </el-select>-->
+<!--                                            </div>-->
+<!--                                            <div class="left-col1">-->
+<!--                                                <el-select-->
+<!--                                                        filterable-->
+<!--                                                        allow-create-->
+<!--                                                        default-first-option-->
+<!--                                                        class="oneContorls"-->
+<!--                                                        v-model="europeanOptionLeg1Form.optionType"-->
+<!--                                                        placeholder="请选择">-->
+<!--                                                    <el-option-->
+<!--                                                            v-for="item in callPutOptions"-->
+<!--                                                            :key="item.key"-->
+<!--                                                            :label="item.label"-->
+<!--                                                            :value="item.value"-->
+<!--                                                    ></el-option>-->
+<!--                                                </el-select>-->
+<!--                                            </div>-->
+<!--                                            <div class="left-col2">-->
+<!--                                                <el-date-picker-->
+<!--                                                        class="oneContorls"-->
+<!--                                                        placeholder="选择日期"-->
+<!--                                                        type="date"-->
+<!--                                                        v-model="europeanOptionLeg1Form.tradeDate">-->
+<!--                                                </el-date-picker>-->
+<!--                                            </div>-->
+<!--                                            <div class="left-col1">-->
+<!--                                                <el-date-picker-->
+<!--                                                        class="oneContorls"-->
+<!--                                                        placeholder="选择日期"-->
+<!--                                                        type="date"-->
+<!--                                                        v-model="europeanOptionLeg1Form.expireDate">-->
+<!--                                                </el-date-picker>-->
+<!--                                            </div>-->
+<!--                                            <div class="left-col2">-->
+<!--                                                <el-date-picker-->
+<!--                                                        class="oneContorls"-->
+<!--                                                        placeholder="选择日期"-->
+<!--                                                        type="date"-->
+<!--                                                        v-model="europeanOptionLeg1Form.jiaoGeDate">-->
+<!--                                                </el-date-picker>-->
+<!--                                            </div>-->
+<!--                                        </el-col>-->
+<!--                                    </el-col>-->
+<!--                                    &lt;!&ndash;                           第二列 &ndash;&gt;-->
+<!--                                    <el-col :span="12">-->
+<!--                                        <el-col :span="12">-->
+<!--                                            <div class="left-col1">本币期权金额</div>-->
+<!--                                            <div class="left-col2">外币期权金额</div>-->
+<!--                                            <div class="left-col1">波动率(%)</div>-->
+<!--                                            <div class="left-col2">行权价</div>-->
+<!--                                            <div class="left-col1">期权费</div>-->
+<!--                                            <div class="left-col2" style="color:transparent">a</div>-->
+<!--                                        </el-col>-->
+<!--                                        <el-col :span="12">-->
+<!--                                            <div class="left-col1">-->
+<!--                                                <el-input-number-->
+<!--                                                        :controls="false"-->
+<!--                                                        class="oneContorls"-->
+<!--                                                        v-model="europeanOptionLeg1Form.benbiQiQuanJingE"-->
+<!--                                                >-->
+<!--                                                </el-input-number>-->
+<!--                                            </div>-->
+<!--                                            <div class="left-col2">-->
+<!--                                                <el-input-number-->
+<!--                                                        :controls="false"-->
+<!--                                                        class="oneContorls"-->
+<!--                                                        v-model="europeanOptionLeg1Form.waibiQiQuanJingE"-->
+<!--                                                >-->
+<!--                                                </el-input-number>-->
+<!--                                            </div>-->
+<!--                                            <div class="left-col1">-->
+<!--                                                <el-input-number-->
+<!--                                                        :controls="false"-->
+<!--                                                        class="oneContorls"-->
+<!--                                                        v-model="europeanOptionLeg1Form.volatility"-->
+<!--                                                >-->
+<!--                                                </el-input-number>-->
+<!--                                            </div>-->
+<!--                                            <div class="left-col2">-->
+<!--                                                <el-input-number-->
+<!--                                                        :controls="false"-->
+<!--                                                        class="oneContorls"-->
+<!--                                                        v-model="europeanOptionLeg1Form.xingQuanJia"-->
+<!--                                                >-->
+<!--                                                </el-input-number>-->
+<!--                                            </div>-->
+<!--                                            <div class="left-col1">-->
+<!--                                                <el-input-number-->
+<!--                                                        :controls="false"-->
+<!--                                                        class="oneContorls"-->
+<!--                                                        v-model="europeanOptionLeg1Form.qiQuanFei"-->
+<!--                                                >-->
+<!--                                                </el-input-number>-->
+<!--                                            </div>-->
+<!--                                            <div class="left-col2" style="color:transparent">a</div>-->
+<!--                                        </el-col>-->
+<!--                                    </el-col>-->
+<!--                                </div>-->
+<!--                            </el-col>-->
+<!--                            &lt;!&ndash;            定价参数&ndash;&gt;-->
+<!--                            <el-col :span="6">-->
+<!--                                <div class="box-card-title">-->
+<!--                                    <span>定价参数</span>-->
+<!--                                </div>-->
+<!--                                <div class="my-block">-->
+<!--                                    <el-col :span="12">-->
+<!--                                        <div class="left-col1">计息天数方式</div>-->
+<!--                                        <div class="left-col2">营业日规则</div>-->
+<!--                                        <div class="left-col1">波动率曲面插值方法</div>-->
+<!--                                        <div class="left-col2">折现曲线插值方法</div>-->
+<!--                                        <div class="left-col1" style="color:transparent">a</div>-->
+<!--                                        <div class="left-col2" style="color:transparent">a</div>-->
+<!--                                    </el-col>-->
+<!--                                    <el-col :span="12">-->
+<!--                                        <div class="left-col1">-->
+<!--                                            <el-select-->
+<!--                                                    filterable-->
+<!--                                                    allow-create-->
+<!--                                                    default-first-option-->
+<!--                                                    class="oneContorls"-->
+<!--                                                    v-model="europeanOptionLeg1Form.jiXiTianShuFangshi"-->
+<!--                                                    placeholder="请选择">-->
+<!--                                                <el-option-->
+<!--                                                        v-for="item in jiXiTianShuFangshiOptions"-->
+<!--                                                        :key="item.key"-->
+<!--                                                        :label="item.label"-->
+<!--                                                        :value="item.value"-->
+<!--                                                ></el-option>-->
+<!--                                            </el-select>-->
+<!--                                        </div>-->
 
-                                        <div class="left-col2">
-                                            <el-select
-                                                    class="oneContorls"
-                                                    v-model="europeanOptionLeg1Form.yingYeRiGuiZe"
-                                                    placeholder="请选择">
-                                                <el-option
-                                                        v-for="item in yingYeRiGuiZeOptions"
-                                                        :key="item.key"
-                                                        :label="item.label"
-                                                        :value="item.value"
-                                                ></el-option>
-                                            </el-select>
-                                        </div>
-                                        <div class="left-col1">
-                                            <el-select
-                                                    class="oneContorls"
-                                                    v-model="europeanOptionLeg1Form.boDonglvQuMianChaZhi"
-                                                    placeholder="请选择">
-                                                <el-option
-                                                        v-for="item in boDonglvQuMianChaZhiOptions"
-                                                        :key="item.key"
-                                                        :label="item.label"
-                                                        :value="item.value"
-                                                ></el-option>
-                                            </el-select>
-                                        </div>
-                                        <div class="left-col2">
-                                            <el-select
-                                                    class="oneContorls"
-                                                    v-model="europeanOptionLeg1Form.zheXianQuxianChaZhi"
-                                                    placeholder="请选择">
-                                                <el-option
-                                                        v-for="item in zheXianQuxianChaZhiOptions"
-                                                        :key="item.key"
-                                                        :label="item.label"
-                                                        :value="item.value"
-                                                ></el-option>
-                                            </el-select>
-                                        </div>
-                                        <div class="left-col1" style="color:transparent">a</div>
-                                        <div class="left-col2" style="color:transparent">a</div>
-                                    </el-col>
-                                </div>
-                            </el-col>
-                            <!--            市场数据-->
-                            <el-col :span="6">
-                                <div class="box-card-title">
-                                    <span>市场数据</span>
-                                </div>
-                                <div class="my-block">
-                                    <el-col :span="12">
-                                        <div class="left-col1">外币利率曲线</div>
-                                        <div class="left-col2">本币利率曲线</div>
-                                        <div class="left-col1">外币到期利率</div>
-                                        <div class="left-col2">本币到期利率</div>
-                                        <div class="left-col1" style="color:transparent">a</div>
-                                        <div class="left-col2" style="color:transparent">a</div>
-                                    </el-col>
-                                    <el-col :span="12">
-                                        <div class="left-col1">
-                                            <el-select class="oneContorls"
-                                                       v-model="europeanOptionLeg1Form.waiBiLiLvCurve"
-                                                       placeholder="选择曲线名称">
-                                                <el-option
-                                                        class="oneContorls"
-                                                        v-for="item in currency1EarningCurveOptions"
-                                                        :key="item.key"
-                                                        :label="item.label"
-                                                        :value="item.value"
-                                                ></el-option>
-                                            </el-select>
-                                        </div>
-                                        <div class="left-col2">
-                                            <el-select class="oneContorls"
-                                                       v-model="europeanOptionLeg1Form.benBiLiLvCurve"
-                                                       placeholder="选择曲线名称">
-                                                <el-option
-                                                        v-for="item in currency2EarningCurveOptions"
-                                                        :key="item.key"
-                                                        :label="item.label"
-                                                        :value="item.value"
-                                                ></el-option>
-                                            </el-select>
-                                        </div>
-                                        <div class="left-col1">
-                                            <el-input-number
-                                                    :controls="false"
-                                                    class="oneContorls"
-                                                    v-model="europeanOptionLeg1Form.waiBiDaoQiYuanQiLiLv"
-                                            >
-                                            </el-input-number>
-                                        </div>
-                                        <div class="left-col2">
-                                            <el-input-number
-                                                    :controls="false"
-                                                    class="oneContorls"
-                                                    v-model="europeanOptionLeg1Form.benBiDaoQiYuanQiLiLv"
-                                            >
-                                            </el-input-number>
-                                        </div>
-                                        <div class="left-col1" style="color:transparent">a</div>
-                                        <div class="left-col2" style="color:transparent">a</div>
+<!--                                        <div class="left-col2">-->
+<!--                                            <el-select-->
+<!--                                                    filterable-->
+<!--                                                    allow-create-->
+<!--                                                    default-first-option-->
+<!--                                                    class="oneContorls"-->
+<!--                                                    v-model="europeanOptionLeg1Form.yingYeRiGuiZe"-->
+<!--                                                    placeholder="请选择">-->
+<!--                                                <el-option-->
+<!--                                                        v-for="item in yingYeRiGuiZeOptions"-->
+<!--                                                        :key="item.key"-->
+<!--                                                        :label="item.label"-->
+<!--                                                        :value="item.value"-->
+<!--                                                ></el-option>-->
+<!--                                            </el-select>-->
+<!--                                        </div>-->
+<!--                                        <div class="left-col1">-->
+<!--                                            <el-select-->
+<!--                                                    filterable-->
+<!--                                                    allow-create-->
+<!--                                                    default-first-option-->
+<!--                                                    class="oneContorls"-->
+<!--                                                    v-model="europeanOptionLeg1Form.boDonglvQuMianChaZhi"-->
+<!--                                                    placeholder="请选择">-->
+<!--                                                <el-option-->
+<!--                                                        v-for="item in boDonglvQuMianChaZhiOptions"-->
+<!--                                                        :key="item.key"-->
+<!--                                                        :label="item.label"-->
+<!--                                                        :value="item.value"-->
+<!--                                                ></el-option>-->
+<!--                                            </el-select>-->
+<!--                                        </div>-->
+<!--                                        <div class="left-col2">-->
+<!--                                            <el-select-->
+<!--                                                    filterable-->
+<!--                                                    allow-create-->
+<!--                                                    default-first-option-->
+<!--                                                    class="oneContorls"-->
+<!--                                                    v-model="europeanOptionLeg1Form.zheXianQuxianChaZhi"-->
+<!--                                                    placeholder="请选择">-->
+<!--                                                <el-option-->
+<!--                                                        v-for="item in zheXianQuxianChaZhiOptions"-->
+<!--                                                        :key="item.key"-->
+<!--                                                        :label="item.label"-->
+<!--                                                        :value="item.value"-->
+<!--                                                ></el-option>-->
+<!--                                            </el-select>-->
+<!--                                        </div>-->
+<!--                                        <div class="left-col1" style="color:transparent">a</div>-->
+<!--                                        <div class="left-col2" style="color:transparent">a</div>-->
+<!--                                    </el-col>-->
+<!--                                </div>-->
+<!--                            </el-col>-->
+<!--                            &lt;!&ndash;            市场数据&ndash;&gt;-->
+<!--                            <el-col :span="6">-->
+<!--                                <div class="box-card-title">-->
+<!--                                    <span>市场数据</span>-->
+<!--                                </div>-->
+<!--                                <div class="my-block">-->
+<!--                                    <el-col :span="12">-->
+<!--                                        <div class="left-col1">外币利率曲线</div>-->
+<!--                                        <div class="left-col2">本币利率曲线</div>-->
+<!--                                        <div class="left-col1">外币到期利率</div>-->
+<!--                                        <div class="left-col2">本币到期利率</div>-->
+<!--                                        <div class="left-col1" style="color:transparent">a</div>-->
+<!--                                        <div class="left-col2" style="color:transparent">a</div>-->
+<!--                                    </el-col>-->
+<!--                                    <el-col :span="12">-->
+<!--                                        <div class="left-col1">-->
+<!--                                            <el-select-->
+<!--                                                    filterable-->
+<!--                                                    allow-create-->
+<!--                                                    default-first-option-->
+<!--                                                    class="oneContorls"-->
+<!--                                                    v-model="europeanOptionLeg1Form.waiBiLiLvCurve"-->
+<!--                                                    placeholder="选择曲线名称">-->
+<!--                                                <el-option-->
+<!--                                                        class="oneContorls"-->
+<!--                                                        v-for="item in currency1EarningCurveOptions"-->
+<!--                                                        :key="item.key"-->
+<!--                                                        :label="item.label"-->
+<!--                                                        :value="item.value"-->
+<!--                                                ></el-option>-->
+<!--                                            </el-select>-->
+<!--                                        </div>-->
+<!--                                        <div class="left-col2">-->
+<!--                                            <el-select-->
+<!--                                                    filterable-->
+<!--                                                    allow-create-->
+<!--                                                    default-first-option-->
+<!--                                                    class="oneContorls"-->
+<!--                                                    v-model="europeanOptionLeg1Form.benBiLiLvCurve"-->
+<!--                                                    placeholder="选择曲线名称">-->
+<!--                                                <el-option-->
+<!--                                                        v-for="item in currency2EarningCurveOptions"-->
+<!--                                                        :key="item.key"-->
+<!--                                                        :label="item.label"-->
+<!--                                                        :value="item.value"-->
+<!--                                                ></el-option>-->
+<!--                                            </el-select>-->
+<!--                                        </div>-->
+<!--                                        <div class="left-col1">-->
+<!--                                            <el-input-number-->
+<!--                                                    :controls="false"-->
+<!--                                                    class="oneContorls"-->
+<!--                                                    v-model="europeanOptionLeg1Form.waiBiDaoQiYuanQiLiLv"-->
+<!--                                            >-->
+<!--                                            </el-input-number>-->
+<!--                                        </div>-->
+<!--                                        <div class="left-col2">-->
+<!--                                            <el-input-number-->
+<!--                                                    :controls="false"-->
+<!--                                                    class="oneContorls"-->
+<!--                                                    v-model="europeanOptionLeg1Form.benBiDaoQiYuanQiLiLv"-->
+<!--                                            >-->
+<!--                                            </el-input-number>-->
+<!--                                        </div>-->
+<!--                                        <div class="left-col1" style="color:transparent">a</div>-->
+<!--                                        <div class="left-col2" style="color:transparent">a</div>-->
 
-                                    </el-col>
-                                </div>
+<!--                                    </el-col>-->
+<!--                                </div>-->
 
-                            </el-col>
+<!--                            </el-col>-->
 
 
-                        </el-collapse-item>
-                        <el-collapse-item title="期权二输入" name="leg2">
+<!--                        </el-collapse-item>-->
+<!--                        <el-collapse-item title="期权二输入" name="leg2">-->
 
-                            <el-col :span="12">
-                                <div class="box-card-title">
-                                    <span>交易要素</span>
-                                </div>
-                                <div class="my-block">
-                                    <el-col :span="12">
-                                        <el-col :span="12">
-                                            <div class="left-col1">货币对</div>
-                                            <div class="left-col2">买卖方向</div>
-                                            <div class="left-col1">期权类型</div>
-                                            <div class="left-col2">交易日</div>
-                                            <div class="left-col1">到期日</div>
-                                            <div class="left-col2">交割日</div>
-                                        </el-col>
-                                        <el-col :span="12">
-                                            <div class="left-col1">
-                                                <el-select
-                                                        class="oneContorls"
-                                                        v-model="europeanOptionLeg2Form.currencyPair"
-                                                        placeholder="请选择">
-                                                    <el-option
-                                                            v-for="item in currencyPairOptions"
-                                                            :key="item.key"
-                                                            :label="item.label"
-                                                            :value="item.value"
-                                                    ></el-option>
-                                                </el-select>
-                                            </div>
-                                            <div class="left-col2">
-                                                <el-select
-                                                        class="oneContorls"
-                                                        v-model="europeanOptionLeg2Form.direction"
-                                                        placeholder="请选择">
-                                                    <el-option
-                                                            v-for="item in tradingDirectionOptions"
-                                                            :key="item.key"
-                                                            :label="item.label"
-                                                            :value="item.value"
-                                                    ></el-option>
-                                                </el-select>
-                                            </div>
-                                            <div class="left-col1">
-                                                <el-select
-                                                        class="oneContorls"
-                                                        v-model="europeanOptionLeg2Form.optionType"
-                                                        placeholder="请选择">
-                                                    <el-option
-                                                            v-for="item in callPutOptions"
-                                                            :key="item.key"
-                                                            :label="item.label"
-                                                            :value="item.value"
-                                                    ></el-option>
-                                                </el-select>
-                                            </div>
-                                            <div class="left-col2">
-                                                <el-date-picker
-                                                        class="oneContorls"
-                                                        placeholder="选择日期"
-                                                        type="date"
-                                                        v-model="europeanOptionLeg2Form.tradeDate">
-                                                </el-date-picker>
-                                            </div>
-                                            <div class="left-col1">
-                                                <el-date-picker
-                                                        class="oneContorls"
-                                                        placeholder="选择日期"
-                                                        type="date"
-                                                        v-model="europeanOptionLeg2Form.expireDate">
-                                                </el-date-picker>
-                                            </div>
-                                            <div class="left-col2">
-                                                <el-date-picker
-                                                        class="oneContorls"
-                                                        placeholder="选择日期"
-                                                        type="date"
-                                                        v-model="europeanOptionLeg2Form.jiaoGeDate">
-                                                </el-date-picker>
-                                            </div>
-                                        </el-col>
-                                    </el-col>
-                                    <!--                           第二列 -->
-                                    <el-col :span="12">
-                                        <el-col :span="12">
-                                            <div class="left-col1">本币期权金额</div>
-                                            <div class="left-col2">外币期权金额</div>
-                                            <div class="left-col1">波动率(%)</div>
-                                            <div class="left-col2">行权价</div>
-                                            <div class="left-col1">期权费</div>
-                                            <div class="left-col2" style="color:transparent">a</div>
-                                        </el-col>
-                                        <el-col :span="12">
-                                            <div class="left-col1">
-                                                <el-input-number
-                                                        :controls="false"
-                                                        class="oneContorls"
-                                                        v-model="europeanOptionLeg2Form.benbiQiQuanJingE"
-                                                >
-                                                </el-input-number>
-                                            </div>
-                                            <div class="left-col2">
-                                                <el-input-number
-                                                        :controls="false"
-                                                        class="oneContorls"
-                                                        v-model="europeanOptionLeg2Form.waibiQiQuanJingE"
-                                                >
-                                                </el-input-number>
-                                            </div>
-                                            <div class="left-col1">
-                                                <el-input-number
-                                                        :controls="false"
-                                                        class="oneContorls"
-                                                        v-model="europeanOptionLeg2Form.volatility"
-                                                >
-                                                </el-input-number>
-                                            </div>
-                                            <div class="left-col2">
-                                                <el-input-number
-                                                        :controls="false"
-                                                        class="oneContorls"
-                                                        v-model="europeanOptionLeg2Form.xingQuanJia"
-                                                >
-                                                </el-input-number>
-                                            </div>
-                                            <div class="left-col1">
-                                                <el-input-number
-                                                        :controls="false"
-                                                        class="oneContorls"
-                                                        v-model="europeanOptionLeg2Form.qiQuanFei"
-                                                >
-                                                </el-input-number>
-                                            </div>
-                                            <div class="left-col2" style="color:transparent">a</div>
-                                        </el-col>
-                                    </el-col>
-                                </div>
-                            </el-col>
-                            <!--            定价参数-->
-                            <el-col :span="6">
-                                <div class="box-card-title">
-                                    <span>定价参数</span>
-                                </div>
-                                <div class="my-block">
-                                    <el-col :span="12">
-                                        <div class="left-col1">计息天数方式</div>
-                                        <div class="left-col2">营业日规则</div>
-                                        <div class="left-col1">波动率曲面插值方法</div>
-                                        <div class="left-col2">折现曲线插值方法</div>
-                                        <div class="left-col1" style="color:transparent">a</div>
-                                        <div class="left-col2" style="color:transparent">a</div>
-                                    </el-col>
-                                    <el-col :span="12">
-                                        <div class="left-col1">
-                                            <el-select
-                                                    class="oneContorls"
-                                                    v-model="europeanOptionLeg2Form.jiXiTianShuFangshi"
-                                                    placeholder="请选择">
-                                                <el-option
-                                                        v-for="item in jiXiTianShuFangshiOptions"
-                                                        :key="item.key"
-                                                        :label="item.label"
-                                                        :value="item.value"
-                                                ></el-option>
-                                            </el-select>
-                                        </div>
+<!--                            <el-col :span="12">-->
+<!--                                <div class="box-card-title">-->
+<!--                                    <span>交易要素</span>-->
+<!--                                </div>-->
+<!--                                <div class="my-block">-->
+<!--                                    <el-col :span="12">-->
+<!--                                        <el-col :span="12">-->
+<!--                                            <div class="left-col1">货币对</div>-->
+<!--                                            <div class="left-col2">买卖方向</div>-->
+<!--                                            <div class="left-col1">期权类型</div>-->
+<!--                                            <div class="left-col2">交易日</div>-->
+<!--                                            <div class="left-col1">到期日</div>-->
+<!--                                            <div class="left-col2">交割日</div>-->
+<!--                                        </el-col>-->
+<!--                                        <el-col :span="12">-->
+<!--                                            <div class="left-col1">-->
+<!--                                                <el-select-->
+<!--                                                        filterable-->
+<!--                                                        allow-create-->
+<!--                                                        default-first-option-->
+<!--                                                        class="oneContorls"-->
+<!--                                                        v-model="europeanOptionLeg2Form.currencyPair"-->
+<!--                                                        placeholder="请选择">-->
+<!--                                                    <el-option-->
+<!--                                                            v-for="item in currencyPairOptions"-->
+<!--                                                            :key="item.key"-->
+<!--                                                            :label="item.label"-->
+<!--                                                            :value="item.value"-->
+<!--                                                    ></el-option>-->
+<!--                                                </el-select>-->
+<!--                                            </div>-->
+<!--                                            <div class="left-col2">-->
+<!--                                                <el-select-->
+<!--                                                        filterable-->
+<!--                                                        allow-create-->
+<!--                                                        default-first-option-->
+<!--                                                        class="oneContorls"-->
+<!--                                                        v-model="europeanOptionLeg2Form.direction"-->
+<!--                                                        placeholder="请选择">-->
+<!--                                                    <el-option-->
+<!--                                                            v-for="item in tradingDirectionOptions"-->
+<!--                                                            :key="item.key"-->
+<!--                                                            :label="item.label"-->
+<!--                                                            :value="item.value"-->
+<!--                                                    ></el-option>-->
+<!--                                                </el-select>-->
+<!--                                            </div>-->
+<!--                                            <div class="left-col1">-->
+<!--                                                <el-select-->
+<!--                                                        filterable-->
+<!--                                                        allow-create-->
+<!--                                                        default-first-option-->
+<!--                                                        class="oneContorls"-->
+<!--                                                        v-model="europeanOptionLeg2Form.optionType"-->
+<!--                                                        placeholder="请选择">-->
+<!--                                                    <el-option-->
+<!--                                                            v-for="item in callPutOptions"-->
+<!--                                                            :key="item.key"-->
+<!--                                                            :label="item.label"-->
+<!--                                                            :value="item.value"-->
+<!--                                                    ></el-option>-->
+<!--                                                </el-select>-->
+<!--                                            </div>-->
+<!--                                            <div class="left-col2">-->
+<!--                                                <el-date-picker-->
+<!--                                                        class="oneContorls"-->
+<!--                                                        placeholder="选择日期"-->
+<!--                                                        type="date"-->
+<!--                                                        v-model="europeanOptionLeg2Form.tradeDate">-->
+<!--                                                </el-date-picker>-->
+<!--                                            </div>-->
+<!--                                            <div class="left-col1">-->
+<!--                                                <el-date-picker-->
+<!--                                                        class="oneContorls"-->
+<!--                                                        placeholder="选择日期"-->
+<!--                                                        type="date"-->
+<!--                                                        v-model="europeanOptionLeg2Form.expireDate">-->
+<!--                                                </el-date-picker>-->
+<!--                                            </div>-->
+<!--                                            <div class="left-col2">-->
+<!--                                                <el-date-picker-->
+<!--                                                        class="oneContorls"-->
+<!--                                                        placeholder="选择日期"-->
+<!--                                                        type="date"-->
+<!--                                                        v-model="europeanOptionLeg2Form.jiaoGeDate">-->
+<!--                                                </el-date-picker>-->
+<!--                                            </div>-->
+<!--                                        </el-col>-->
+<!--                                    </el-col>-->
+<!--                                    &lt;!&ndash;                           第二列 &ndash;&gt;-->
+<!--                                    <el-col :span="12">-->
+<!--                                        <el-col :span="12">-->
+<!--                                            <div class="left-col1">本币期权金额</div>-->
+<!--                                            <div class="left-col2">外币期权金额</div>-->
+<!--                                            <div class="left-col1">波动率(%)</div>-->
+<!--                                            <div class="left-col2">行权价</div>-->
+<!--                                            <div class="left-col1">期权费</div>-->
+<!--                                            <div class="left-col2" style="color:transparent">a</div>-->
+<!--                                        </el-col>-->
+<!--                                        <el-col :span="12">-->
+<!--                                            <div class="left-col1">-->
+<!--                                                <el-input-number-->
+<!--                                                        :controls="false"-->
+<!--                                                        class="oneContorls"-->
+<!--                                                        v-model="europeanOptionLeg2Form.benbiQiQuanJingE"-->
+<!--                                                >-->
+<!--                                                </el-input-number>-->
+<!--                                            </div>-->
+<!--                                            <div class="left-col2">-->
+<!--                                                <el-input-number-->
+<!--                                                        :controls="false"-->
+<!--                                                        class="oneContorls"-->
+<!--                                                        v-model="europeanOptionLeg2Form.waibiQiQuanJingE"-->
+<!--                                                >-->
+<!--                                                </el-input-number>-->
+<!--                                            </div>-->
+<!--                                            <div class="left-col1">-->
+<!--                                                <el-input-number-->
+<!--                                                        :controls="false"-->
+<!--                                                        class="oneContorls"-->
+<!--                                                        v-model="europeanOptionLeg2Form.volatility"-->
+<!--                                                >-->
+<!--                                                </el-input-number>-->
+<!--                                            </div>-->
+<!--                                            <div class="left-col2">-->
+<!--                                                <el-input-number-->
+<!--                                                        :controls="false"-->
+<!--                                                        class="oneContorls"-->
+<!--                                                        v-model="europeanOptionLeg2Form.xingQuanJia"-->
+<!--                                                >-->
+<!--                                                </el-input-number>-->
+<!--                                            </div>-->
+<!--                                            <div class="left-col1">-->
+<!--                                                <el-input-number-->
+<!--                                                        :controls="false"-->
+<!--                                                        class="oneContorls"-->
+<!--                                                        v-model="europeanOptionLeg2Form.qiQuanFei"-->
+<!--                                                >-->
+<!--                                                </el-input-number>-->
+<!--                                            </div>-->
+<!--                                            <div class="left-col2" style="color:transparent">a</div>-->
+<!--                                        </el-col>-->
+<!--                                    </el-col>-->
+<!--                                </div>-->
+<!--                            </el-col>-->
+<!--                            &lt;!&ndash;            定价参数&ndash;&gt;-->
+<!--                            <el-col :span="6">-->
+<!--                                <div class="box-card-title">-->
+<!--                                    <span>定价参数</span>-->
+<!--                                </div>-->
+<!--                                <div class="my-block">-->
+<!--                                    <el-col :span="12">-->
+<!--                                        <div class="left-col1">计息天数方式</div>-->
+<!--                                        <div class="left-col2">营业日规则</div>-->
+<!--                                        <div class="left-col1">波动率曲面插值方法</div>-->
+<!--                                        <div class="left-col2">折现曲线插值方法</div>-->
+<!--                                        <div class="left-col1" style="color:transparent">a</div>-->
+<!--                                        <div class="left-col2" style="color:transparent">a</div>-->
+<!--                                    </el-col>-->
+<!--                                    <el-col :span="12">-->
+<!--                                        <div class="left-col1">-->
+<!--                                            <el-select-->
+<!--                                                    filterable-->
+<!--                                                    allow-create-->
+<!--                                                    default-first-option-->
+<!--                                                    class="oneContorls"-->
+<!--                                                    v-model="europeanOptionLeg2Form.jiXiTianShuFangshi"-->
+<!--                                                    placeholder="请选择">-->
+<!--                                                <el-option-->
+<!--                                                        v-for="item in jiXiTianShuFangshiOptions"-->
+<!--                                                        :key="item.key"-->
+<!--                                                        :label="item.label"-->
+<!--                                                        :value="item.value"-->
+<!--                                                ></el-option>-->
+<!--                                            </el-select>-->
+<!--                                        </div>-->
 
-                                        <div class="left-col2">
-                                            <el-select
-                                                    class="oneContorls"
-                                                    v-model="europeanOptionLeg2Form.yingYeRiGuiZe"
-                                                    placeholder="请选择">
-                                                <el-option
-                                                        v-for="item in yingYeRiGuiZeOptions"
-                                                        :key="item.key"
-                                                        :label="item.label"
-                                                        :value="item.value"
-                                                ></el-option>
-                                            </el-select>
-                                        </div>
-                                        <div class="left-col1">
-                                            <el-select
-                                                    class="oneContorls"
-                                                    v-model="europeanOptionLeg2Form.boDonglvQuMianChaZhi"
-                                                    placeholder="请选择">
-                                                <el-option
-                                                        v-for="item in boDonglvQuMianChaZhiOptions"
-                                                        :key="item.key"
-                                                        :label="item.label"
-                                                        :value="item.value"
-                                                ></el-option>
-                                            </el-select>
-                                        </div>
-                                        <div class="left-col2">
-                                            <el-select
-                                                    class="oneContorls"
-                                                    v-model="europeanOptionLeg2Form.zheXianQuxianChaZhi"
-                                                    placeholder="请选择">
-                                                <el-option
-                                                        v-for="item in zheXianQuxianChaZhiOptions"
-                                                        :key="item.key"
-                                                        :label="item.label"
-                                                        :value="item.value"
-                                                ></el-option>
-                                            </el-select>
-                                        </div>
-                                        <div class="left-col1" style="color:transparent">a</div>
-                                        <div class="left-col2" style="color:transparent">a</div>
-                                    </el-col>
-                                </div>
-                            </el-col>
-                            <!--            市场数据-->
-                            <el-col :span="6">
-                                <div class="box-card-title">
-                                    <span>市场数据</span>
-                                </div>
-                                <div class="my-block">
-                                    <el-col :span="12">
-                                        <div class="left-col1">外币利率曲线</div>
-                                        <div class="left-col2">本币利率曲线</div>
-                                        <div class="left-col1">外币到期利率</div>
-                                        <div class="left-col2">本币到期利率</div>
-                                        <div class="left-col1" style="color:transparent">a</div>
-                                        <div class="left-col2" style="color:transparent">a</div>
-                                    </el-col>
-                                    <el-col :span="12">
-                                        <div class="left-col1">
-                                            <el-select class="oneContorls"
-                                                       v-model="europeanOptionLeg2Form.waiBiLiLvCurve"
-                                                       placeholder="选择曲线名称">
-                                                <el-option
-                                                        class="oneContorls"
-                                                        v-for="item in currency1EarningCurveOptions"
-                                                        :key="item.key"
-                                                        :label="item.label"
-                                                        :value="item.value"
-                                                ></el-option>
-                                            </el-select>
-                                        </div>
-                                        <div class="left-col2">
-                                            <el-select class="oneContorls"
-                                                       v-model="europeanOptionLeg2Form.benBiLiLvCurve"
-                                                       placeholder="选择曲线名称">
-                                                <el-option
-                                                        v-for="item in currency2EarningCurveOptions"
-                                                        :key="item.key"
-                                                        :label="item.label"
-                                                        :value="item.value"
-                                                ></el-option>
-                                            </el-select>
-                                        </div>
-                                        <div class="left-col1">
-                                            <el-input-number
-                                                    :controls="false"
-                                                    class="oneContorls"
-                                                    v-model="europeanOptionLeg2Form.waiBiDaoQiYuanQiLiLv"
-                                            >
-                                            </el-input-number>
-                                        </div>
-                                        <div class="left-col2">
-                                            <el-input-number
-                                                    :controls="false"
-                                                    class="oneContorls"
-                                                    v-model="europeanOptionLeg2Form.benBiDaoQiYuanQiLiLv"
-                                            >
-                                            </el-input-number>
-                                        </div>
-                                        <div class="left-col1" style="color:transparent">a</div>
-                                        <div class="left-col2" style="color:transparent">a</div>
-                                    </el-col>
-                                </div>
-                            </el-col>
-                        </el-collapse-item>
-                    </el-collapse>
+<!--                                        <div class="left-col2">-->
+<!--                                            <el-select-->
+<!--                                                    filterable-->
+<!--                                                    allow-create-->
+<!--                                                    default-first-option-->
+<!--                                                    class="oneContorls"-->
+<!--                                                    v-model="europeanOptionLeg2Form.yingYeRiGuiZe"-->
+<!--                                                    placeholder="请选择">-->
+<!--                                                <el-option-->
+<!--                                                        v-for="item in yingYeRiGuiZeOptions"-->
+<!--                                                        :key="item.key"-->
+<!--                                                        :label="item.label"-->
+<!--                                                        :value="item.value"-->
+<!--                                                ></el-option>-->
+<!--                                            </el-select>-->
+<!--                                        </div>-->
+<!--                                        <div class="left-col1">-->
+<!--                                            <el-select-->
+<!--                                                    filterable-->
+<!--                                                    allow-create-->
+<!--                                                    default-first-option-->
+<!--                                                    class="oneContorls"-->
+<!--                                                    v-model="europeanOptionLeg2Form.boDonglvQuMianChaZhi"-->
+<!--                                                    placeholder="请选择">-->
+<!--                                                <el-option-->
+<!--                                                        v-for="item in boDonglvQuMianChaZhiOptions"-->
+<!--                                                        :key="item.key"-->
+<!--                                                        :label="item.label"-->
+<!--                                                        :value="item.value"-->
+<!--                                                ></el-option>-->
+<!--                                            </el-select>-->
+<!--                                        </div>-->
+<!--                                        <div class="left-col2">-->
+<!--                                            <el-select-->
+<!--                                                    filterable-->
+<!--                                                    allow-create-->
+<!--                                                    default-first-option-->
+<!--                                                    class="oneContorls"-->
+<!--                                                    v-model="europeanOptionLeg2Form.zheXianQuxianChaZhi"-->
+<!--                                                    placeholder="请选择">-->
+<!--                                                <el-option-->
+<!--                                                        v-for="item in zheXianQuxianChaZhiOptions"-->
+<!--                                                        :key="item.key"-->
+<!--                                                        :label="item.label"-->
+<!--                                                        :value="item.value"-->
+<!--                                                ></el-option>-->
+<!--                                            </el-select>-->
+<!--                                        </div>-->
+<!--                                        <div class="left-col1" style="color:transparent">a</div>-->
+<!--                                        <div class="left-col2" style="color:transparent">a</div>-->
+<!--                                    </el-col>-->
+<!--                                </div>-->
+<!--                            </el-col>-->
+<!--                            &lt;!&ndash;            市场数据&ndash;&gt;-->
+<!--                            <el-col :span="6">-->
+<!--                                <div class="box-card-title">-->
+<!--                                    <span>市场数据</span>-->
+<!--                                </div>-->
+<!--                                <div class="my-block">-->
+<!--                                    <el-col :span="12">-->
+<!--                                        <div class="left-col1">外币利率曲线</div>-->
+<!--                                        <div class="left-col2">本币利率曲线</div>-->
+<!--                                        <div class="left-col1">外币到期利率</div>-->
+<!--                                        <div class="left-col2">本币到期利率</div>-->
+<!--                                        <div class="left-col1" style="color:transparent">a</div>-->
+<!--                                        <div class="left-col2" style="color:transparent">a</div>-->
+<!--                                    </el-col>-->
+<!--                                    <el-col :span="12">-->
+<!--                                        <div class="left-col1">-->
+<!--                                            <el-select-->
+<!--                                                    filterable-->
+<!--                                                    allow-create-->
+<!--                                                    default-first-option-->
+<!--                                                    class="oneContorls"-->
+<!--                                                       v-model="europeanOptionLeg2Form.waiBiLiLvCurve"-->
+<!--                                                       placeholder="选择曲线名称">-->
+<!--                                                <el-option-->
+<!--                                                        class="oneContorls"-->
+<!--                                                        v-for="item in currency1EarningCurveOptions"-->
+<!--                                                        :key="item.key"-->
+<!--                                                        :label="item.label"-->
+<!--                                                        :value="item.value"-->
+<!--                                                ></el-option>-->
+<!--                                            </el-select>-->
+<!--                                        </div>-->
+<!--                                        <div class="left-col2">-->
+<!--                                            <el-select-->
+<!--                                                    filterable-->
+<!--                                                    allow-create-->
+<!--                                                    default-first-option-->
+<!--                                                    class="oneContorls"-->
+<!--                                                       v-model="europeanOptionLeg2Form.benBiLiLvCurve"-->
+<!--                                                       placeholder="选择曲线名称">-->
+<!--                                                <el-option-->
+<!--                                                        v-for="item in currency2EarningCurveOptions"-->
+<!--                                                        :key="item.key"-->
+<!--                                                        :label="item.label"-->
+<!--                                                        :value="item.value"-->
+<!--                                                ></el-option>-->
+<!--                                            </el-select>-->
+<!--                                        </div>-->
+<!--                                        <div class="left-col1">-->
+<!--                                            <el-input-number-->
+<!--                                                    :controls="false"-->
+<!--                                                    class="oneContorls"-->
+<!--                                                    v-model="europeanOptionLeg2Form.waiBiDaoQiYuanQiLiLv"-->
+<!--                                            >-->
+<!--                                            </el-input-number>-->
+<!--                                        </div>-->
+<!--                                        <div class="left-col2">-->
+<!--                                            <el-input-number-->
+<!--                                                    :controls="false"-->
+<!--                                                    class="oneContorls"-->
+<!--                                                    v-model="europeanOptionLeg2Form.benBiDaoQiYuanQiLiLv"-->
+<!--                                            >-->
+<!--                                            </el-input-number>-->
+<!--                                        </div>-->
+<!--                                        <div class="left-col1" style="color:transparent">a</div>-->
+<!--                                        <div class="left-col2" style="color:transparent">a</div>-->
+<!--                                    </el-col>-->
+<!--                                </div>-->
+<!--                            </el-col>-->
+<!--                        </el-collapse-item>-->
+<!--                    </el-collapse>-->
+<!--                </div>-->
+<!--            </div>-->
+
+
+            <div class="box-card" style="height:355px">
+                <div class="box-card-title" style="text-align: center;color:white">
+                    Leg 1
                 </div>
+                <el-col :span="12">
+                    <div class="box-card-title">
+                        <span>交易要素</span>
+                    </div>
+                    <div class="my-block">
+                        <el-col :span="12">
+                            <el-col :span="12">
+                                <div class="left-col1">货币对</div>
+                                <div class="left-col2">买卖方向</div>
+                                <div class="left-col1">期权类型</div>
+                                <div class="left-col2">交易日</div>
+                                <div class="left-col1">到期日</div>
+                                <div class="left-col2">交割日</div>
+                            </el-col>
+                            <el-col :span="12">
+                                <div class="left-col1">
+                                    <el-select
+                                            filterable
+                                            allow-create
+                                            default-first-option
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.currencyPair"
+                                            placeholder="请选择">
+                                        <el-option
+                                                v-for="item in currencyPairOptions"
+                                                :key="item.key"
+                                                :label="item.label"
+                                                :value="item.value"
+                                        ></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="left-col2">
+                                    <el-select
+                                            filterable
+                                            allow-create
+                                            default-first-option
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.direction"
+                                            placeholder="请选择">
+                                        <el-option
+                                                v-for="item in tradingDirectionOptions"
+                                                :key="item.key"
+                                                :label="item.label"
+                                                :value="item.value"
+                                        ></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="left-col1">
+                                    <el-select
+                                            filterable
+                                            allow-create
+                                            default-first-option
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.optionType"
+                                            placeholder="请选择">
+                                        <el-option
+                                                v-for="item in callPutOptions"
+                                                :key="item.key"
+                                                :label="item.label"
+                                                :value="item.value"
+                                        ></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="left-col2">
+                                    <el-date-picker
+                                            class="oneContorls"
+                                            placeholder="选择日期"
+                                            type="date"
+                                            v-model="europeanOptionLeg1Form.tradeDate">
+                                    </el-date-picker>
+                                </div>
+                                <div class="left-col1">
+                                    <el-date-picker
+                                            class="oneContorls"
+                                            placeholder="选择日期"
+                                            type="date"
+                                            v-model="europeanOptionLeg1Form.expireDate">
+                                    </el-date-picker>
+                                </div>
+                                <div class="left-col2">
+                                    <el-date-picker
+                                            class="oneContorls"
+                                            placeholder="选择日期"
+                                            type="date"
+                                            v-model="europeanOptionLeg1Form.jiaoGeDate">
+                                    </el-date-picker>
+                                </div>
+                            </el-col>
+                        </el-col>
+                        <!--                           第二列 -->
+                        <el-col :span="12">
+                            <el-col :span="12">
+                                <div class="left-col1">本币期权金额</div>
+                                <div class="left-col2">外币期权金额</div>
+                                <div class="left-col1">波动率(%)</div>
+                                <div class="left-col2">行权价</div>
+                                <div class="left-col1">期权费</div>
+                                <div class="left-col2" style="color:transparent">a</div>
+                            </el-col>
+                            <el-col :span="12">
+                                <div class="left-col1">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.benbiQiQuanJingE"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col2">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.waibiQiQuanJingE"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col1">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.volatility"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col2">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.xingQuanJia"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col1">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.qiQuanFei"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col2" style="color:transparent">a</div>
+                            </el-col>
+                        </el-col>
+                    </div>
+                </el-col>
+                <!--            定价参数-->
+                <el-col :span="6">
+                    <div class="box-card-title">
+                        <span>定价参数</span>
+                    </div>
+                    <div class="my-block">
+                        <el-col :span="12">
+                            <div class="left-col1">计息天数方式</div>
+                            <div class="left-col2">营业日规则</div>
+                            <div class="left-col1">波动率曲面插值方法</div>
+                            <div class="left-col2">折现曲线插值方法</div>
+                            <div class="left-col1" style="color:transparent">a</div>
+                            <div class="left-col2" style="color:transparent">a</div>
+                        </el-col>
+                        <el-col :span="12">
+                            <div class="left-col1">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.jiXiTianShuFangshi"
+                                        placeholder="请选择">
+                                    <el-option
+                                            v-for="item in jiXiTianShuFangshiOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+
+                            <div class="left-col2">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.yingYeRiGuiZe"
+                                        placeholder="请选择">
+                                    <el-option
+                                            v-for="item in yingYeRiGuiZeOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col1">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.boDonglvQuMianChaZhi"
+                                        placeholder="请选择">
+                                    <el-option
+                                            v-for="item in boDonglvQuMianChaZhiOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col2">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.zheXianQuxianChaZhi"
+                                        placeholder="请选择">
+                                    <el-option
+                                            v-for="item in zheXianQuxianChaZhiOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col1" style="color:transparent">a</div>
+                            <div class="left-col2" style="color:transparent">a</div>
+                        </el-col>
+                    </div>
+                </el-col>
+                <!--            市场数据-->
+                <el-col :span="6">
+                    <div class="box-card-title">
+                        <span>市场数据</span>
+                    </div>
+                    <div class="my-block">
+                        <el-col :span="12">
+                            <div class="left-col1">外币利率曲线</div>
+                            <div class="left-col2">本币利率曲线</div>
+                            <div class="left-col1">外币到期利率</div>
+                            <div class="left-col2">本币到期利率</div>
+                            <div class="left-col1" style="color:transparent">a</div>
+                            <div class="left-col2" style="color:transparent">a</div>
+                        </el-col>
+                        <el-col :span="12">
+                            <div class="left-col1">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.waiBiLiLvCurve"
+                                        placeholder="选择曲线名称">
+                                    <el-option
+                                            class="oneContorls"
+                                            v-for="item in currency1EarningCurveOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col2">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.benBiLiLvCurve"
+                                        placeholder="选择曲线名称">
+                                    <el-option
+                                            v-for="item in currency2EarningCurveOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col1">
+                                <el-input-number
+                                        :controls="false"
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.waiBiDaoQiYuanQiLiLv"
+                                >
+                                </el-input-number>
+                            </div>
+                            <div class="left-col2">
+                                <el-input-number
+                                        :controls="false"
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.benBiDaoQiYuanQiLiLv"
+                                >
+                                </el-input-number>
+                            </div>
+                            <div class="left-col1" style="color:transparent">a</div>
+                            <div class="left-col2" style="color:transparent">a</div>
+
+                        </el-col>
+                    </div>
+
+                </el-col>
             </div>
+            <div class="box-card" style="height:355px" v-show="legNum>1">
+                <div class="box-card-title" style="text-align: center;color:white">
+                    Leg 2
+                </div>
+                <el-col :span="12">
+                    <div class="box-card-title">
+                        <span>交易要素</span>
+                    </div>
+                    <div class="my-block">
+                        <el-col :span="12">
+                            <el-col :span="12">
+                                <div class="left-col1">货币对</div>
+                                <div class="left-col2">买卖方向</div>
+                                <div class="left-col1">期权类型</div>
+                                <div class="left-col2">交易日</div>
+                                <div class="left-col1">到期日</div>
+                                <div class="left-col2">交割日</div>
+                            </el-col>
+                            <el-col :span="12">
+                                <div class="left-col1">
+                                    <el-select
+                                            filterable
+                                            allow-create
+                                            default-first-option
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.currencyPair"
+                                            placeholder="请选择">
+                                        <el-option
+                                                v-for="item in currencyPairOptions"
+                                                :key="item.key"
+                                                :label="item.label"
+                                                :value="item.value"
+                                        ></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="left-col2">
+                                    <el-select
+                                            filterable
+                                            allow-create
+                                            default-first-option
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.direction"
+                                            placeholder="请选择">
+                                        <el-option
+                                                v-for="item in tradingDirectionOptions"
+                                                :key="item.key"
+                                                :label="item.label"
+                                                :value="item.value"
+                                        ></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="left-col1">
+                                    <el-select
+                                            filterable
+                                            allow-create
+                                            default-first-option
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.optionType"
+                                            placeholder="请选择">
+                                        <el-option
+                                                v-for="item in callPutOptions"
+                                                :key="item.key"
+                                                :label="item.label"
+                                                :value="item.value"
+                                        ></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="left-col2">
+                                    <el-date-picker
+                                            class="oneContorls"
+                                            placeholder="选择日期"
+                                            type="date"
+                                            v-model="europeanOptionLeg1Form.tradeDate">
+                                    </el-date-picker>
+                                </div>
+                                <div class="left-col1">
+                                    <el-date-picker
+                                            class="oneContorls"
+                                            placeholder="选择日期"
+                                            type="date"
+                                            v-model="europeanOptionLeg1Form.expireDate">
+                                    </el-date-picker>
+                                </div>
+                                <div class="left-col2">
+                                    <el-date-picker
+                                            class="oneContorls"
+                                            placeholder="选择日期"
+                                            type="date"
+                                            v-model="europeanOptionLeg1Form.jiaoGeDate">
+                                    </el-date-picker>
+                                </div>
+                            </el-col>
+                        </el-col>
+                        <!--                           第二列 -->
+                        <el-col :span="12">
+                            <el-col :span="12">
+                                <div class="left-col1">本币期权金额</div>
+                                <div class="left-col2">外币期权金额</div>
+                                <div class="left-col1">波动率(%)</div>
+                                <div class="left-col2">行权价</div>
+                                <div class="left-col1">期权费</div>
+                                <div class="left-col2" style="color:transparent">a</div>
+                            </el-col>
+                            <el-col :span="12">
+                                <div class="left-col1">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.benbiQiQuanJingE"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col2">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.waibiQiQuanJingE"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col1">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.volatility"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col2">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.xingQuanJia"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col1">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.qiQuanFei"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col2" style="color:transparent">a</div>
+                            </el-col>
+                        </el-col>
+                    </div>
+                </el-col>
+                <!--            定价参数-->
+                <el-col :span="6">
+                    <div class="box-card-title">
+                        <span>定价参数</span>
+                    </div>
+                    <div class="my-block">
+                        <el-col :span="12">
+                            <div class="left-col1">计息天数方式</div>
+                            <div class="left-col2">营业日规则</div>
+                            <div class="left-col1">波动率曲面插值方法</div>
+                            <div class="left-col2">折现曲线插值方法</div>
+                            <div class="left-col1" style="color:transparent">a</div>
+                            <div class="left-col2" style="color:transparent">a</div>
+                        </el-col>
+                        <el-col :span="12">
+                            <div class="left-col1">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.jiXiTianShuFangshi"
+                                        placeholder="请选择">
+                                    <el-option
+                                            v-for="item in jiXiTianShuFangshiOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+
+                            <div class="left-col2">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.yingYeRiGuiZe"
+                                        placeholder="请选择">
+                                    <el-option
+                                            v-for="item in yingYeRiGuiZeOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col1">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.boDonglvQuMianChaZhi"
+                                        placeholder="请选择">
+                                    <el-option
+                                            v-for="item in boDonglvQuMianChaZhiOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col2">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.zheXianQuxianChaZhi"
+                                        placeholder="请选择">
+                                    <el-option
+                                            v-for="item in zheXianQuxianChaZhiOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col1" style="color:transparent">a</div>
+                            <div class="left-col2" style="color:transparent">a</div>
+                        </el-col>
+                    </div>
+                </el-col>
+                <!--            市场数据-->
+                <el-col :span="6">
+                    <div class="box-card-title">
+                        <span>市场数据</span>
+                    </div>
+                    <div class="my-block">
+                        <el-col :span="12">
+                            <div class="left-col1">外币利率曲线</div>
+                            <div class="left-col2">本币利率曲线</div>
+                            <div class="left-col1">外币到期利率</div>
+                            <div class="left-col2">本币到期利率</div>
+                            <div class="left-col1" style="color:transparent">a</div>
+                            <div class="left-col2" style="color:transparent">a</div>
+                        </el-col>
+                        <el-col :span="12">
+                            <div class="left-col1">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.waiBiLiLvCurve"
+                                        placeholder="选择曲线名称">
+                                    <el-option
+                                            class="oneContorls"
+                                            v-for="item in currency1EarningCurveOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col2">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.benBiLiLvCurve"
+                                        placeholder="选择曲线名称">
+                                    <el-option
+                                            v-for="item in currency2EarningCurveOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col1">
+                                <el-input-number
+                                        :controls="false"
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.waiBiDaoQiYuanQiLiLv"
+                                >
+                                </el-input-number>
+                            </div>
+                            <div class="left-col2">
+                                <el-input-number
+                                        :controls="false"
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.benBiDaoQiYuanQiLiLv"
+                                >
+                                </el-input-number>
+                            </div>
+                            <div class="left-col1" style="color:transparent">a</div>
+                            <div class="left-col2" style="color:transparent">a</div>
+
+                        </el-col>
+                    </div>
+
+                </el-col>
+            </div>
+            <div class="box-card" style="height:355px"v-show="legNum>2">
+                <div class="box-card-title" style="text-align: center;color:white">
+                    Leg 3
+                </div>
+                <el-col :span="12">
+                    <div class="box-card-title">
+                        <span>交易要素</span>
+                    </div>
+                    <div class="my-block">
+                        <el-col :span="12">
+                            <el-col :span="12">
+                                <div class="left-col1">货币对</div>
+                                <div class="left-col2">买卖方向</div>
+                                <div class="left-col1">期权类型</div>
+                                <div class="left-col2">交易日</div>
+                                <div class="left-col1">到期日</div>
+                                <div class="left-col2">交割日</div>
+                            </el-col>
+                            <el-col :span="12">
+                                <div class="left-col1">
+                                    <el-select
+                                            filterable
+                                            allow-create
+                                            default-first-option
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.currencyPair"
+                                            placeholder="请选择">
+                                        <el-option
+                                                v-for="item in currencyPairOptions"
+                                                :key="item.key"
+                                                :label="item.label"
+                                                :value="item.value"
+                                        ></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="left-col2">
+                                    <el-select
+                                            filterable
+                                            allow-create
+                                            default-first-option
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.direction"
+                                            placeholder="请选择">
+                                        <el-option
+                                                v-for="item in tradingDirectionOptions"
+                                                :key="item.key"
+                                                :label="item.label"
+                                                :value="item.value"
+                                        ></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="left-col1">
+                                    <el-select
+                                            filterable
+                                            allow-create
+                                            default-first-option
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.optionType"
+                                            placeholder="请选择">
+                                        <el-option
+                                                v-for="item in callPutOptions"
+                                                :key="item.key"
+                                                :label="item.label"
+                                                :value="item.value"
+                                        ></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="left-col2">
+                                    <el-date-picker
+                                            class="oneContorls"
+                                            placeholder="选择日期"
+                                            type="date"
+                                            v-model="europeanOptionLeg1Form.tradeDate">
+                                    </el-date-picker>
+                                </div>
+                                <div class="left-col1">
+                                    <el-date-picker
+                                            class="oneContorls"
+                                            placeholder="选择日期"
+                                            type="date"
+                                            v-model="europeanOptionLeg1Form.expireDate">
+                                    </el-date-picker>
+                                </div>
+                                <div class="left-col2">
+                                    <el-date-picker
+                                            class="oneContorls"
+                                            placeholder="选择日期"
+                                            type="date"
+                                            v-model="europeanOptionLeg1Form.jiaoGeDate">
+                                    </el-date-picker>
+                                </div>
+                            </el-col>
+                        </el-col>
+                        <!--                           第二列 -->
+                        <el-col :span="12">
+                            <el-col :span="12">
+                                <div class="left-col1">本币期权金额</div>
+                                <div class="left-col2">外币期权金额</div>
+                                <div class="left-col1">波动率(%)</div>
+                                <div class="left-col2">行权价</div>
+                                <div class="left-col1">期权费</div>
+                                <div class="left-col2" style="color:transparent">a</div>
+                            </el-col>
+                            <el-col :span="12">
+                                <div class="left-col1">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.benbiQiQuanJingE"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col2">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.waibiQiQuanJingE"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col1">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.volatility"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col2">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.xingQuanJia"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col1">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.qiQuanFei"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col2" style="color:transparent">a</div>
+                            </el-col>
+                        </el-col>
+                    </div>
+                </el-col>
+                <!--            定价参数-->
+                <el-col :span="6">
+                    <div class="box-card-title">
+                        <span>定价参数</span>
+                    </div>
+                    <div class="my-block">
+                        <el-col :span="12">
+                            <div class="left-col1">计息天数方式</div>
+                            <div class="left-col2">营业日规则</div>
+                            <div class="left-col1">波动率曲面插值方法</div>
+                            <div class="left-col2">折现曲线插值方法</div>
+                            <div class="left-col1" style="color:transparent">a</div>
+                            <div class="left-col2" style="color:transparent">a</div>
+                        </el-col>
+                        <el-col :span="12">
+                            <div class="left-col1">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.jiXiTianShuFangshi"
+                                        placeholder="请选择">
+                                    <el-option
+                                            v-for="item in jiXiTianShuFangshiOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+
+                            <div class="left-col2">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.yingYeRiGuiZe"
+                                        placeholder="请选择">
+                                    <el-option
+                                            v-for="item in yingYeRiGuiZeOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col1">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.boDonglvQuMianChaZhi"
+                                        placeholder="请选择">
+                                    <el-option
+                                            v-for="item in boDonglvQuMianChaZhiOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col2">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.zheXianQuxianChaZhi"
+                                        placeholder="请选择">
+                                    <el-option
+                                            v-for="item in zheXianQuxianChaZhiOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col1" style="color:transparent">a</div>
+                            <div class="left-col2" style="color:transparent">a</div>
+                        </el-col>
+                    </div>
+                </el-col>
+                <!--            市场数据-->
+                <el-col :span="6">
+                    <div class="box-card-title">
+                        <span>市场数据</span>
+                    </div>
+                    <div class="my-block">
+                        <el-col :span="12">
+                            <div class="left-col1">外币利率曲线</div>
+                            <div class="left-col2">本币利率曲线</div>
+                            <div class="left-col1">外币到期利率</div>
+                            <div class="left-col2">本币到期利率</div>
+                            <div class="left-col1" style="color:transparent">a</div>
+                            <div class="left-col2" style="color:transparent">a</div>
+                        </el-col>
+                        <el-col :span="12">
+                            <div class="left-col1">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.waiBiLiLvCurve"
+                                        placeholder="选择曲线名称">
+                                    <el-option
+                                            class="oneContorls"
+                                            v-for="item in currency1EarningCurveOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col2">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.benBiLiLvCurve"
+                                        placeholder="选择曲线名称">
+                                    <el-option
+                                            v-for="item in currency2EarningCurveOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col1">
+                                <el-input-number
+                                        :controls="false"
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.waiBiDaoQiYuanQiLiLv"
+                                >
+                                </el-input-number>
+                            </div>
+                            <div class="left-col2">
+                                <el-input-number
+                                        :controls="false"
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.benBiDaoQiYuanQiLiLv"
+                                >
+                                </el-input-number>
+                            </div>
+                            <div class="left-col1" style="color:transparent">a</div>
+                            <div class="left-col2" style="color:transparent">a</div>
+
+                        </el-col>
+                    </div>
+
+                </el-col>
+            </div>
+            <div class="box-card" style="height:355px" v-show="legNum>3">
+                <div class="box-card-title" style="text-align: center;color:white">
+                    Leg 4
+                </div>
+                <el-col :span="12">
+                    <div class="box-card-title">
+                        <span>交易要素</span>
+                    </div>
+                    <div class="my-block">
+                        <el-col :span="12">
+                            <el-col :span="12">
+                                <div class="left-col1">货币对</div>
+                                <div class="left-col2">买卖方向</div>
+                                <div class="left-col1">期权类型</div>
+                                <div class="left-col2">交易日</div>
+                                <div class="left-col1">到期日</div>
+                                <div class="left-col2">交割日</div>
+                            </el-col>
+                            <el-col :span="12">
+                                <div class="left-col1">
+                                    <el-select
+                                            filterable
+                                            allow-create
+                                            default-first-option
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.currencyPair"
+                                            placeholder="请选择">
+                                        <el-option
+                                                v-for="item in currencyPairOptions"
+                                                :key="item.key"
+                                                :label="item.label"
+                                                :value="item.value"
+                                        ></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="left-col2">
+                                    <el-select
+                                            filterable
+                                            allow-create
+                                            default-first-option
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.direction"
+                                            placeholder="请选择">
+                                        <el-option
+                                                v-for="item in tradingDirectionOptions"
+                                                :key="item.key"
+                                                :label="item.label"
+                                                :value="item.value"
+                                        ></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="left-col1">
+                                    <el-select
+                                            filterable
+                                            allow-create
+                                            default-first-option
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.optionType"
+                                            placeholder="请选择">
+                                        <el-option
+                                                v-for="item in callPutOptions"
+                                                :key="item.key"
+                                                :label="item.label"
+                                                :value="item.value"
+                                        ></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="left-col2">
+                                    <el-date-picker
+                                            class="oneContorls"
+                                            placeholder="选择日期"
+                                            type="date"
+                                            v-model="europeanOptionLeg1Form.tradeDate">
+                                    </el-date-picker>
+                                </div>
+                                <div class="left-col1">
+                                    <el-date-picker
+                                            class="oneContorls"
+                                            placeholder="选择日期"
+                                            type="date"
+                                            v-model="europeanOptionLeg1Form.expireDate">
+                                    </el-date-picker>
+                                </div>
+                                <div class="left-col2">
+                                    <el-date-picker
+                                            class="oneContorls"
+                                            placeholder="选择日期"
+                                            type="date"
+                                            v-model="europeanOptionLeg1Form.jiaoGeDate">
+                                    </el-date-picker>
+                                </div>
+                            </el-col>
+                        </el-col>
+                        <!--                           第二列 -->
+                        <el-col :span="12">
+                            <el-col :span="12">
+                                <div class="left-col1">本币期权金额</div>
+                                <div class="left-col2">外币期权金额</div>
+                                <div class="left-col1">波动率(%)</div>
+                                <div class="left-col2">行权价</div>
+                                <div class="left-col1">期权费</div>
+                                <div class="left-col2" style="color:transparent">a</div>
+                            </el-col>
+                            <el-col :span="12">
+                                <div class="left-col1">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.benbiQiQuanJingE"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col2">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.waibiQiQuanJingE"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col1">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.volatility"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col2">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.xingQuanJia"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col1">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.qiQuanFei"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col2" style="color:transparent">a</div>
+                            </el-col>
+                        </el-col>
+                    </div>
+                </el-col>
+                <!--            定价参数-->
+                <el-col :span="6">
+                    <div class="box-card-title">
+                        <span>定价参数</span>
+                    </div>
+                    <div class="my-block">
+                        <el-col :span="12">
+                            <div class="left-col1">计息天数方式</div>
+                            <div class="left-col2">营业日规则</div>
+                            <div class="left-col1">波动率曲面插值方法</div>
+                            <div class="left-col2">折现曲线插值方法</div>
+                            <div class="left-col1" style="color:transparent">a</div>
+                            <div class="left-col2" style="color:transparent">a</div>
+                        </el-col>
+                        <el-col :span="12">
+                            <div class="left-col1">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.jiXiTianShuFangshi"
+                                        placeholder="请选择">
+                                    <el-option
+                                            v-for="item in jiXiTianShuFangshiOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+
+                            <div class="left-col2">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.yingYeRiGuiZe"
+                                        placeholder="请选择">
+                                    <el-option
+                                            v-for="item in yingYeRiGuiZeOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col1">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.boDonglvQuMianChaZhi"
+                                        placeholder="请选择">
+                                    <el-option
+                                            v-for="item in boDonglvQuMianChaZhiOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col2">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.zheXianQuxianChaZhi"
+                                        placeholder="请选择">
+                                    <el-option
+                                            v-for="item in zheXianQuxianChaZhiOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col1" style="color:transparent">a</div>
+                            <div class="left-col2" style="color:transparent">a</div>
+                        </el-col>
+                    </div>
+                </el-col>
+                <!--            市场数据-->
+                <el-col :span="6">
+                    <div class="box-card-title">
+                        <span>市场数据</span>
+                    </div>
+                    <div class="my-block">
+                        <el-col :span="12">
+                            <div class="left-col1">外币利率曲线</div>
+                            <div class="left-col2">本币利率曲线</div>
+                            <div class="left-col1">外币到期利率</div>
+                            <div class="left-col2">本币到期利率</div>
+                            <div class="left-col1" style="color:transparent">a</div>
+                            <div class="left-col2" style="color:transparent">a</div>
+                        </el-col>
+                        <el-col :span="12">
+                            <div class="left-col1">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.waiBiLiLvCurve"
+                                        placeholder="选择曲线名称">
+                                    <el-option
+                                            class="oneContorls"
+                                            v-for="item in currency1EarningCurveOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col2">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.benBiLiLvCurve"
+                                        placeholder="选择曲线名称">
+                                    <el-option
+                                            v-for="item in currency2EarningCurveOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col1">
+                                <el-input-number
+                                        :controls="false"
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.waiBiDaoQiYuanQiLiLv"
+                                >
+                                </el-input-number>
+                            </div>
+                            <div class="left-col2">
+                                <el-input-number
+                                        :controls="false"
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.benBiDaoQiYuanQiLiLv"
+                                >
+                                </el-input-number>
+                            </div>
+                            <div class="left-col1" style="color:transparent">a</div>
+                            <div class="left-col2" style="color:transparent">a</div>
+
+                        </el-col>
+                    </div>
+
+                </el-col>
+            </div>
+            <div class="box-card" style="height:355px" v-show="legNum>4">
+                <div class="box-card-title" style="text-align: center;color:white">
+                    Leg 5
+                </div>
+                <el-col :span="12">
+                    <div class="box-card-title">
+                        <span>交易要素</span>
+                    </div>
+                    <div class="my-block">
+                        <el-col :span="12">
+                            <el-col :span="12">
+                                <div class="left-col1">货币对</div>
+                                <div class="left-col2">买卖方向</div>
+                                <div class="left-col1">期权类型</div>
+                                <div class="left-col2">交易日</div>
+                                <div class="left-col1">到期日</div>
+                                <div class="left-col2">交割日</div>
+                            </el-col>
+                            <el-col :span="12">
+                                <div class="left-col1">
+                                    <el-select
+                                            filterable
+                                            allow-create
+                                            default-first-option
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.currencyPair"
+                                            placeholder="请选择">
+                                        <el-option
+                                                v-for="item in currencyPairOptions"
+                                                :key="item.key"
+                                                :label="item.label"
+                                                :value="item.value"
+                                        ></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="left-col2">
+                                    <el-select
+                                            filterable
+                                            allow-create
+                                            default-first-option
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.direction"
+                                            placeholder="请选择">
+                                        <el-option
+                                                v-for="item in tradingDirectionOptions"
+                                                :key="item.key"
+                                                :label="item.label"
+                                                :value="item.value"
+                                        ></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="left-col1">
+                                    <el-select
+                                            filterable
+                                            allow-create
+                                            default-first-option
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.optionType"
+                                            placeholder="请选择">
+                                        <el-option
+                                                v-for="item in callPutOptions"
+                                                :key="item.key"
+                                                :label="item.label"
+                                                :value="item.value"
+                                        ></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="left-col2">
+                                    <el-date-picker
+                                            class="oneContorls"
+                                            placeholder="选择日期"
+                                            type="date"
+                                            v-model="europeanOptionLeg1Form.tradeDate">
+                                    </el-date-picker>
+                                </div>
+                                <div class="left-col1">
+                                    <el-date-picker
+                                            class="oneContorls"
+                                            placeholder="选择日期"
+                                            type="date"
+                                            v-model="europeanOptionLeg1Form.expireDate">
+                                    </el-date-picker>
+                                </div>
+                                <div class="left-col2">
+                                    <el-date-picker
+                                            class="oneContorls"
+                                            placeholder="选择日期"
+                                            type="date"
+                                            v-model="europeanOptionLeg1Form.jiaoGeDate">
+                                    </el-date-picker>
+                                </div>
+                            </el-col>
+                        </el-col>
+                        <!--                           第二列 -->
+                        <el-col :span="12">
+                            <el-col :span="12">
+                                <div class="left-col1">本币期权金额</div>
+                                <div class="left-col2">外币期权金额</div>
+                                <div class="left-col1">波动率(%)</div>
+                                <div class="left-col2">行权价</div>
+                                <div class="left-col1">期权费</div>
+                                <div class="left-col2" style="color:transparent">a</div>
+                            </el-col>
+                            <el-col :span="12">
+                                <div class="left-col1">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.benbiQiQuanJingE"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col2">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.waibiQiQuanJingE"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col1">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.volatility"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col2">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.xingQuanJia"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col1">
+                                    <el-input-number
+                                            :controls="false"
+                                            class="oneContorls"
+                                            v-model="europeanOptionLeg1Form.qiQuanFei"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col2" style="color:transparent">a</div>
+                            </el-col>
+                        </el-col>
+                    </div>
+                </el-col>
+                <!--            定价参数-->
+                <el-col :span="6">
+                    <div class="box-card-title">
+                        <span>定价参数</span>
+                    </div>
+                    <div class="my-block">
+                        <el-col :span="12">
+                            <div class="left-col1">计息天数方式</div>
+                            <div class="left-col2">营业日规则</div>
+                            <div class="left-col1">波动率曲面插值方法</div>
+                            <div class="left-col2">折现曲线插值方法</div>
+                            <div class="left-col1" style="color:transparent">a</div>
+                            <div class="left-col2" style="color:transparent">a</div>
+                        </el-col>
+                        <el-col :span="12">
+                            <div class="left-col1">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.jiXiTianShuFangshi"
+                                        placeholder="请选择">
+                                    <el-option
+                                            v-for="item in jiXiTianShuFangshiOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+
+                            <div class="left-col2">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.yingYeRiGuiZe"
+                                        placeholder="请选择">
+                                    <el-option
+                                            v-for="item in yingYeRiGuiZeOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col1">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.boDonglvQuMianChaZhi"
+                                        placeholder="请选择">
+                                    <el-option
+                                            v-for="item in boDonglvQuMianChaZhiOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col2">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.zheXianQuxianChaZhi"
+                                        placeholder="请选择">
+                                    <el-option
+                                            v-for="item in zheXianQuxianChaZhiOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col1" style="color:transparent">a</div>
+                            <div class="left-col2" style="color:transparent">a</div>
+                        </el-col>
+                    </div>
+                </el-col>
+                <!--            市场数据-->
+                <el-col :span="6">
+                    <div class="box-card-title">
+                        <span>市场数据</span>
+                    </div>
+                    <div class="my-block">
+                        <el-col :span="12">
+                            <div class="left-col1">外币利率曲线</div>
+                            <div class="left-col2">本币利率曲线</div>
+                            <div class="left-col1">外币到期利率</div>
+                            <div class="left-col2">本币到期利率</div>
+                            <div class="left-col1" style="color:transparent">a</div>
+                            <div class="left-col2" style="color:transparent">a</div>
+                        </el-col>
+                        <el-col :span="12">
+                            <div class="left-col1">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.waiBiLiLvCurve"
+                                        placeholder="选择曲线名称">
+                                    <el-option
+                                            class="oneContorls"
+                                            v-for="item in currency1EarningCurveOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col2">
+                                <el-select
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.benBiLiLvCurve"
+                                        placeholder="选择曲线名称">
+                                    <el-option
+                                            v-for="item in currency2EarningCurveOptions"
+                                            :key="item.key"
+                                            :label="item.label"
+                                            :value="item.value"
+                                    ></el-option>
+                                </el-select>
+                            </div>
+                            <div class="left-col1">
+                                <el-input-number
+                                        :controls="false"
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.waiBiDaoQiYuanQiLiLv"
+                                >
+                                </el-input-number>
+                            </div>
+                            <div class="left-col2">
+                                <el-input-number
+                                        :controls="false"
+                                        class="oneContorls"
+                                        v-model="europeanOptionLeg1Form.benBiDaoQiYuanQiLiLv"
+                                >
+                                </el-input-number>
+                            </div>
+                            <div class="left-col1" style="color:transparent">a</div>
+                            <div class="left-col2" style="color:transparent">a</div>
+
+                        </el-col>
+                    </div>
+
+                </el-col>
+            </div>
+
             <div class="box-card" style="height:105px">
                 <div class="box-card-title">利率曲线</div>
                 <div style="margin:20px 0px 20px 5px">
@@ -586,10 +2177,11 @@
                 </div>
                 <div style="margin:20px 0px 20px 5px">
                     <el-row>
-                        <el-col :span="6"><el-button type="info" class="curvebutton" @click="calcNPV">计算NPV</el-button></el-col>
-                        <el-col :span="6"><el-button type="info" class="curvebutton">倒算行权价</el-button></el-col>
-                        <el-col :span="6"><el-button type="info" class="curvebutton">清空</el-button></el-col>
-                        <el-col :span="6"><el-button type="info" class="curvebutton" @click="switchLegs">交换输入</el-button></el-col>
+                        <el-col :span="4"><el-button type="info" class="curvebutton" @click="calcNPV">计算NPV</el-button></el-col>
+                        <el-col :span="4"><el-button type="info" class="curvebutton">倒算行权价</el-button></el-col>
+                        <el-col :span="4"><el-button type="info" class="curvebutton">清空</el-button></el-col>
+                        <el-col :span="4"><el-button type="info" icon='el-icon-circle-plus-outline' class="curvebutton" @click="addLegs">增加Leg</el-button></el-col>
+                        <el-col :span="4"><el-button type="info" icon='el-icon-remove-outline' class="curvebutton" @click="removeLegs">减小Leg</el-button></el-col>
                     </el-row>
                 </div>
 
@@ -688,7 +2280,7 @@
                 </div>
             </div>
             <el-col :span="12">
-                <div class="box-card" style="height:172px">
+                <div class="box-card" style="height:165px">
                     <div class="box-card-title">
                         <el-checkbox-button v-model="DeltaHedgeCalc" @click="clickDeltaHedgeCalc">
                             Delta Hedge
@@ -750,8 +2342,9 @@
                     </div>
                 </div>
             </el-col>
+            <el-row>
             <el-col :span="12">
-                <div class="box-card" style="height:172px">
+                <div class="box-card" style="height:165px">
                     <div class="box-card-title" >
                         <el-checkbox-button v-model="VegaHedgeCalc" @click="clickVegaHedgeCalc">
                             Vega Hedge
@@ -829,6 +2422,20 @@
 
                 </div>
             </el-col>
+            </el-row>
+            <div class="box-card" style="color:transparent;height:355px;" v-show="legNum<2">
+                a
+            </div>
+            <div class="box-card" style="color:transparent;height:355px;" v-show="legNum<3" >
+                a
+            </div>
+            <div class="box-card" style="color:transparent;height:355px;" v-show="legNum<4" >
+                a
+            </div>
+            <div class="box-card" style="color:transparent;height:355px;" v-show="legNum<5" >
+                a
+            </div>
+
             <div>
                 <el-dialog
                         title="利率曲线"
@@ -914,7 +2521,7 @@
             { 'x': 3, 'y': 13, 'w': 9, 'h': 15.5, 'i': '4' },
           ],
           colNum: 12,
-          rowHeight: 32,
+          rowHeight: 81,
           isDraggable: false,
           isResizable: false,
           isMirrored: false,
@@ -953,7 +2560,8 @@
         europeanResultLeg1:europeanResultLeg1,
         europeanResultLeg2:europeanResultLeg2,
         europeanOptionLeg1Form: europeanOptionLeg1Form,
-        europeanOptionLeg2Form: europeanOptionLeg2Form
+        europeanOptionLeg2Form: europeanOptionLeg2Form,
+        legNum:1,
       }
     },
     mounted () {
@@ -977,14 +2585,27 @@
                 this.DeltaHedgeCalc = true;
             }
         },
-        switchLegs()
-        {
-            if(this.collapsActiveName=== 'leg1'){
-                this.collapsActiveName='leg2';
-            }else{
-                this.collapsActiveName='leg1';
-            }
+        addLegs(){
+           if(this.legNum>4){
+               this.legNum=4
+           }
+          this.legNum+=1;
         },
+        removeLegs(){
+            if(this.legNum < 2){
+                this.legNum=2
+            }
+            this.legNum-=1;
+            console.log( this.legNum,'leg')
+        },
+        // switchLegs()
+        // {
+        //     if(this.collapsActiveName=== 'leg1'){
+        //         this.collapsActiveName='leg2';
+        //     }else{
+        //         this.collapsActiveName='leg1';
+        //     }
+        // },
 //api
         calculateDeltaHedge(){
             console.log('call pricing')

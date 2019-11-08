@@ -18,6 +18,9 @@
                 <el-col :span="16">
                   <div class="left-col1" >
                     <el-select
+                            filterable
+                            allow-create
+                            default-first-option
                             class="oneContorls"
                             v-model="swaptionForm.touCun"
                             placeholder="请选择">
@@ -66,6 +69,9 @@
                 <el-col :span="16">
                   <div class="left-col1" >
                     <el-select
+                            filterable
+                            allow-create
+                            default-first-option
                             class="oneContorls"
                             v-model="swaptionForm.jiaoYiLeiXing"
                             placeholder="请选择">
@@ -79,6 +85,9 @@
                   </div>
                   <div class="left-col2" >
                     <el-select
+                            filterable
+                            allow-create
+                            default-first-option
                             class="oneContorls"
                             v-model="swaptionForm.tongZhiQiXian"
                             placeholder="请选择">
@@ -92,6 +101,9 @@
                   </div>
                   <div class="left-col1" >
                     <el-select
+                            filterable
+                            allow-create
+                            default-first-option
                             class="oneContorls"
                             v-model="swaptionForm.jiaoGeFangShi"
                             placeholder="请选择">
@@ -125,6 +137,9 @@
                   </div>
                   <div class="left-col2" >
                     <el-select
+                           filterable
+                           allow-create
+                           default-first-option
                           class="oneContorls"
                           v-model="swaptionForm.jiaoYiDuiShou"
                           placeholder="请选择">
@@ -165,6 +180,9 @@
                   </div>
                   <div class="left-col2" >
                     <el-select
+                            filterable
+                            allow-create
+                            default-first-option
                             class="oneContorls"
                             v-model="swaptionForm.biZhong"
                             placeholder="请选择">
@@ -202,6 +220,9 @@
                 <el-col :span="16">
                   <div class="left-col1" >
                     <el-select
+                            filterable
+                            allow-create
+                            default-first-option
                             class="oneContorls"
                             v-model="swaptionForm.qiQuanGuZhiMoXing"
                             placeholder="请选择">
@@ -222,6 +243,9 @@
                 <el-col :span="16">
                   <div class="left-col1" >
                     <el-select
+                            filterable
+                            allow-create
+                            default-first-option
                             class="oneContorls"
                             v-model="swaptionForm.boDongLvLeXing"
                             placeholder="请选择">
@@ -264,6 +288,9 @@
                 <el-col :span="16">
                   <div class="left-col1" >
                     <el-select
+                            filterable
+                            allow-create
+                            default-first-option
                             class="oneContorls"
                             v-model="swaptionForm.zhiFuPingLv"
                             placeholder="请选择">
@@ -284,6 +311,9 @@
                 <el-col :span="16">
                   <div class="left-col1" >
                     <el-select
+                            filterable
+                            allow-create
+                            default-first-option
                             class="oneContorls"
                             v-model="swaptionForm.jiXiTianShuFangshi"
                             placeholder="请选择">
@@ -304,6 +334,9 @@
                 <el-col :span="16">
                   <div class="left-col1" >
                     <el-select
+                            filterable
+                            allow-create
+                            default-first-option
                             class="oneContorls"
                             v-model="swaptionForm.yingYeRiGuiZe"
                             placeholder="请选择">
@@ -341,6 +374,9 @@
                   </div>
                   <div class="left-col2" >
                     <el-select
+                            filterable
+                            allow-create
+                            default-first-option
                             class="oneContorls"
                             v-model="swaptionForm.zhiFuPingLvFuDongDuan"
                             placeholder="请选择">
@@ -370,6 +406,9 @@
                   </div>
                   <div class="left-col2" >
                       <el-select
+                              filterable
+                              allow-create
+                              default-first-option
                               class="oneContorls"
                               v-model="swaptionForm.jiXiTianShuFangShiFuDongDuan"
                               placeholder="请选择">
@@ -408,6 +447,9 @@
                 <el-col :span="16">
                   <div class="left-col1" >
                     <el-select
+                            filterable
+                            allow-create
+                            default-first-option
                             class="oneContorls"
                             v-model="swaptionForm.chongZhiPinLv"
                             placeholder="请选择">
