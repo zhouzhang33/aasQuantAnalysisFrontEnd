@@ -27,6 +27,7 @@
     "echarts-gl": "^1.1.1",
     "element-ui": "^2.4.11",
     "flex.css": "^1.1.7",
+    "fs": "0.0.1-security",
     "fuse.js": "^3.2.1",
     "github-markdown-css": "^2.10.0",
     "highlight.js": "^9.12.0",

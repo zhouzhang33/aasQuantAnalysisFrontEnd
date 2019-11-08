@@ -636,7 +636,7 @@
         curveNameOptions:curveNameOptions,
         tradingTypeOptions: tradingTypeOptions,
         tradingDirectionOptions:tradingDirectionOptions,
-          interestCurveData:'',
+        interestCurveData:'',
          interestBenBiCurveData: [{
               date: '2016-05-02',
               rate: '6',

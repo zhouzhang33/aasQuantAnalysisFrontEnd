@@ -94,14 +94,71 @@ export function getDiscountCurve(){
 }
 export function getInterestCurve(curveName){
   return request({
-    url:'/frtbdata/'+curveName,
+    url:'/frtbdata/getMarketData?curvename='+curveName,
     method:'get'
   })
 }
+export function SavePricing(foldername,td){
+  return request({
+    url:'/frtbdata/save?product='+foldername,
+    method:'post',
+    responseType: 'json',
+    data: td
+  })
+}
+//*************************
+//后端API
+var url_pre = 'http://127.0.0.1:8081'
+export function getFXFWDPricingResult(type,td){
+  return request({
+    url:url_pre + '/getFXFWDPricingResult?PricingType='+type,
+    method:'get',
+    responseType: 'json',
+    data: td
+  })
+}
 
-
+export function getEuroOptionPricingResult(type,td){
+  return request({
+    url:url_pre + '/getEuroOptionPricingResult?PricingType='+type,
+    method:'get',
+    responseType: 'json',
+    data: td
+  })
+}
+export function getIRSCCSPricingResult(type,td){
+  return request({
+    url:url_pre + '/getIRSCCSPricingResult?PricingType='+type,
+    method:'get',
+    responseType: 'json',
+    data: td
+  })
+}
+export function getBondPricingResult(type,td){
+  return request({
+    url:url_pre + '/getBondPricingResult?PricingType='+type,
+    method:'get',
+    responseType: 'json',
+    data: td
+  })
+}
+export function getSwaptionPricingresult(type,td){
+  return request({
+    url:url_pre + '/getSwaptionPricingresult?PricingType='+type,
+    method:'get',
+    responseType: 'json',
+    data: td
+  })
+}
+export function getFXDigitalPricingresult(type,td){
+  return request({
+    url:url_pre + '/getFXFWDPricingResult?PricingType='+type,
+    method:'get',
+    responseType: 'json',
+    data: td
+  })
+}
 // *******************************
-var url_pre = "http://localhost:9990";
 export function cpus () {
   return request({
     url: url_pre+'/system/resources/cpu',
