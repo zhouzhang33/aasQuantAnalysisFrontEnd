@@ -792,12 +792,13 @@
       }
     }
   }
+  //frtb
 
   .controls-a-line{
       margin:10px 5px 5px 50px;
   }
   .oneControls {
-      width: 135px;
+      width: 190px;
   }
   .left-col2{
       height:40px;
@@ -847,12 +848,17 @@
   .oneContorls1 {
       width:150px;
   }
- .form-num{
-   width: 220px;
- }
+  .form-num{
+      width: 220px;
+  }
   .curvebutton{
       width:190px;
   }
+  .curve-title{
+      font-size:16px;
+      text-align: center;
+  }
+
 </style>
 
 <style lang="scss" >

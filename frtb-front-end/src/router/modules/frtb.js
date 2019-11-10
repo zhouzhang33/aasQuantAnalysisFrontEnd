@@ -64,6 +64,15 @@ export default {
       component: () => import('@/pages/frtb/fxdigitaloption/index')
     },
     {
+      path: 'combinedcashflow',
+      name: 'combinedcashflow',
+      meta: {
+        title: 'Combined Cash Flow',
+        auth: false
+      },
+      component: () => import('@/pages/frtb/combinedcashflow/index')
+    },
+    {
       path: 'senarioAnalysis',
       name: 'senarioAnalysis',
       meta: {

@@ -775,11 +775,11 @@ import {
       }
     }
   }
+  //frtb
 
   .controls-a-line{
     margin:10px 5px 5px 50px;
   }
-
   .oneControls {
     width: 190px;
   }
@@ -834,8 +834,13 @@ import {
   .form-num{
     width: 220px;
   }
-
-
+  .curvebutton{
+    width:190px;
+  }
+  .curve-title{
+    font-size:16px;
+    text-align: center;
+  }
 </style>
 
 <style lang="scss" >

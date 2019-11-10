@@ -2181,7 +2181,7 @@
                         <el-col :span="4"><el-button type="info" class="curvebutton">倒算行权价</el-button></el-col>
                         <el-col :span="4"><el-button type="info" class="curvebutton">清空</el-button></el-col>
                         <el-col :span="4"><el-button type="info" icon='el-icon-circle-plus-outline' class="curvebutton" @click="addLegs">增加Leg</el-button></el-col>
-                        <el-col :span="4"><el-button type="info" icon='el-icon-remove-outline' class="curvebutton" @click="removeLegs">减小Leg</el-button></el-col>
+                        <el-col :span="4"><el-button type="info" icon='el-icon-remove-outline' class="curvebutton" @click="removeLegs">减少Leg</el-button></el-col>
                     </el-row>
                 </div>
 
@@ -2768,12 +2768,13 @@
             }
         }
     }
+    //frtb
 
     .controls-a-line{
         margin:10px 5px 5px 50px;
     }
     .oneControls {
-        width: 135px;
+        width: 190px;
     }
     .left-col2{
         height:40px;
@@ -2782,8 +2783,6 @@
         padding-left:20px;
         line-height: 40px;
         vertical-align: center;
-        font-size:16px;
-        color:white;
     }
     .my-block{
         margin:0px 2px 0px 2px;
@@ -2796,8 +2795,6 @@
         padding-left:20px;
         line-height: 40px;
         vertical-align: center;
-        font-size:16px;
-        color:white;
     }
     .right-col{
         height:40px;
@@ -2830,12 +2827,12 @@
     .form-num{
         width: 220px;
     }
+    .curvebutton{
+        width:190px;
+    }
     .curve-title{
         font-size:16px;
         text-align: center;
-    }
-    .curvebutton{
-        width:190px;
     }
 </style>
 

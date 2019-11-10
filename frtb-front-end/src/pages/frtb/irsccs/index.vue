@@ -1041,6 +1041,8 @@
         color:transparent;
         /*margin:5px 0px 5px 0px;*/
     }
+    //frtb
+
     .controls-a-line{
         margin:10px 5px 5px 50px;
     }
@@ -1100,6 +1102,10 @@
     }
     .curvebutton{
         width:190px;
+    }
+    .curve-title{
+        font-size:16px;
+        text-align: center;
     }
 </style>
 

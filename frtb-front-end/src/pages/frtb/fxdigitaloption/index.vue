@@ -576,14 +576,8 @@ export default {
       }
     }
   }
-  .dividerStyle{
-    height:45px;
-    margin: auto;
-    background:#FFE600;
-    width:5px;
-    color:transparent;
-    /*margin:5px 0px 5px 0px;*/
-  }
+  //frtb
+
   .controls-a-line{
     margin:10px 5px 5px 50px;
   }
@@ -643,8 +637,20 @@ export default {
   }
   .curvebutton{
     width:190px;
+  }
+  .curve-title{
+    font-size:16px;
     text-align: center;
   }
+  .dividerStyle{
+    height:45px;
+    margin: auto;
+    background:#FFE600;
+    width:5px;
+    color:transparent;
+    /*margin:5px 0px 5px 0px;*/
+  }
+
 }
 
 </style>
