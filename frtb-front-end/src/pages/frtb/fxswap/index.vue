@@ -5,7 +5,7 @@
                 @layout-updated="layoutUpdatedHandler">
       <div>
         <el-col :span="24">
-          <div class='box-card' style="height:340px">
+          <div class='box-card' style="height:245px">
                   <el-col :span="8">
                     <div class="box-card-title">
                       <span>交易要素</span>
@@ -14,10 +14,11 @@
                     <el-col :span="12">
                       <div class="left-col1">货币对</div>
                       <div class="left-col2">交易类型</div>
-                      <div class="left-col1">远端买卖方向</div>
-                      <div class="left-col2">交易日</div>
-                      <div class="left-col1">外币利率曲线名称</div>
-                      <div class="left-col2">本币利率曲线名称</div>
+<!--                      <div class="left-col1">远端买卖方向</div>-->
+                      <div class="left-col1">交易日</div>
+<!--                      <div class="left-col2">外币利率曲线名称</div>-->
+<!--                      <div class="left-col1">本币利率曲线名称</div>-->
+                      <div class="left-col2" style="color:transparent">a</div>
                      </el-col>
                     <el-col :span="12">
                         <div class="left-col1" >
@@ -52,23 +53,23 @@
                                 ></el-option>
                             </el-select>
                         </div>
+<!--                        <div class="left-col1" >-->
+<!--                            <el-select-->
+<!--                                    filterable-->
+<!--                                    allow-create-->
+<!--                                    default-first-option-->
+<!--                                    class="oneContorls"-->
+<!--                                    v-model="swapForm.yuanDuanMaiMaiFanagxiang"-->
+<!--                                    placeholder="请选择">-->
+<!--                                <el-option-->
+<!--                                        v-for="item in tradingDirectionOptions"-->
+<!--                                        :key="item.key"-->
+<!--                                        :label="item.label"-->
+<!--                                        :value="item.value"-->
+<!--                                ></el-option>-->
+<!--                            </el-select>-->
+<!--                        </div>-->
                         <div class="left-col1" >
-                            <el-select
-                                    filterable
-                                    allow-create
-                                    default-first-option
-                                    class="oneContorls"
-                                    v-model="swapForm.yuanDuanMaiMaiFanagxiang"
-                                    placeholder="请选择">
-                                <el-option
-                                        v-for="item in tradingDirectionOptions"
-                                        :key="item.key"
-                                        :label="item.label"
-                                        :value="item.value"
-                                ></el-option>
-                            </el-select>
-                        </div>
-                        <div class="left-col2" >
                             <el-date-picker
                                     class="oneContorls"
                                     placeholder="选择日期"
@@ -76,38 +77,7 @@
                                     v-model="swapForm.tradingDate">
                             </el-date-picker>
                         </div>
-                        <div class="left-col1" >
-                            <el-select
-                                    filterable
-                                    allow-create
-                                    default-first-option
-                                    class="oneContorls"
-                                    v-model="swapForm.currency1InterestCurve"
-                                    placeholder="请选择">
-                                <el-option
-                                        v-for="item in currency1EarningCurveOptions"
-                                        :key="item.key"
-                                        :label="item.label"
-                                        :value="item.value"
-                                ></el-option>
-                            </el-select>
-                        </div>
-                        <div class="left-col2" >
-                            <el-select
-                                    filterable
-                                    allow-create
-                                    default-first-option
-                                    class="oneContorls"
-                                    v-model="swapForm.currency2InterestCurve"
-                                    placeholder="请选择">
-                                <el-option
-                                        v-for="item in currency2EarningCurveOptions"
-                                        :key="item.key"
-                                        :label="item.label"
-                                        :value="item.value"
-                                ></el-option>
-                            </el-select>
-                        </div>
+                        <div class="left-col2" style="color:transparent">a</div>
 
                     </el-col>
                       </div>
@@ -122,8 +92,6 @@
                       <div class="left-col1">插值方法</div>
                       <div class="left-col2">计息天数方式</div>
                       <div class="left-col1">营业日规则</div>
-                      <div class="left-col2" style="color:transparent">a</div>
-                      <div class="left-col1" style="color:transparent">a</div>
                       <div class="left-col2" style="color:transparent">a</div>
                   </el-col>
                   <el-col :span="12">
@@ -176,9 +144,6 @@
                           </el-select>
                       </div>
                       <div class="left-col2" style="color:transparent">a</div>
-                      <div class="left-col1" style="color:transparent">a</div>
-                      <div class="left-col2" style="color:transparent">a</div>
-
                   </el-col>
                   </div>
               </el-col>
@@ -191,16 +156,46 @@
                   <el-col :span="12">
                       <div class="left-col1">近端汇率</div>
                       <div class="left-col2">远端汇率</div>
-                      <div class="left-col1"><el-button type="info" class="oneContorls" style="margin-left:60px" @click="showWaibiInterestCurve"> 外币利率曲线查看</el-button></div>
-                      <div class="left-col2" style="color:transparent">a</div>
-                      <div class="left-col1" style="color:transparent">a</div>
-                      <div class="left-col2" style="color:transparent">a</div>
+                      <div class="left-col1" >
+                          <el-select
+                                  filterable
+                                  allow-create
+                                  default-first-option
+                                  class="oneContorls"
+                                  v-model="swapForm.currency1InterestCurve"
+                                  placeholder="请选择">
+                              <el-option
+                                      v-for="item in currency1EarningCurveOptions"
+                                      :key="item.key"
+                                      :label="item.label"
+                                      :value="item.value"
+                              ></el-option>
+                          </el-select>
+                      </div>
+                      <div class="left-col2" >
+                          <el-select
+                                  filterable
+                                  allow-create
+                                  default-first-option
+                                  class="oneContorls"
+                                  v-model="swapForm.currency2InterestCurve"
+                                  placeholder="请选择">
+                              <el-option
+                                      v-for="item in currency2EarningCurveOptions"
+                                      :key="item.key"
+                                      :label="item.label"
+                                      :value="item.value"
+                              ></el-option>
+                          </el-select>
+                      </div>
+
                   </el-col>
                   <el-col :span="12">
                       <div class="left-col1" >
                           <el-input-number
                                   :controls="false"
                                   class="oneContorls"
+                                  :precision=6
                                   v-model="swapForm.jinDuanHuiLv"
                           >
                           </el-input-number>
@@ -209,16 +204,18 @@
                           <el-input-number
                                   :controls="false"
                                   class="oneContorls"
+                                  :precision=6
                                   v-model="swapForm.yuanDuanHuiLv"
                           >
                           </el-input-number>
                       </div>
-                      <div class="left-col1" >
-                          <el-button type="info" class="oneContorls" @click="showBenbiInterestCurve">本币利率曲线查看</el-button>
+                      <div class="left-col1">
+                          <el-button type="info" class="oneContorls" @click="showWaibiInterestCurve"> 货币1利率曲线查看</el-button>
                       </div>
-                      <div class="left-col2" style="color:transparent">a</div>
-                      <div class="left-col1" style="color:transparent">a</div>
-                      <div class="left-col2" style="color:transparent">a</div>
+                      <div class="left-col2" >
+                          <el-button type="info" class="oneContorls" @click="showBenbiInterestCurve">货币2利率曲线查看</el-button>
+                      </div>
+
                   </el-col>
                   </div>
               </el-col>
@@ -254,14 +251,15 @@
                 </el-col>
                 <el-col :span="8">
                     <el-col :span="12">
-                        <div class="left-col1">外币近端金额</div>
-                        <div class="left-col2">外币近端利率</div>
+                        <div class="left-col1">货币1近端金额</div>
+                        <div class="left-col2">货币2近端金额</div>
                     </el-col>
                     <el-col :span="12">
                         <div class="left-col1" >
                             <el-input-number
                                     :controls="false"
                                     class="oneContorls"
+                                    :precision=5
                                     v-model="swapForm.waiBiJinDuanJingE"
                             >
                             </el-input-number>
@@ -270,7 +268,8 @@
                             <el-input-number
                                     :controls="false"
                                     class="oneContorls"
-                                    v-model="swapForm.waiBiJinDuanLiLv"
+                                    :precision=5
+                                    v-model="swapForm.benBiJinDuanJingE"
                             >
                             </el-input-number>
                         </div>
@@ -278,15 +277,16 @@
                 </el-col>
                 <el-col :span="8">
                     <el-col :span="12">
-                        <div class="left-col1">本币近端金额</div>
-                        <div class="left-col2">本币近端利率</div>
+                        <div class="left-col1">货币1近端利率</div>
+                        <div class="left-col2">货币2近端利率</div>
                     </el-col>
                     <el-col :span="12">
                         <div class="left-col1" >
                             <el-input-number
                                     :controls="false"
                                     class="oneContorls"
-                                    v-model="swapForm.benBiJinDuanJingE"
+                                    :precision=5
+                                    v-model="swapForm.waiBiJinDuanLiLv"
                             >
                             </el-input-number>
                         </div>
@@ -294,6 +294,7 @@
                             <el-input-number
                                     :controls="false"
                                     class="oneContorls"
+                                    :precision=5
                                     v-model="swapForm.benBiJinDuanLiLv"
                             >
                             </el-input-number>
@@ -333,14 +334,15 @@
                 </el-col>
                 <el-col :span="8">
                     <el-col :span="12">
-                        <div class="left-col1">外币远端金额</div>
-                        <div class="left-col2">外币远端利率</div>
+                        <div class="left-col1">货币1远端金额</div>
+                        <div class="left-col2">货币1远端利率</div>
                     </el-col>
                     <el-col :span="12">
                         <div class="left-col1" >
                             <el-input-number
                                     :controls="false"
                                     class="oneContorls"
+                                    :precision=5
                                     v-model="swapForm.waiBiYuanDuanJingE"
                             >
                             </el-input-number>
@@ -349,6 +351,7 @@
                             <el-input-number
                                     :controls="false"
                                     class="oneContorls"
+                                    :precision=5
                                     v-model="swapForm.waiBiYuaDuanLiLv"
                             >
                             </el-input-number>
@@ -357,14 +360,15 @@
                 </el-col>
                 <el-col :span="8">
                     <el-col :span="12">
-                        <div class="left-col1">本币远端金额</div>
-                        <div class="left-col2">本币远端利率</div>
+                        <div class="left-col1">货币2远端金额</div>
+                        <div class="left-col2">货币2远端利率</div>
                     </el-col>
                     <el-col :span="12">
                         <div class="left-col1" >
                             <el-input-number
                                     :controls="false"
                                     class="oneContorls"
+                                    :precision=5
                                     v-model="swapForm.benBiYuaDuanJingE"
                             >
                             </el-input-number>
@@ -373,6 +377,7 @@
                             <el-input-number
                                     :controls="false"
                                     class="oneContorls"
+                                    :precision=5
                                     v-model="swapForm.benBiYuaDuanLiLv"
                             >
                             </el-input-number>
@@ -393,6 +398,7 @@
                               :controls="false"
                               class="controls-a-line"
                               disabled
+                              :precision=5
                               v-model="swapFormResult.PV1"
                       >
                       </el-input-number>
@@ -401,6 +407,7 @@
                               :controls="false"
                               class="controls-a-line"
                               disabled
+                              :precision=5
                               v-model="swapFormResult.PV2"
                       >
                       </el-input-number>
@@ -410,11 +417,12 @@
                           :controls="false"
                           class="controls-a-line"
                           disabled
+                          :precision=5
                           v-model="swapFormResult.PV1"
                   >
                   </el-input-number>
                   <span>
-                  <el-radio v-model="swapFormResult.calcUnit" label="CYN"></el-radio>
+                  <el-radio v-model="swapFormResult.calcUnit" label="CNY"></el-radio>
                   <el-radio v-model="swapFormResult.calcUnit" label="USD"></el-radio>
                  </span>
                   <el-button class="controls-a-line" type="info" @click="calcPricing">计算NPV</el-button>
@@ -424,7 +432,7 @@
 
             </div>
           </div>
-          <div class='box-card' style="height:385px">
+          <div class='box-card' style="height:362px">
                 <div class="box-card-title">
                     <span>套利空间计算</span>
                 </div>
@@ -433,7 +441,7 @@
                   <el-col :span="16" style="color:transparent">a</el-col>
                   <el-col :span="7">
                       <span>
-                         <el-radio v-model="swapFormResult.calcTaoliUnit" label="CYN"></el-radio>
+                         <el-radio v-model="swapFormResult.calcTaoliUnit" label="CNY"></el-radio>
                          <el-radio v-model="swapFormResult.calcTaoliUnit" label="USD"></el-radio>
                       </span>
                       <el-button class="controls-a-line" type="info"@click="calcTaoLiKongJian">计算套利空间</el-button>
@@ -443,8 +451,8 @@
                   <div class="my-block" style="margin-top: 20px">
                       <el-col :span="8">
                           <el-col :span="12">
-                              <div class="left-col1">外币利率曲线</div>
-                              <div class="left-col2">本币利率曲线</div>
+                              <div class="left-col1">货币1利率曲线</div>
+                              <div class="left-col2">货币2利率曲线</div>
                           </el-col>
                           <el-col :span="12" >
                               <div class="left-col1" >
@@ -489,6 +497,7 @@
                                           :controls="false"
                                           class="oneContorls"
                                           disabled
+                                          :precision=5
                                           v-model="swapFormResult.PV1Taoli"
                                   >
                                   </el-input-number>
@@ -498,6 +507,7 @@
                                           :controls="false"
                                           class="oneContorls"
                                           disabled
+                                          :precision=5
                                           v-model="swapFormResult.PV2Taoli"
                                   >
                                   </el-input-number>
@@ -517,6 +527,7 @@
                               <div class="left-col1" >
                                   <el-input-number
                                           disabled
+                                          :precision=5
                                           :controls="false"
                                           class="oneContorls"
                                           v-model="swapFormResult.NPVTaoli"
@@ -527,6 +538,7 @@
                                   <el-input-number
                                           :controls="false"
                                           disabled
+                                          :precision=5
                                           class="oneContorls"
                                           v-model="swapFormResult.taoLiKongJian"
                                   >
@@ -609,7 +621,7 @@
             { 'x': 3, 'y': 13, 'w': 9, 'h': 15.5, 'i': '4' },
           ],
           colNum: 12,
-          rowHeight: 40,
+          rowHeight: 36,
           isDraggable: false,
           isResizable: false,
           isMirrored: false,
@@ -619,7 +631,7 @@
         },
         labelPostion:'left',
         interestialogTableVisible:false,
-        calcUnit:'CYN',
+        calcUnit:'CNY',
         currencyPairOptions: currencyPairOptions,
         yingYeRiGuiZeOptions:yingYeRiGuiZeOptions,
         jiXiTianShuFangshiOptions:jiXiTianShuFangshiOptions,
