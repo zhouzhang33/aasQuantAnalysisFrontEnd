@@ -46,9 +46,9 @@ var swapFormResult = {
     taoLiKongJian:'0',
     calcTaoliUnit:'CYN'
 }
-var europeanResultDeltaHedge={
-    spotHedge:'',
-    forwardHedge:'',
+export var europeanResultDeltaHedge={
+    Hedge:'',
+    interestDate:Date.now(),
     currencyUnit:'CNY'
 }
 var europeanResultVegaHedge={
@@ -61,7 +61,10 @@ var europeanResultVegaHedge={
 
 var europeanResultLeg1={
     NPV:'',
-    Delta:'',
+    PV_inpips:'',
+    PV_in_per:'',
+    SpotDelta:'',
+    FWDDelta:'',
     Gamma:'',
     Vega:'',
     Theta:'',
@@ -294,7 +297,10 @@ export default [
             if(productName ==='NPV'){
                 resultData=europeanResultLeg1,
                 resultData.NPV=1.1,
-                resultData.Delta=1.2,
+                resultData.PV_inpips=1.12,
+                resultData.PV_in_per=1.13,
+                resultData.SpotDelta=1.2,
+                resultData.FWDDelta=1.21,
                 resultData.Gamma=1.3,
                 resultData.Vega=1.4,
                 resultData.Theta=1.5,
@@ -302,8 +308,8 @@ export default [
             }
             else if(productName ==='DeltaHedge') {
                 resultData=europeanResultDeltaHedge;
-                resultData.spotHedge=4;
-                resultData.forwardHedge=5;
+                resultData.Hedge=4;
+                resultData.interestDate=Date.now();
                 resultData.currencyUnit='USD';
             }
             else if(productName ==='VegaHedge') {

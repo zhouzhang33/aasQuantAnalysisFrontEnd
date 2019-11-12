@@ -629,7 +629,7 @@
                     </div>
                     <div class="my-block">
                         <el-col :span="12">
-                            <el-col :span="12">
+                            <el-col :span="8">
                                 <div class="left-col1">货币对</div>
                                 <div class="left-col2">买卖方向</div>
                                 <div class="left-col1">期权类型</div>
@@ -637,7 +637,7 @@
                                 <div class="left-col1">到期日</div>
                                 <div class="left-col2">交割日</div>
                             </el-col>
-                            <el-col :span="12">
+                            <el-col :span="16">
                                 <div class="left-col1">
                                     <el-select
                                             filterable
@@ -714,7 +714,7 @@
                         </el-col>
                         <!--                           第二列 -->
                         <el-col :span="12">
-                            <el-col :span="12">
+                            <el-col :span="8">
                                 <div class="left-col1">本币期权金额</div>
                                 <div class="left-col2">外币期权金额</div>
                                 <div class="left-col1">波动率(%)</div>
@@ -722,17 +722,19 @@
                                 <div class="left-col1">期权费</div>
                                 <div class="left-col2" style="color:transparent">a</div>
                             </el-col>
-                            <el-col :span="12">
+                            <el-col :span="16">
                                 <div class="left-col1">
                                     <el-input-number
                                             :controls="false"
                                             class="oneContorls"
+                                            :precision=5
                                             v-model="europeanOptionLeg1Form.benbiQiQuanJingE"
                                     >
                                     </el-input-number>
                                 </div>
                                 <div class="left-col2">
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             v-model="europeanOptionLeg1Form.waibiQiQuanJingE"
@@ -742,6 +744,7 @@
                                 <div class="left-col1">
                                     <el-input-number
                                             :controls="false"
+                                            :precision=5
                                             class="oneContorls"
                                             v-model="europeanOptionLeg1Form.volatility"
                                     >
@@ -749,6 +752,7 @@
                                 </div>
                                 <div class="left-col2">
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             v-model="europeanOptionLeg1Form.xingQuanJia"
@@ -757,6 +761,7 @@
                                 </div>
                                 <div class="left-col1">
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             v-model="europeanOptionLeg1Form.qiQuanFei"
@@ -859,7 +864,7 @@
                         <span>市场数据</span>
                     </div>
                     <div class="my-block">
-                        <el-col :span="12">
+                        <el-col :span="8">
                             <div class="left-col1">外币利率曲线</div>
                             <div class="left-col2">本币利率曲线</div>
                             <div class="left-col1">外币到期利率</div>
@@ -867,7 +872,7 @@
                             <div class="left-col1" style="color:transparent">a</div>
                             <div class="left-col2" style="color:transparent">a</div>
                         </el-col>
-                        <el-col :span="12">
+                        <el-col :span="16">
                             <div class="left-col1">
                                 <el-select
                                         filterable
@@ -904,6 +909,7 @@
                             <div class="left-col1">
                                 <el-input-number
                                         :controls="false"
+                                        :precision=5
                                         class="oneContorls"
                                         v-model="europeanOptionLeg1Form.waiBiDaoQiYuanQiLiLv"
                                 >
@@ -911,6 +917,7 @@
                             </div>
                             <div class="left-col2">
                                 <el-input-number
+                                        :precision=5
                                         :controls="false"
                                         class="oneContorls"
                                         v-model="europeanOptionLeg1Form.benBiDaoQiYuanQiLiLv"
@@ -1033,6 +1040,7 @@
                                     <el-input-number
                                             :controls="false"
                                             class="oneContorls"
+                                            :precision=5
                                             v-model="europeanOptionLeg1Form.benbiQiQuanJingE"
                                     >
                                     </el-input-number>
@@ -1040,6 +1048,7 @@
                                 <div class="left-col2">
                                     <el-input-number
                                             :controls="false"
+                                            :precision=5
                                             class="oneContorls"
                                             v-model="europeanOptionLeg1Form.waibiQiQuanJingE"
                                     >
@@ -1047,6 +1056,7 @@
                                 </div>
                                 <div class="left-col1">
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             v-model="europeanOptionLeg1Form.volatility"
@@ -1055,6 +1065,7 @@
                                 </div>
                                 <div class="left-col2">
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             v-model="europeanOptionLeg1Form.xingQuanJia"
@@ -1063,6 +1074,7 @@
                                 </div>
                                 <div class="left-col1">
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             v-model="europeanOptionLeg1Form.qiQuanFei"
@@ -1210,6 +1222,7 @@
                             <div class="left-col1">
                                 <el-input-number
                                         :controls="false"
+                                        :precision=5
                                         class="oneContorls"
                                         v-model="europeanOptionLeg1Form.waiBiDaoQiYuanQiLiLv"
                                 >
@@ -1217,6 +1230,7 @@
                             </div>
                             <div class="left-col2">
                                 <el-input-number
+                                        :precision=5
                                         :controls="false"
                                         class="oneContorls"
                                         v-model="europeanOptionLeg1Form.benBiDaoQiYuanQiLiLv"
@@ -1337,6 +1351,7 @@
                             <el-col :span="12">
                                 <div class="left-col1">
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             v-model="europeanOptionLeg1Form.benbiQiQuanJingE"
@@ -1345,6 +1360,7 @@
                                 </div>
                                 <div class="left-col2">
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             v-model="europeanOptionLeg1Form.waibiQiQuanJingE"
@@ -1353,6 +1369,7 @@
                                 </div>
                                 <div class="left-col1">
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             v-model="europeanOptionLeg1Form.volatility"
@@ -1361,6 +1378,7 @@
                                 </div>
                                 <div class="left-col2">
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             v-model="europeanOptionLeg1Form.xingQuanJia"
@@ -1369,6 +1387,7 @@
                                 </div>
                                 <div class="left-col1">
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             v-model="europeanOptionLeg1Form.qiQuanFei"
@@ -1515,6 +1534,7 @@
                             </div>
                             <div class="left-col1">
                                 <el-input-number
+                                        :precision=5
                                         :controls="false"
                                         class="oneContorls"
                                         v-model="europeanOptionLeg1Form.waiBiDaoQiYuanQiLiLv"
@@ -1523,6 +1543,7 @@
                             </div>
                             <div class="left-col2">
                                 <el-input-number
+                                        :precision=5
                                         :controls="false"
                                         class="oneContorls"
                                         v-model="europeanOptionLeg1Form.benBiDaoQiYuanQiLiLv"
@@ -1644,6 +1665,7 @@
                                 <div class="left-col1">
                                     <el-input-number
                                             :controls="false"
+                                            :precision=5
                                             class="oneContorls"
                                             v-model="europeanOptionLeg1Form.benbiQiQuanJingE"
                                     >
@@ -1651,6 +1673,7 @@
                                 </div>
                                 <div class="left-col2">
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             v-model="europeanOptionLeg1Form.waibiQiQuanJingE"
@@ -1659,6 +1682,7 @@
                                 </div>
                                 <div class="left-col1">
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             v-model="europeanOptionLeg1Form.volatility"
@@ -1667,6 +1691,7 @@
                                 </div>
                                 <div class="left-col2">
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             v-model="europeanOptionLeg1Form.xingQuanJia"
@@ -1675,6 +1700,7 @@
                                 </div>
                                 <div class="left-col1">
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             v-model="europeanOptionLeg1Form.qiQuanFei"
@@ -1822,6 +1848,7 @@
                             <div class="left-col1">
                                 <el-input-number
                                         :controls="false"
+                                        :precision=5
                                         class="oneContorls"
                                         v-model="europeanOptionLeg1Form.waiBiDaoQiYuanQiLiLv"
                                 >
@@ -1829,6 +1856,7 @@
                             </div>
                             <div class="left-col2">
                                 <el-input-number
+                                        :precision=5
                                         :controls="false"
                                         class="oneContorls"
                                         v-model="europeanOptionLeg1Form.benBiDaoQiYuanQiLiLv"
@@ -1949,6 +1977,7 @@
                             <el-col :span="12">
                                 <div class="left-col1">
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             v-model="europeanOptionLeg1Form.benbiQiQuanJingE"
@@ -1957,6 +1986,7 @@
                                 </div>
                                 <div class="left-col2">
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             v-model="europeanOptionLeg1Form.waibiQiQuanJingE"
@@ -1965,6 +1995,7 @@
                                 </div>
                                 <div class="left-col1">
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             v-model="europeanOptionLeg1Form.volatility"
@@ -1973,6 +2004,7 @@
                                 </div>
                                 <div class="left-col2">
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             v-model="europeanOptionLeg1Form.xingQuanJia"
@@ -1981,6 +2013,7 @@
                                 </div>
                                 <div class="left-col1">
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             v-model="europeanOptionLeg1Form.qiQuanFei"
@@ -2127,6 +2160,7 @@
                             </div>
                             <div class="left-col1">
                                 <el-input-number
+                                        :precision=5
                                         :controls="false"
                                         class="oneContorls"
                                         v-model="europeanOptionLeg1Form.waiBiDaoQiYuanQiLiLv"
@@ -2135,6 +2169,7 @@
                             </div>
                             <div class="left-col2">
                                 <el-input-number
+                                        :precision=5
                                         :controls="false"
                                         class="oneContorls"
                                         v-model="europeanOptionLeg1Form.benBiDaoQiYuanQiLiLv"
@@ -2150,23 +2185,52 @@
                 </el-col>
             </div>
 
-            <div class="box-card" style="height:105px">
+            <div class="box-card" style="height:108px">
                 <div class="box-card-title">利率曲线</div>
                 <div style="margin:20px 0px 20px 5px">
                     <el-col :span="6">
-                        <el-button type="info" class="curvebutton" @click="showWaibiInterestCurve">查看本币远期利率曲线</el-button>
+                        <el-col :span="8">
+                            <div style="color:transparent">a</div>
+                        </el-col>
+                        <el-col :span="16">
+                            <div class="left-col1">
+                                <el-button type="info" class="curvebutton" @click="showWaibiInterestCurve">查看本币远期利率曲线</el-button>
+                            </div>
+                        </el-col>
+
                     </el-col>
 
                     <el-col :span="6">
+                        <el-col :span="8">
+                            <div style="color:transparent">a</div>
+                        </el-col>
+                        <el-col :span="16">
+                            <div class="left-col1">
                         <el-button type="info" class="curvebutton" @click="showWaibiInterestCurve">查看外币远期利率曲线</el-button>
+                            </div>
+                        </el-col>
                     </el-col>
 
                     <el-col :span="6">
+                        <el-col :span="8">
+                            <div style="color:transparent">a</div>
+                        </el-col>
+                        <el-col :span="16">
+                            <div class="left-col1">
                         <el-button type="info" class="curvebutton">查看汇率远期曲线</el-button>
+                            </div>
+                        </el-col>
                     </el-col>
 
                     <el-col :span="6">
+                        <el-col :span="8">
+                            <div style="color:transparent">a</div>
+                        </el-col>
+                        <el-col :span="16">
+                            <div class="left-col1">
                         <el-button type="info" class="curvebutton" @click="showVolatilityCurve">查看波动率曲面</el-button>
+                            </div>
+                        </el-col>
 
                     </el-col>
                 </div>
@@ -2175,13 +2239,14 @@
                 <div class="box-card-title">
                     <span>计算结果</span>
                 </div>
-                <div style="margin:20px 0px 20px 5px">
+                <div style="margin:20px 0px 20px 0px">
                     <el-row>
-                        <el-col :span="4"><el-button type="info" class="curvebutton" @click="calcNPV">计算NPV</el-button></el-col>
-                        <el-col :span="4"><el-button type="info" class="curvebutton">倒算行权价</el-button></el-col>
-                        <el-col :span="4"><el-button type="info" class="curvebutton">清空</el-button></el-col>
-                        <el-col :span="4"><el-button type="info" icon='el-icon-circle-plus-outline' class="curvebutton" @click="addLegs">增加Leg</el-button></el-col>
-                        <el-col :span="4"><el-button type="info" icon='el-icon-remove-outline' class="curvebutton" @click="removeLegs">减少Leg</el-button></el-col>
+                        <el-col :span="4"><el-button style="margin-left:40px" type="info" class="curvebutton" @click="calcNPV">计算NPV</el-button></el-col>
+                        <el-col :span="4"><el-button style="margin-left:40px" type="info" class="curvebutton">倒算行权价</el-button></el-col>
+                        <el-col :span="4"><el-button style="margin-left:40px" type="info" class="curvebutton">清空</el-button></el-col>
+                        <el-col :span="4"><el-button style="margin-left:40px" type="info" icon='el-icon-circle-plus-outline' class="curvebutton" @click="addLegs">增加Leg</el-button></el-col>
+                        <el-col :span="4"><el-button style="margin-left:40px" type="info" icon='el-icon-remove-outline' class="curvebutton" @click="removeLegs">减少Leg</el-button></el-col>
+                        <el-col :span="4"><el-button style="margin-left:40px" type="info" class="curvebutton" @click="showPayoffCurve">查看期权收益图</el-button></el-col>
                     </el-row>
                 </div>
 
@@ -2189,13 +2254,14 @@
                     <el-col :span="8">
                         <div class="my-block">
                             <el-col :span="8">
-                                <div class="left-col1">NPV</div>
-                                <div class="left-col2" style="color:transparent">a</div>
-                                <div class="left-col1" style="color:transparent">a</div>
+                                <div class="left-col1">PV</div>
+                                <div class="left-col2">PV in pips</div>
+                                <div class="left-col1">PV in percent</div>
                             </el-col>
                             <el-col :span="16">
                                 <div class="left-col1" >
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             disabled
@@ -2203,30 +2269,60 @@
                                     >
                                     </el-input-number>
                                 </div>
-                                <div class="left-col2" style="color:transparent">a</div>
-                                <div class="left-col1" style="color:transparent">a</div>
+                                <div class="left-col1" >
+                                    <el-input-number
+                                            :precision=5
+                                            :controls="false"
+                                            class="oneContorls"
+                                            disabled
+                                            v-model="europeanResultLeg1.PV_inpips"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col1" >
+                                    <el-input-number
+                                            :precision=5
+                                            :controls="false"
+                                            class="oneContorls"
+                                            disabled
+                                            v-model="europeanResultLeg1.PV_in_per"
+                                    >
+                                    </el-input-number>
+                                </div>
                             </el-col>
                         </div>
                     </el-col>
                     <el-col :span="8">
                         <div class="my-block">
                             <el-col :span="8">
-                                <div class="left-col1">Delta</div>
-                                <div class="left-col2">Gamma</div>
-                                <div class="left-col1" style="color:transparent">a</div>
+                                <div class="left-col1">Spot Delta</div>
+                                <div class="left-col2">Forward Delta</div>
+                                <div class="left-col1">Gamma</div>
                             </el-col>
                             <el-col :span="16">
                                 <div class="left-col1" >
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             disabled
-                                            v-model="europeanResultLeg1.Delta"
+                                            v-model="europeanResultLeg1.SpotDelta"
                                     >
                                     </el-input-number>
                                 </div>
                                 <div class="left-col2" >
                                     <el-input-number
+                                            :precision=5
+                                            :controls="false"
+                                            class="oneContorls"
+                                            disabled
+                                            v-model="europeanResultLeg1.FWDDelta"
+                                    >
+                                    </el-input-number>
+                                </div>
+                                <div class="left-col1" >
+                                    <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             disabled
@@ -2234,8 +2330,7 @@
                                     >
                                     </el-input-number>
                                 </div>
-                                <div class="left-col1" style="color:transparent">a</div>
-                            </el-col>
+                                   </el-col>
                         </div>
                     </el-col>
 
@@ -2249,6 +2344,7 @@
                             <el-col :span="16">
                                 <div class="left-col1" >
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             disabled
@@ -2258,6 +2354,7 @@
                                 </div>
                                 <div class="left-col2" >
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             disabled
@@ -2267,6 +2364,7 @@
                                 </div>
                                 <div class="left-col1" >
                                     <el-input-number
+                                            :precision=5
                                             :controls="false"
                                             class="oneContorls"
                                             disabled
@@ -2280,150 +2378,221 @@
                 </div>
             </div>
             <el-row>
-            <el-col :span="12">
-                <div class="box-card" style="height:165px">
-                    <div class="box-card-title">
-                        <el-checkbox-button v-model="DeltaHedgeCalc" @click="clickDeltaHedgeCalc">
-                            Delta Hedge
-                        </el-checkbox-button>
-                        <span  class="controls-a-line" v-show="DeltaHedgeCalc === true">
-                            <el-button type='info' class="curvebutton" @click="calculateDeltaHedge">计算</el-button>
-                        </span>
+                <el-col :span="24">
+                    <div class="box-card" style="height:165px">
+                        <el-row>
+                            <div class="box-card-title">
+                                <el-col :span="8">
+                                    <el-col :span="8">
+                                        <el-checkbox-button class="left-col1" v-model="DeltaHedgeCalc" @click="clickDeltaHedgeCalc">
+                                            Delta Hedge
+                                        </el-checkbox-button>
+                                    </el-col>
+                                    <el-col :span="16">
+                                        <div  class="left-col1" v-show="DeltaHedgeCalc === true">
+                                            <el-button type='info' class="curvebutton" @click="calculateDeltaHedge">计算</el-button>
+                                        </div>
+                                    </el-col>
+                                </el-col>
+                            </div>
+                        </el-row>
+                        <el-row>
+                            <div v-show="DeltaHedgeCalc === true">
 
-                    </div>
-                    <div v-show="DeltaHedgeCalc === true">
-                        <div style="margin:20px 0px 20px 5px">
-                            <el-col :span="5">
-                                <span class="left-col1">Spot Hedge头寸</span>
-                            </el-col>
-                            <el-col :span="5">
-                                <span class="left-col1" >
-                                <el-input-number
-                                        :controls="false"
-                                        class="oneContorls1"
-                                        disabled
-                                        v-model="europeanResultDeltaHedge.spotHedge"
-                                >
-                                </el-input-number>
-                                </span>
-                            </el-col>
-
-                            <el-col :span="2">
-                                <el-tag >
-                                    {{ europeanResultDeltaHedge.currencyUnit }}
-                                </el-tag>
-                            </el-col>
-
+                            <div class="my-block" style="margin:20px 0px 20px 0px">
+                                <el-col :span="8">
+                                    <el-col :span="8">
+                                        <div class="left-col1">Hedge头寸</div>
+                                    </el-col>
+                                    <el-col :span="12">
+                                    <div class="left-col1">
+                                        <el-input-number
+                                                :precision=5
+                                                :controls="false"
+                                                class="oneControls"
+                                                disabled
+                                                v-model="europeanResultDeltaHedge.Hedge"
+                                        >
+                                        </el-input-number>
+                                    </div>
+                                    </el-col>
+                                    <el-col :span="4">
+                                        <div class="left-col1">
+                                        <el-tag>
+                                            {{ europeanResultDeltaHedge.currencyUnit }}
+                                        </el-tag>
+                                        </div>
+                                    </el-col>
+                                </el-col>
+                                <el-col :span="8">
+                                    <el-col :span="8">
+                                        <div class="left-col1">起息日</div>
+                                    </el-col>
+                                    <el-col :span="16">
+                                    <div class="left-col1">
+                                        <el-date-picker
+                                                class="oneContorls"
+                                                placeholder="选择日期"
+                                                type="date"
+                                                v-model="europeanResultDeltaHedge.interestDate">
+                                        </el-date-picker>
+                                        <!--                                    <el-input-number-->
+                                        <!--                                            :precision=5-->
+                                        <!--                                            :controls="false"-->
+                                        <!--                                            class="oneContorls1"-->
+                                        <!--                                            disabled-->
+                                        <!--                                            v-model="europeanResultDeltaHedge.forwardHedge"-->
+                                        <!--                                    >-->
+                                        <!--                                    </el-input-number>-->
+                                    </div>
+                                    </el-col>
+                                </el-col>
+                                <el-col :span="8">
+                                    <div class="left-col1" style="color:transparent">a</div>
+                                </el-col>
+                            </div>
                         </div>
-                        <div class="my-block" style="margin-top:10px">
-                            <el-col :span="5">
-                                <span class="left-col1">Forward Hedge头寸</span>
-                            </el-col>
-
-                            <el-col :span="5">
-                                <span class="left-col1">
-                                    <el-input-number
-                                            :controls="false"
-                                            class="oneContorls1"
-                                            disabled
-                                            v-model="europeanResultDeltaHedge.forwardHedge"
-                                    >
-                                    </el-input-number>
-                                </span>
-                            </el-col>
-                            <el-col :span="1">
-
-                                <el-tag>
-                                    {{ europeanResultVegaHedge.currencyUnit }}
-                                </el-tag>
-
-                            </el-col>
-
-                        </div>
+                        </el-row>
                     </div>
-                </div>
-            </el-col>
-
-            <el-col :span="12">
-                <div class="box-card" style="height:165px">
-                    <div class="box-card-title" >
-                        <el-checkbox-button v-model="VegaHedgeCalc" @click="clickVegaHedgeCalc">
-                            Vega Hedge
-                        </el-checkbox-button>
-                        <span  class="controls-a-line" v-show="VegaHedgeCalc === true">
-                            <el-button type='info' class="curvebutton" @click="calculateVegaHedge">计算</el-button>
-                        </span>
-                    </div>
-                    <div v-show="VegaHedgeCalc === true">
-                        <div style="margin:20px 0px 20px 5px">
-                            <el-col :span="4">
-                                <div class="left-col1">期权1类型</div>
-                                <div class="left-col2">期权2类型</div>
-                            </el-col>
-                            <el-col :span="7">
-                                <div class="left-col1" >
-                                    <el-input
-                                            class="oneContorls1"
-                                            disabled
-                                            v-model="europeanResultVegaHedge.option1Type"
-                                    >
-                                    </el-input>
-                                </div>
-                                <div class="left-col2" >
-                                    <el-input
-                                             class="oneContorls1"
-                                            disabled
-                                            v-model="europeanResultVegaHedge.option2Type"
-                                    >
-                                    </el-input>
-                                </div>
-                            </el-col>
-
-                        </div>
-                        <div class="my-block" style="margin-top:10px">
-                            <el-col :span="4">
-                                <div class="left-col1">期权1本金</div>
-                                <div class="left-col2">期权2本金</div>
-                            </el-col>
-                            <el-col :span="5">
-                                <div class="left-col1">
-                                    <el-input-number
-                                            :controls="false"
-                                            class="oneContorls1"
-                                            disabled
-                                            v-model="europeanResultVegaHedge.option1Amount"
-                                    >
-                                    </el-input-number>
-                                </div>
-                                <div class="left-col2">
-                                    <el-input-number
-                                            :controls="false"
-                                            class="oneContorls1"
-                                            disabled
-                                            v-model="europeanResultVegaHedge.option2Amount"
-                                    >
-                                    </el-input-number>
-                                </div>
-                            </el-col>
-                            <el-col :span="2">
-                                <div class="left-col1">
-                                    <el-tag>
-                                        {{ europeanResultVegaHedge.currencyUnit }}
-                                    </el-tag>
-                                </div>
-                                <div class="left-col2">
-                                    <el-tag>
-                                        {{ europeanResultVegaHedge.currencyUnit }}
-                                    </el-tag>
-                                </div>
+                </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="24">
+                <div class="box-card" style="height:205px">
+                    <el-row>
+                        <div class="box-card-title">
+                            <el-col :span="8">
+                                <el-col :span="8">
+                                    <el-checkbox-button class="left-col1" v-model="VegaHedgeCalc" @click="clickVegaHedgeCalc">
+                                        Vega Hedge
+                                    </el-checkbox-button>
+                                </el-col>
+                                <el-col :span="16">
+                                    <div  class="left-col1" v-show="VegaHedgeCalc === true">
+                                        <el-button type='info' class="curvebutton" @click="calculateVegaHedge">计算</el-button>
+                                    </div>
+                                </el-col>
                             </el-col>
                         </div>
+                    </el-row>
+                    <el-row>
+                      <div v-show="VegaHedgeCalc === true">
+                        <div class="my-block">
+                            <el-col :span="8">
+                                <div class="my-block">
+                                    <el-col :span="8">
+                                        <div class="left-col1">期权1类型</div>
+                                        <div class="left-col2">货币对</div>
+                                        <div class="left-col1">买卖方向</div>
+                                    </el-col>
+                                    <el-col :span="16">
+                                        <div class="left-col1" >
+                                            <el-input
+                                                    class="oneControls"
+                                                    disabled
+                                                    v-model="europeanResultVegaHedge.option1Type"
+                                            >
+                                            </el-input>
+                                        </div>
+                                        <div class="left-col2" >
+                                            <el-input
+                                                    class="oneControls"
+                                                    disabled
+                                                    v-model="europeanResultVegaHedge.currencypair"
+                                            >
+                                            </el-input>
+                                        </div>
+                                        <div class="left-col1" >
+                                            <el-input
+                                                    class="oneControls"
+                                                    disabled
+                                                    v-model="europeanResultVegaHedge.direction"
+                                            >
+                                            </el-input>
+                                        </div>
+                                    </el-col>
+                                </div>
+                            </el-col>
+                            <el-col :span="8">
+                                <div class="my-block">
+                                    <el-col :span="8">
+                                        <div class="left-col1">期权2类型</div>
+                                        <div class="left-col2">起息日</div>
+                                        <div class="left-col1">到期日</div>
+                                    </el-col>
+                                    <el-col :span="16">
+                                        <div class="left-col1" >
+                                            <el-input
+                                                    class="oneControls"
+                                                    disabled
+                                                    v-model="europeanResultVegaHedge.option2Type"
+                                            >
+                                            </el-input>
+                                        </div>
+                                        <div class="left-col2" >
+                                            <el-date-picker
+                                                    type='date'
+                                                    class="oneControls"
+                                                    disabled
+                                                    v-model="europeanResultVegaHedge.interestStartDate"
+                                            >
+                                            </el-date-picker>
+                                        </div>
+                                        <div class="left-col1" >
+                                            <el-date-picker
+                                                    type='date'
+                                                    class="oneControls"
+                                                    disabled
+                                                    v-model="europeanResultVegaHedge.interestEndDate"
+                                            >
+                                            </el-date-picker>
+                                        </div>
+                                     </el-col>
+                                </div>
+                            </el-col>
+                            <el-col :span="8">
+                                <div class="my-block">
+                                    <el-col :span="8">
+                                        <div class="left-col1">货币1金额</div>
+                                        <div class="left-col2">货币2金额</div>
+                                        <div class="left-col1">行权价</div>
+                                    </el-col>
+                                    <el-col :span="16">
+                                        <div class="left-col1" >
+                                            <el-input
+                                                    class="oneControls"
+                                                    disabled
+                                                    v-model="europeanResultVegaHedge.option1Amount"
+                                            >
+                                            </el-input>
+                                        </div>
+                                        <div class="left-col2" >
+                                            <el-input
+                                                    class="oneControls"
+                                                    disabled
+                                                    v-model="europeanResultVegaHedge.option2Amount"
+                                            >
+                                            </el-input>
+                                        </div>
+                                        <div class="left-col1" >
+                                            <el-input
+                                                    class="oneControls"
+                                                    disabled
+                                                    v-model="europeanResultVegaHedge.price"
+                                            >
+                                            </el-input>
+                                        </div>
+                                    </el-col>
+                                </div>
+                            </el-col>
+                        </div>
                     </div>
-
+                    </el-row>
 
                 </div>
             </el-col>
             </el-row>
+
             <div class="box-card" style="color:transparent;height:355px;" v-show="legNum<2">
                 a
             </div>
@@ -2439,11 +2608,20 @@
 
             <div>
                 <el-dialog
+                        title="期权收益图"
+                        :visible.sync="optionPayoffVisible"
+                        :append-to-body="true"
+                        @opened="onDialogOpen"
+                        width="70%">
+                    <div class="box-card" style="height:500px">
+                        <div id="payoffchart" style="margin:auto;width:700px;height:400px"></div>
+                    </div>
+                </el-dialog>
+                <el-dialog
                         title="利率曲线"
                         :visible.sync="interestialogTableVisible"
                         :append-to-body="true"
                         width="70%"
-
                 >
                     <div class='box-card' style="height:100%">
                         <div class="box-card-title"> {{ dialogName }}</div>
@@ -2481,7 +2659,6 @@
     SavePricing
   } from '@api/index'
   import echarts from 'echarts'
-  import 'echarts-gl'
   import {
       currencyPairOptions,
       callPutOptions,
@@ -2493,8 +2670,8 @@
       currency2EarningCurveOptions,
       intepolationTypeOptions,
       tradingDirectionOptions,
-      echartOption,
-      echartSurfoption
+      echartPayoffOption,
+      echartOption
   } from '../UIPara/UIPara'
   import {
       europeanResultDeltaHedge,
@@ -2539,8 +2716,6 @@
         DeltaHedgeCalc:true,
         VegaHedgeCalc:false,
         InputDataTableOpt: {height: '290'},
-        myechats:null,
-        myechartSurf:null,
         currencyPairOptions:currencyPairOptions,
         callPutOptions:callPutOptions,
         zheXianQuxianChaZhiOptions:zheXianQuxianChaZhiOptions,
@@ -2551,8 +2726,7 @@
         currency2EarningCurveOptions:currency2EarningCurveOptions,
         intepolationTypeOptions:intepolationTypeOptions,
         tradingDirectionOptions:tradingDirectionOptions,
-        echartOption:echartOption,
-        echartSurfoption:echartSurfoption,
+          echartPayoffOption:echartPayoffOption,
         interestCurveData:null,
         showtable:true,
         dialogName:'',
@@ -2563,13 +2737,24 @@
         europeanOptionLeg1Form: europeanOptionLeg1Form,
         europeanOptionLeg2Form: europeanOptionLeg2Form,
         legNum:1,
+        optionPayoffVisible:false,
+        myechart:null,
+          echartOption:echartOption
       }
     },
     mounted () {
+
     },
     methods: {
 
       // ****************************
+        onDialogOpen(){
+            this.myechart = echarts.init(document.getElementById('payoffchart'));
+            this.myechart.setOption(this.echartPayoffOption);
+        },
+        showPayoffCurve(){
+            this.optionPayoffVisible=true;
+        },
        clickVegaHedgeCalc(){
            if(this.VegaHedgeCalc===true) {
                this.VegaHedgeCalc = false;

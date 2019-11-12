@@ -342,8 +342,6 @@ export var echartOption = {
     textStyle:{
       color: "white",
     },
-
-
   },
   legend:{
     show:true,
@@ -427,7 +425,125 @@ export var echartOption = {
   ]
 
 };
+export var echartPayoffOption = {
+  title: {
+    textStyle:{
+      color: "white",
+    },
+  },
+  legend:{
+    show:true,
+    y:'bottom',
+    orient:'horizontal',
+    textStyle:{
+      color:"white",
+      fontSize:16
 
+    }
+  },
+
+  tooltip: {
+    trigger: 'axis',
+  },
+  grid: {
+    left: '5%',
+    right: '1%',
+    bottom: '15%',
+    top:'10%',
+    containLabel: true
+  },
+  xAxis: {
+    name: '行权价',
+    nameLocation:'center',
+    nameGap:30,
+    min:6.6,
+    textStyle:{
+      color:"white",
+      fontSize:16
+    },
+    type: 'value',
+    splitLine: {
+      show: false
+    },
+    nameTestStyle:{
+      color:'#FFFFFF'
+    },
+    axisLine:{
+      lineStyle:{
+        color:'white',  //坐标轴的颜色
+        width:1,
+      },
+    },
+  },
+  yAxis: {
+    name: '收益（万元）',
+    nameLocation:'center',
+    nameGap:60,
+    type: 'value',
+    splitLine: {
+      show: false
+    },
+    axisLabel:{
+      formatter:'{value}'
+    },
+    axisLine:{
+      lineStyle:{
+        color:'white',  //坐标轴的颜色
+        width:1,
+      }
+    },
+    nameTestStyle:{
+      color:'#FFFFFF'
+    },
+  },
+  series: [
+    {
+      name:'Leg1：买入欧式看涨期权',
+      type:'line',
+      data:[
+        [6.65 , -8000.00],
+        [6.68 , -8000.00],
+        [6.70 , -8000.00],
+        [6.71 , -8000.00],
+        [6.73 , -8000.00],
+        [6.75 , -8000.00],
+        [6.76 , -8000.00],
+        [6.78 , 14000.00],
+        [6.80 , 35000.00],]
+    },
+    {
+      name:'Leg2：卖出欧式看跌期权',
+      type:'line',
+      data:[
+        [6.65 ,  -55000.00],
+        [6.68 ,  -30000.00],
+        [6.70 ,  -8000.00],
+        [6.71 ,  5000.00],
+        [6.73 ,  5000.00],
+        [6.75 ,  5000.00],
+        [6.76 ,  5000.00],
+        [6.78 ,  5000.00],
+        [6.80 ,  5000.00],
+      ]
+    },
+    {
+      name:'总收益',
+      type:'line',
+      data:[
+        [6.65 	 ,	 -63000.00],
+        [6.68 	 ,	 -38000.00],
+        [6.70 	 ,-16000.00],
+        [6.71 	 ,-3000.00],
+        [6.73 	 ,-3000.00],
+        [6.75 	 ,-3000.00],
+        [6.76 	 ,-3000.00],
+        [6.78 	 ,19000.00],
+        [6.80 	 ,40000.00],
+      ]
+    },
+  ]
+
+};
 export var echartOptionRight = {
   title: {
     //text: 'CPU资源',

@@ -30,30 +30,38 @@ export var swapFormResult = {
        PV1: '0',
         PV2: '0',
         NPV: '0',
-        calcUnit:'CYN',
+        calcUnit:'CNY',
         PV1Taoli: '0',
         PV2Taoli: '0',
         NPVTaoli: '0',
         taoLiKongJian:'0',
-        calcTaoliUnit:'CYN'
+        calcTaoliUnit:'CNY'
 }
 
 export var europeanResultDeltaHedge={
-        spotHedge:'',
-        forwardHedge:'',
+        Hedge:'',
+        interestDate:Date.now(),
         currencyUnit:'CNY'
 }
 export var europeanResultVegaHedge={
         option1Type:'',
+        currencypair:'',
+        direction:'',
         option2Type:'',
+        interestStartDate:'',
+        interestEndDate:'',
         option1Amount:'',
         option2Amount:'',
+        price:'',
         currencyUnit:'CNY'
 }
 
 export var europeanResultLeg1={
         NPV:'',
-        Delta:'',
+        PV_inpips:'',
+        PV_in_per:'',
+        SpotDelta:'',
+        FWDDelta:'',
         Gamma:'',
         Vega:'',
         Theta:'',
