@@ -9,6 +9,39 @@ export var currencyPairOptions=[
   // },
 ];
 
+export var productTypes=[
+  {
+    key:'FXFWDSwap',
+    label:'FX FWD Swap',
+    value:'FXFWDSwap',
+  },
+  {
+    key:'FXEuropeanOption',
+    label:'FX European Option',
+    value:'FXEuropeanOption',
+  },
+  {
+    key:'IRSCCS',
+    label:'IRS CCS',
+    value:'IRSCCS',
+  },
+  {
+    key:'Bond',
+    label:'Bond',
+    value:'Bond',
+  },
+  {
+    key:'Swaption',
+    label:'Swaption',
+    value:'Swaption',
+  },
+  {
+    key:'FXDigitalOption',
+    label:'FX Digital Option',
+    value:'FXDigitalOption',
+  },
+];
+
 export var callPutOptions=[
   {key:'Call',value:'Call',label:'Call'},
   {key:'Put',value:'Put',label:'Put'},

@@ -5,7 +5,16 @@ export var curveNameOptions=[
     {
         key: 'Shibor1M', label: 'Shibor1M', value: 'Shibor1M',
     },
-]
+];
+
+export var displayOptions=[
+    {
+        key: '损失分布数据表', label: '损失分布数据表', value: '损失分布数据表',
+    },
+    {
+        key: '损失分布图', label: '损失分布图', value: '损失分布图',
+    },
+];
 
 export var jiXiTianShuFangshiOptions=[
     {
