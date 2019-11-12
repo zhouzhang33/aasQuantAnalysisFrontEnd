@@ -311,43 +311,169 @@
             title="结束日损益占比分析"
             :visible.sync="DPPartVisible"
             :append-to-body="true"
+            @opened="DPPartGraphOpenSWAP"
             width="70%"
           >
             <div class='box-card' style="height:100%">
-              <div class="box-card-title"> {{ dialogName }}</div>
+              <div class="box-card-title"> {{ dialogNameDPPart }}</div>
             </div>
             <div v-if="DPPart===true">
-              <el-table
-                :border="true"
-                :data="DPPartData"
-                :cell-style="rowstyle"
-                :header-cell-style="headerstyle"
+              <div>
+                <el-table
+                        :border="true"
+                        :data="DPPartDataSWAP"
+                        :cell-style="rowstyle"
+                        :header-cell-style="headerstyle"
                 >
                   <el-table-column
-                        label="数据类型"
-                        prop="数据类型"
+                          label="数据类型"
+                          prop="数据类型"
                   >
                   </el-table-column>
                   <el-table-column
-                        label="外汇远掉期"
-                        prop="外汇远掉期"
+                          label="外汇远掉期结束日损益"
+                          prop="外汇远掉期结束日损益"
                   >
                   </el-table-column>
                   <el-table-column
-                        label="结束日总损益"
-                        prop="结束日总损益"
+                          label="结束日总损益"
+                          prop="结束日总损益"
                   >
-                </el-table-column>
-              </el-table>
-              
-
+                  </el-table-column>
+                </el-table>
+              </div>
+              <div class="box-card" style="height:500px">
+                <div id="DPPartChartSWAP" style="margin:auto;width:700px;height:400px"></div>
+              </div>
             </div>
-
           </el-dialog>
         </div>
 
-
-
+        <div>
+          <el-dialog
+                  title="区间连续日损益分析"
+                  :visible.sync="ContinousDPVisible"
+                  :append-to-body="true"
+                  @opened="ConDPGraphOpenSWAP1"
+                  width="70%"
+          >
+            <div class='box-card' style="height:100%">
+              <div class="box-card-title"> {{ dialogNameConDP }}</div>
+            </div>
+            <div v-if="ContinousDP===true">
+              <div>
+                <el-table
+                        :border="true"
+                        :data="ConDPSWAP1"
+                        :cell-style="rowstyle"
+                        :header-cell-style="headerstyle"
+                >
+                  <el-table-column
+                          label="数据类型"
+                          prop="数据类型"
+                  >
+                  </el-table-column>
+                  <el-table-column
+                          label="2019-11-04"
+                          prop="2019-11-04"
+                  >
+                  </el-table-column>
+                  <el-table-column
+                          label="2019-11-05"
+                          prop="2019-11-05"
+                  >
+                  </el-table-column>
+                  <el-table-column
+                          label="2019-11-06"
+                          prop="2019-11-06"
+                  >
+                  </el-table-column>
+                  <el-table-column
+                          label="2019-11-07"
+                          prop="2019-11-07"
+                  >
+                  </el-table-column>
+                  <el-table-column
+                          label="2019-11-08"
+                          prop="2019-11-08"
+                  >
+                  </el-table-column>
+                  <el-table-column
+                          label="2019-11-09"
+                          prop="2019-11-09"
+                  >
+                  </el-table-column>
+                  <el-table-column
+                          label="2019-11-10"
+                          prop="2019-11-10"
+                  >
+                  </el-table-column>
+                </el-table>
+              </div>
+              <div class="box-card" style="height:500px">
+                <div id="ConDPChartSWAP1" style="margin:auto;width:700px;height:400px"></div>
+              </div>
+            </div>
+          </el-dialog>
+        </div>
+        <div>
+          <el-dialog
+                  title="区间损益归因分析"
+                  :visible.sync="PnlVisible"
+                  :append-to-body="true"
+                  width="70%"
+          >
+            <div class='box-card' style="height:100%">
+              <div class="box-card-title"> {{ dialogNamePNL }}</div>
+            </div>
+            <div v-if="Pnl===true">
+              <div>
+                <el-table
+                        :border="true"
+                        :data="PNLSWAP1"
+                        :cell-style="rowstyle"
+                        :header-cell-style="headerstyle"
+                >
+                  <el-table-column
+                          label="投组"
+                          prop="投组"
+                  >
+                  </el-table-column>
+                  <el-table-column
+                          label="货币"
+                          prop="货币"
+                  >
+                  </el-table-column>
+                  <el-table-column
+                          label="浮动盈亏"
+                          prop="浮动盈亏"
+                  >
+                  </el-table-column>
+                  <el-table-column
+                          label="期限影响"
+                          prop="期限影响"
+                  >
+                  </el-table-column>
+                  <el-table-column
+                          label="汇率影响"
+                          prop="汇率影响"
+                  >
+                  </el-table-column>
+                  <el-table-column
+                          label="利率影响"
+                          prop="利率影响"
+                  >
+                  </el-table-column>
+                  <el-table-column
+                          label="残差"
+                          prop="残差"
+                  >
+                  </el-table-column>
+                </el-table>
+              </div>
+            </div>
+          </el-dialog>
+        </div>
 <!--      </d2-grid-item>-->
     </d2-grid-layout>
   </d2-container>
@@ -356,17 +482,14 @@
 <script>
 
 import {
-  pricing,
-  calcFxFWD
-} from '@api/index'
-
-import {
   intepolationTypeOptions,
   currencyOptions,
-  productTypes} from '../UIPara/UIPara'
+  productTypes,
+  echartDPPartOptionSWAP,
+  echartConPDSWAP1} from '../UIPara/UIPara'
 
 import {displayOptions} from './UIPara'
-
+import echarts from 'echarts'
 import Calendar from 'vue-calendar-component'
 
 export default {
@@ -405,7 +528,10 @@ export default {
       currencyOptions:currencyOptions,
       productTypes:productTypes,
       displayOptions:displayOptions,
+      echartDPPartOptionSWAP:echartDPPartOptionSWAP,
+      echartConPDSWAP1:echartConPDSWAP1,
       currentRow: null,
+      myechart:null,
       productStatus: {
         isUsed: '',
         htDisplay:'',
@@ -427,8 +553,17 @@ export default {
         {"投组群组":"FXSWAP-TRADING","总损益":"27491544.28","已实现损益":"10331747.14","浮动盈亏":"17159797.14","结束日日损益":"3927363.47","结束日月损益":"117820904.07","结束日年损益":"6927869159.02","结束日已实现损益":"1475963.88"},
 
       ],
-      DPPartData:[
-        {"数据类型":"损益","外汇远掉期":"558525849.81 ","结束日总损益":"3292629249.06 "},
+      DPPartDataSWAP:[
+        {"数据类型":"损益","外汇远掉期结束日损益":"558525849.81 ","结束日总损益":"3292629249.06 "},
+      ],
+      ConDPSWAP1:[
+        {"数据类型":"日损益","2019-11-04":" 114,541,140 ","2019-11-05":" 132,930,453 ","2019-11-06":" -143,007,454 ","2019-11-07":" -148,637,255 ","2019-11-08":" 192,681,679 ","2019-11-09":" 230,273,605 ","2019-11-10":" 179,743,683 "},
+        {"数据类型":"累计损益","2019-11-04":" 114,541,140 ","2019-11-05":" 247,471,593 ","2019-11-06":" 104,464,139 ","2019-11-07":" -44,173,116 ","2019-11-08":" 148,508,563 ","2019-11-09":" 378,782,167 ","2019-11-10":" 558,525,850 "},
+
+      ],
+      PNLSWAP1:[
+        {"投组":"FXSWAP-TRADING","货币":"CNY","浮动盈亏":"61176240.38","期限影响":"1357554.762","汇率影响":"40784160.26","利率影响":"19034525.3659938 ","残差":"0.00"},
+
       ],
       options: {
         border: true,
@@ -449,6 +584,14 @@ export default {
   },
   methods: {
     // ****************************
+    DPPartGraphOpenSWAP(){
+      this.myechart = echarts.init(document.getElementById('DPPartChartSWAP'));
+      this.myechart.setOption(this.echartDPPartOptionSWAP);
+    },
+    ConDPGraphOpenSWAP1(){
+      this.myechart = echarts.init(document.getElementById('ConDPChartSWAP1'));
+      this.myechart.setOption(this.echartConPDSWAP1);
+    },
     calPLResults () {
       if (this.displayData === false){
         this.displayData = true;
@@ -482,17 +625,17 @@ export default {
     showContinousDP(){
       this.ContinousDPVisible = true;
       this.ContinousDP = true;
-      this.dialogName = '区间连续日损益';
+      this.dialogNameConDP = '区间连续日损益';
     },
     showDPPart(){
       this.DPPartVisible = true;
       this.DPPart = true;
-      this.dialogName = '结束日损益占比';
+      this.dialogNameDPPart = '结束日损益占比';
     },
     showPNL(){
       this.PnlVisible = true;
       this.Pnl = true;
-      this.dialogName = '区间损益归因';
+      this.dialogNamePNL = '区间损益归因';
     },
   }
 }

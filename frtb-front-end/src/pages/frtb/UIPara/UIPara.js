@@ -544,6 +544,138 @@ export var echartPayoffOption = {
   ]
 
 };
+export var echartDPPartOptionSWAP = {
+  title: {
+    textStyle:{
+      color: "white",
+    },
+  },
+  tooltip: {
+    trigger: 'item',
+    formatter:"{a} <br/>{b} : {c} ({d}%)"
+  },
+  color:['#FFDE00','grey'],
+  legend:{
+    orient:'horizontal',
+    left:'Center',
+    bottom:'bottom',
+    selectedMode:false,
+    textStyle:{
+      color:"white",
+      fontSize:16
+    },
+    data:['外汇远掉期结束日损益','结束日总损益']
+    },
+
+  series: [
+    {
+      name: '外汇远掉期结束日损益',
+      type: 'pie',
+      radius: '60%',
+      center: ['50%', '60%'],
+      hoveranimation: true,
+      selectedMode: 'single',
+      selectedOffset: 5,
+      data: [
+        { value: 558525849.81, name: '外汇远掉期结束日损益',itemStyle:{normal:{color:'#FFDE00'}}},
+        { value: 3292629249.06, name: '结束日总损益',itemStyle:{normal:{color:'grey'}}},
+      ],
+      itemstyle: {
+        emphasis: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0,0,0,0.5)'
+        }
+      }
+    },
+  ]
+
+};
+export var echartConPDSWAP1 = {
+  title: {
+    textStyle:{
+      color: "white",
+    },
+  },
+  legend:{
+    show:true,
+    y:'bottom',
+    orient:'horizontal',
+    textStyle:{
+      color:"white",
+      fontSize:16
+
+    }
+  },
+
+  tooltip: {
+    trigger: 'axis',
+  },
+  grid: {
+    left: '5%',
+    right: '1%',
+    bottom: '15%',
+    top:'10%',
+    containLabel: true
+  },
+  xAxis: {
+    name: '日期',
+    nameLocation:'center',
+    nameGap:30,
+    type: 'category',
+    data:['2019-11-04','2019-11-05','2019-11-06','2019-11-06','2019-11-07','2019-11-08','2019-11-09','2019-11-10'],
+    nameTextStyle:{
+      fontWeight:600,
+      fontSize:16
+    },
+    splitLine: {
+      show: false
+    },
+    nameTestStyle:{
+      color:'#FFFFFF'
+    },
+    axisLine:{
+      lineStyle:{
+        color:'white',  //坐标轴的颜色
+        width:1,
+      },
+    },
+  },
+  yAxis: {
+    name: '损益',
+    nameLocation:'center',
+    nameGap:60,
+    type: 'value',
+    splitLine: {
+      show: false
+    },
+    axisLabel:{
+      formatter:'{value}'
+    },
+    axisLine:{
+      lineStyle:{
+        color:'white',  //坐标轴的颜色
+        width:1,
+      }
+    },
+    nameTestStyle:{
+      color:'#FFFFFF'
+    },
+  },
+  series: [
+    {
+      name:'日损益',
+      type:'line',
+      data:[114541140.00,132930453.00,-143007454.00,-148637255.00,192681679.00,230273605.00,179743683.00]
+    },
+    {
+      name:'累计损益',
+      type:'line',
+      data:[114541139.82,247471593.21 ,104464138.88 ,-44173116.23,148508562.67 ,378782167.23 ,558525849.81 ]
+    },
+  ]
+
+};
 export var echartOptionRight = {
   title: {
     //text: 'CPU资源',
