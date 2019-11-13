@@ -24,12 +24,14 @@
                   <div class="left-col1">
                     <el-select
                             filterable
+                            multiple
                             allow-create
+                            v-model="combinedCashFlowForm.ccfOptionSelected"
                             default-first-option
                             class="oneControls"
                             placeholder="请选择">
                       <el-option
-                              v-for="item in intepolationTypeOptions"
+                              v-for="item in ccfOptionTypeOptions"
                               :key="item.key"
                               :label="item.label"
                               :value="item.value"
@@ -39,12 +41,14 @@
                   <div class="left-col2">
                     <el-select
                             filterable
+                            multiple
                             allow-create
                             default-first-option
+                            v-model="combinedCashFlowForm.currencySelected"
                             class="oneControls"
                             placeholder="请选择">
                       <el-option
-                              v-for="item in intepolationTypeOptions"
+                              v-for="item in currencyOptions"
                               :key="item.key"
                               :label="item.label"
                               :value="item.value"
@@ -122,13 +126,13 @@
                 </el-col>
                 <el-col :span="16">
                   <div class="left-col1">
-                    <el-button class="oneContorls"></el-button>
+                    <el-button type="info" class="oneContorls" disabled>金额单位及导出设置</el-button>
                   </div>
                   <div class="left-col2">
-                    <el-button class="oneContorls"></el-button>
+                    <el-button type="info" class="oneContorls" disabled>自定义期限设置</el-button>
                   </div>
                   <div class="left-col1">
-                    <el-button class="oneContorls"></el-button>
+                    <el-button type="info" class="oneContorls" disabled>查询</el-button>
                   </div>
                 </el-col>
               </el-row>
@@ -148,7 +152,41 @@
         <el-row>
           <el-col :span="6">
             <div class="box-card" style="height:400px">
-              <el-button @click="changeEchart">click me</el-button>
+              <div class="box-card-title">
+                图表选择
+              </div>
+              <el-col :span="8">
+                <div class="left-col1">选择日期</div>
+                <div class="left-col2">选择交易类型</div>
+                <div class="left-col1" style="color:transparent">a</div>
+              </el-col>
+              <el-col :span="16">
+                <div class="left-col1">
+                  <el-date-picker
+                          class="oneControls"
+                          v-model="combinedCashFlowForm.curveDate"
+                          :default-time="2019-10-15"
+                          type="date">
+                  </el-date-picker>
+                </div>
+                <div class="left-col2">
+                  <el-select
+                          filterable
+                          allow-create
+                          v-model="combinedCashFlowForm.productSelect"
+                          default-first-option
+                          class="oneControls"
+                          placeholder="请选择">
+                    <el-option
+                            :label="全选"
+                            :value="全选"
+                    ></el-option>
+                  </el-select>
+                </div>
+                <div class="left-col1">
+                  <el-button type="info" class="oneContorls" @click="changeEchart">查看曲线</el-button>
+                </div>
+              </el-col>
             </div>
           </el-col>
           <el-col :span="18">
@@ -189,19 +227,11 @@
     SavePricing
   } from '@api/index'
   import {
-    currencyPairOptions,
-    yingYeRiGuiZeOptions,
-    jiXiTianShuFangshiOptions,
-    currency1EarningCurveOptions,
-    currency2EarningCurveOptions,
-    intepolationTypeOptions,
-    curveNameOptions,
-    tradingTypeOptions,
-    tradingDirectionOptions,
+    currencyOptions,
+    ccfOptionTypeOptions
   } from '../UIPara/UIPara'
   import {
-    swapFormResult,
-    swapForm,
+    combinedCashFlowForm
   }from '../UIPara/FRTBParam'
   import echarts from 'echarts'
   export default {
@@ -275,30 +305,59 @@
           },
         ],
         ccfData:[
-
-            {"Bucket":"TODAY","BucketRowspan":"7","Date":"2012/9/25","Typology":"Total 2012-09-25","TypologSpan":"1","Instrument":"","CNY":"427835","USD":"-2339303","blank":""},
-            {"Bucket":"TODAY","BucketRowspan":"0","Date":"2012/9/25","Typology":"Bond Future","TypologSpan":"1","Instrument":"CNY BOND FUTURE 5Y","CNY":"-3990","USD":"","blank":"0"},
-            {"Bucket":"TODAY","BucketRowspan":"0","Date":"2012/9/25","Typology":"CDS","TypologSpan":"3","Instrument":"Total CDS","CNY":"441825","USD":"","blank":"0"},
-            {"Bucket":"TODAY","BucketRowspan":"0","Date":"2012/9/25","Typology":"CDS","TypologSpan":"0","Instrument":"CHINA UNICOME DEFAULT","CNY":"443325","USD":"","blank":""},
-            {"Bucket":"TODAY","BucketRowspan":"0","Date":"2012/9/25","Typology":"CDS","TypologSpan":"0","Instrument":"CHINA UNICOME LTD","CNY":"-1500","USD":"","blank":""},
-            {"Bucket":"TODAY","BucketRowspan":"0","Date":"2012/9/25","Typology":"Collar Cap","TypologSpan":"1","Instrument":"CYN SHIBOR 3M","CNY":"-10000","USD":"","blank":"0"},
-            {"Bucket":"TODAY","BucketRowspan":"0","Date":"2012/9/25","Typology":"FRA","TypologSpan":"1","Instrument":"USD 3M LIBOR","CNY":"","USD":"-2339303","blank":""},
-            {"Bucket":"TOM","BucketRowspan":"1","Date":"2012/9/26","Typology":"Bond","TypologSpan":"1","Instrument":"021001001.IB","CNY":"-1000055521","USD":"","blank":""},
-            {"Bucket":"SPOT","BucketRowspan":"4","Date":"2012/9/27","Typology":"Total 2012-09-27","TypologSpan":"1","Instrument":"","CNY":"159140","USD":"27476","blank":""},
-            {"Bucket":"SPOT","BucketRowspan":"0","Date":"2012/9/27","Typology":"Bond Future","TypologSpan":"1","Instrument":"CNY BOND FUTURE 5Y","CNY":"159140","USD":"","blank":""},
-            {"Bucket":"SPOT","BucketRowspan":"0","Date":"2012/9/27","Typology":"FRA","TypologSpan":"1","Instrument":"USD 3M LIBOR","CNY":"","USD":"-1000","blank":"0"},
-            {"Bucket":"SPOT","BucketRowspan":"0","Date":"2012/9/27","Typology":"Swaption European","TypologSpan":"1","Instrument":"USD LIBOR Q 3M","CNY":"","USD":"28476","blank":""},
-            {"Bucket":"30D","BucketRowspan":"3","Date":"2012/9/28","Typology":"Sec Lend/Borrow BD","TypologSpan":"3","Instrument":"Total Sec Lend/Borrow BD","CNY":"-20571","USD":"","blank":""},
-            {"Bucket":"30D","BucketRowspan":"0","Date":"2012/9/28","Typology":"Sec Lend/Borrow BD","TypologSpan":"0","Instrument":"CGTB 0 171020 1320","CNY":"23061","USD":"","blank":"0"},
-            {"Bucket":"30D","BucketRowspan":"0","Date":"2012/9/28","Typology":"Sec Lend/Borrow BD","TypologSpan":"0","Instrument":"CHINA 0 190115 1401","CNY":"-43733","USD":"","blank":""},
-            {"Bucket":"2M","BucketRowspan":"3","Date":"2012/10/31","Typology":"Sec Lend/Borrow BD","TypologSpan":"3","Instrument":"Total Sec Lend/Borrow BD","CNY":"-341078","USD":"","blank":""},
-            {"Bucket":"2M","BucketRowspan":"0","Date":"2012/10/31","Typology":"Sec Lend/Borrow BD","TypologSpan":"0","Instrument":"CGTB 0 171020 1320","CNY":"380514","USD":"","blank":""},
-            {"Bucket":"2M","BucketRowspan":"0","Date":"2012/10/31","Typology":"Sec Lend/Borrow BD","TypologSpan":"0","Instrument":"CHINA 0 190115 1401","CNY":"-721592","USD":"","blank":""},
-            {"Bucket":"3M","BucketRowspan":"4","Date":"2012/11/30","Typology":"Total 3M (2012-12-25)","TypologSpan":"1","Instrument":"","CNY":"-310071","USD":"-18238243","blank":""},
-            {"Bucket":"3M","BucketRowspan":"0","Date":"2012/11/30","Typology":"Sec Lend/Borrow BD","TypologSpan":"3","Instrument":"Total Sec Lend/Borrow BD","CNY":"-310071","USD":"","blank":""},
-            {"Bucket":"3M","BucketRowspan":"0","Date":"2012/11/30","Typology":"Sec Lend/Borrow BD","TypologSpan":"0","Instrument":"CGTB 0 171020 1320","CNY":"345922","USD":"","blank":""},
-            {"Bucket":"3M","BucketRowspan":"0","Date":"2012/11/30","Typology":"Sec Lend/Borrow BD","TypologSpan":"0","Instrument":"CHINA 0 190115 1401","CNY":"-655993","USD":"","blank":""},
-            {"Bucket":"3M","BucketRowspan":"1","Date":"2012/12/5","Typology":"FRA","TypologSpan":"1","Instrument":"USD 3M LIBOR","CNY":"","USD":"-18238243","blank":""},
+          {"Bucket":"TODAY","BucketRowspan":"6","Date":"2019/9/5","Typology":"Total 2019/9/5","TypologSpan":"1","Instrument":"","CNY":"95937000","USD":"148588"},
+          {"Bucket":"TODAY","BucketRowspan":"0","Date":"2019/9/5","Typology":"Bond","TypologSpan":"2","Instrument":"130234.SH","CNY":"-2000000","USD":""},
+          {"Bucket":"TODAY","BucketRowspan":"0","Date":"2019/9/5","Typology":"Bond","TypologSpan":"0","Instrument":"111790567","CNY":"-1000000","USD":""},
+          {"Bucket":"TODAY","BucketRowspan":"0","Date":"2019/9/5","Typology":"CCS","TypologSpan":"1","Instrument":"USD 3M LIBOR","CNY":"-1000000","USD":"148588"},
+          {"Bucket":"TODAY","BucketRowspan":"0","Date":"2019/9/5","Typology":"FX Option","TypologSpan":"1","Instrument":"USD 3M LIBOR","CNY":"-63000","USD":""},
+          {"Bucket":"TODAY","BucketRowspan":"0","Date":"2019/9/5","Typology":"IRS","TypologSpan":"1","Instrument":"CNY SSHIB","CNY":"100000000","USD":""},
+          {"Bucket":"TOM","BucketRowspan":"2","Date":"2019/9/6","Typology":"Total 2019/9/6","TypologSpan":"1","Instrument":"","CNY":"311370000","USD":""},
+          {"Bucket":"TOM","BucketRowspan":"0","Date":"2019/9/6","Typology":"Bond","TypologSpan":"1","Instrument":"1589044","CNY":"311370000","USD":""},
+          {"Bucket":"SPOT","BucketRowspan":"3","Date":"2019/9/6","Typology":"Total 2019/9/6","TypologSpan":"1","Instrument":"","CNY":"678000","USD":"184760"},
+          {"Bucket":"SPOT","BucketRowspan":"0","Date":"2019/9/6","Typology":"FX Swap","TypologSpan":"1","Instrument":"USD 3M LIBOR","CNY":"678000","USD":"-100000"},
+          {"Bucket":"SPOT","BucketRowspan":"0","Date":"2019/9/6","Typology":"Swaption European","TypologSpan":"1","Instrument":"USD 3M LIBOR","CNY":"","USD":"284760"},
+          {"Bucket":"1M","BucketRowspan":"2","Date":"2019/10/8","Typology":"Total 2019/10/6","TypologSpan":"1","Instrument":"","CNY":"103624000","USD":"-14916220"},
+          {"Bucket":"1M","BucketRowspan":"0","Date":"2019/10/8","Typology":"FX Fwd ","TypologSpan":"1","Instrument":"USD 3M LIBOR","CNY":"103624000","USD":"-14916220"},
+          {"Bucket":"2M","BucketRowspan":"2","Date":"2019/11/6","Typology":"Total 2019/11/6","TypologSpan":"1","Instrument":"","CNY":"","USD":"687000"},
+          {"Bucket":"2M","BucketRowspan":"0","Date":"2019/11/6","Typology":"FX Option","TypologSpan":"1","Instrument":"USD 3M LIBOR","CNY":"","USD":"687000"},
+          {"Bucket":"3M","BucketRowspan":"4","Date":"2019/12/6","Typology":"Total 2019/12/6","TypologSpan":"1","Instrument":"","CNY":"2681207","USD":"-1485.88"},
+          {"Bucket":"3M","BucketRowspan":"0","Date":"2019/12/6","Typology":"Bond","TypologSpan":"1","Instrument":"130234.SH","CNY":"600000","USD":""},
+          {"Bucket":"3M","BucketRowspan":"0","Date":"2019/12/6","Typology":"CCS","TypologSpan":"1","Instrument":"USD 3M LIBOR","CNY":"10000","USD":"-1485.88"},
+          {"Bucket":"3M","BucketRowspan":"0","Date":"2019/12/6","Typology":"IRS","TypologSpan":"1","Instrument":"CNY SSHIB","CNY":"2071207","USD":""},
+          {"Bucket":"6M","BucketRowspan":"4","Date":"2020/3/6","Typology":"Total 2020/3/6","TypologSpan":"1","Instrument":"","CNY":"2683407","USD":"-1485.88"},
+          {"Bucket":"6M","BucketRowspan":"0","Date":"2020/3/6","Typology":"Bond","TypologSpan":"1","Instrument":"130234.SH","CNY":"600000","USD":""},
+          {"Bucket":"6M","BucketRowspan":"0","Date":"2020/3/6","Typology":"CCS","TypologSpan":"1","Instrument":"","CNY":"10000","USD":"-1485.88"},
+          {"Bucket":"6M","BucketRowspan":"0","Date":"2020/3/6","Typology":"IRS","TypologSpan":"1","Instrument":"CNY SSHIB","CNY":"2073407","USD":""},
+          {"Bucket":"1Y","BucketRowspan":"7","Date":"2020/9/7","Typology":"Total 2020/9/6","TypologSpan":"1","Instrument":"","CNY":"114782487","USD":"-14867415.88"},
+          {"Bucket":"1Y","BucketRowspan":"0","Date":"2020/9/7","Typology":"Bond","TypologSpan":"2","Instrument":"130234.SH","CNY":"2600000","USD":""},
+          {"Bucket":"1Y","BucketRowspan":"0","Date":"2020/9/7","Typology":"Bond","TypologSpan":"0","Instrument":"111790567","CNY":"1035000","USD":""},
+          {"Bucket":"1Y","BucketRowspan":"0","Date":"2020/9/7","Typology":"FX Fwd ","TypologSpan":"1","Instrument":"USD 3M LIBOR","CNY":"109067580","USD":"-15300000"},
+          {"Bucket":"1Y","BucketRowspan":"0","Date":"2020/9/7","Typology":"CCS","TypologSpan":"1","Instrument":"USD 3M LIBOR","CNY":"10000","USD":"-1485.88"},
+          {"Bucket":"1Y","BucketRowspan":"0","Date":"2020/9/7","Typology":"IRS","TypologSpan":"1","Instrument":"USD 3M LIBOR","CNY":"2069907","USD":""},
+          {"Bucket":"1Y","BucketRowspan":"0","Date":"2020/9/7","Typology":"FX Option","TypologSpan":"1","Instrument":"USD 3M LIBOR","CNY":"","USD":"434070"}
+            // {"Bucket":"TODAY","BucketRowspan":"7","Date":"2012/9/25","Typology":"Total 2012-09-25","TypologSpan":"1","Instrument":"","CNY":"427835","USD":"-2339303","blank":""},
+            // {"Bucket":"TODAY","BucketRowspan":"0","Date":"2012/9/25","Typology":"Bond Future","TypologSpan":"1","Instrument":"CNY BOND FUTURE 5Y","CNY":"-3990","USD":"","blank":"0"},
+            // {"Bucket":"TODAY","BucketRowspan":"0","Date":"2012/9/25","Typology":"CDS","TypologSpan":"3","Instrument":"Total CDS","CNY":"441825","USD":"","blank":"0"},
+            // {"Bucket":"TODAY","BucketRowspan":"0","Date":"2012/9/25","Typology":"CDS","TypologSpan":"0","Instrument":"CHINA UNICOME DEFAULT","CNY":"443325","USD":"","blank":""},
+            // {"Bucket":"TODAY","BucketRowspan":"0","Date":"2012/9/25","Typology":"CDS","TypologSpan":"0","Instrument":"CHINA UNICOME LTD","CNY":"-1500","USD":"","blank":""},
+            // {"Bucket":"TODAY","BucketRowspan":"0","Date":"2012/9/25","Typology":"Collar Cap","TypologSpan":"1","Instrument":"CYN SHIBOR 3M","CNY":"-10000","USD":"","blank":"0"},
+            // {"Bucket":"TODAY","BucketRowspan":"0","Date":"2012/9/25","Typology":"FRA","TypologSpan":"1","Instrument":"USD 3M LIBOR","CNY":"","USD":"-2339303","blank":""},
+            // {"Bucket":"TOM","BucketRowspan":"1","Date":"2012/9/26","Typology":"Bond","TypologSpan":"1","Instrument":"021001001.IB","CNY":"-1000055521","USD":"","blank":""},
+            // {"Bucket":"SPOT","BucketRowspan":"4","Date":"2012/9/27","Typology":"Total 2012-09-27","TypologSpan":"1","Instrument":"","CNY":"159140","USD":"27476","blank":""},
+            // {"Bucket":"SPOT","BucketRowspan":"0","Date":"2012/9/27","Typology":"Bond Future","TypologSpan":"1","Instrument":"CNY BOND FUTURE 5Y","CNY":"159140","USD":"","blank":""},
+            // {"Bucket":"SPOT","BucketRowspan":"0","Date":"2012/9/27","Typology":"FRA","TypologSpan":"1","Instrument":"USD 3M LIBOR","CNY":"","USD":"-1000","blank":"0"},
+            // {"Bucket":"SPOT","BucketRowspan":"0","Date":"2012/9/27","Typology":"Swaption European","TypologSpan":"1","Instrument":"USD LIBOR Q 3M","CNY":"","USD":"28476","blank":""},
+            // {"Bucket":"30D","BucketRowspan":"3","Date":"2012/9/28","Typology":"Sec Lend/Borrow BD","TypologSpan":"3","Instrument":"Total Sec Lend/Borrow BD","CNY":"-20571","USD":"","blank":""},
+            // {"Bucket":"30D","BucketRowspan":"0","Date":"2012/9/28","Typology":"Sec Lend/Borrow BD","TypologSpan":"0","Instrument":"CGTB 0 171020 1320","CNY":"23061","USD":"","blank":"0"},
+            // {"Bucket":"30D","BucketRowspan":"0","Date":"2012/9/28","Typology":"Sec Lend/Borrow BD","TypologSpan":"0","Instrument":"CHINA 0 190115 1401","CNY":"-43733","USD":"","blank":""},
+            // {"Bucket":"2M","BucketRowspan":"3","Date":"2012/10/31","Typology":"Sec Lend/Borrow BD","TypologSpan":"3","Instrument":"Total Sec Lend/Borrow BD","CNY":"-341078","USD":"","blank":""},
+            // {"Bucket":"2M","BucketRowspan":"0","Date":"2012/10/31","Typology":"Sec Lend/Borrow BD","TypologSpan":"0","Instrument":"CGTB 0 171020 1320","CNY":"380514","USD":"","blank":""},
+            // {"Bucket":"2M","BucketRowspan":"0","Date":"2012/10/31","Typology":"Sec Lend/Borrow BD","TypologSpan":"0","Instrument":"CHINA 0 190115 1401","CNY":"-721592","USD":"","blank":""},
+            // {"Bucket":"3M","BucketRowspan":"4","Date":"2012/11/30","Typology":"Total 3M (2012-12-25)","TypologSpan":"1","Instrument":"","CNY":"-310071","USD":"-18238243","blank":""},
+            // {"Bucket":"3M","BucketRowspan":"0","Date":"2012/11/30","Typology":"Sec Lend/Borrow BD","TypologSpan":"3","Instrument":"Total Sec Lend/Borrow BD","CNY":"-310071","USD":"","blank":""},
+            // {"Bucket":"3M","BucketRowspan":"0","Date":"2012/11/30","Typology":"Sec Lend/Borrow BD","TypologSpan":"0","Instrument":"CGTB 0 171020 1320","CNY":"345922","USD":"","blank":""},
+            // {"Bucket":"3M","BucketRowspan":"0","Date":"2012/11/30","Typology":"Sec Lend/Borrow BD","TypologSpan":"0","Instrument":"CHINA 0 190115 1401","CNY":"-655993","USD":"","blank":""},
+            // {"Bucket":"3M","BucketRowspan":"1","Date":"2012/12/5","Typology":"FRA","TypologSpan":"1","Instrument":"USD 3M LIBOR","CNY":"","USD":"-18238243","blank":""},
         ],
         options: {
           border: true,
@@ -547,6 +606,9 @@
 
     },
         showDetailCurve:false,
+        combinedCashFlowForm:combinedCashFlowForm,
+        currencyOptions:currencyOptions,
+        ccfOptionTypeOptions:ccfOptionTypeOptions,
       }
     },
     mounted () {

@@ -41,7 +41,7 @@ export default {
       name: 'bond',
       meta: {
         title: 'Bond',
-        auth: false
+        auth: true
       },
       component: () => import('@/pages/frtb/bond/index')
     },
@@ -50,7 +50,7 @@ export default {
       name: 'swaption',
       meta: {
         title: 'Swaption',
-        auth: false
+        auth: true
       },
       component: () => import('@/pages/frtb/swaption/index')
     },
@@ -59,7 +59,7 @@ export default {
       name: 'fxdigitaloption',
       meta: {
         title: 'FX Digital Option',
-        auth: false
+        auth: true
       },
       component: () => import('@/pages/frtb/fxdigitaloption/index')
     },
@@ -68,16 +68,25 @@ export default {
       name: 'combinedcashflow',
       meta: {
         title: 'Combined Cash Flow',
-        auth: false
+        auth: true
       },
       component: () => import('@/pages/frtb/combinedcashflow/index')
+    },
+    {
+      path: 'potofolioanalysis',
+      name: 'potofolioanalysis',
+      meta: {
+        title: '组合头寸分析',
+        auth: true
+      },
+      component: () => import('@/pages/frtb/potofolioanalysis/index')
     },
     {
       path: 'senarioAnalysis',
       name: 'senarioAnalysis',
       meta: {
         title: 'Senario Analysis',
-        auth: false
+        auth: true
       },
       component: () => import('@/pages/frtb/senarioAnalysis/index')
     },
@@ -86,7 +95,7 @@ export default {
       name: 'attribution',
       meta: {
         title: 'Attribution',
-        auth: false
+        auth: true
       },
       component: () => import('@/pages/frtb/attribution/index')
     },

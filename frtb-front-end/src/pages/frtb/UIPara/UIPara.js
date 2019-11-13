@@ -215,6 +215,7 @@ export var currencyOptions=[
     value:'美元',
   },
 ];
+
 export var jiXiFangShiOptions=[
   {
     key:'单利',  label:'单利', value:'单利',
@@ -300,6 +301,59 @@ export var digitalOptionTypeOptions=[
       },
 
 ]
+export var ccfOptionTypeOptions=[
+    {
+      key:'全选 ', label:'全选', value:'全选',
+    },
+    {
+        key:'FX Fwd ', label:'FX Fwd', value:'FX Fwd',
+    },
+    {
+      key:'Bond', label:'Bond', value:'Bond',
+    },
+    {
+      key:'CCS', label:'CCS', value:'CCS',
+    },
+    {
+      key:'IRS', label:'IRS', value:'IRS',
+    },
+    {
+      key:'FX Option', label:'FX Option', value:'FX Option',
+    },
+    {
+      key:'FX Swap', label:'FX Swap', value:'FX Swap',
+    },
+]
+
+export var positionCombinationOptions=[
+  {
+    key:'全选 ', label:'全选', value:'全选',
+  },
+
+]
+
+export var jiaoYiDuiShouOptions=[
+  {
+    key:'全选 ', label:'全选', value:'全选',
+  },
+
+]
+export var bondCombinationOptions=[
+  {
+    key:'全选 ', label:'全选', value:'全选',
+  },
+
+]
+export var productTypeCombinationOptions=[
+  {
+    key:'汇率类 ', label:'汇率类', value:'汇率类',
+  },
+  {
+    key:'利率类 ', label:'利率类', value:'利率类',
+  },
+]
+
+
 ///////////////////////////////////
 
 

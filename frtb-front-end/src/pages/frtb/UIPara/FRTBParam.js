@@ -278,11 +278,28 @@ export var digitaloptionForm={
         waiBiDaoJiQiJiaGe:'0'
 }
 export var digitaloptionResultForm={
-    NPV:'0',
+        NPV:'0',
         Vega:'0',
         Delta:'0',
         Theta:'0',
         Gamma:'0',
         Rho1:'0',
         Rho2:'0',
+}
+
+export var combinedCashFlowForm = {
+    curveDate:Date.now(),
+    productSelect:'',
+    ccfOptionSelected:['全选'],
+    currencySelected:['美元','人民币'],
+
+}
+export var cashPositionForm ={
+    pricingDate: Date.now(),
+    positionCombination:'',
+    jiaoYiDuiShou:'',
+    currencyPair:'',
+    boundCode:'',
+    boundType:'',
+    tradingType:'汇率类',
 }

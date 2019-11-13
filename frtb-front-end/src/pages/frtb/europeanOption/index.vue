@@ -2241,7 +2241,7 @@
                 </div>
                 <div style="margin:20px 0px 20px 0px">
                     <el-row>
-                        <el-col :span="4"><el-button style="margin-left:40px" type="info" class="curvebutton" @click="calcNPV">计算NPV</el-button></el-col>
+                        <el-col :span="4"><el-button style="margin-left:40px" type="info" class="curvebutton" @click="calcNPV">计算PV</el-button></el-col>
                         <el-col :span="4"><el-button style="margin-left:40px" type="info" class="curvebutton">倒算行权价</el-button></el-col>
                         <el-col :span="4"><el-button style="margin-left:40px" type="info" class="curvebutton">清空</el-button></el-col>
                         <el-col :span="4"><el-button style="margin-left:40px" type="info" icon='el-icon-circle-plus-outline' class="curvebutton" @click="addLegs">增加Leg</el-button></el-col>
@@ -2699,7 +2699,7 @@
             { 'x': 3, 'y': 13, 'w': 9, 'h': 15.5, 'i': '4' },
           ],
           colNum: 12,
-          rowHeight: 81,
+          rowHeight: 89,
           isDraggable: false,
           isResizable: false,
           isMirrored: false,
