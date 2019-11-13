@@ -2,7 +2,7 @@
   <d2-container :filename="filename" type="full" class="page" better-scroll>
     <d2-grid-layout
             v-bind="layout">
-          <div class="box-card" style="height:900px">
+          <div class="box-card" style="height:1272px">
           <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
             <el-tab-pane label="外汇资产头寸分析" name="foreignPosition">
                 <el-row>
@@ -97,26 +97,27 @@
                 </div>
                 </el-row>
                 <el-row>
-                    <el-col :span="11">
-                        <div>头寸金额 （USD/CNY）</div>
+                    <el-col :span="12">
+                        <div style="margin:50px 0 50px 10px">头寸金额 （USD/CNY）</div>
                         <div>
                         <d2-crud
-                                style="height:400px;overflow: auto"
-                                ref="d2Crud"
+                                style="margin:auto;height:450px;width:95%;overflow: auto"
+                                ref="d2Crud8"
                                 :columns="cashPostionCols"
                                 :data="cashPostionData"
                                 :options="options"/>
                         </div>
                     </el-col>
-                    <el-col :span="2">
-                        <div style="color:transparent">a</div>
-                    </el-col>
-                    <el-col :span="11">
-                        <div>汇率 （USD/CNY）</div>
+<!--                    <el-col :span="2">-->
+<!--                        <div style="color:transparent">a</div>-->
+<!--                    </el-col>-->
+                    <el-col :span="12">
+                        <div style="margin:50px 0 50px 10px">汇率 （USD/CNY）</div>
                         <div>
                             <d2-crud
-                                    style="height:400px;overflow: auto"
-                                    ref="d2Crud"
+                                    style="margin:auto;height:450px;width:95%;overflow: auto"
+                                    ref="d2Crud9"
+                                    width="95%"
                                     :columns="exchangeRateCols"
                                     :data="exchangeRateData"
                                     :options="options"/>
@@ -195,28 +196,6 @@
                         </el-col>
                         <el-col :span="4">
                             <el-col :span="7">
-                                <div class="left-col1">债券代码</div>
-                            </el-col>
-                            <el-col :span="17">
-                                <div class="left-col1" >
-                                    <el-select
-                                            filterable
-                                            allow-create
-                                            default-first-option
-                                            class="oneContorls" v-model="cashPositionForm.boundType" placeholder="选择组合">
-                                        <el-option
-                                                class="oneContorls"
-                                                v-for="item in bondCombinationOptions"
-                                                :key="item.key"
-                                                :label="item.label"
-                                                :value="item.value"
-                                        ></el-option>
-                                    </el-select>
-                                </div>
-                            </el-col>
-                        </el-col>
-                        <el-col :span="4">
-                            <el-col :span="7">
                                 <div class="left-col1">债券类型</div>
                             </el-col>
                             <el-col :span="17">
@@ -238,6 +217,28 @@
                             </el-col>
                         </el-col>
                         <el-col :span="4">
+                            <el-col :span="7">
+                                <div class="left-col1">评级</div>
+                            </el-col>
+                            <el-col :span="17">
+                                <div class="left-col1" >
+                                    <el-select
+                                            filterable
+                                            allow-create
+                                            default-first-option
+                                            class="oneContorls" v-model="cashPositionForm.boundRating" placeholder="选择组合">
+                                        <el-option
+                                                class="oneContorls"
+                                                v-for="item in ratingOptions"
+                                                :key="item.key"
+                                                :label="item.label"
+                                                :value="item.value"
+                                        ></el-option>
+                                    </el-select>
+                                </div>
+                            </el-col>
+                        </el-col>
+                        <el-col :span="4">
                             <div class="left-col1" >
                                 <el-button class="oneControls" type="info"@click="cashAnalysis">分析</el-button>
                             </div>
@@ -247,8 +248,8 @@
                 <el-row>
                     <div style="margin-top: 20px">
                         <d2-crud
-                                style="height:400px;overflow: auto"
-                                ref="d2Crud"
+                                style="margin:auto;width:95%;height:800px;overflow: auto"
+                                ref="d2Crud1"
                                 :columns="bondPostionCols"
                                 :data="bondPostionData"
                                 :options="options"/>
@@ -336,8 +337,8 @@
                         FX Delta
                     </div>
                     <d2-crud
-                            style="height:260px;overflow: auto"
-                            ref="d2Crud"
+                            style="margin:auto;width:95%;height:450px;overflow: auto"
+                            ref="d2Crud2"
                             :columns="capitalPostionColsDelta"
                             :data="capitalPostionDataDelta"
                             :options="options"/>
@@ -345,8 +346,8 @@
                         FX Gamma
                     </div>
                     <d2-crud
-                            style="height:260px;overflow: auto"
-                            ref="d2Crud"
+                            style="margin:auto;width:95%;height:450px;overflow: auto"
+                            ref="d2Crud3"
                             :columns="capitalPostionColsGamma"
                             :data="capitalPostionDataGamma"
                             :options="options"/>
@@ -354,23 +355,42 @@
                         FX Vega
                     </div>
                     <d2-crud
-                            style="height:260px;overflow: auto"
-                            ref="d2Crud"
+                            style="margin:auto;width:95%;height:450px;overflow: auto"
+                            ref="d2Crud4"
                             :columns="capitalPostionColsVega"
                             :data="capitalPostionDataVega"
                             :options="options"/>
                 </div>
                 <div style="margin-top: 20px" v-if="cashPositionForm.tradingType==='利率类'">
+                    <div style="text-align: center;">
+                        PV01
+                    </div>
                     <d2-crud
-                            style="height:400px;overflow: auto"
-                            ref="d2Crud"
-                            :columns="interestPositionCols"
-                            :data="interestPositionData"
+                            style="margin:auto;width:95%;height:415px;overflow: auto"
+                            ref="d2Crud5"
+                            :columns="interestPositionPVCols"
+                            :data="interestPositionPVData"
+                            :options="options"
+                     />
+                    <div style="text-align: center;">
+                        IR Gamma
+                    </div>
+                    <d2-crud
+                            style="margin:auto;width:95%;height:415px;overflow: auto"
+                            ref="d2Crud6"
+                            :columns="interestPostionGammaCols"
+                            :data="interestPostionGammaData"
+                            :options="options"/>
+                    <div style="text-align: center;">
+                        IR Vega
+                    </div>
+                    <d2-crud
+                            style="margin:auto;width:95%;height:415px;overflow: auto"
+                            ref="d2Crud7"
+                            :columns="interestPositionVegaCols"
+                            :data="interestPositionVegaData"
                             :options="options"/>
                 </div>
-                <el-row>
-
-                </el-row>
             </el-tab-pane>
           </el-tabs>
 
@@ -391,6 +411,7 @@ import {
     currencyPairOptions,
     bondCombinationOptions,
     productTypeCombinationOptions,
+    ratingOptions
 } from '../UIPara/UIPara'
 import {
     cashPositionForm
@@ -414,7 +435,7 @@ export default {
           { 'x': 3, 'y': 13, 'w': 9, 'h': 15.5, 'i': '4' },
         ],
         colNum: 12,
-        rowHeight: 30,
+        rowHeight: 42,
         isDraggable: false,
         isResizable: false,
         isMirrored: false,
@@ -430,6 +451,7 @@ export default {
 
         bondCombinationOptions:bondCombinationOptions,
         productTypeCombinationOptions:productTypeCombinationOptions,
+        ratingOptions:ratingOptions,
 
         activeName:'foreignPosition',
         cashPostionCols:[
@@ -502,6 +524,33 @@ export default {
                 {"Tenor":"1Y","Bid":"-284","Ask":"-274","Implied IR":"1.821"}],
         options:{
             border: true,
+            rowStyle(row) {
+                if (row.rowIndex % 2 === 0) {
+                    return "height:30px; background-color:#312E30;  text-align: left;color: white; border:0px; font-size: 16px";
+                } else {
+                    return "height:30px; background-color:#454754;  text-align: left;color: white; border:0px; font-size: 16px";
+                }
+            },
+            headerCellStyle(row) {
+                return "height:30px; background-color:#454754;  text-align: left;color: white; border:0px; font-size: 16px";
+            },
+        },
+        optionsSpan:{
+            border: true,
+            spanMethod ({ row, column, rowIndex, columnIndex }) {
+                var colspannum=1
+                var rowspannum=1
+                if (columnIndex === 0) {
+                    rowspannum=parseInt(row.Curr_span)
+                    if(rowspannum ===0 ){
+                        colspannum=0
+                    }
+                    return{
+                        rowspan:rowspannum,
+                        colspan:colspannum
+                    }
+                } //endif
+            },//end span
             rowStyle(row) {
                 if (row.rowIndex % 2 === 0) {
                     return "height:30px; background-color:#312E30;  text-align: left;color: white; border:0px; font-size: 16px";
@@ -692,29 +741,29 @@ export default {
 
         },
         bondPostionCols:[
-            {"key":"all","title":""},
-            {"key":"投资组合","title":"投资组合"},
-            {"key":"评级","title":"评级"},
-            {"key":"交易日","title":"交易日"},
-            {"key":"到期日","title":"到期日"},
-            {"key":"币种","title":"币种"},
-            {"key":"面额","title":"面额"},
-            {"key":"市场净价","title":"市场净价"},
-            {"key":"全价市值","title":"全价市值"},
-            {"key":"比例","title":"比例"},
-            {"key":"息票率(%)","title":"息票率(%)"},
-            {"key":"收益率(%)","title":"收益率(%)"},
-            {"key":"收益率(%)（Long）","title":"收益率(%)（Long）"},
-            {"key":"收益率(%)（Short)","title":"收益率(%)（Short)"},
-            {"key":"待偿期","title":"待偿期"},
-            {"key":"PV01","title":"PV01"},
-            {"key":"麦氏久期","title":"麦氏久期"},
-            {"key":"麦氏久期(Long)","title":"麦氏久期(Long)"},
-            {"key":"麦氏久期(Short)","title":"麦氏久期(Short)"},
-            {"key":"修正久期","title":"修正久期"},
-            {"key":"凸性","title":"凸性"},
-            {"key":"麦氏凸性","title":"麦氏凸性"},
-            {"key":"VaR","title":"VaR"},
+            {key:"all",title:""},
+            {key:"投资组合",title:"投资组合"},
+            {key:"评级",title:"评级"},
+            {key:"交易日",title:"交易日"},
+            {key:"到期日",title:"到期日"},
+            {key:"币种",title:"币种"},
+            {key:"面额",title:"面额"},
+            {key:"市场净价",title:"市场净价"},
+            {key:"全价市值",title:"全价市值"},
+            {key:"比例",title:"比例"},
+            {key:"息票率(%)",title:"息票率(%)"},
+            {key:"收益率(%)",title:"收益率(%)"},
+            {key:"收益率(%)（Long）",title:"收益率(%)（Long）"},
+            {key:"收益率(%)（Short)",title:"收益率(%)（Short)"},
+            {key:"待偿期",title:"待偿期"},
+            {key:"PV01",title:"PV01"},
+            {key:"麦氏久期",title:"麦氏久期"},
+            {key:"麦氏久期(Long)",title:"麦氏久期(Long)"},
+            {key:"麦氏久期(Short)",title:"麦氏久期(Short)"},
+            {key:"修正久期",title:"修正久期"},
+            {key:"凸性",title:"凸性"},
+            {key:"麦氏凸性",title:"麦氏凸性"},
+            {key:"VaR",title:"VaR"},
         ],
         bondPostionData:[
             {"all":"合计","投资组合":"","评级":"","交易日":"","到期日":"","币种":"","面额":"280,000,000.00","市场净价":"","全价市值":"282,312,000.00","比例":"","息票率(%)":"","收益率(%)":"","收益率(%)（Long）":"","收益率(%)（Short)":"","待偿期":"","PV01":"","麦氏久期":"","麦氏久期(Long)":"","麦氏久期(Short)":"","修正久期":"","凸性":"","麦氏凸性":"","VaR":""},
@@ -727,229 +776,161 @@ export default {
         ],
 
         capitalPostionColsDelta: [
-            {"key": "Tenor", "title": "Tenor"},
-            {"key": "Total", "title": "Total"},
-            {"key": "1M", "title": "1M"},
-            {"key": "3M", "title": "3M"},
-            {"key": "6M", "title": "6M"},
-            {"key": "9M", "title": "9M"},
-            {"key": "1Y", "title": "1Y"},
-            {"key": "2Y", "title": "2Y"},
+                {key:"Tenor",title:"Tenor"},
+                {key:"AUD",title:"AUD"},
+                {key:"CAD",title:"CAD"},
+                {key:"CHF",title:"CHF"},
+                {key:"CNY",title:"CNY"},
+                {key:"EUR",title:"EUR"},
+                {key:"JPY",title:"JPY"},
+                {key:"SGD",title:"SGD"},
         ],
-        capitalPostionDataDelta: [
-            {
-                "Tenor": "AUD",
-                "Total": "-3063870",
-                "1M": "-2998384",
-                "3M": "-65486",
-                "6M": "",
-                "9M": "",
-                "1Y": "",
-                "2Y": ""
-            },
-            {
-                "Tenor": "CAD",
-                "Total": "-21993604",
-                "1M": "-21846249",
-                "3M": "-147355",
-                "6M": "",
-                "9M": "",
-                "1Y": "",
-                "2Y": ""
-            },
-            {"Tenor": "CHF", "Total": "399071", "1M": "176181", "3M": "222890", "6M": "", "9M": "", "1Y": "", "2Y": ""},
-            {
-                "Tenor": "CNY",
-                "Total": "228815656",
-                "1M": "564003267",
-                "3M": "2535517",
-                "6M": "19994591",
-                "9M": "44579828",
-                "1Y": "-406491452",
-                "2Y": "4193905"
-            },
-            {
-                "Tenor": "EUR",
-                "Total": "-2998931",
-                "1M": "-2867865",
-                "3M": "-131066",
-                "6M": "",
-                "9M": "",
-                "1Y": "",
-                "2Y": ""
-            },
-            {
-                "Tenor": "JPY",
-                "Total": "-268844475",
-                "1M": "-260072026",
-                "3M": "-16496219",
-                "6M": "2839654",
-                "9M": "4884116",
-                "1Y": "",
-                "2Y": ""
-            },
-            {
-                "Tenor": "SGD",
-                "Total": "-1180369",
-                "1M": "-1311492",
-                "3M": "131123",
-                "6M": "",
-                "9M": "",
-                "1Y": "",
-                "2Y": ""
-            },
+        capitalPostionDataDelta:[
+            {"Tenor":"Total","AUD":"-3063870","CAD":"-21993604","CHF":"399071","CNY":"228815656","EUR":"-2998931","JPY":"-268844475","SGD":"-1180369"},
+            {"Tenor":"1M","AUD":"-2998384","CAD":"-21846249","CHF":"176181","CNY":"564003267","EUR":"-2867865","JPY":"-260072026","SGD":"-1311492"},
+            {"Tenor":"3M","AUD":"-65486","CAD":"-147355","CHF":"222890","CNY":"2535517","EUR":"-131066","JPY":"-16496219","SGD":"131123"},
+            {"Tenor":"6M","AUD":"","CAD":"","CHF":"","CNY":"19994591","EUR":"","JPY":"2839654","SGD":""},
+            {"Tenor":"9M","AUD":"","CAD":"","CHF":"","CNY":"44579828","EUR":"","JPY":"4884116","SGD":""},
+            {"Tenor":"1Y","AUD":"","CAD":"","CHF":"","CNY":"-406491452","EUR":"","JPY":"","SGD":""},
+            {"Tenor":"2Y","AUD":"","CAD":"","CHF":"","CNY":"4193905","EUR":"","JPY":"","SGD":""},
+
         ],
 
         capitalPostionColsGamma: [
-            {"key": "Tenor", "title": "Tenor"},
-            {"key": "Total", "title": "Total"},
-            {"key": "1M", "title": "1M"},
-            {"key": "3M", "title": "3M"},
-            {"key": "6M", "title": "6M"},
-            {"key": "9M", "title": "9M"},
-            {"key": "1Y", "title": "1Y"},
-            {"key": "2Y", "title": "2Y"},
+            {key:"Tenor",title:"Tenor"},
+            {key:"AUD",title:"AUD"},
+            {key:"CAD",title:"CAD"},
+            {key:"CHF",title:"CHF"},
+            {key:"CNY",title:"CNY"},
+            {key:"EUR",title:"EUR"},
+            {key:"JPY",title:"JPY"},
+            {key:"SGD",title:"SGD"},
         ],
-        capitalPostionDataGamma: [
-            {
-                "Tenor": "AUD",
-                "Total": "-167647",
-                "1M": "-7450",
-                "3M": "-11585",
-                "6M": "-19604",
-                "9M": "-26497",
-                "1Y": "-56038",
-                "2Y": "-46473"
-            },
-            {
-                "Tenor": "CAD",
-                "Total": "-100302",
-                "1M": "-2655",
-                "3M": "-5025",
-                "6M": "-7479",
-                "9M": "-9902",
-                "1Y": "-28768",
-                "2Y": "-46473"
-            },
-            {
-                "Tenor": "CHF",
-                "Total": "-26561",
-                "1M": "-1783",
-                "3M": "-2532",
-                "6M": "-4920",
-                "9M": "-6298",
-                "1Y": "-11028",
-                "2Y": ""
-            },
-            {
-                "Tenor": "CNY",
-                "Total": "-40784",
-                "1M": "-3012",
-                "3M": "-4028",
-                "6M": "-7205",
-                "9M": "-10297",
-                "1Y": "-16242",
-                "2Y": ""
-            },
-            {
-                "Tenor": "EUR",
-                "Total": "70537",
-                "1M": "42105",
-                "3M": "-2070",
-                "6M": "-69712",
-                "9M": "99050",
-                "1Y": "1164",
-                "2Y": ""
-            },
-            {
-                "Tenor": "JPY",
-                "Total": "55772",
-                "1M": "33288",
-                "3M": "-1637",
-                "6M": "-55106",
-                "9M": "78305",
-                "1Y": "922",
-                "2Y": ""
-            },
-            {
-                "Tenor": "SGD",
-                "Total": "14765",
-                "1M": "8817",
-                "3M": "-433",
-                "6M": "-14606",
-                "9M": "20745",
-                "1Y": "242",
-                "2Y": ""
-            },
+        capitalPostionDataGamma:[
+            {"Tenor":"Total","AUD":"-167647","CAD":"-100302","CHF":"-26561","CNY":"-40784","EUR":"70537","JPY":"55772","SGD":"14765"},
+            {"Tenor":"1M","AUD":"-7450","CAD":"-2655","CHF":"-1783","CNY":"-3012","EUR":"42105","JPY":"33288","SGD":"8817"},
+            {"Tenor":"3M","AUD":"-11585","CAD":"-5025","CHF":"-2532","CNY":"-4028","EUR":"-2070","JPY":"-1637","SGD":"-433"},
+            {"Tenor":"6M","AUD":"-19604","CAD":"-7479","CHF":"-4920","CNY":"-7205","EUR":"-69712","JPY":"-55106","SGD":"-14606"},
+            {"Tenor":"9M","AUD":"-26497","CAD":"-9902","CHF":"-6298","CNY":"-10297","EUR":"99050","JPY":"78305","SGD":"20745"},
+            {"Tenor":"1Y","AUD":"-56038","CAD":"-28768","CHF":"-11028","CNY":"-16242","EUR":"1164","JPY":"922","SGD":"242"},
+            {"Tenor":"2Y","AUD":"-46473","CAD":"-46473","CHF":"","CNY":"","EUR":"","JPY":"","SGD":""},
+
         ],
         capitalPostionColsVega: [
-            {"key": "Vol", "title": "Vol"},
-            {"key": "Total", "title": "Total"},
-            {"key": "0.5", "title": "0.5"},
-            {"key": "0.75", "title": "0.75"},
-            {"key": "1", "title": "1"},
-            {"key": "5", "title": "5"},
-            {"key": "6", "title": "6"},
-
+            {key:"Vol",title:"Vol"},
+            {key:"AUD",title:"AUD"},
+            {key:"CAD",title:"CAD"},
+            {key:"CHF",title:"CHF"},
+            {key:"CNY",title:"CNY"},
+            {key:"EUR",title:"EUR"},
+            {key:"JPY",title:"JPY"},
+            {key:"SGD",title:"SGD"},
         ],
-        capitalPostionDataVega: [
-
-            {"Vol": "AUD", "Total": "62002", "0.5": "13958", "0.75": "19572", "1": "28472", "5": "", "6": ""},
-            {"Vol": "CAD", "Total": "86168", "0.5": "", "0.75": "3574", "1": "", "5": "82594", "6": ""},
-            {"Vol": "CHF", "Total": "56636", "0.5": "41102", "0.75": "10402", "1": "5132", "5": "", "6": ""},
-            {"Vol": "CNY", "Total": "137026", "0.5": "2411", "0.75": "42104", "1": "5102", "5": "2847", "6": "84562"},
-            {"Vol": "EUR", "Total": "25900", "0.5": "", "0.75": "", "1": "2455", "5": "", "6": "23445"},
-            {"Vol": "JPY", "Total": "4888", "0.5": "2543", "0.75": "", "1": "2345", "5": "", "6": ""},
-            {"Vol": "SGD", "Total": "67105", "0.5": "", "0.75": "32452", "1": "34653", "5": "", "6": ""},
-
+        capitalPostionDataVega:[
+            {"Vol":"Total","AUD":"62002","CAD":"86168","CHF":"56636","CNY":"137026","EUR":"25900","JPY":"4888","SGD":"67105"},
+            {"Vol":"0.5","AUD":"13958","CAD":"","CHF":"41102","CNY":"2411","EUR":"","JPY":"2543","SGD":""},
+            {"Vol":"0.75","AUD":"19572","CAD":"3574","CHF":"10402","CNY":"42104","EUR":"","JPY":"","SGD":"32452"},
+            {"Vol":"1","AUD":"28472","CAD":"","CHF":"5132","CNY":"5102","EUR":"2455","JPY":"2345","SGD":"34653"},
+            {"Vol":"5","AUD":"","CAD":"82594","CHF":"","CNY":"2847","EUR":"","JPY":"","SGD":""},
+            {"Vol":"6","AUD":"","CAD":"","CHF":"","CNY":"84562","EUR":"23445","JPY":"","SGD":""},
         ],
-
-        interestPositionCols:[
-            {"key":"col1","title":""},
-            {"key":"col2","title":""},
-            {"key":"col3","title":""},
-            {"key":"col4","title":""},
-            {"key":"col5","title":""},
-            {"key":"col6","title":""},
-            {"key":"col7","title":""},
-            {"key":"col8","title":""},
-            {"key":"col9","title":""},
-            {"key":"col10","title":""},
-            {"key":"col11","title":""},
-            {"key":"col12","title":""},
-            {"key":"col13","title":""},
-
+        interestPositionPVCols:[
+            {
+                key:'Tenor',title:'Tenor'
+            },
+            {
+                title:'CNY',
+                children:[
+                    {key:"totalCNY",title:""},
+                    {key:"CNY FR007",title:"CNY FR007"},
+                    {key:"CNY SHIBOR",title:"CNY SHIBOR"},
+                    {key:"CNY FX ONSHORE",title:"CNY FX ONSHORE"},
+                   ]
+            },
+            {
+                title:'USD',
+                children:[
+                    {key:"totalUSD",title:" "},
+                    {key:"USD LIBOR",title:"USD LIBOR"},
+                    {key:"USD FX ONSHORE",title:"USD FX ONSHORE"},
+                ]
+            }
         ],
-        interestPositionData:[
-            {"col1":"2","col2":"2","col3":"2","col4":"","col5":"","col6":"","col7":"PV01","col8":"","col9":"","col10":"","col11":"","col12":"","col13":""},
-            // {"col1":"","col2":"Tenor","col3":"O/N","col4":"1W","col5":"1M","col6":"3M","col7":"6M","col8":"9M","col9":"1Y","col10":"2Y","col11":"3Y","col12":"5Y","col13":"10Y"},
-            // {"col1":"CNY","col2":"","col3":"-127","col4":"-227","col5":"-744","col6":"-1157","col7":"-1959","col8":"-2648","col9":"-5602","col10":"-4647","col11":"-6302","col12":"-8584","col13":"-11865"},
-            // {"col1":"","col2":"CNY FR007","col3":"-52","col4":"-84","col5":"-265","col6":"-502","col7":"-747","col8":"-990","col9":"-2876","col10":"-4647","col11":"-6302","col12":"-8584","col13":"-11865"},
-            // {"col1":"","col2":"CNY SHIBOR","col3":"-23","col4":"-58","col5":"-178","col6":"-253","col7":"-492","col8":"-629","col9":"-1102","col10":"","col11":"","col12":"","col13":""},
-            // {"col1":"","col2":"CNY FX ONSHORE","col3":"-52","col4":"-85","col5":"-301","col6":"-402","col7":"-720","col8":"-1029","col9":"-1624","col10":"","col11":"","col12":"","col13":""},
-            // {"col1":"USD","col2":"","col3":"-641","col4":"1406","col5":"4209","col6":"-206","col7":"-6970","col8":"9904","col9":"116","col10":"","col11":"","col12":"","col13":""},
-            // {"col1":"","col2":"USD LIBOR","col3":"-507","col4":"1112","col5":"3328","col6":"-163","col7":"-5510","col8":"7830","col9":"92","col10":"","col11":"","col12":"","col13":""},
-            // {"col1":"","col2":"USD FX ONSHORE","col3":"-134","col4":"294","col5":"881","col6":"-43","col7":"-1460","col8":"2074","col9":"24","col10":"","col11":"","col12":"","col13":""},
-            // {"col1":"","col2":"","col3":"","col4":"","col5":"","col6":"","col7":"IR Gamma","col8":"","col9":"","col10":"","col11":"","col12":"","col13":""},
-            // {"col1":"","col2":"Tenor","col3":"O/N","col4":"1W","col5":"1M","col6":"3M","col7":"6M","col8":"9M","col9":"1Y","col10":"2Y","col11":"3Y","col12":"5Y","col13":"10Y"},
-            // {"col1":"CNY","col2":"","col3":"-1284","col4":"-2279","col5":"-7450","col6":"-11585","col7":"-19604","col8":"-26497","col9":"-56038","col10":"-46473","col11":"-63023","col12":"-85848","col13":"-118656"},
-            // {"col1":"","col2":"CNY FR007","col3":"-523","col4":"-842","col5":"-2655","col6":"-5025","col7":"-7479","col8":"-9902","col9":"-28768","col10":"-46473","col11":"-63023","col12":"-85848","col13":"-118656"},
-            // {"col1":"","col2":"CNY SHIBOR","col3":"-234","col4":"-585","col5":"-1783","col6":"-2532","col7":"-4920","col8":"-6298","col9":"-11028","col10":"","col11":"","col12":"","col13":""},
-            // {"col1":"","col2":"CNY FX ONSHORE","col3":"-527","col4":"-852","col5":"-3012","col6":"-4028","col7":"-7205","col8":"-10297","col9":"-16242","col10":"","col11":"","col12":"","col13":""},
-            // {"col1":"USD","col2":"","col3":"-6420","col4":"14070","col5":"42105","col6":"-2070","col7":"-69712","col8":"99050","col9":"1164","col10":"","col11":"","col12":"","col13":""},
-            // {"col1":"","col2":"USD LIBOR","col3":"-5071","col4":"11128","col5":"33288","col6":"-1637","col7":"-55106","col8":"78305","col9":"922","col10":"","col11":"","col12":"","col13":""},
-            // {"col1":"","col2":"USD FX ONSHORE","col3":"-1349","col4":"2942","col5":"8817","col6":"-433","col7":"-14606","col8":"20745","col9":"242","col10":"","col11":"","col12":"","col13":""},
-            // {"col1":"","col2":"","col3":"","col4":"","col5":"","col6":"","col7":"IR Vega","col8":"","col9":"","col10":"","col11":"","col12":"","col13":""},
-            // {"col1":"","col2":"Vol","col3":"Total","col4":"0.65","col5":"0.9","col6":"1","col7":"5","col8":"6","col9":"","col10":"","col11":"","col12":"","col13":""},
-            // {"col1":"CNY","col2":"","col3":"2447","col4":"1139","col5":"1308","col6":"","col7":"","col8":"","col9":"","col10":"","col11":"","col12":"","col13":""},
-            // {"col1":"","col2":"CNY SHIBOR","col3":"2447","col4":"1139","col5":"1308","col6":"","col7":"","col8":"","col9":"","col10":"","col11":"","col12":"","col13":""},
-            // {"col1":"USD","col2":"","col3":"358","col4":"","col5":"","col6":"411","col7":"-104","col8":"51","col9":"","col10":"","col11":"","col12":"","col13":""},
-            // {"col1":"","col2":"USD LIBOR","col3":"358","col4":"","col5":"","col6":"411","col7":"-104","col8":"51","col9":"","col10":"","col11":"","col12":"","col13":""},
+        interestPositionPVData:[
+            {"Tenor":"ON","totalCNY":"-127","CNY FR007":"-52","CNY SHIBOR":"-23","CNY FX ONSHORE":"-52","totalUSD":"-641","USD LIBOR":"-507","USD FX ONSHORE":"-134"},
+            {"Tenor":"1W","totalCNY":"-227","CNY FR007":"-84","CNY SHIBOR":"-58","CNY FX ONSHORE":"-85","totalUSD":"1406","USD LIBOR":"1112","USD FX ONSHORE":"294"},
+            {"Tenor":"1M","totalCNY":"-744","CNY FR007":"-265","CNY SHIBOR":"-178","CNY FX ONSHORE":"-301","totalUSD":"4209","USD LIBOR":"3328","USD FX ONSHORE":"881"},
+            {"Tenor":"3M","totalCNY":"-1157","CNY FR007":"-502","CNY SHIBOR":"-253","CNY FX ONSHORE":"-402","totalUSD":"-206","USD LIBOR":"-163","USD FX ONSHORE":"-43"},
+            {"Tenor":"6M","totalCNY":"-1959","CNY FR007":"-747","CNY SHIBOR":"-492","CNY FX ONSHORE":"-720","totalUSD":"-6970","USD LIBOR":"-5510","USD FX ONSHORE":"-1460"},
+            {"Tenor":"9M","totalCNY":"-2648","CNY FR007":"-990","CNY SHIBOR":"-629","CNY FX ONSHORE":"-1029","totalUSD":"9904","USD LIBOR":"7830","USD FX ONSHORE":"2074"},
+            {"Tenor":"1Y","totalCNY":"-5602","CNY FR007":"-2876","CNY SHIBOR":"-1102","CNY FX ONSHORE":"-1624","totalUSD":"116","USD LIBOR":"92","USD FX ONSHORE":"24"},
+            {"Tenor":"2Y","totalCNY":"-4647","CNY FR007":"-4647","CNY SHIBOR":"","CNY FX ONSHORE":"","totalUSD":"","USD LIBOR":"","USD FX ONSHORE":""},
+            {"Tenor":"3Y","totalCNY":"-6302","CNY FR007":"-6302","CNY SHIBOR":"","CNY FX ONSHORE":"","totalUSD":"","USD LIBOR":"","USD FX ONSHORE":""},
+            {"Tenor":"5Y","totalCNY":"-8584","CNY FR007":"-8584","CNY SHIBOR":"","CNY FX ONSHORE":"","totalUSD":"","USD LIBOR":"","USD FX ONSHORE":""},
+            {"Tenor":"10Y","totalCNY":"-11865","CNY FR007":"-11865","CNY SHIBOR":"","CNY FX ONSHORE":"","totalUSD":"","USD LIBOR":"","USD FX ONSHORE":""},
         ],
-
-
-
-
+        interestPostionGammaCols:[
+            {
+                key:'Tenor',title:'Tenor'
+            },
+            {
+                title:'CNY',
+                children:[
+                    {key:"totalCNY",title:""},
+                    {key:"CNY FR007",title:"CNY FR007"},
+                    {key:"CNY SHIBOR",title:"CNY SHIBOR"},
+                    {key:"CNY FX ONSHORE",title:"CNY FX ONSHORE"},
+                ]
+            },
+            {
+                title:'USD',
+                children:[
+                    {key:"totalUSD",title:" "},
+                    {key:"USD LIBOR",title:"USD LIBOR"},
+                    {key:"USD FX ONSHORE",title:"USD FX ONSHORE"},
+                ]
+            }
+        ],
+        interestPostionGammaData:[
+                {"Tenor":"O/N","totalCNY":"-1284","CNY FR007":"-523","CNY SHIBOR":"-234","CNY FX ONSHORE":"-527","totalUSD":"-6420","USD LIBOR":"-5071","USD FX ONSHORE":"-1349"},
+                {"Tenor":"1W","totalCNY":"-2279","CNY FR007":"-842","CNY SHIBOR":"-585","CNY FX ONSHORE":"-852","totalUSD":"14070","USD LIBOR":"11128","USD FX ONSHORE":"2942"},
+                {"Tenor":"1M","totalCNY":"-7450","CNY FR007":"-2655","CNY SHIBOR":"-1783","CNY FX ONSHORE":"-3012","totalUSD":"42105","USD LIBOR":"33288","USD FX ONSHORE":"8817"},
+                {"Tenor":"3M","totalCNY":"-11585","CNY FR007":"-5025","CNY SHIBOR":"-2532","CNY FX ONSHORE":"-4028","totalUSD":"-2070","USD LIBOR":"-1637","USD FX ONSHORE":"-433"},
+                {"Tenor":"6M","totalCNY":"-19604","CNY FR007":"-7479","CNY SHIBOR":"-4920","CNY FX ONSHORE":"-7205","totalUSD":"-69712","USD LIBOR":"-55106","USD FX ONSHORE":"-14606"},
+                {"Tenor":"9M","totalCNY":"-26497","CNY FR007":"-9902","CNY SHIBOR":"-6298","CNY FX ONSHORE":"-10297","totalUSD":"99050","USD LIBOR":"78305","USD FX ONSHORE":"20745"},
+                {"Tenor":"1Y","totalCNY":"-56038","CNY FR007":"-28768","CNY SHIBOR":"-11028","CNY FX ONSHORE":"-16242","totalUSD":"1164","USD LIBOR":"922","USD FX ONSHORE":"242"},
+                {"Tenor":"2Y","totalCNY":"-46473","CNY FR007":"-46473","CNY SHIBOR":"","CNY FX ONSHORE":"","totalUSD":"","USD LIBOR":"","USD FX ONSHORE":""},
+                {"Tenor":"3Y","totalCNY":"-63023","CNY FR007":"-63023","CNY SHIBOR":"","CNY FX ONSHORE":"","totalUSD":"","USD LIBOR":"","USD FX ONSHORE":""},
+                {"Tenor":"5Y","totalCNY":"-85848","CNY FR007":"-85848","CNY SHIBOR":"","CNY FX ONSHORE":"","totalUSD":"","USD LIBOR":"","USD FX ONSHORE":""},
+                {"Tenor":"10Y","totalCNY":"-118656","CNY FR007":"-118656","CNY SHIBOR":"","CNY FX ONSHORE":"","totalUSD":"","USD LIBOR":"","USD FX ONSHORE":""},
+        ],
+        interestPositionVegaCols:[
+            {
+                key:'Vol',title:'Vol'
+            },
+            {
+                title:'CNY',
+                children:[
+                    {key:"totalCNY",title:""},
+                     {key:"CNY SHIBOR",title:"CNY SHIBOR"},
+                ]
+            },
+            {
+                title:'USD',
+                children:[
+                    {key:"totalUSD",title:" "},
+                    {key:"USD LIBOR",title:"USD LIBOR"},
+                ]
+            }
+        ],
+        interestPositionVegaData:[
+            {"Vol":"Total","totalCNY":"2447","CNY SHIBOR":"2447","totalUSD":"358","USD LIBOR":"358"},
+            {"Vol":"0.65","totalCNY":"1139","CNY SHIBOR":"1139","totalUSD":"","USD LIBOR":""},
+            {"Vol":"0.9","totalCNY":"1308","CNY SHIBOR":"1308","totalUSD":"","USD LIBOR":""},
+            {"Vol":"1","totalCNY":"","CNY SHIBOR":"","totalUSD":"411","USD LIBOR":"411"},
+            {"Vol":"5","totalCNY":"","CNY SHIBOR":"","totalUSD":"-104","USD LIBOR":"-104"},
+            {"Vol":"6","totalCNY":"","CNY SHIBOR":"","totalUSD":"51","USD LIBOR":"51"},
+        ],
         echartsleft: null,
         echartsright: null,
 
@@ -1067,5 +1048,7 @@ export default {
 </style>
 
 <style lang="scss" >
-
+    .d2-crud .el-table--enable-row-hover .el-table__body tr:hover>td{
+        background-color: #222222;
+    }
 </style>

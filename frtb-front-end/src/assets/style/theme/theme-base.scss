@@ -161,7 +161,13 @@
 .col-dummy {
   color:transparent;
 }
+.box-card .el-tabs__item {
+  height: 40px !important;
+  line-height: 40px !important;
+  color: white !important;
+  font-size: 20px !important;
 
+}
 // 整体框架结构
 .d2-layout-header-aside-group {
   height: 100%;

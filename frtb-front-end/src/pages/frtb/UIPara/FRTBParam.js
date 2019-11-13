@@ -289,17 +289,23 @@ export var digitaloptionResultForm={
 
 export var combinedCashFlowForm = {
     curveDate:Date.now(),
-    productSelect:'',
+    productSelect:'全选',
     ccfOptionSelected:['全选'],
     currencySelected:['美元','人民币'],
-
+    startDate:Date.now(),
+    tradingType:'全选',
+    endDate:Date.now(),
+    displayWay:['品种','日期'],
+    managePeriod:'标准期限'
 }
 export var cashPositionForm ={
     pricingDate: Date.now(),
-    positionCombination:'',
-    jiaoYiDuiShou:'',
-    currencyPair:'',
-    boundCode:'',
+    positionCombination:'全选',
+    jiaoYiDuiShou:'全选',
+    currencyPair:'USD/CNY',
+    boundCode:'全选',
     boundType:'',
+
+    boundRating:'AAA',
     tradingType:'汇率类',
 }

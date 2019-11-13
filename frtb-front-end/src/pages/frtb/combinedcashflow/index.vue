@@ -58,6 +58,7 @@
                   <div class="left-col1">
                     <el-date-picker
                             class="oneControls"
+                            v-model="combinedCashFlowForm.startDate"
                             placeholder="选择日期"
                             type="date">
                     </el-date-picker>
@@ -65,6 +66,7 @@
                   <div class="left-col2">
                     <el-date-picker
                             class="oneControls"
+                            v-model="combinedCashFlowForm.endDate"
                             placeholder="选择日期"
                             type="date"
                     >
@@ -76,9 +78,10 @@
                             allow-create
                             default-first-option
                             class="oneContorls"
+                            v-model="combinedCashFlowForm.tradingType"
                             placeholder="请选择">
                       <el-option
-                              v-for="item in intepolationTypeOptions"
+                              v-for="item in ccfOptionTypeOptions"
                               :key="item.key"
                               :label="item.label"
                               :value="item.value"
@@ -91,12 +94,11 @@
                             allow-create
                             default-first-option
                             class="oneContorls"
+                            v-model="combinedCashFlowForm.managePeriod"
                             placeholder="请选择">
                       <el-option
-                              v-for="item in intepolationTypeOptions"
-                              :key="item.key"
-                              :label="item.label"
-                              :value="item.value"
+                              :label="标准期限"
+                              :value="标准期限"
                       ></el-option>
                     </el-select>
                   </div>
@@ -104,11 +106,13 @@
                     <el-select
                             filterable
                             allow-create
+                            multiple
                             default-first-option
+                            v-model="combinedCashFlowForm.displayWay"
                             class="oneContorls"
                             placeholder="请选择">
                       <el-option
-                              v-for="item in intepolationTypeOptions"
+                              v-for="item in ccfDisplayWayOptions"
                               :key="item.key"
                               :label="item.label"
                               :value="item.value"
@@ -228,7 +232,9 @@
   } from '@api/index'
   import {
     currencyOptions,
-    ccfOptionTypeOptions
+    ccfDisplayWayOptions,
+    ccfOptionTypeOptions,
+
   } from '../UIPara/UIPara'
   import {
     combinedCashFlowForm
@@ -609,6 +615,7 @@
         combinedCashFlowForm:combinedCashFlowForm,
         currencyOptions:currencyOptions,
         ccfOptionTypeOptions:ccfOptionTypeOptions,
+        ccfDisplayWayOptions:ccfDisplayWayOptions
       }
     },
     mounted () {
