@@ -337,7 +337,7 @@
                         FX Delta
                     </div>
                     <d2-crud
-                            style="margin:auto;width:95%;height:450px;overflow: auto"
+                            style="margin:auto;width:95%;height:350px;overflow: auto"
                             ref="d2Crud2"
                             :columns="capitalPostionColsDelta"
                             :data="capitalPostionDataDelta"
@@ -346,7 +346,7 @@
                         FX Gamma
                     </div>
                     <d2-crud
-                            style="margin:auto;width:95%;height:450px;overflow: auto"
+                            style="margin:auto;width:95%;height:350px;overflow: auto"
                             ref="d2Crud3"
                             :columns="capitalPostionColsGamma"
                             :data="capitalPostionDataGamma"
@@ -355,7 +355,7 @@
                         FX Vega
                     </div>
                     <d2-crud
-                            style="margin:auto;width:95%;height:450px;overflow: auto"
+                            style="margin:auto;width:95%;height:350px;overflow: auto"
                             ref="d2Crud4"
                             :columns="capitalPostionColsVega"
                             :data="capitalPostionDataVega"
