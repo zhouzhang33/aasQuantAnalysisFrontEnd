@@ -16,6 +16,7 @@
         <el-col :span="12">
           <div class="box-card-title">
             <span>交易要素</span>
+            <span style="margin-left:90px"> <el-button class="oneContorls" type="info" @click="showBondComaprison"> 相关债券比 </el-button>  </span>
           </div>
           <div class="my-block">
             <el-col :span="4">
@@ -174,7 +175,7 @@
           <div class="box-card-title" >
             <span>定价参数</span>
           </div>
-          <div class="my-block">
+          <div class="my-block" style="margin-top:19px">
           <el-col :span="5">
             <div class="left-col1">首次基准利率重置日</div>
             <div class="left-col2">基准利率重置频率</div>
@@ -396,7 +397,7 @@
                     </el-input-number>
                 </div>
                 <div class="left-col2" >
-                  <el-button type="info" class="oneContorls">查看折现曲线</el-button>
+                  <el-button type="info" class="oneContorls" @click="showDiscountCurve">查看折现曲线</el-button>
                 </div>
               </el-col>
             </el-col>
@@ -566,6 +567,27 @@
           </div>
         </el-dialog>
       </div>
+      <div>
+        <el-dialog
+                :visible.sync="bondCompareVisible"
+                :append-to-body="true"
+                width="95%"
+        >
+          <bondComparison v-if="bondShowEarningCurveVisible===0"  />
+          <bondCurve v-else-if="bondShowEarningCurveVisible===1" />
+          <bondDiscountCurve v-else />
+        </el-dialog>
+      </div>
+<!--      <div>-->
+<!--        <el-dialog-->
+<!--          :visible.sync="bondShowEarningCurveVisible"-->
+<!--          :append-to-body="true"-->
+<!--          width="70%">-->
+<!--          <bondCurve/>-->
+<!--        </el-dialog>-->
+
+
+<!--      </div>-->
 
 
     </d2-grid-layout>
@@ -591,11 +613,14 @@ import {
   bondResultForm,
   bondForm
 } from '../UIPara/FRTBParam'
-
-
+import bondComparison from "./bondComparison"
+import bondCurve from "./bondEarningCurve"
+import bondDiscountCurve from "./bondDiscountCurve";
   export default {
     components: {
-
+      bondComparison,
+      bondCurve,
+      bondDiscountCurve
     },
     data () {
       return {
@@ -659,20 +684,34 @@ import {
         xiPiaoLeiXingOptions:xiPiaoLeiXingOptions,
         fuXiPinLVOptions:fuXiPinLVOptions,
         bondResultForm:bondResultForm,
-        bondForm:bondForm
+        bondForm:bondForm,
+
+        bondCompareVisible:false,
+        bondShowEarningCurveVisible:0
+
+
       }
     },
     mounted () {
     },
     methods: {
+      showBondComaprison(){
+        this.bondShowEarningCurveVisible = 0
+        this.bondCompareVisible = true
+      },
    // API
       compareResult(){
         console.log('compareResult')
       },
       showEarningCurve(){
+        this.bondShowEarningCurveVisible = 1
+        this.bondCompareVisible = true
         console.log('showEarningCurve')
       },
-
+      showDiscountCurve(){
+        this.bondShowEarningCurveVisible = 2
+        this.bondCompareVisible = true
+      },
       calcPricing() {
         console.log('call pricing')
         getBondPricingResult('NPV',this.bondForm).then(res => {

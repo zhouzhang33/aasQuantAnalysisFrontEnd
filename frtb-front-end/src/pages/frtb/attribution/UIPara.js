@@ -16,6 +16,12 @@ export var displayOptions=[
     },
 ];
 
+export var touzuOptions=[
+    {
+        key: 'TRADING', label: 'TRADING', value: 'TRADING',
+    },
+];
+
 export var jiXiTianShuFangshiOptions=[
     {
         key:'ACT/365',
