@@ -4,8 +4,10 @@
             v-bind="layout"
             @layout-updated="layoutUpdatedHandler">
       <div>
-          <el-col :span="6">
+        <el-col :span="6">
+          <div class='box-card' style="height:890px">
             <el-row>
+<<<<<<< HEAD
               <div class='box-card' style="height:790px">
                 <div class="box-card-title">
                   查询条件
@@ -99,7 +101,12 @@
                       </div>
                     </el-col>
                 </el-row>
+=======
+              <div class="box-card-title">
+                查询条件
+>>>>>>> branch 'master' of http://114.67.93.212:8721/gitlab/aas/aas.git
               </div>
+<<<<<<< HEAD
             </el-row>
             <el-row>
               <el-col span="12">
@@ -406,11 +413,102 @@
                         </el-table-column>
                       </el-table>
                     </div>
+=======
+                <el-col :span="8">
+                  <div class="left-col1-attr">投组</div>
+                  <div class="left-col2-attr">货币</div>
+                  <div class="left-col1-attr">起始日</div>
+                  <div class="left-col2-attr">结束日</div>
+                  <div class="left-col1-attr">交易品种</div>
+                  <div class="left-col2-attr">展示方式</div>
+                </el-col>
+                <el-col :span="16">
+                  <div class="left-col1-attr">
+                    <el-select
+                            filterable
+                            allow-create
+                            default-first-option
+                            class="oneControls-attr"
+                            v-model="productStatus.investPair"
+                            placeholder="请选择">
+                      <el-option
+                              v-for="item in touzuOptions"
+                              :key="item.key"
+                              :label="item.label"
+                              :value="item.value"
+                      ></el-option>
+                    </el-select>
+                  </div>
+                  <div class="left-col2-attr">
+                    <el-select
+                            filterable
+                            allow-create
+                            default-first-option
+                            class="oneControls-attr"
+                            v-model="productStatus.currency"
+                            placeholder="请选择">
+                      <el-option
+                              v-for="item in currencyOptions"
+                              :key="item.key"
+                              :label="item.label"
+                              :value="item.value"
+                      ></el-option>
+                    </el-select>
+                  </div>
+                  <div class="left-col1-attr">
+                    <el-date-picker
+                            class="oneControls-attr"
+                            placeholder="选择日期"
+                            v-model="productStatus.startDate"
+                            type="date">
+                    </el-date-picker>
+                  </div>
+                  <div class="left-col2-attr">
+                    <el-date-picker
+                            class="oneControls-attr"
+                            placeholder="选择日期"
+                            v-model="productStatus.endDate"
+                            type="date"
+                    >
+                    </el-date-picker>
+                  </div>
+                  <div class="left-col1-attr">
+                    <el-select
+                            filterable
+                            allow-create
+                            default-first-option
+                            class="oneControls-attr"
+                            v-model="productStatus.isUsed"
+                            placeholder="请选择">
+                      <el-option
+                              v-for="item in productTypes"
+                              :key="item.key"
+                              :label="item.label"
+                              :value="item.value"
+                      ></el-option>
+                    </el-select>
+                  </div>
+                  <div class="left-col2-attr">
+                    <el-select
+                            filterable
+                            allow-create
+                            default-first-option
+                            class="oneControls-attr"
+                            v-model="productStatus.htDisplay"
+                            placeholder="请选择">
+                      <el-option
+                              v-for="item in displayOptions"
+                              :key="item.key"
+                              :label="item.label"
+                              :value="item.value"
+                      ></el-option>
+                    </el-select>
+>>>>>>> branch 'master' of http://114.67.93.212:8721/gitlab/aas/aas.git
                   </div>
                 </el-col>
-              </div>
             </el-row>
             <el-row>
+<<<<<<< HEAD
               <div v-show="productStatus.htDisplay != ''">
                 <el-col span="8">
                   <div v-show="productStatus.isUsed === 'FXFWDSwap'">
@@ -431,15 +529,354 @@
                   <div v-show="productStatus.isUsed === 'FXDigitalOption'">
                     <el-button type="info" class="box-card-attr" @click="showDPPartDigital">结束日损益占比分析</el-button>
                   </div>
+=======
+              <div class="my-block" style="margin-top:50px">
+<!--                <el-col :span="4">-->
+<!--                  <div style="color:transparent">a</div>-->
+<!--                </el-col>-->
+                <el-col :span="12">
+                  <el-button type="info" class="oneControls-attr" @click="calPLResults">查询</el-button>
+>>>>>>> branch 'master' of http://114.67.93.212:8721/gitlab/aas/aas.git
                 </el-col>
-                <el-col span="8">
-                  <el-button type="info" class="box-card-attr" @click="showContinousDP">区间连续日损益分析</el-button>
-                </el-col>
-                <el-col span="8">
-                  <el-button type="info" class="box-card-attr" @click="showPNL">区间损益归因分析</el-button>
+                <el-col :span="12">
+                  <el-button type="info" class="oneControls-attr" @click="clearPLResults">清空</el-button>
                 </el-col>
               </div>
             </el-row>
+          </div>
+        </el-col>
+
+          <el-col :span="18">
+            <div class="box-card" style="height:890px">
+              <el-row>
+                <div>
+                   <div style="padding:30px">
+                      <div class="box-card-title-white" v-show="productStatus.htDisplay === '损失分布数据表'">
+                        <span>损益分布数据表</span>
+                      </div>
+                      <div class="box-card" style="height:790px" v-show="displayData === false && productStatus.htDisplay === '损失分布数据表'">
+                        <el-table
+                                :border="true"
+                                :data="IniGeneralData"
+                                :cell-style="rowstyle"
+                                :header-cell-style="headerstyle"
+                                @select=""
+                                style="width:100%"
+                        >
+                          <el-table-column
+                                  fixed
+                                  type="selection"
+                                  width="80px"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="投组群组"
+                                  prop="投组群组"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="总损益"
+                                  prop="总损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="已实现损益"
+                                  prop="已实现损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="浮动盈亏"
+                                  prop="浮动盈亏"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="结束日日损益"
+                                  prop="结束日日损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="结束日月损益"
+                                  prop="结束日月损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="结束日年损益"
+                                  prop="结束日年损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="结束日已实现损益"
+                                  prop="结束日已实现损益"
+                          >
+                          </el-table-column>
+                        </el-table>
+                      </div>
+                      <div class="box-card" style="height:790px" v-show="productStatus.isUsed==='' && productStatus.htDisplay === '损失分布数据表' && displayData === true">
+                        <el-table
+                                :border="true"
+                                :data="IniGeneralData"
+                                :cell-style="rowstyle"
+                                :header-cell-style="headerstyle"
+                                style="width:100%"
+                        >
+                          <el-table-column
+                                  fixed
+                                  type="selection"
+                                  width="80px"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="投组群组"
+                                  prop="投组群组"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="总损益"
+                                  prop="总损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="已实现损益"
+                                  prop="已实现损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="浮动盈亏"
+                                  prop="浮动盈亏"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="结束日日损益"
+                                  prop="结束日日损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="结束日月损益"
+                                  prop="结束日月损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="结束日年损益"
+                                  prop="结束日年损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="结束日已实现损益"
+                                  prop="结束日已实现损益"
+                          >
+                          </el-table-column>
+                        </el-table>
+                      </div>
+                      <div class="box-card" style="height:790px" v-show="productStatus.isUsed==='FXFWDSwap' && productStatus.htDisplay === '损失分布数据表'&& displayData === true">
+                        <el-table
+                                :border="true"
+                                :data="GeneralDataSwap"
+                                :cell-style="rowstyle"
+                                :header-cell-style="headerstyle"
+                                style="width:100%"
+                                @select="interestialogTableVisible=true"
+                                height="790"
+                        >
+                          <el-table-column
+                                  fixed
+                                  type="selection"
+                                  width="80px"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="投组群组"
+                                  prop="投组群组"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="总损益"
+                                  prop="总损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="已实现损益"
+                                  prop="已实现损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="浮动盈亏"
+                                  prop="浮动盈亏"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="结束日日损益"
+                                  prop="结束日日损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="结束日月损益"
+                                  prop="结束日月损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="结束日年损益"
+                                  prop="结束日年损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="结束日已实现损益"
+                                  prop="结束日已实现损益"
+                          >
+                          </el-table-column>
+                        </el-table>
+                      </div>
+                      <div class="box-card" style="height:790px" v-show="productStatus.isUsed==='FXEuropeanOption' && productStatus.htDisplay === '损失分布数据表'&& displayData === true">
+                        <el-table
+                                :border="true"
+                                :data="GeneralDataEuroOpt"
+                                :cell-style="rowstyle"
+                                :header-cell-style="headerstyle"
+                                style="width:100%"
+                                @select="interestialogTableVisible=true"
+                                height="790"
+                        >
+                          <el-table-column
+                                  fixed
+                                  type="selection"
+                                  width="80px"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="投组群组"
+                                  prop="投组群组"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="总损益"
+                                  prop="总损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="已实现损益"
+                                  prop="已实现损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="浮动盈亏"
+                                  prop="浮动盈亏"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="结束日日损益"
+                                  prop="结束日日损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="结束日月损益"
+                                  prop="结束日月损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="结束日年损益"
+                                  prop="结束日年损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="结束日已实现损益"
+                                  prop="结束日已实现损益"
+                          >
+                          </el-table-column>
+                        </el-table>
+                      </div>
+                      <div class="box-card" style="height:790px" v-show="productStatus.isUsed==='IRSCCS' && productStatus.htDisplay === '损失分布数据表'&& displayData === true">
+                        <el-table
+                                :border="true"
+                                :data="GeneralDataIRSCCS"
+                                :cell-style="rowstyle"
+                                :header-cell-style="headerstyle"
+                                style="width:100%"
+                                @select="interestialogTableVisible=true"
+                                height="790"
+                        >
+                          <el-table-column
+                                  fixed
+                                  type="selection"
+                                  width="80px"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="投组群组"
+                                  prop="投组群组"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="总损益"
+                                  prop="总损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="已实现损益"
+                                  prop="已实现损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="浮动盈亏"
+                                  prop="浮动盈亏"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="结束日日损益"
+                                  prop="结束日日损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="结束日月损益"
+                                  prop="结束日月损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="结束日年损益"
+                                  prop="结束日年损益"
+                          >
+                          </el-table-column>
+                          <el-table-column
+                                  label="结束日已实现损益"
+                                  prop="结束日已实现损益"
+                          >
+                          </el-table-column>
+                        </el-table>
+                      </div>
+                    </div>
+                </div>
+              </el-row>
+              <el-row>
+                <div v-show="productStatus.htDisplay != ''">
+                  <div class="my-block" style="margin-left:50px">
+                    <el-col :span="8">
+                      <div v-show="productStatus.isUsed === 'FXFWDSwap'">
+                        <el-button type="info" class="box-card-attr" @click="showDPPartSWAP">结束日损益占比分析</el-button>
+                      </div>
+                      <div v-show="productStatus.isUsed === 'FXEuropeanOption'">
+                        <el-button type="info" class="box-card-attr" @click="showDPPartEUROPT">结束日损益占比分析</el-button>
+                      </div>
+                      <div v-show="productStatus.isUsed === 'IRSCCS'">
+                        <el-button type="info" class="box-card-attr" @click="showDPPartIRS">结束日损益占比分析</el-button>
+                      </div>
+                      <div v-show="productStatus.isUsed === 'Bond'">
+                        <el-button type="info" class="box-card-attr" @click="showDPPartBond">结束日损益占比分析</el-button>
+                      </div>
+                      <div v-show="productStatus.isUsed === 'Swaption'">
+                        <el-button type="info" class="box-card-attr" @click="showDPPartSWPT">结束日损益占比分析</el-button>
+                      </div>
+                      <div v-show="productStatus.isUsed === 'FXDigitalOption'">
+                        <el-button type="info" class="box-card-attr" @click="showDPPartDigital">结束日损益占比分析</el-button>
+                      </div>
+                    </el-col>
+                    <el-col :span="8">
+                      <el-button type="info" class="box-card-attr" @click="showContinousDP">区间连续日损益分析</el-button>
+                    </el-col>
+                    <el-col :span="8">
+                      <el-button type="info" class="box-card-attr" @click="showPNL">区间损益归因分析</el-button>
+                    </el-col>
+                  </div>
+                </div>
+              </el-row>
+            </div>
           </el-col>
         </div>
 
@@ -680,9 +1117,17 @@ export default {
       echartConPDSWAP1:echartConPDSWAP1,
       currentRow: null,
       myechart:null,
-      productStatus: {
+      dialogNameDPPart:null,
+      dialogNameConDP:null,
+      dialogNamePNL:null,
+
+    productStatus: {
         isUsed: '',
         htDisplay:'',
+        investPair:'TRADING',
+        currency:'人民币',
+        startDate:Date.now(),
+        endDate:Date.now(),
       },
 
       IniGeneralData:[
@@ -966,20 +1411,21 @@ export default {
   font-size:16px;
   color:white;
 }
-.oneContorls-attr {
+.oneControls-attr {
   width:190px;
 }
 .tradeInfoButton-attr{
   width:190px;
 }
 .box-card-attr {
-  /*margin: 5px;*/
-  border-radius: 5px;
-  padding: 5px;
-  //background-color: #2c2c41;
-  background-color: #333333;
-  color: white;
-  margin: -100px 2px 0px 350px;
+  /*<!--!*margin: 5px;*!-->*/
+  /*<!--border-radius: 5px;-->*/
+  /*<!--padding: 5px;-->*/
+  /*<!--//background-color: #2c2c41;-->*/
+  /*<!--background-color: #333333;-->*/
+  /*<!--color: white;-->*/
+  /*<!--margin: -100px 2px 0px 350px;-->*/
+
 }
 </style>
 

@@ -334,6 +334,14 @@ export var digitalOptionTypeOptions=[
       },
 
 ]
+export var ccfDisplayWayOptions=[
+  {
+    key:'品种', label:'品种', value:'品种',
+  },
+  {
+    key:'日期', label:'日期', value:'日期',
+  }
+]
 export var ccfOptionTypeOptions=[
     {
       key:'全选 ', label:'全选', value:'全选',
@@ -385,8 +393,14 @@ export var productTypeCombinationOptions=[
     key:'利率类 ', label:'利率类', value:'利率类',
   },
 ]
-
-
+export var ratingOptions=[
+  {
+    key:'AAA ', label:'AAA', value:'AAA',
+  },
+  {
+    key:'AAA- ', label:'AAA-', value:'AAA-',
+  },
+]
 ///////////////////////////////////
 
 

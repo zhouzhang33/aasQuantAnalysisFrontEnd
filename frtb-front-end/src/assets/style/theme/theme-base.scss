@@ -93,7 +93,12 @@
   color: white;
   margin: 0px 5px 0px 5px;
 }
-
+.box-card-title-white {
+  margin: 5px 5px;
+  font-size: 20px;
+  color: white;
+  // text-align: center;
+}
 .box-card-title {
   margin: 5px 5px;
   font-size: 20px;
@@ -161,7 +166,13 @@
 .col-dummy {
   color:transparent;
 }
+.box-card .el-tabs__item {
+  height: 40px !important;
+  line-height: 40px !important;
+  color: white !important;
+  font-size: 20px !important;
 
+}
 // 整体框架结构
 .d2-layout-header-aside-group {
   height: 100%;

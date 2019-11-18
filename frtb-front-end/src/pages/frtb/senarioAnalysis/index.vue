@@ -6,385 +6,385 @@
 
         <div>
           <el-col :span="4">
-            <el-row>
-              <div class="right-column">
-                <div class='box-card' style="height:925px">
-                  <div class="box-card-title">
-                    交易类型选取
+            <div class='box-card' style="height:925px">
+              <div class="box-card-title">
+                交易类型选取
+              </div>
+              <div class="my-block">
+                <el-row>
+                  <div class='left-col'>
+                    <el-checkbox-button v-model="isSwap" @click="clickSwap">外汇远掉期
+                    </el-checkbox-button>
                   </div>
-                  <el-col>
-                    <div class="right-col-s">
-                      <div class="box-card-title">
-                        <el-checkbox-button class="controls-a-line-attr" v-model="isSwap" @click="clickSwap">外汇远掉期</el-checkbox-button>
-                      </div>
+                  <div class='left-col'>
+                    <el-checkbox-button  v-model="isEuropeanOption"
+                                        @click="clickEuropeanOption">外汇欧式期权
+                    </el-checkbox-button>
+                  </div>
+                  <div class='left-col'>
+                    <el-checkbox-button v-model="isIrsCcs" @click="clickIrsCcs">
+                      IRS/CCS
+                    </el-checkbox-button>
+                  </div>
+                  <div class='left-col'>
+                    <el-checkbox-button v-model="isBond" @click="clickBond">债券
+                    </el-checkbox-button>
+                  </div>
+                </el-row>
+                <el-row>
+                  <div class='left-col'>
+                    <el-button type="info" class="tradeInfoButton" @click="chooseTrading">选取交易</el-button>
+                  </div>
+                </el-row>
+              </div>
+            </div>
+
+
+          </el-col>
+
+          <el-col :span="9">
+            <div class='box-card' style="height:925px">
+              <el-row>
+                <div v-show="isSwap === true">
+
+                  <div style="padding:30px">
+                    <div class="box-card-title-white">
+                      <span>外汇远掉期风险因子设定</span>
                     </div>
-                    <div class="right-col-s">
-                      <div class="box-card-title">
-                        <el-checkbox-button class="controls-a-line-attr" v-model="isEuropeanOption" @click="clickEuropeanOption">外汇欧式期权</el-checkbox-button>
+                    <el-col :span="12">
+                      <div class="left-col1-s">风险因子</div>
+                      <div class="left-col2-s">变动幅度</div>
+                    </el-col>
+                    <el-col :span="12">
+                      <div class="left-col1-s">
+                        <el-select
+                                class="oneContorls"
+                                v-model="swapScenario.RiskType"
+                                placeholder="请选择">
+                          <el-option
+                                  v-for="item in swapScenarioOptions"
+                                  :key="item.key"
+                                  :label="item.label"
+                                  :value="item.value"
+                          ></el-option>
+                        </el-select>
                       </div>
+                      <div class="left-col2-s">
+                        <el-input-number
+                                :controls="false"
+                                class="oneContorls"
+                                v-model="swapScenario.Change"
+                        >
+                        </el-input-number>
+                      </div>
+                    </el-col>
+                  </div>
+
+                </div>
+              </el-row>
+              <div class="middle-col">
+                <el-row>
+                  <div v-show="isEuropeanOption === true">
+                    <div style="padding:30px">
+                      <div class="box-card-title-white">
+                        <span>外汇欧式期权风险因子设定</span>
+                      </div>
+                      <el-col :span="12">
+                        <div class="left-col1-s">风险因子</div>
+                        <div class="left-col2-s">变动幅度</div>
+                      </el-col>
+                      <el-col :span="12">
+                        <div class="left-col1-s">
+                          <el-select
+                                  class="oneContorls"
+                                  v-model="europeanOptionScenario.RiskType"
+                                  placeholder="请选择">
+                            <el-option
+                                    v-for="item in europeanOptionScenarioOptions"
+                                    :key="item.key"
+                                    :label="item.label"
+                                    :value="item.value"
+                            ></el-option>
+                          </el-select>
+                        </div>
+                        <div class="left-col2-s">
+                          <el-input-number
+                                  :controls="false"
+                                  class="oneContorls"
+                                  v-model="europeanOptionScenario.Change"
+                          >
+                          </el-input-number>
+                        </div>
+                      </el-col>
                     </div>
-                    <div class="right-col-s">
-                      <div class="box-card-title">
-                        <el-checkbox-button class="controls-a-line-attr" v-model="isIrsCcs" @click="clickIrsCcs">IRS/CCS</el-checkbox-button>
+                  </div>
+                </el-row>
+              </div>
+              <div class="middle-col">
+                <el-row>
+                  <div v-show="isIrsCcs === true">
+                    <div style="padding:30px">
+                      <div class="box-card-title-white">
+                        <span>IRS/CCS风险因子设定</span>
                       </div>
+                      <el-col :span="12">
+                        <div class="left-col1-s">风险因子</div>
+                        <div class="left-col2-s">变动幅度</div>
+                      </el-col>
+                      <el-col :span="12">
+                        <div class="left-col1-s">
+                          <el-select
+                                  class="oneContorls"
+                                  v-model="irsccsScenario.RiskType"
+                                  placeholder="请选择">
+                            <el-option
+                                    v-for="item in irsccsScenarioOptions"
+                                    :key="item.key"
+                                    :label="item.label"
+                                    :value="item.value"
+                            ></el-option>
+                          </el-select>
+                        </div>
+                        <div class="left-col2-s">
+                          <el-input-number
+                                  :controls="false"
+                                  class="oneContorls"
+                                  v-model="irsccsScenario.Change"
+                          >
+                          </el-input-number>
+                        </div>
+                      </el-col>
                     </div>
-                    <div class="right-col-s">
-                      <div class="box-card-title">
-                        <el-checkbox-button class="controls-a-line-attr" v-model="isBond" @click="clickBond">债券</el-checkbox-button>
+                  </div>
+                </el-row>
+              </div>
+              <div class="middle-col">
+                <el-row>
+                  <div v-show="isBond === true">
+                    <div style="padding:30px">
+                      <div class="box-card-title-white">
+                        <span>债券风险因子设定</span>
                       </div>
+                      <el-col :span="12">
+                        <div class="left-col1-s">风险因子</div>
+                        <div class="left-col2-s">变动幅度</div>
+                      </el-col>
+                      <el-col :span="12">
+                        <div class="left-col1-s">
+                          <el-select
+                                  class="oneContorls"
+                                  v-model="bondScenario.RiskType"
+                                  placeholder="请选择">
+                            <el-option
+                                    v-for="item in bondScenarioOptions"
+                                    :key="item.key"
+                                    :label="item.label"
+                                    :value="item.value"
+                            ></el-option>
+                          </el-select>
+                        </div>
+                        <div class="left-col2-s">
+                          <el-input-number
+                                  :controls="false"
+                                  class="oneContorls"
+                                  v-model="bondScenario.Change"
+                          >
+                          </el-input-number>
+                        </div>
+                      </el-col>
+                    </div>
+                  </div>
+                </el-row>
+              </div>
+              <div v-show="isSwap===true||isEuropeanOption===true||isIrsCcs===true||isBond===true">
+                <el-row>
+                  <el-button style='margin-top:154px' class="controls-a-line-attr-btm">开始计算</el-button>
+                </el-row>
+              </div>
+            </div>
+
+          </el-col>
+
+          <el-col :span="11">
+            <div class="box-card" style="height: 925px">
+              <div v-show="isSwap===true">
+                  <el-col :span="24">
+                    <div style="padding:30px">
+                      <div class="box-card-title-white">
+                        <span>外汇远掉期情景计算结果</span>
+                      </div>
+                      <el-table
+                              :data="fxSneData"
+                              :cell-style="rowstyle"
+                              :header-cell-style="headerstyle"
+                              style="width:100%"
+                      >
+                        <el-table-column
+                                label="NPV"
+                                prop="NPV"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                                label="PV1"
+                                prop="PV1"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                                label="PV2"
+                                prop="PV2"
+                        >
+                        </el-table-column>
+                      </el-table>
+                    </div>
+                  </el-col>
+              </div>
+              <div v-show="isEuropeanOption===true">
+                <div style="margin-top:10px">
+                  <el-col :span="24">
+                    <div style="padding:30px">
+                      <div class="box-card-title-white">
+                        <span>外汇欧式期权情景计算结果</span>
+                      </div>
+                      <el-table
+                              :data="europeanOptionSneData"
+                              :cell-style="rowstyle"
+                              :header-cell-style="headerstyle"
+                              style="width:100%"
+                      >
+                        <el-table-column
+                                label="NPV"
+                                prop="NPV"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                                label="Delta"
+                                prop="Delta"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                                label="Gamma"
+                                prop="Gamma"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                                label="Vega"
+                                prop="Vega"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                                label="Theta"
+                                prop="Theta"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                                label="Rho"
+                                prop="Rho"
+                        >
+                        </el-table-column>
+                      </el-table>
                     </div>
                   </el-col>
                 </div>
               </div>
-            </el-row>
-            <el-row>
-              <el-button type="info" class="tradeInfoButton" @click="showWaibiInterestCurve">选取交易</el-button>
-            </el-row>
-          </el-col>
-
-          <el-col :span="10">
-            <div class="left-column">
-              <div class='box-card' style="height:925px">
-                <el-row>
-                  <div v-show="isSwap === true">
-                    <el-col :span="10">
-                      <div style="padding:30px">
-                        <div class="box-card-title">
-                          <span>外汇远掉期风险因子设定</span>
-                        </div>
-                        <el-col :span="12">
-                          <div class="left-col1-s">风险因子</div>
-                          <div class="left-col2-s">变动幅度</div>
-                        </el-col>
-                        <el-col :span="12">
-                          <div class="left-col1-s">
-                            <el-select
-                                    class="oneContorls"
-                                    v-model="swapScenario.RiskType"
-                                    placeholder="请选择">
-                              <el-option
-                                      v-for="item in swapScenarioOptions"
-                                      :key="item.key"
-                                      :label="item.label"
-                                      :value="item.value"
-                              ></el-option>
-                            </el-select>
-                          </div>
-                          <div class="left-col2-s">
-                            <el-input-number
-                                    :controls="false"
-                                    class="oneContorls"
-                                    v-model="swapScenario.Change"
-                            >
-                            </el-input-number>
-                          </div>
-                        </el-col>
+              <div v-show="isIrsCcs===true">
+                <div style="margin-top:10px">
+                  <el-col :span="24">
+                    <div style="padding:30px">
+                      <div class="box-card-title-white">
+                        <span>IRS/CCS情景计算结果</span>
                       </div>
-                    </el-col>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div v-show="isEuropeanOption === true">
-                    <el-col :span="10">
-                      <div style="padding:30px">
-                        <div class="box-card-title">
-                          <span>外汇欧式期权风险因子设定</span>
-                        </div>
-                        <el-col :span="12">
-                          <div class="left-col1-s">风险因子</div>
-                          <div class="left-col2-s">变动幅度</div>
-                        </el-col>
-                        <el-col :span="12">
-                          <div class="left-col1-s">
-                            <el-select
-                                    class="oneContorls"
-                                    v-model="europeanOptionScenario.RiskType"
-                                    placeholder="请选择">
-                              <el-option
-                                      v-for="item in europeanOptionScenarioOptions"
-                                      :key="item.key"
-                                      :label="item.label"
-                                      :value="item.value"
-                              ></el-option>
-                            </el-select>
-                          </div>
-                          <div class="left-col2-s">
-                            <el-input-number
-                                    :controls="false"
-                                    class="oneContorls"
-                                    v-model="europeanOptionScenario.Change"
-                            >
-                            </el-input-number>
-                          </div>
-                        </el-col>
+                      <el-table
+                              :data="IrsCcsSneData"
+                              :cell-style="rowstyle"
+                              :header-cell-style="headerstyle"
+                              style="width:100%"
+                      >
+                        <el-table-column
+                                label="NPV"
+                                prop="NPV"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                                label="AccrualInterest"
+                                prop="AccrualInterest"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                                label="DV01"
+                                prop="DV01"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                                label="ReceiveNPV"
+                                prop="ReceiveNPV"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                                label="PayNPV"
+                                prop="PayNPV"
+                        >
+                        </el-table-column>
+                      </el-table>
+                    </div>
+                  </el-col>
+                </div>
+              </div>
+              <div v-show="isBond===true">
+                <div style="margin-top:10px">
+                  <el-col :span="24">
+                    <div style="padding:30px">
+                      <div class="box-card-title-white">
+                        <span>债券情景计算结果</span>
                       </div>
-                    </el-col>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div v-show="isIrsCcs === true">
-                    <el-col :span="10">
-                      <div style="padding:30px">
-                        <div class="box-card-title">
-                          <span>IRS/CCS风险因子设定</span>
-                        </div>
-                        <el-col :span="12">
-                          <div class="left-col1-s">风险因子</div>
-                          <div class="left-col2-s">变动幅度</div>
-                        </el-col>
-                        <el-col :span="12">
-                          <div class="left-col1-s">
-                            <el-select
-                                    class="oneContorls"
-                                    v-model="irsccsScenario.RiskType"
-                                    placeholder="请选择">
-                              <el-option
-                                      v-for="item in irsccsScenarioOptions"
-                                      :key="item.key"
-                                      :label="item.label"
-                                      :value="item.value"
-                              ></el-option>
-                            </el-select>
-                          </div>
-                          <div class="left-col2-s">
-                            <el-input-number
-                                    :controls="false"
-                                    class="oneContorls"
-                                    v-model="irsccsScenario.Change"
-                            >
-                            </el-input-number>
-                          </div>
-                        </el-col>
-                      </div>
-                    </el-col>
-                  </div>
-                </el-row>
-                <el-row>
-                  <div v-show="isBond === true">
-                    <el-col :span="10">
-                      <div style="padding:30px">
-                        <div class="box-card-title">
-                          <span>债券风险因子设定</span>
-                        </div>
-                        <el-col :span="12">
-                          <div class="left-col1-s">风险因子</div>
-                          <div class="left-col2-s">变动幅度</div>
-                        </el-col>
-                        <el-col :span="12">
-                          <div class="left-col1-s">
-                            <el-select
-                                    class="oneContorls"
-                                    v-model="bondScenario.RiskType"
-                                    placeholder="请选择">
-                              <el-option
-                                      v-for="item in bondScenarioOptions"
-                                      :key="item.key"
-                                      :label="item.label"
-                                      :value="item.value"
-                              ></el-option>
-                            </el-select>
-                          </div>
-                          <div class="left-col2-s">
-                            <el-input-number
-                                    :controls="false"
-                                    class="oneContorls"
-                                    v-model="bondScenario.Change"
-                            >
-                            </el-input-number>
-                          </div>
-                        </el-col>
-                      </div>
-                    </el-col>
-                  </div>
-                </el-row>
-                <div v-show="isSwap===true||isEuropeanOption===true||isIrsCcs===true||isBond===true">
-                  <el-row>
-                    <el-button class="controls-a-line-attr-btm">开始计算</el-button>
-                  </el-row>
+                      <el-table
+                              :data="BondSneData"
+                              :cell-style="rowstyle"
+                              :header-cell-style="headerstyle"
+                              style="width:100%"
+                      >
+                        <el-table-column
+                                label="DirtyPrice"
+                                prop="DirtyPrice"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                                label="CleanPrice"
+                                prop="CleanPrice"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                                label="AccrualInterest"
+                                prop="AccrualInterest"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                                label="DV01"
+                                prop="DV01"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                                label="Duration"
+                                prop="Duration"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                                label="Convexity"
+                                prop="Convexity"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                                label="VaR"
+                                prop="VaR"
+                        >
+                        </el-table-column>
+                      </el-table>
+                    </div>
+                  </el-col>
                 </div>
               </div>
             </div>
           </el-col>
 
-          <el-col :span="14">
-            <div v-show="isSwap===true">
-              <div style="margin-top:10px">
-                <el-col :span="24">
-                  <div style="padding:30px">
-                    <div class="box-card-title">
-                      <span>外汇远掉期情景计算结果</span>
-                    </div>
-                    <el-table
-                            :data="fxSneData"
-                            :cell-style="rowstyle"
-                            :header-cell-style="headerstyle"
-                            style="width:100%"
-                    >
-                      <el-table-column
-                              label="NPV"
-                              prop="NPV"
-                      >
-                      </el-table-column>
-                      <el-table-column
-                              label="PV1"
-                              prop="PV1"
-                      >
-                      </el-table-column>
-                      <el-table-column
-                              label="PV2"
-                              prop="PV2"
-                      >
-                      </el-table-column>
-                    </el-table>
-                  </div>
-                </el-col>
-              </div>
-            </div>
-            <div v-show="isEuropeanOption===true">
-              <div style="margin-top:10px">
-                <el-col :span="24">
-                  <div style="padding:30px">
-                    <div class="box-card-title">
-                      <span>外汇欧式期权情景计算结果</span>
-                    </div>
-                    <el-table
-                            :data="europeanOptionSneData"
-                            :cell-style="rowstyle"
-                            :header-cell-style="headerstyle"
-                            style="width:100%"
-                    >
-                      <el-table-column
-                              label="NPV"
-                              prop="NPV"
-                      >
-                      </el-table-column>
-                      <el-table-column
-                              label="Delta"
-                              prop="Delta"
-                      >
-                      </el-table-column>
-                      <el-table-column
-                              label="Gamma"
-                              prop="Gamma"
-                      >
-                      </el-table-column>
-                      <el-table-column
-                              label="Vega"
-                              prop="Vega"
-                      >
-                      </el-table-column>
-                      <el-table-column
-                              label="Theta"
-                              prop="Theta"
-                      >
-                      </el-table-column>
-                      <el-table-column
-                              label="Rho"
-                              prop="Rho"
-                      >
-                      </el-table-column>
-                    </el-table>
-                  </div>
-                </el-col>
-              </div>
-            </div>
-            <div v-show="isIrsCcs===true">
-              <div style="margin-top:10px">
-                <el-col :span="24">
-                  <div style="padding:30px">
-                    <div class="box-card-title">
-                      <span>IRS/CCS情景计算结果</span>
-                    </div>
-                    <el-table
-                            :data="IrsCcsSneData"
-                            :cell-style="rowstyle"
-                            :header-cell-style="headerstyle"
-                            style="width:100%"
-                    >
-                      <el-table-column
-                              label="NPV"
-                              prop="NPV"
-                      >
-                      </el-table-column>
-                      <el-table-column
-                              label="AccrualInterest"
-                              prop="AccrualInterest"
-                      >
-                      </el-table-column>
-                      <el-table-column
-                              label="DV01"
-                              prop="DV01"
-                      >
-                      </el-table-column>
-                      <el-table-column
-                              label="ReceiveNPV"
-                              prop="ReceiveNPV"
-                      >
-                      </el-table-column>
-                      <el-table-column
-                              label="PayNPV"
-                              prop="PayNPV"
-                      >
-                      </el-table-column>
-                    </el-table>
-                  </div>
-                </el-col>
-              </div>
-            </div>
-            <div v-show="isBond===true">
-              <div style="margin-top:10px">
-                <el-col :span="24">
-                  <div style="padding:30px">
-                    <div class="box-card-title">
-                      <span>债券情景计算结果</span>
-                    </div>
-                    <el-table
-                            :data="BondSneData"
-                            :cell-style="rowstyle"
-                            :header-cell-style="headerstyle"
-                            style="width:100%"
-                    >
-                      <el-table-column
-                              label="DirtyPrice"
-                              prop="DirtyPrice"
-                      >
-                      </el-table-column>
-                      <el-table-column
-                              label="CleanPrice"
-                              prop="CleanPrice"
-                      >
-                      </el-table-column>
-                      <el-table-column
-                              label="AccrualInterest"
-                              prop="AccrualInterest"
-                      >
-                      </el-table-column>
-                      <el-table-column
-                              label="DV01"
-                              prop="DV01"
-                      >
-                      </el-table-column>
-                      <el-table-column
-                              label="Duration"
-                              prop="Duration"
-                      >
-                      </el-table-column>
-                      <el-table-column
-                              label="Convexity"
-                              prop="Convexity"
-                      >
-                      </el-table-column>
-                      <el-table-column
-                              label="VaR"
-                              prop="VaR"
-                      >
-                      </el-table-column>
-                    </el-table>
-                  </div>
-                </el-col>
-              </div>
-            </div>
-          </el-col>
 
         </div>
 <!--      </d2-grid-item>-->
@@ -475,6 +475,10 @@ export default {
   },
   methods: {
     // ****************************
+    chooseTrading(){
+      console.log('选择交易')
+      console.log(this.isSwap,'isSwap')
+    },
     clickSwap(){
       if(this.isSwap === true){
         this.isSwap = false;
@@ -518,13 +522,13 @@ export default {
     },
     rowstyle(row){
       if (row.rowIndex % 2 === 0) {
-        return "height:30px; background-color:#312E30;  text-align: left;color: white; border:0px; font-size: 16px";
+        return "height:40px; background-color:#312E30;  text-align: left;color: white; border:0px; font-size: 16px";
       } else {
-        return "height:30px; background-color:#454754;  text-align: left;color: white; border:0px; font-size: 16px";
+        return "height:40px; background-color:#454754;  text-align: left;color: white; border:0px; font-size: 16px";
       }
     },
     headerstyle(row) {
-      return "height:30px; background-color:#454754;  text-align: left;color: white; border:0px; font-size: 16px";
+      return "height:40px; background-color:#454754;  text-align: left;color: white; border:0px; font-size: 16px";
     },
   }
 }
@@ -578,17 +582,96 @@ export default {
   font-size:16px;
   color:white;
 }
-.oneContorls {
-  width:190px;
-}
 .tradeInfoButton{
   width:190px;
 }
 .controls-a-line-attr-btm{
-  margin:50px 60px 60px 500px;
+  margin:50px 60px 60px 30px;
+  width:190px
 }
+.controls-a-line-attr{
+  margin:50px 60px 60px 500px;
+  width:190px
+}
+
+//frtb
+
+.controls-a-line{
+  margin:10px 5px 5px 50px;
+}
+.oneControls {
+  width: 190px;
+}
+
+.left-col2{
+  height:40px;
+  background:#454754;;
+  margin:5px 0px 5px 0px;
+  padding-left:20px;
+  line-height: 40px;
+  vertical-align: center;
+}
+.left-col{
+  height:40px;
+  margin:55px 0px 130px 0px;
+  padding-left:20px;
+  line-height: 40px;
+  vertical-align: center;
+}
+.my-block{
+  margin:0px 2px 0px 2px;
+  padding:0px 2px 0px 2px;
+}
+.left-col1{
+  height:40px;
+  background:#312E30;
+  margin:5px 0px 5px 0px;
+  padding-left:20px;
+  line-height: 40px;
+  vertical-align: center;
+}
+.right-col{
+  height:40px;
+  background:transparent;
+  margin:auto;
+  line-height: 40px;
+  vertical-align: center;
+
+}
+.middle-col{
+ margin-top:9px;
+}
+.middle-col2{
+  height:40px;
+  margin:auto;
+  background:#454754;;
+}
+.twoControls {
+  width:108px;
+}
+
+.oneContorls {
+  width:190px;
+}
+.oneContorls1 {
+  width:150px;
+}
+.form-num{
+  width: 220px;
+}
+.curvebutton{
+  width:190px;
+}
+.curve-title{
+  font-size:16px;
+  text-align: center;
+}
+
+
 </style>
 
 <style lang="scss" >
-
+  .my-block  .el-checkbox-button__inner{
+    width:190px;
+  }
 </style>
