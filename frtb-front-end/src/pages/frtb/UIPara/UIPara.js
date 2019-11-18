@@ -631,8 +631,8 @@ export var echartDPPartOptionSWAP = {
       selectedMode: 'single',
       selectedOffset: 5,
       data: [
-        { value: 558525849.81, name: '外汇远掉期结束日损益',itemStyle:{normal:{color:'#FFDE00'}}},
-        { value: 3292629249.06, name: '结束日总损益',itemStyle:{normal:{color:'grey'}}},
+        { value: 100664868.23, name: '外汇远掉期结束日损益',itemStyle:{normal:{color:'#FFDE00'}}},
+        { value: 694240470.50, name: '结束日总损益',itemStyle:{normal:{color:'grey'}}},
       ],
       itemstyle: {
         emphasis: {
@@ -720,12 +720,12 @@ export var echartConPDSWAP1 = {
     {
       name:'日损益',
       type:'line',
-      data:[114541140.00,132930453.00,-143007454.00,-148637255.00,192681679.00,230273605.00,179743683.00]
+      data:[114541140.00,132930453.00,-143007454.00,-148637255.00,192681679.00,342483656.85,100664868.23]
     },
     {
       name:'累计损益',
       type:'line',
-      data:[114541139.82,247471593.21 ,104464138.88 ,-44173116.23,148508562.67 ,378782167.23 ,558525849.81 ]
+      data:[114541139.82,247471593.21 ,104464138.88 ,-44173116.23,148508562.67 ,378782167.23 ,721265824.08 ]
     },
   ]
 
