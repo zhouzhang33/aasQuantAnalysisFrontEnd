@@ -1,0 +1,59 @@
+
+===================================================
+===================================================
+
+This document explains the required fields, schema and formats to define fixings data. 
+
+Revision: 1
+
+===================================================
+===================================================
+
+Fixings Data Specification
+
+The fixings data of any index are subject to the same fixings data specification. We take 'US0003M' as an example for details.
+
+---------------------------------
+
+US0003M Specification
+
+Fixings Data Type: 
+US0003M
+
+Description: 
+The historical fixings data of 'US0003M' index (i.e. USD Libor 3M rate).
+
+Fixings Data required headers:
+FixingName - The identification name for this set of fixings data. It must be globally unique and distinct to any other fixings names.
+Source - The field to store the name of fixings data source.
+Revision - The field to store which revision the fixings data is for, e.g. 'TKFE-1500', 'BEIJING-1100' etc.
+Date - The fixing date.
+ScaleFactor - The scaling adjustment to the 'Value' field. This scale factor will be multiplied to the value in 'Value' field to represent the final quote value to use.
+Value - The market quoted price/value on fixing.
+
+
+Following is an example for US0003M fixings data:
+
+FixingName	Source		Revision	Date		ScaleFactor	Value
+US0003M		BLOOMBERG	1			2-Jan-18	0.01		1.69693
+US0003M		BLOOMBERG	1			3-Jan-18	0.01		1.69593
+US0003M		BLOOMBERG	1			4-Jan-18	0.01		1.70381
+US0003M		BLOOMBERG	1			5-Jan-18	0.01		1.70393
+US0003M		BLOOMBERG	1			8-Jan-18	0.01		1.70802
+US0003M		BLOOMBERG	1			9-Jan-18	0.01		1.70457
+US0003M		BLOOMBERG	1			10-Jan-18	0.01		1.70911
+US0003M		BLOOMBERG	1			11-Jan-18	0.01		1.72019
+US0003M		BLOOMBERG	1			12-Jan-18	0.01		1.72152
+US0003M		BLOOMBERG	1			15-Jan-18	0.01		1.73133
+US0003M		BLOOMBERG	1			16-Jan-18	0.01		1.73408
+US0003M		BLOOMBERG	1			17-Jan-18	0.01		1.73918
+US0003M		BLOOMBERG	1			18-Jan-18	0.01		1.7447
+US0003M		BLOOMBERG	1			19-Jan-18	0.01		1.74447
+US0003M		BLOOMBERG	1			22-Jan-18	0.01		1.7413
+US0003M		BLOOMBERG	1			23-Jan-18	0.01		1.7452
+US0003M		BLOOMBERG	1			24-Jan-18	0.01		1.75246
+...
+
+
+===================================================
+===================================================

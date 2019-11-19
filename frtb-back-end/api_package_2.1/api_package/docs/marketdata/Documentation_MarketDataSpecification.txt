@@ -1,0 +1,699 @@
+
+===================================================
+===================================================
+
+This document explains the required fields, schema and formats to define market data. 
+
+Revision: 1
+
+===================================================
+===================================================
+
+OIS Discounting Curve Market Data Specification
+
+OIS Discounting Curve supported currencies and curve names:
+(1) USD - Curve_USD_OIS
+(2) EUR - Curve_EUR_OIS
+(3) GBP - Curve_GBP_OIS
+(4) JPY - Curve_JPY_OIS
+(5) CNY - Curve_CNY_Repo7D
+
+All OIS Discounting Curves are following the same market data specification. We take 'Curve_USD_OIS' as an example for details.
+
+---------------------------------
+
+Curve_USD_OIS Specification
+
+Market Data Type: 
+Curve_USD_OIS
+
+Description: 
+The OIS Discounting Curve of USD currency
+
+Market Data required headers:
+MarketDataType - The market data object to construct with the market data.
+Source - The field to store the name of market data source.
+Revision - The field to store which price type of "Bid", "Ask" or "Mid" the market data is.
+Currency - The currency name.
+InstrumentType - Defines the curve boot strapping instrument type name. Details will be explained later.
+Tenor - Tenor of each curve boot strapping instrument. Details will be explained later.
+ScaleFactor - The scaling adjustment to the 'Value' field. This scale factor will be multiplied to the value in 'Value' field to represent the final quote value to use.
+Value - The market quoted price/value.
+
+Detailed Specification of 'InstrumentType' and 'Tenor':
+Curve_USD_OIS support following boot strapping instrument types, and accordingly 'Tenor' format for each type of instrument.
+(1) CashDeposit - If the instrument type is 'CashDeposit', the tenor should usually be 'ON', 'TN' or 'SN'. Also, it can use the typical tenor, e.g. '3M'.
+(2) CompoundIndexSwap - If the instrument type is 'CompoundIndexSwap', the tenor should use the typical tenor, e.g. '10Y'.
+
+
+Following is an example for Curve_USD_OIS market data:
+
+MarketDataType	Source		Revision	Currency	InstrumentType	   Tenor	ScaleFactor	Value
+Curve_USD_OIS	BLOOMBERG	BID			USD			CashDeposit			ON		1			0.0237
+Curve_USD_OIS	BLOOMBERG	BID			USD			CompoundIndexSwap	1w		1			0.023207
+Curve_USD_OIS	BLOOMBERG	BID			USD			CompoundIndexSwap	2w		1	 		0.023256
+Curve_USD_OIS	BLOOMBERG	BID			USD			CompoundIndexSwap	3w		1			0.02327
+Curve_USD_OIS	BLOOMBERG	BID			USD			CompoundIndexSwap	1m		1			0.02325
+Curve_USD_OIS	BLOOMBERG	BID			USD			CompoundIndexSwap	2m		1			0.0226702
+Curve_USD_OIS	BLOOMBERG	BID			USD			CompoundIndexSwap	3m		1			0.0222115
+Curve_USD_OIS	BLOOMBERG	BID			USD			CompoundIndexSwap	4m		1			0.0215668
+Curve_USD_OIS	BLOOMBERG	BID			USD			CompoundIndexSwap	5m		1			0.0211307
+Curve_USD_OIS	BLOOMBERG	BID			USD			CompoundIndexSwap	6m		1			0.0207125
+Curve_USD_OIS	BLOOMBERG	BID			USD			CompoundIndexSwap	9m		1			0.0196311
+Curve_USD_OIS	BLOOMBERG	BID			USD			CompoundIndexSwap	1y		1			0.018775
+Curve_USD_OIS	BLOOMBERG	BID			USD			CompoundIndexSwap	18m		1			0.017485
+Curve_USD_OIS	BLOOMBERG	BID			USD			CompoundIndexSwap	2y		1			0.016645
+Curve_USD_OIS	BLOOMBERG	BID			USD			CompoundIndexSwap	3y		1			0.01591
+Curve_USD_OIS	BLOOMBERG	BID			USD			CompoundIndexSwap	4y		1			0.01573
+Curve_USD_OIS	BLOOMBERG	BID			USD			CompoundIndexSwap	5y		1			0.01583
+Curve_USD_OIS	BLOOMBERG	BID			USD			CompoundIndexSwap	10y		1			0.01756
+
+
+
+
+===================================================
+===================================================
+
+Non-OIS Discounting Curve Specification
+
+Non-OIS Discounting Curve supported currencies and curve names:
+(1) AUD - Curve_AUD_BankBills3M
+(2) CAD - Curve_CAD_Cdor3M
+(3) CHF - Curve_CHF_Libor6M
+(4) CNY - Curve_CNY_Shibor3M
+(5) EUR - Curve_EUR_Euribor6M
+(6) GBP - Curve_GBP_Libor6M
+(7) JPY - Curve_JPY_Libor6M
+(8) USD - Curve_USD_Libor3M
+
+All non-OIS discounting curves are following the same market data specification. We take 'Curve_USD_Libor3M' as an example for details.
+
+---------------------------------
+
+Curve_USD_Libor3M Specification
+
+Market Data Type: 
+Curve_USD_Libor3M
+
+Description: 
+The LIBOR 3M curve of USD currency
+
+Market Data required headers:
+MarketDataType - The market data object to construct with the market data.
+Source - The field to store the name of market data source.
+Revision - The field to store which price type of "Bid", "Ask" or "Mid" the market data is.
+Currency - The currency name.
+InstrumentType - Defines the curve boot strapping instrument type name. Details will be explained later.
+Tenor - Tenor of each curve boot strapping instrument. Details will be explained later.
+ScaleFactor - The scaling adjustment to the 'Value' field. This scale factor will be multiplied to the value in 'Value' field to represent the final quote value to use.
+Value - The market quoted price/value.
+
+Detailed Specification of 'InstrumentType' and 'Tenor':
+Curve_USD_Libor3M support following boot strapping instrument types, and accordingly 'Tenor' format for each type of instrument.
+(1) CashDeposit - If the instrument type is 'CashDeposit', the tenor should use the typical tenor, e.g. '3M', '6M' etc. Also, it can use 'ON', 'TN' or 'SN'.
+(2) FRA - If the instrument type is 'FRA', the tenor should follow one of the formats below:
+	(a) Tenor = [Name]_[StartTenor]_[EndTenor], where [Name] is an arbitrary descriptive name, [StartTenor] and [EndTenor] are the start and end tenors of FRA contract, e.g. 'FRA_1M_7M' for the FRA contract with start tenor '1M' and end tenor '7M'.
+	(b) Tenor = [Name]_[StartDate]_[EndDate], where [Name] is an arbitrary descriptive name, [StartDate] and [EndDate] are the start and end dates of FRA contract, e.g. 'FRA_18-Sep-2019_18-Dec-2019' for the FRA contract with start date '18-Sep-2019' and end date '18-Dec-2019'.
+(3) STIRFuture - If the instrument type is 'STIRFuture', the tenor should use the future contract month code starting with month code followed by two-digit year code, e.g. 'U19' for September 2019.
+(4) Swap - If the instrument type is 'Swap', the tenor should use the typical tenor, e.g. '10Y'.
+
+
+Following is an example for Curve_USD_OIS market data:
+(Use intruments 'CashDeposit', 'STIRFuture' and 'Swap')
+
+MarketDataType		Source		Revision	Currency	InstrumentType	Tenor	ScaleFactor	Value
+Curve_USD_Libor3M	BLOOMBERG	BID			USD			CashDeposit		3m		1			0.0238663
+Curve_USD_Libor3M	BLOOMBERG	BID			USD			STIRFuture		U19		1			0.02099445
+Curve_USD_Libor3M	BLOOMBERG	BID			USD			STIRFuture		Z19		1			0.01998522
+Curve_USD_Libor3M	BLOOMBERG	BID			USD			STIRFuture		H20		1			0.01802242
+Curve_USD_Libor3M	BLOOMBERG	BID			USD			STIRFuture		M20		1			0.01710615
+Curve_USD_Libor3M	BLOOMBERG	BID			USD			STIRFuture		U20		1			0.01638648
+Curve_USD_Libor3M	BLOOMBERG	BID			USD			STIRFuture		Z20		1			0.01626349
+Curve_USD_Libor3M	BLOOMBERG	BID			USD			Swap			2y		1			0.01899273
+Curve_USD_Libor3M	BLOOMBERG	BID			USD			Swap			3y		1			0.01825004
+Curve_USD_Libor3M	BLOOMBERG	BID			USD			Swap			4y		1			0.01808697
+Curve_USD_Libor3M	BLOOMBERG	BID			USD			Swap			5y		1			0.01819461
+Curve_USD_Libor3M	BLOOMBERG	BID			USD			Swap			6y		1			0.01851857
+Curve_USD_Libor3M	BLOOMBERG	BID			USD			Swap			7y		1			0.01887469
+Curve_USD_Libor3M	BLOOMBERG	BID			USD			Swap			8y		1			0.01923447
+Curve_USD_Libor3M	BLOOMBERG	BID			USD			Swap			9y		1			0.01961268
+Curve_USD_Libor3M	BLOOMBERG	BID			USD			Swap			10y		1			0.0199913
+Curve_USD_Libor3M	BLOOMBERG	BID			USD			Swap			11y		1			0.02034812
+Curve_USD_Libor3M	BLOOMBERG	BID			USD			Swap			12y		1			0.02065264
+Curve_USD_Libor3M	BLOOMBERG	BID			USD			Swap			15y		1			0.02135113
+Curve_USD_Libor3M	BLOOMBERG	BID			USD			Swap			20y		1			0.02197713
+Curve_USD_Libor3M	BLOOMBERG	BID			USD			Swap			25y		1			0.02219859
+Curve_USD_Libor3M	BLOOMBERG	BID			USD			Swap			30y		1			0.02228755
+Curve_USD_Libor3M	BLOOMBERG	BID			USD			Swap			40y		1			0.02210131
+Curve_USD_Libor3M	BLOOMBERG	BID			USD			Swap			50y		1			0.02169677
+...
+
+
+Following is an example for Curve_EUR_Euribor6M market data:
+(Use intruments 'CashDeposit', 'Swap' and 'FRA' of [Name]_[StartTenor]_[EndTenor] format)
+
+MarketDataType		Source		Revision	Currency	InstrumentType	Tenor		ScaleFactor	Value
+Curve_EUR_Euribor6M	BLOOMBERG	BID			EUR			CashDeposit		6M			1			-0.00276
+Curve_EUR_Euribor6M	BLOOMBERG	BID			EUR			FRA				FRA_1M_7M	1			-0.00330982
+Curve_EUR_Euribor6M	BLOOMBERG	BID			EUR			FRA				FRA_2M_8M	1			-0.00353515
+...
+Curve_EUR_Euribor6M	BLOOMBERG	BID			EUR			Swap			2Y			1			-0.0037815
+Curve_EUR_Euribor6M	BLOOMBERG	BID			EUR			Swap			3Y			1			-0.003563
+...
+
+Following is an example for Curve_EUR_Euribor6M market data:
+(Use intruments 'CashDeposit', 'Swap' and 'FRA' of [Name]_[StartDate]_[EndDate] format)
+
+MarketDataType		Source		Revision	Currency	InstrumentType	Tenor						ScaleFactor	Value
+Curve_EUR_Euribor6M	BLOOMBERG	BID			EUR			CashDeposit		6M							1			-0.00276
+Curve_EUR_Euribor6M	BLOOMBERG	BID			EUR			FRA				FRA_18-Jul-2019_18-Jan-2020	1			-0.00330982
+Curve_EUR_Euribor6M	BLOOMBERG	BID			EUR			FRA				FRA_18-Aug-2019_18-Feb-2020	1			-0.00353515
+...
+Curve_EUR_Euribor6M	BLOOMBERG	BID			EUR			Swap			2Y							1			-0.0037815
+Curve_EUR_Euribor6M	BLOOMBERG	BID			EUR			Swap			3Y							1			-0.003563
+...
+
+
+
+===================================================
+===================================================
+
+
+FX Spot Matrix Specification
+
+FX Spot Matrix so far only supports USD as the intermediate exchange rate quote currency:
+(1) USD - FXSpot_USD
+(Later more intermediate exchange rate quote currencies may be subject to add.)
+
+Any FX spot matrix will be following the same market data specification. We take 'Curve_USD_Implied_USDCNY' as an example for details.
+
+---------------------------------
+
+FXSpot_USD Specification
+
+Market Data Type: 
+FXSpot_USD
+
+Description: 
+FX Spot matrix constructed by market data that all currencies exchange rates are quoted in USD.
+
+Market Data required headers:
+MarketDataType - The market data object to construct with the market data.
+Source - The field to store the name of market data source.
+Revision - The field to store which price type of "Bid", "Ask" or "Mid" the market data is.
+Currency - The currency name of the exchange rate.
+Inversed - Indicate whether the quoted exchange rate in the 'Value' field is a rate of '1-unit' base currency in currency ('FALSE') or a rate of '1-unit' currency in base currency('TRUE'). e.g. For 'FXSpot_USD' it indicate whether the quoted exchange rate is target currency to USD rate ('FALSE') or USD to target currency rate('TRUE').
+ScaleFactor - The scaling adjustment to the 'Value' field. This scale factor will be multiplied to the value in 'Value' field to represent the final quote value to use.
+Value - The market quoted price/value.
+
+
+Following is an example for FXSpot_USD market data :
+
+MarketDataType	Source			Revision	Currency	Inversed	ScaleFactor	Value
+FXSpot_USD		BLOOMBERG		BID			EUR	 		FALSE		1			1.11936
+FXSpot_USD		BLOOMBERG		BID			JPY	 		TRUE		1			108.451
+FXSpot_USD		BLOOMBERG		BID			GBP	 		FALSE		1			1.25575
+FXSpot_USD		BLOOMBERG		BID			CHF	 		TRUE		1			1.00047
+FXSpot_USD		BLOOMBERG		BID			CAD	 		TRUE		1			1.33765
+FXSpot_USD		BLOOMBERG		BID			AUD	 		FALSE		1			0.68767
+FXSpot_USD		BLOOMBERG		BID			NZD	 		FALSE		1			0.65296
+...
+
+
+
+===================================================
+===================================================
+
+
+FX Forward Implied Discounting Curve Specification
+
+FX Forward Implied Discounting Curve supported currencies and curve names:
+(1) AUD - Curve_AUD_Implied_AUDCNY
+(2) AUD - Curve_AUD_Implied_AUDUSD
+(3) CAD - Curve_CAD_Implied_CADCNY
+(4) CAD - Curve_CAD_Implied_USDCAD
+(5) CHF - Curve_CHF_Implied_CHFCNY
+(6) CHF - Curve_CHF_Implied_USDCHF
+(7) EUR - Curve_EUR_Implied_EURCNY
+(8) EUR - Curve_EUR_Implied_EURUSD
+(9) GBP - Curve_GBP_Implied_GBPCNY
+(10) GBP - Curve_GBP_Implied_GBPUSD
+(11) JPY - Curve_JPY_Implied_JPYCNY
+(12) JPY - Curve_JPY_Implied_USDJPY
+(13) USD - Curve_USD_Implied_USDCNY  
+
+All FX forward discounting curves are following the same market data specification. We take 'Curve_USD_Implied_USDCNY' as an example for details.
+
+---------------------------------
+
+Curve_USD_Implied_USDCNY Specification
+
+Market Data Type: 
+Curve_USD_Implied_USDCNY
+
+Description: 
+The implied discounting curve of USD currency, constructed by a CNY discounting curve and a series of USDCNY forward exchange rates.
+
+Market Data required headers:
+MarketDataType - The market data object to construct with the market data.
+Source - The field to store the name of market data source.
+Revision - The field to store which price type of "Bid", "Ask" or "Mid" the market data is.
+BaseCurrency - The base currency name.
+Currency - The currency name.
+InstrumentType - Defines the curve boot strapping instrument type name. Details will be explained later.
+Tenor - Tenor of each curve boot strapping instrument. Details will be explained later.
+Inversed - Indicate whether the quoted exchange rate in the 'Value' field is a rate of '1-unit' base currency in currency ('FALSE') or a rate of '1-unit' currency in base currency('TRUE').
+ScaleFactor - The scaling adjustment to the 'Value' field. This scale factor will be multiplied to the value in 'Value' field to represent the final quote value to use.
+Value - The market quoted price/value.
+
+Detailed Specification of 'InstrumentType' and 'Tenor':
+Curve_USD_Implied_USDCNY support following boot strapping instrument types, and accordingly 'Tenor' format for each type of instrument.
+(1) FXSpot - If the instrument type is 'FXSpot' the tenor only accept 'SP'. Note: 'FXSpot' is a required quote for every FX forward implied discounting curve. It is required and only one is accepted.
+(2) FXForwardPoint - If the instrument type is 'FXForwardPoint', the tenor should use 'ON', 'TN', 'SN' and typical tenors like '1W', '3M', '1Y' etc.
+(3) FXForwardOutright - If the instrument type is 'FXForwardOutright', the tenor should use typical tenors like '1W', '3M', '1Y' etc. It does not support 'ON', 'TN', 'SN' tenors
+
+Note: 'FXForwardOutright' does not support 'ON', 'TN', 'SN' tenors; if need to provide forward rates on 'ON', 'TN' and 'SN' tenors, convert market data and switch to use 'FXForwardPoint' instrument type.
+
+
+Following is an example for Curve_USD_Implied_USDCNY market data :
+(Instrument type uses 'FXForwardPoint' and 'FXSpot'.)
+
+MarketDataType				Source		Revision	BaseCurrency	Currency	InstrumentType		Tenor	Inversed	ScaleFactor	Value
+Curve_USD_Implied_USDCNY	BLOOMBERG	BID			USD				CNY			FXForwardPoint		ON		FALSE		0.0001		0
+Curve_USD_Implied_USDCNY	BLOOMBERG	BID			USD				CNY			FXForwardPoint		TN		FALSE		0.0001		-17.05
+Curve_USD_Implied_USDCNY	BLOOMBERG	BID			USD				CNY			FXSpot				SP		FALSE		1			6.9032
+Curve_USD_Implied_USDCNY	BLOOMBERG	BID			USD				CNY			FXForwardPoint		SN		FALSE		0.0001		-41.37
+Curve_USD_Implied_USDCNY	BLOOMBERG	BID			USD				CNY			FXForwardPoint		1W		FALSE		0.0001		-289.62
+Curve_USD_Implied_USDCNY	BLOOMBERG	BID			USD				CNY			FXForwardPoint		2W		FALSE		0.0001		-254.22
+...
+
+Following is an example for Curve_JPY_Implied_USDJPY market data:
+(Instrument type uses 'FXForwardPoint', 'FXSpot' and 'FXForwardOutright'.)
+
+MarketDataType				Source		Revision	BaseCurrency	Currency	InstrumentType		Tenor	Inversed	ScaleFactor	Value
+Curve_JPY_Implied_USDJPY	BLOOMBERG	BID			USD				JPY			FXForwardPoint		ON		FALSE		1			-0.00827
+Curve_JPY_Implied_USDJPY	BLOOMBERG	BID			USD				JPY			FXForwardPoint		TN		FALSE		1			-0.35331
+Curve_JPY_Implied_USDJPY	BLOOMBERG	BID			USD				JPY			FXSpot				SP		FALSE		1			108.451
+Curve_JPY_Implied_USDJPY	BLOOMBERG	BID			USD				JPY			FXForwardPoint		SN		FALSE		1			0.3101
+Curve_JPY_Implied_USDJPY	BLOOMBERG	BID			USD				JPY			FXForwardOutright	1W		FALSE		1			108.7087
+Curve_JPY_Implied_USDJPY	BLOOMBERG	BID			USD				JPY			FXForwardOutright	2W		FALSE		1			108.6473
+Curve_JPY_Implied_USDJPY	BLOOMBERG	BID			USD				JPY			FXForwardOutright	3W		FALSE		1			108.5871
+Curve_JPY_Implied_USDJPY	BLOOMBERG	BID			USD				JPY			FXForwardOutright	1M		FALSE		1			108.5006
+Curve_JPY_Implied_USDJPY	BLOOMBERG	BID			USD				JPY			FXForwardOutright	2M		FALSE		1			108.258
+Curve_JPY_Implied_USDJPY	BLOOMBERG	BID			USD				JPY			FXForwardOutright	3M		FALSE		1			107.9608
+...
+
+
+
+===================================================
+===================================================
+
+
+FX Volatility Surface Specification
+
+FX Volatility Surface supported currency pairs and volatility names:
+(1) AUDCNY - Vol_AUDCNY_OptionVol
+(2) AUDUSD - Vol_AUDUSD_OptionVol
+(3) CADCNY - Vol_CADCNY_OptionVol
+(4) CHFCNY - Vol_CHFCNY_OptionVol
+(5) EURCNY - Vol_EURCNY_OptionVol
+(6) EURUSD - Vol_EURUSD_OptionVol
+(7) GBPCNY - Vol_GBPCNY_OptionVol
+(8) GBPUSD - Vol_GBPUSD_OptionVol
+(9) USDCAD - Vol_USDCAD_OptionVol
+(10) USDCHF - Vol_USDCHF_OptionVol
+(11) USDCNY - Vol_USDCNY_OptionVol
+(12) USDJPY - Vol_USDJPY_OptionVol
+(13) JPYCNY - Vol_JPYCNY_OptionVol
+
+All FX volatilities are following the same market data specification. We take 'Vol_USDCNY_OptionVol' as an example for details.
+
+---------------------------------
+
+Vol_USDCNY_OptionVol Specification
+
+Market Data Type: 
+Vol_USDCNY_OptionVol
+
+Description:
+The Black-implied volatility surface of USDCNY exchange rate European vanilla options.
+
+Market Data required headers:
+MarketDataType - The market data object to construct with the market data.
+Source - The field to store the name of market data source.
+Revision - The field to store which price type of "Bid", "Ask" or "Mid" the market data is.
+BaseCurrency - The base currency name.
+Currency - The currency name.
+InstrumentType - Always be 'EuropeanOption'. Defines the instrument type of the market volatility quote.
+Tenor - Tenor of each market quote instrument (e.g. European option), typical tenors like '1W', '3M', '1Y' etc. Cannot be 'ON', 'TN' or 'SN'.
+BFRR - The type name for strike level. It takes ATM or the representation of a delta name followed by BF/RR. For example, 'ATM', '25D BF', '25D RR', '10D BF', '10D RR' etc.
+ScaleFactor - The scaling adjustment to the 'Value' field. This scale factor will be multiplied to the value in 'Value' field to represent the final quote value to use.
+Value - The market quoted price/value.
+
+
+Following is an example for Vol_USDCNY_OptionVol market data:
+
+MarketDataType			Source		Revision	BaseCurrency	Currency	InstrumentType	Tenor	BFRR		ScaleFactor	Value	
+Vol_USDCNY_OptionVol	BLOOMBERG	BID			USD				CNY			EuropeanOption	1D		ATM			0.01		2.695
+Vol_USDCNY_OptionVol	BLOOMBERG	BID			USD				CNY			EuropeanOption	1W		ATM			0.01		2.745
+Vol_USDCNY_OptionVol	BLOOMBERG	BID			USD				CNY			EuropeanOption	2W		ATM			0.01		3.51
+Vol_USDCNY_OptionVol	BLOOMBERG	BID			USD				CNY			EuropeanOption	3W		ATM			0.01		3.66
+Vol_USDCNY_OptionVol	BLOOMBERG	BID			USD				CNY			EuropeanOption	1M		ATM			0.01		3.965
+...
+Vol_USDCNY_OptionVol	BLOOMBERG	BID			USD				CNY			EuropeanOption	1D		25D RR		0.01		-0.86	
+Vol_USDCNY_OptionVol	BLOOMBERG	BID			USD				CNY			EuropeanOption	1W		25D RR		0.01		-0.005	
+Vol_USDCNY_OptionVol	BLOOMBERG	BID			USD				CNY			EuropeanOption	2W		25D RR		0.01		-0.06	
+Vol_USDCNY_OptionVol	BLOOMBERG	BID			USD				CNY			EuropeanOption	3W		25D RR		0.01		0.02	
+Vol_USDCNY_OptionVol	BLOOMBERG	BID			USD				CNY			EuropeanOption	1M		25D RR		0.01		0.19	
+...
+Vol_USDCNY_OptionVol	BLOOMBERG	BID			USD				CNY			EuropeanOption	1D		25D BF		0.01		-0.51	
+Vol_USDCNY_OptionVol	BLOOMBERG	BID			USD				CNY			EuropeanOption	1W		25D BF		0.01		0.055	
+Vol_USDCNY_OptionVol	BLOOMBERG	BID			USD				CNY			EuropeanOption	2W		25D BF		0.01		-0.005	
+Vol_USDCNY_OptionVol	BLOOMBERG	BID			USD				CNY			EuropeanOption	3W		25D BF		0.01		0.02	
+Vol_USDCNY_OptionVol	BLOOMBERG	BID			USD				CNY			EuropeanOption	1M		25D BF		0.01		0.115	
+...
+
+
+
+===================================================
+===================================================
+
+
+Interest Swaption ATM Volatility Surface Specification
+
+Interest Swaption ATM Volatility Surface supported currencies and volatility names:
+(1) USD - Vol_USD_Swaption_ATM_Libor3M
+(2) EUR - Vol_EUR_Swaption_ATM_Euribor6M
+(3) GBP - Vol_GBP_Swaption_ATM_Libor6M
+(4) JPY - Vol_JPY_Swaption_ATM_Libor6M
+
+All interest swaption ATM volatilities are following the same market data specification. We take 'Vol_USD_Swaption_ATM_Libor3M' as an example for details.
+
+---------------------------------
+
+Vol_USD_Swaption_ATM_Libor3M Specification
+
+Market Data Type: 
+Vol_USD_Swaption_ATM_Libor3M
+
+Description:
+The Black-implied or Normal volatility surface of ATM swaption in USD Libor 3M index.
+
+Market Data required headers:
+MarketDataType - The market data object to construct with the market data.
+Source - The field to store the name of market data source.
+Revision - The field to store which price type of "Bid", "Ask" or "Mid" the market data is.
+Currency - The currency name.
+InstrumentType - Always be 'Swaption'. Defines the instrument type of the market volatility quote.
+OptionTenor - Option Tenor of each market quote instrument (e.g. Swaption), typical tenors like '1W', '3M', '1Y' etc. Cannot be 'ON', 'TN' or 'SN'.
+SwapTenor - Swap Tenor of each market quote instrument (e.g. Swaption), typical tenors like '1W', '3M', '1Y' etc. Cannot be 'ON', 'TN' or 'SN'.
+Strike - Always be 'ATM'. The type name for strike level.
+VolType - The type of volatility modeling, either 'BlackVol' (i.e. Black model) or 'NormalVol' (i.e. Ho-Lee or Hull White model).
+ScaleFactor - The scaling adjustment to the 'Value' field. This scale factor will be multiplied to the value in 'Value' field to represent the final quote value to use.
+Value - The market quoted price/value.
+
+
+Following is an example for Vol_USD_Swaption_ATM_Libor3M market data:
+
+MarketDataType					Source		Revision	Currency	InstrumentType	OptionTenor	SwapTenor	Strike	VolType		ScaleFactor	Value
+Vol_USD_SWAPTION_ATM_Libor3M	BLOOMBERG	BID			USD			Swaption		1M			1Y			ATM		NormalVol	0.0001		89.07
+Vol_USD_SWAPTION_ATM_Libor3M	BLOOMBERG	BID			USD			Swaption		3M			1Y			ATM		NormalVol	0.0001		33.68
+Vol_USD_SWAPTION_ATM_Libor3M	BLOOMBERG	BID			USD			Swaption		6M			1Y			ATM		NormalVol	0.0001		81.74
+Vol_USD_SWAPTION_ATM_Libor3M	BLOOMBERG	BID			USD			Swaption		9M			1Y			ATM		NormalVol	0.0001		51.21
+Vol_USD_SWAPTION_ATM_Libor3M	BLOOMBERG	BID			USD			Swaption		1Y			1Y			ATM		NormalVol	0.0001		82.745
+Vol_USD_SWAPTION_ATM_Libor3M	BLOOMBERG	BID			USD			Swaption		2Y			1Y			ATM		NormalVol	0.0001		78.335
+Vol_USD_SWAPTION_ATM_Libor3M	BLOOMBERG	BID			USD			Swaption		3Y			1Y			ATM		NormalVol	0.0001		71.905
+Vol_USD_SWAPTION_ATM_Libor3M	BLOOMBERG	BID			USD			Swaption		4Y			1Y			ATM		NormalVol	0.0001		74.57
+Vol_USD_SWAPTION_ATM_Libor3M	BLOOMBERG	BID			USD			Swaption		5Y			1Y			ATM		NormalVol	0.0001		77.405
+
+
+
+===================================================
+===================================================
+
+
+Interest Swaption Volatility Cube Specification
+
+Interest Swaption Volatility Cube supported currencies and volatility names:
+(1) USD - Vol_USD_SWAPTION_VCUB_Libor3M
+(2) EUR - Vol_EUR_SWAPTION_VCUB_Euribor6M
+(3) GBP - Vol_GBP_SWAPTION_VCUB_Libor6M
+(4) JPY - Vol_JPY_SWAPTION_VCUB_Libor6M
+
+All interest swaption volatility cube are following the same market data specification. We take 'Vol_USD_SWAPTION_VCUB_Libor3M' as an example for details.
+
+---------------------------------
+
+Vol_USD_SWAPTION_VCUB_Libor3M Specification
+
+Market Data Type: 
+Vol_USD_SWAPTION_VCUB_Libor3M
+
+Description:
+The Black-implied or Normal volatility surface of ATM swaption in USD Libor 3M index.
+
+Market Data required headers:
+MarketDataType - The market data object to construct with the market data.
+Source - The field to store the name of market data source.
+Revision - The field to store which price type of "Bid", "Ask" or "Mid" the market data is.
+Currency - The currency name.
+InstrumentType - Always be 'Swaption'. Defines the instrument type of the market volatility quote.
+OptionTenor - Option Tenor of each market quote instrument (e.g. Swaption), typical tenors like '1W', '3M', '1Y' etc. Cannot be 'ON', 'TN' or 'SN'.
+SwapTenor - Swap Tenor of each market quote instrument (e.g. Swaption), typical tenors like '1W', '3M', '1Y' etc. Cannot be 'ON', 'TN' or 'SN'.
+Strike - The type name for strike level. It takes ATM or a number(+/-) of bps away from ATM. For example, 'ATM', '-100bps', '-25bps', '25bps', '+100bps' etc.
+VolType - The type of volatility modeling, either 'BlackVol' (i.e. Black model) or 'NormalVol' (i.e. Ho-Lee or Hull White model).
+ScaleFactor - The scaling adjustment to the 'Value' field. This scale factor will be multiplied to the value in 'Value' field to represent the final quote value to use.
+Value - The market quoted price/value.
+
+
+Following is an example for Vol_USD_SWAPTION_VCUB_Libor3M market data:
+
+MarketDataType					Source		Revision	Currency	InstrumentType	OptionTenor	SwapTenor	Strike	VolType		ScaleFactor	Value
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		1M			5Y			-200bps	BlackVol	0.01		0
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		3M			5Y			-200bps	BlackVol	0.01		0
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		6M			5Y			-200bps	BlackVol	0.01		0
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		9M			5Y			-200bps	BlackVol	0.01		0
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		1Y			5Y			-200bps	BlackVol	0.01		0
+...
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		1M			5Y			-25bps	BlackVol	0.01		55.08
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		3M			5Y			-25bps	BlackVol	0.01		50.24
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		6M			5Y			-25bps	BlackVol	0.01		47.97
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		9M			5Y			-25bps	BlackVol	0.01		46.24
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		1Y			5Y			-25bps	BlackVol	0.01		44.91
+...
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		1M			5Y			ATM		BlackVol	0.01		48.95
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		3M			5Y			ATM		BlackVol	0.01		44.32
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		6M			5Y			ATM		BlackVol	0.01		42.4
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		9M			5Y			ATM		BlackVol	0.01		41.41
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		1Y			5Y			ATM		BlackVol	0.01		40.81
+...
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		1M			5Y			25bps	BlackVol	0.01		44.73
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		3M			5Y			25bps	BlackVol	0.01		40.33
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		6M			5Y			25bps	BlackVol	0.01		38.19
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		9M			5Y			25bps	BlackVol	0.01		37.81
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		1Y			5Y			25bps	BlackVol	0.01		37.8
+...
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		1M			5Y			200bps	BlackVol	0.01		43.48
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		3M			5Y			200bps	BlackVol	0.01		40.3
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		6M			5Y			200bps	BlackVol	0.01		32.67
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		9M			5Y			200bps	BlackVol	0.01		32.63
+Vol_USD_SWAPTION_VCUB_Libor3M	BLOOMBERG	BID			USD			Swaption		1Y			5Y			200bps	BlackVol	0.01		32.95
+...
+
+
+
+===================================================
+===================================================
+
+
+Commodtiy Forward Curve Specification
+
+Commodtiy Forward Curve supported commodity index and curve names:
+(1) WTI - Curve_WTI_CmdtyForward
+(More commodity indices are subject to add.)
+
+All commodity forward curves are following the same market data specification. We take 'Curve_WTI_CmdtyForward' as an example for details.
+
+---------------------------------
+
+Curve_WTI_CmdtyForward Specification
+
+Market Data Type: 
+Curve_WTI_CmdtyForward
+
+Description:
+The forward price curve constructed from prices of a series of Future contracts.
+
+Market Data required headers:
+MarketDataType - The market data object to construct with the market data.
+Source - The field to store the name of market data source.
+Revision - The field to store which price type of "Bid", "Ask" or "Mid" the market data is.
+Currency - The pricing currency of commodity underlying index.
+InstrumentType - Always be 'Future'. Defines the instrument type of the commodity index contracts. Details will be explained later.
+Contract - The name of commodity index contracts. Details will be explained later.
+ScaleFactor - The scaling adjustment to the 'Value' field. This scale factor will be multiplied to the value in 'Value' field to represent the final quote value to use.
+Value - The market quoted price/value.
+
+Detailed Specification of 'InstrumentType' and 'Contract':
+Curve_WTI_CmdtyForward support following commodity instrument types for forward curve construction, and accordingly 'Contract' naming rules for each type of instrument.
+(1) Future - If the instrument type is 'Future', the naming rule of 'Contract' field should be 'Contract' = [ContractName]_[LastTradeDate], where [ContractName] is an arbitrary descriptive name, [LastTradeDate] is the last date when the future contract is available for trade, e.g. 'CLN9 Comdty_20-Jun-2019' for the CLN9 Comdty contract which is available to trade util the last trade date on '20-Jun-2019'. The accuracy of [LastTradeDate] field is critical in building an accurate commodity forward curve.
+(So far only 'Future' instrument supported.)
+
+
+Following is an example for Curve_WTI_CmdtyForward market data:
+
+MarketDataType			Source		Revision	Currency	InstrumentType	Contract					ScaleFactor	Value
+Curve_WTI_CmdtyForward	BLOOMBERG	BID			USD			Future			CLN9 Comdty_20-Jun-2019		1			53.9
+Curve_WTI_CmdtyForward	BLOOMBERG	BID			USD			Future			CLQ9 Comdty_22-Jul-2019		1			54.11
+Curve_WTI_CmdtyForward	BLOOMBERG	BID			USD			Future			CLU9 Comdty_20-Aug-2019		1			54.19
+Curve_WTI_CmdtyForward	BLOOMBERG	BID			USD			Future			CLV9 Comdty_20-Sep-2019		1			54.14
+Curve_WTI_CmdtyForward	BLOOMBERG	BID			USD			Future			CLX9 Comdty_22-Oct-2019		1			54.08
+Curve_WTI_CmdtyForward	BLOOMBERG	BID			USD			Future			CLZ9 Comdty_20-Nov-2019		1			54
+Curve_WTI_CmdtyForward	BLOOMBERG	BID			USD			Future			CLF0 Comdty_19-Dec-2019		1			53.87
+Curve_WTI_CmdtyForward	BLOOMBERG	BID			USD			Future			CLG0 Comdty_21-Jan-2020		1			53.71
+Curve_WTI_CmdtyForward	BLOOMBERG	BID			USD			Future			CLH0 Comdty_20-Feb-2020		1			53.56
+Curve_WTI_CmdtyForward	BLOOMBERG	BID			USD			Future			CLJ0 Comdty_20-Mar-2020		1			53.42
+Curve_WTI_CmdtyForward	BLOOMBERG	BID			USD			Future			CLK0 Comdty_21-Apr-2020		1			53.29
+Curve_WTI_CmdtyForward	BLOOMBERG	BID			USD			Future			CLM0 Comdty_19-May-2020		1			53.18
+
+
+
+===================================================
+===================================================
+
+
+
+Commodtiy Volatility Surface Specification
+
+Commodtiy Volatility Surface supported commodity index and curve names:
+(1) WTI - Vol_WTI_OptionVol
+(More commodity indices are subject to add.)
+
+All commodity volatilities are following the same market data specification. We take 'Vol_WTI_OptionVol' as an example for details.
+
+---------------------------------
+
+Vol_WTI_OptionVol Specification
+
+Market Data Type: 
+Vol_WTI_OptionVol
+
+Description:
+The Black-implied volatility surface of WTI European Future options.
+
+Market Data required headers:
+MarketDataType - The market data object to construct with the market data.
+Source - The field to store the name of market data source.
+Revision - The field to store which price type of "Bid", "Ask" or "Mid" the market data is.
+Currency - The pricing currency of commodity underlying index.
+InstrumentType - Always be 'Future'. Defines the instrument type of the commodity index contracts. Details will be explained later.
+Contract - The name of commodity index contracts. Details will be explained later.
+Delta - The type name for strike level. It takes ATM or the representation of a delta name followed by Call/Put. For example, 'ATM', '25D Call', '25D Put', '10D Call', '10D Put' etc.
+ScaleFactor - The scaling adjustment to the 'Value' field. This scale factor will be multiplied to the value in 'Value' field to represent the final quote value to use.
+Value - The market quoted price/value.
+
+Detailed Specification of 'InstrumentType' and 'Contract':
+Vol_WTI_OptionVol support following commodity instrument types for forward curve construction, and accordingly 'Contract' naming rules for each type of instrument.
+(1) Future - If the instrument type is 'Future', the naming rule of 'Contract' field should be 'Contract' = [ContractName]_[LastTradeDate], where [ContractName] is an arbitrary descriptive name, [LastTradeDate] is the last date when the future contract is available for trade, e.g. 'CLN9 Comdty_20-Jun-2019' for the CLN9 Comdty contract which is available to trade util the last trade date on '20-Jun-2019'. The accuracy of [LastTradeDate] field is critical in building an accurate commodity forward curve.
+(So far only 'Future' instrument supported.)
+
+
+Following is an example for Vol_WTI_OptionVol market data:
+
+MarketDataType		Source		Revision	Currency	InstrumentType	Contract					Delta	ScaleFactor	Value		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLQ9 Comdty_22-Jul-2019		10DPut	0.01		50.11		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLU9 Comdty_20-Aug-2019		10DPut	0.01		47.81		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLV9 Comdty_20-Sep-2019		10DPut	0.01		45.29		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLX9 Comdty_22-Oct-2019		10DPut	0.01		44.38		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLZ9 Comdty_20-Nov-2019		10DPut	0.01		42.97		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLF0 Comdty_19-Dec-2019		10DPut	0.01		42.29		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLG0 Comdty_21-Jan-2020		10DPut	0.01		40.35		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLH0 Comdty_20-Feb-2020		10DPut	0.01		40.79	
+...
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLQ9 Comdty_22-Jul-2019		25DPut	0.01		44.43		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLU9 Comdty_20-Aug-2019		25DPut	0.01		42.99		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLV9 Comdty_20-Sep-2019		25DPut	0.01		41.13		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLX9 Comdty_22-Oct-2019		25DPut	0.01		40.02		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLZ9 Comdty_20-Nov-2019		25DPut	0.01		39.01		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLF0 Comdty_19-Dec-2019		25DPut	0.01		38.27		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLG0 Comdty_21-Jan-2020		25DPut	0.01		37.56		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLH0 Comdty_20-Feb-2020		25DPut	0.01		36.81	
+...
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLQ9 Comdty_22-Jul-2019		ATM		0.01		39.91		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLU9 Comdty_20-Aug-2019		ATM		0.01		38.57		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLV9 Comdty_20-Sep-2019		ATM		0.01		37.09		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLX9 Comdty_22-Oct-2019		ATM		0.01		36.27		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLZ9 Comdty_20-Nov-2019		ATM		0.01		35.32		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLF0 Comdty_19-Dec-2019		ATM		0.01		34.58		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLG0 Comdty_21-Jan-2020		ATM		0.01		33.97		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLH0 Comdty_20-Feb-2020		ATM		0.01		33.3	
+...
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLQ9 Comdty_22-Jul-2019		25DCall	0.01		37.55		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLU9 Comdty_20-Aug-2019		25DCall	0.01		35.86		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLV9 Comdty_20-Sep-2019		25DCall	0.01		34.45		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLX9 Comdty_22-Oct-2019		25DCall	0.01		33.31		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLZ9 Comdty_20-Nov-2019		25DCall	0.01		32.6		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLF0 Comdty_19-Dec-2019		25DCall	0.01		31.55		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLG0 Comdty_21-Jan-2020		25DCall	0.01		31.42		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLH0 Comdty_20-Feb-2020		25DCall	0.01		30	
+...
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLQ9 Comdty_22-Jul-2019		10DCall	0.01		37.88		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLU9 Comdty_20-Aug-2019		10DCall	0.01		35.64		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLV9 Comdty_20-Sep-2019		10DCall	0.01		34.21		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLX9 Comdty_22-Oct-2019		10DCall	0.01		33.27		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLZ9 Comdty_20-Nov-2019		10DCall	0.01		32.54		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLF0 Comdty_19-Dec-2019		10DCall	0.01		31.5		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLG0 Comdty_21-Jan-2020		10DCall	0.01		30.37		
+Vol_WTI_OptionVol	BLOOMBERG	BID			USD			EuropeanOption	CLH0 Comdty_20-Feb-2020		10DCall	0.01		29.98	
+...
+
+
+
+===================================================
+===================================================
+
+
+Discount Factor Surface Specification
+
+Market Data Type: 
+Curve_DiscountFactor
+
+Description:
+Contruct a discount curve simply using a list discount factors and the dates.
+
+Market Data required headers:
+MarketDataType - The market data object to construct with the market data.
+Source - The field to store the name of market data source.
+Revision - The field to store which price type of "Bid", "Ask" or "Mid" the market data is.
+Currency - The insterest rate currency.
+Date - The dates of discount factor.
+ScaleFactor - The scaling adjustment to the 'Value' field. This scale factor will be multiplied to the value in 'Value' field to represent the final quote value to use.
+Value - Multipled with 'ScaleFactor' gives the discount factor.
+
+
+
+Following is an example for Curve_DiscountFactor market data:
+
+MarketDataType			Source		Revision	Description							Currency		Date		ScaleFactor	Value
+Curve_DiscountFactor	BLOOMBERG	USD.DF.MID	Curve build with discount factor	USD				18-Jun-19	1			1
+Curve_DiscountFactor	BLOOMBERG	USD.DF.MID	Curve build with discount factor	USD				19-Jun-19	1			0.999934171
+Curve_DiscountFactor	BLOOMBERG	USD.DF.MID	Curve build with discount factor	USD				1-Jul-19	1			0.999166099
+Curve_DiscountFactor	BLOOMBERG	USD.DF.MID	Curve build with discount factor	USD				9-Jul-19	1			0.998631129
+Curve_DiscountFactor	BLOOMBERG	USD.DF.MID	Curve build with discount factor	USD				15-Jul-19	1			0.998283907
+Curve_DiscountFactor	BLOOMBERG	USD.DF.MID	Curve build with discount factor	USD				24-Jul-19	1			0.997667632
+Curve_DiscountFactor	BLOOMBERG	USD.DF.MID	Curve build with discount factor	USD				22-Aug-19	1			0.99592632
+Curve_DiscountFactor	BLOOMBERG	USD.DF.MID	Curve build with discount factor	USD				24-Sep-19	1			0.993996083
+Curve_DiscountFactor	BLOOMBERG	USD.DF.MID	Curve build with discount factor	USD				23-Oct-19	1			0.9924517
+Curve_DiscountFactor	BLOOMBERG	USD.DF.MID	Curve build with discount factor	USD				22-Nov-19	1			0.990865773
+Curve_DiscountFactor	BLOOMBERG	USD.DF.MID	Curve build with discount factor	USD				24-Dec-19	1			0.989253944
+Curve_DiscountFactor	BLOOMBERG	USD.DF.MID	Curve build with discount factor	USD				24-Mar-20	1			0.984972922
+Curve_DiscountFactor	BLOOMBERG	USD.DF.MID	Curve build with discount factor	USD				24-Jun-20	1			0.980957761
+Curve_DiscountFactor	BLOOMBERG	USD.DF.MID	Curve build with discount factor	USD				23-Dec-20	1			0.973644088
+Curve_DiscountFactor	BLOOMBERG	USD.DF.MID	Curve build with discount factor	USD				23-Jun-21	1			0.966833353
+Curve_DiscountFactor	BLOOMBERG	USD.DF.MID	Curve build with discount factor	USD				22-Jun-22	1			0.952956013
+Curve_DiscountFactor	BLOOMBERG	USD.DF.MID	Curve build with discount factor	USD				22-Jun-23	1			0.938511129
+Curve_DiscountFactor	BLOOMBERG	USD.DF.MID	Curve build with discount factor	USD				24-Jun-24	1			0.923172651
+Curve_DiscountFactor	BLOOMBERG	USD.DF.MID	Curve build with discount factor	USD				22-Jun-29	1			0.837181381
+
+
+

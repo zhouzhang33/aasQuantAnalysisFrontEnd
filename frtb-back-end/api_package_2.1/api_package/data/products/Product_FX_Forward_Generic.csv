@@ -1,0 +1,9 @@
+ValuationDate,18-jun-2019
+BaseCurrency,USD
+Currency,CNY
+DeliveryDate,08-jan-2020
+ForwardRate,6.9099
+Notional,1000000
+BaseCcyDiscountCurve,CURVE_USD_IMPLIED_USDCNY#BLOOMBERG#MID
+DiscountCurve,CURVE_CNY_REPO7D#BLOOMBERG#MID
+FxSpot,FXSPOT_USD#BLOOMBERG#MID

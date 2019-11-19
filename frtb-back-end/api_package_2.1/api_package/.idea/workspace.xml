@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d0d0714f-cfe0-4c44-954c-73ad28e40303" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../EYPricingService/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../EYPricingService/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../frtb-front-end/dist.zip" beforeDir="false" afterPath="$PROJECT_DIR$/../../../frtb-front-end/dist.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../frtb-front-end/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../frtb-front-end/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../frtb-front-end/src/pages/frtb/bond/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../../frtb-front-end/src/pages/frtb/bond/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../frtb-front-end/src/pages/frtb/fxdigitaloption/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../../frtb-front-end/src/pages/frtb/fxdigitaloption/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../frtb-front-end/src/pages/frtb/irsccs/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../../frtb-front-end/src/pages/frtb/irsccs/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../frtb-front-end/src/pages/frtb/swaption/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../../frtb-front-end/src/pages/frtb/swaption/index.vue" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectId" id="1ToXQJS0jIWdlyWtZ0aUF1xtUGF" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/java-example/ApiPricer" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d0d0714f-cfe0-4c44-954c-73ad28e40303" name="Default Changelist" comment="" />
+      <created>1574127404930</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1574127404930</updated>
+      <workItem from="1574127407498" duration="43000" />
+    </task>
+    <servers />
+  </component>
+</project>

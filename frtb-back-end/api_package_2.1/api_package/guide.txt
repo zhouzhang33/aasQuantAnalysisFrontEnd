@@ -1,0 +1,16 @@
+==========================
+Package
+==========================
+./bin folder contains dll binaries.
+./data folder contains example market data csv file, fixing data csv file, and product trade parameter csv files.
+./docs folder contains documentation about market data specifications, fixing data specifications, product parameters, and the javadoc for ApiPricer.jar.
+./java-example folder contains an example java project for ApiPricer.jar.
+./lib folder contains all the jar files to run ApiPricer.jar.
+
+
+==========================
+How to Deploy
+==========================
+- Copy/Add jar files in ./lib folder into java project.
+- Configure java VM "-Djava.library.path=..." by adding with the path of ./bin folder.
+- Add the path of ./bin folder into the Environment Variable 'PATH'. Or simply copy all the dll files in ./bin folder to a folder that is already included in 'PATH'.
