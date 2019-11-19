@@ -52,26 +52,27 @@
                 </el-input>
               </div>
               <div class="left-col2" >
-                <el-input-number
-                        :controls="false"
-                        class="oneContorls"
-                        v-model="bondForm.interestStartDate"
-                >
-                </el-input-number>
+                  <el-date-picker
+                          class="oneContorls"
+                          placeholder="选择日期"
+                          type="date"
+                          v-model="bondForm.interestStartDate">
+                  </el-date-picker>
               </div>
               <div class="left-col1" >
-                <el-input-number
-                        :controls="false"
-                        class="oneContorls"
-                        v-model="bondForm.exerciseDate"
-                >
-                </el-input-number>
+                  <el-date-picker
+                          class="oneContorls"
+                          placeholder="选择日期"
+                          type="date"
+                          v-model="bondForm.exerciseDate">
+                  </el-date-picker>
               </div>
               <div class="left-col2" >
                 <el-input-number
                         :controls="false"
                         class="oneContorls"
                         v-model="bondForm.shouYiLv"
+                        :precision=5
                 >
                 </el-input-number>
               </div>
@@ -80,6 +81,7 @@
                         :controls="false"
                         class="oneContorls"
                         v-model="bondForm.piaoMianZongE"
+                        :precision=5
                 >
                 </el-input-number>
               </div>
@@ -115,6 +117,7 @@
                           class="oneContorls"
                           :controls="false"
                           v-model="bondForm.piaoMianLiLv"
+                          :precision=5
                   >
                   </el-input-number>
                 </div>
@@ -154,6 +157,7 @@
                           :controls="false"
                           class="oneContorls"
                           v-model="bondForm.liCha"
+                          :precision=5
                   >
                   </el-input-number>
                 </div>
@@ -162,6 +166,7 @@
                           :controls="false"
                           class="oneContorls"
                           v-model="bondForm.jieSuanJingE"
+                          :precision=5
                   >
                   </el-input-number>
                 </div>
@@ -200,6 +205,7 @@
                       :controls="false"
                       class="oneContorls"
                       v-model="bondForm.jiZhunLiLvChongZhiPingLv"
+                      :precision=5
               >
               </el-input-number>
             </div>
@@ -208,6 +214,7 @@
                       :controls="false"
                       class="oneContorls"
                       v-model="bondForm.fuDongLiLvCha"
+                      :precision=5
               >
               </el-input-number>
             </div>
@@ -216,6 +223,7 @@
                       :controls="false"
                       class="oneContorls"
                       v-model="bondForm.fuDongLiLvBeiShu"
+                      :precision=5
               >
               </el-input-number>
             </div>
@@ -224,6 +232,7 @@
                       :controls="false"
                       class="oneContorls"
                       v-model="bondForm.fuDongLiLvShangXian"
+                      :precision=5
               >
               </el-input-number>
             </div>
@@ -232,6 +241,7 @@
                       :controls="false"
                       class="oneContorls"
                       v-model="bondForm.fuDongLiLvXiaXian"
+                      :precision=5
               >
               </el-input-number>
             </div>
@@ -262,6 +272,7 @@
                       class="oneContorls"
                       :controls="false"
                       v-model="bondForm.fuxiRiTiaoZheng"
+                      :precision=5
               >
               </el-input-number>
             </div>
@@ -270,6 +281,7 @@
                       class="oneContorls"
                       :controls="false"
                       v-model="bondForm.fuXiPinLV"
+                      :precision=5
               >
               </el-input-number>
               <el-select
@@ -393,6 +405,7 @@
                             :controls="false"
                             class="oneContorls"
                             v-model="bondForm.zhaiQuanZheXianQuXian"
+                            :precision=5
                     >
                     </el-input-number>
                 </div>
@@ -413,6 +426,7 @@
                           :controls="false"
                           class="oneContorls"
                           v-model="bondForm.jiZhunLiLv"
+                          :precision=5
                   >
                   </el-input-number>
                 </div>
@@ -449,6 +463,7 @@
                           :controls="false"
                           class="oneContorls"
                           v-model="bondResultForm.quanJia"
+                          :precision=5
                   >
                   </el-input-number>
                 </div>
@@ -457,6 +472,7 @@
                           :controls="false"
                           class="oneContorls"
                           v-model="bondResultForm.xiuZhengJiuQi"
+                          :precision=5
                   >
                   </el-input-number>
                 </div>
@@ -474,6 +490,7 @@
                           :controls="false"
                           class="oneContorls"
                           v-model="bondResultForm.jingJia"
+                          :precision=5
                   >
                   </el-input-number>
                 </div>
@@ -482,6 +499,7 @@
                           :controls="false"
                           class="oneContorls"
                           v-model="bondResultForm.xiuZhengJiuQi"
+                          :precision=5
                   >
                   </el-input-number>
                 </div>
@@ -499,6 +517,7 @@
                           :controls="false"
                           class="oneContorls"
                           v-model="bondResultForm.yingJiLiXi"
+                          :precision=5
                   >
                   </el-input-number>
                 </div>
@@ -507,6 +526,7 @@
                           :controls="false"
                           class="oneContorls"
                           v-model="bondResultForm.tuXing"
+                          :precision=5
                   >
                   </el-input-number>
                 </div>
@@ -524,6 +544,7 @@
                           :controls="false"
                           class="oneContorls"
                           v-model="bondResultForm.DV01"
+                          :precision=5
                   >
                   </el-input-number>
                 </div>
@@ -532,6 +553,7 @@
                           :controls="false"
                           class="oneContorls"
                           v-model="bondResultForm.VaR"
+                          :precision=5
                   >
                   </el-input-number>
                 </div>
@@ -575,7 +597,8 @@
         >
           <bondComparison v-if="bondShowEarningCurveVisible===0"  />
           <bondCurve v-else-if="bondShowEarningCurveVisible===1" />
-          <bondDiscountCurve v-else />
+          <bondDiscountCurve v-else-if="bondShowEarningCurveVisible===2" />
+          <bondPricing v-else-if="bondShowEarningCurveVisible ===3" />
         </el-dialog>
       </div>
 <!--      <div>-->
@@ -616,11 +639,13 @@ import {
 import bondComparison from "./bondComparison"
 import bondCurve from "./bondEarningCurve"
 import bondDiscountCurve from "./bondDiscountCurve";
+import bondPricing from "./bondPricing";
   export default {
     components: {
       bondComparison,
       bondCurve,
-      bondDiscountCurve
+      bondDiscountCurve,
+      bondPricing
     },
     data () {
       return {
@@ -701,7 +726,8 @@ import bondDiscountCurve from "./bondDiscountCurve";
       },
    // API
       compareResult(){
-        console.log('compareResult')
+        this.bondShowEarningCurveVisible = 3
+        this.bondCompareVisible = true
       },
       showEarningCurve(){
         this.bondShowEarningCurveVisible = 1
@@ -717,15 +743,16 @@ import bondDiscountCurve from "./bondDiscountCurve";
         getBondPricingResult('NPV',this.bondForm).then(res => {
           var keys = Object.keys(res['Result']);
           for(var i=0; i<keys.length; i++){
-            this.bondResultForm[keys[i]]=res['Result'][keys[i]];
+            //this.bondResultForm[keys[i]]=res['Result'][keys[i]];
+            console.log(res['Result'][keys[i]],'response');
           }
 
         }).catch(function (error) {
           console.log(error);
           vm.errorMsg = error;
         });
-        var data={name:Date.now(),Input:this.swapForm,Result:this.swapFormResult};
-        SavePricing('bond',data)
+        // var data={name:Date.now(),Input:this.swapForm,Result:this.swapFormResult};
+        // SavePricing('bond',data)
 
       },
       showbaseInterestCurve(){

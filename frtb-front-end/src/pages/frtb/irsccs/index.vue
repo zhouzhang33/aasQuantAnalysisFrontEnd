@@ -134,6 +134,7 @@
                                                                     :controls="false"
                                                                     class="oneControls"
                                                                     v-model="irsccsFormLeg1.Amount"
+                                                                    :precision=5
                                                             >
                                                             </el-input-number>
                                                         </div>
@@ -175,6 +176,7 @@
                                                                     :controls="false"
                                                                     class="oneContorls"
                                                                     v-model="irsccsFormLeg1.xiPiaoLv"
+                                                                    :precision=5
                                                             >
                                                             </el-input-number>
                                                         </div>
@@ -199,6 +201,7 @@
                                                                     :controls="false"
                                                                     class="oneContorls"
                                                                     v-model="irsccsFormLeg1.xiPiaoLvChengShu"
+                                                                    :precision=5
                                                             >
                                                             </el-input-number>
                                                         </div>
@@ -266,6 +269,7 @@
                                                                     :controls="false"
                                                                     class="oneContorls"
                                                                     v-model="irsccsFormLeg1.dingPanRiTiaoZheng"
+                                                                    :precision=5
                                                             >
                                                             </el-input-number>
                                                         </div>
@@ -274,6 +278,7 @@
                                                                     :controls="false"
                                                                     class="oneContorls"
                                                                     v-model="irsccsFormLeg1.liCha"
+                                                                    :precision=5
                                                             >
                                                             </el-input-number>
                                                         </div>
@@ -333,6 +338,7 @@
                                                                     :controls="false"
                                                                     class="oneControls"
                                                                     v-model="irsccsFormLeg2.Amount"
+                                                                    :precision=5
                                                             >
                                                             </el-input-number>
                                                         </div>
@@ -366,6 +372,7 @@
                                                                     :controls="false"
                                                                     class="oneContorls"
                                                                     v-model="irsccsFormLeg2.xiPiaoLv"
+                                                                    :precision=5
                                                             >
                                                             </el-input-number>
                                                         </div>
@@ -390,6 +397,7 @@
                                                                     :controls="false"
                                                                     class="oneContorls"
                                                                     v-model="irsccsFormLeg2.xiPiaoLvChengShu"
+                                                                    :precision=5
                                                             >
                                                             </el-input-number>
                                                         </div>
@@ -457,6 +465,7 @@
                                                                     :controls="false"
                                                                     class="oneContorls"
                                                                     v-model="irsccsFormLeg2.dingPanRiTiaoZheng"
+                                                                    :precision=5
                                                             >
                                                             </el-input-number>
                                                         </div>
@@ -468,6 +477,7 @@
                                                                     :controls="false"
                                                                     class="oneContorls"
                                                                     v-model="irsccsFormLeg2.liCha"
+                                                                    :precision=5
                                                             >
                                                             </el-input-number>
                                                         </div>
@@ -691,6 +701,7 @@
                                         class="oneContorls"
                                         :controls="false"
                                         v-model="irsccsResultForm.NPV"
+                                        :precision=5
                                 >
                                 </el-input-number>
                             </div>
@@ -711,6 +722,7 @@
                                         class="oneContorls"
                                         :controls="false"
                                         v-model="irsccsResultForm.yinJiLiXi"
+                                        :precision=5
                                 >
                                 </el-input-number>
                             </div>
@@ -726,6 +738,7 @@
                                         class="oneContorls"
                                         :controls="false"
                                         v-model="irsccsResultForm.DV01"
+                                        :precision=5
                                 >
                                 </el-input-number>
                             </div>
@@ -751,6 +764,7 @@
                                             class="oneContorls"
                                             :controls="false"
                                             v-model="irsccsResultForm.NPVLeg1"
+                                            :precision=5
                                     >
                                     </el-input-number>
                                 </div>
@@ -759,6 +773,7 @@
                                             class="oneContorls"
                                             :controls="false"
                                             v-model="irsccsResultForm.DV01Leg1"
+                                            :precision=5
                                     >
                                     </el-input-number>
                                 </div>
@@ -775,6 +790,7 @@
                                             class="oneContorls"
                                             :controls="false"
                                             v-model="irsccsResultForm.yinJiLiXiLeg1"
+                                            :precision=5
                                     >
                                     </el-input-number>
                                 </div>

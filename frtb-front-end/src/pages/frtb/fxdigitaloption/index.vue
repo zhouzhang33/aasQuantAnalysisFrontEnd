@@ -77,6 +77,7 @@
                         :controls="false"
                         class="oneContorls"
                         v-model="digitaloptionForm.benBiJingE"
+                        :precision=5
                 >
                 </el-input-number>
               </div>
@@ -119,6 +120,7 @@
                         :controls="false"
                         class="oneContorls"
                         v-model="digitaloptionForm.waiBiJinE"
+                        :precision=5
                 >
                 </el-input-number>
               </div>
@@ -161,6 +163,7 @@
                         :controls="false"
                         class="oneControls"
                         v-model="digitaloptionForm.xingQuanJia"
+                        :precision=5
                 >
                 </el-input-number>
               </div>
@@ -241,6 +244,7 @@
                       :controls="false"
                       class="oneControls"
                       v-model="digitaloptionForm.benBiDaoQiYuanQiLiLv"
+                      :precision=5
               >
               </el-input-number>
             </div>
@@ -260,6 +264,7 @@
                       :controls="false"
                       class="oneControls"
                       v-model="digitaloptionForm.waiBiDaoQiYuanQiLiLv"
+                      :precision=5
               >
               </el-input-number>
             </div>
@@ -279,6 +284,7 @@
                       :controls="false"
                       class="oneControls"
                       v-model="digitaloptionForm.waiBiDaoJiQiJiaGe"
+                      :precision=5
               >
               </el-input-number>
             </div>
@@ -315,6 +321,7 @@
                         :controls="false"
                         class="oneContorls"
                         v-model="digitaloptionResultForm.NPV"
+                        :precision=5
                 >
                 </el-input-number>
               </div>
@@ -323,6 +330,7 @@
                         :controls="false"
                         class="oneContorls"
                         v-model="digitaloptionResultForm.Vega"
+                        :precision=5
                 >
                 </el-input-number>
               </div>
@@ -340,6 +348,7 @@
                         :controls="false"
                         class="oneContorls"
                         v-model="digitaloptionResultForm.Delta"
+                        :precision=5
                 >
                 </el-input-number>
               </div>
@@ -348,6 +357,7 @@
                         :controls="false"
                         class="oneContorls"
                         v-model="digitaloptionResultForm.Vega"
+                        :precision=5
                 >
                 </el-input-number>
               </div>
@@ -372,6 +382,7 @@
                         :controls="false"
                         class="oneContorls"
                         v-model="digitaloptionResultForm.Rho1"
+                        :precision=5
                 >
                 </el-input-number>
               </div>

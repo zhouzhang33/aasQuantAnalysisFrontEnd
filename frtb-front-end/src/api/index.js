@@ -108,8 +108,61 @@ export function SavePricing(foldername,td){
     data: td
   })
 }
-//*************************
-//mock API
+// //*************************
+// //mock API
+// export function getFXFWDPricingResult(type,td){
+//   return request({
+//     url:'/frtbdata/getFXFWDPricingResult?PricingType='+type,
+//     method:'get',
+//     responseType: 'json',
+//     data: td
+//   })
+// }
+// export function getEuroOptionPricingResult(type,td){
+//   return request({
+//     url: '/frtbdata/getEuroOptionPricingResult?PricingType='+type,
+//     method:'get',
+//     responseType: 'json',
+//     data: td
+//   })
+// }
+// export function getIRSCCSPricingResult(type,td){
+//   return request({
+//     url: '/frtbdata/getIRSCCSPricingResult?PricingType='+type,
+//     method:'get',
+//     responseType: 'json',
+//     data: td
+//   })
+// }
+// export function getBondPricingResult(type,td){
+//   return request({
+//     url: '/frtbdata/getBondPricingResult?PricingType='+type,
+//     method:'get',
+//     responseType: 'json',
+//     data: td
+//   })
+// }
+// export function getSwaptionPricingResult(type,td){
+//   return request({
+//     url: '/frtbdata/getSwaptionPricingResult?PricingType='+type,
+//     method:'get',
+//     responseType: 'json',
+//     data: td
+//   })
+// }
+// export function getFXDigitalPricingResult(type,td){
+//   return request({
+//     url: '/frtbdata/getFXDigitalPricingResult?PricingType='+type,
+//     method:'get',
+//     responseType: 'json',
+//     data: td
+//   })
+// }
+//
+
+ //*************************
+// //后端API
+var url_pre = 'http://127.0.0.1:8081'
 export function getFXFWDPricingResult(type,td){
   return request({
     url:'/frtbdata/getFXFWDPricingResult?PricingType='+type,
@@ -120,7 +173,7 @@ export function getFXFWDPricingResult(type,td){
 }
 export function getEuroOptionPricingResult(type,td){
   return request({
-    url: '/frtbdata/getEuroOptionPricingResult?PricingType='+type,
+    url: url_pre + '/frtbdata/getEuroOptionPricingResult?PricingType='+type,
     method:'get',
     responseType: 'json',
     data: td
@@ -135,9 +188,10 @@ export function getIRSCCSPricingResult(type,td){
   })
 }
 export function getBondPricingResult(type,td){
+  console.log(td,'data in pricing')
   return request({
-    url: '/frtbdata/getBondPricingResult?PricingType='+type,
-    method:'get',
+    url: url_pre + '/frtbdata/getBondPricingResult?PricingType='+type,
+    method:'post',
     responseType: 'json',
     data: td
   })
@@ -158,60 +212,7 @@ export function getFXDigitalPricingResult(type,td){
     data: td
   })
 }
-//
 
- //*************************
-// //后端API
-// var url_pre = 'http://127.0.0.1:8081'
-// export function getFXFWDPricingResult(type,td){
-//   return request({
-//     url:url_pre + '/getFXFWDPricingResult?PricingType='+type,
-//     method:'get',
-//     responseType: 'json',
-//     data: td
-//   })
-// }
-//
-// export function getEuroOptionPricingResult(type,td){
-//   return request({
-//     url:url_pre + '/getEuroOptionPricingResult?PricingType='+type,
-//     method:'get',
-//     responseType: 'json',
-//     data: td
-//   })
-// }
-// export function getIRSCCSPricingResult(type,td){
-//   return request({
-//     url:url_pre + '/getIRSCCSPricingResult?PricingType='+type,
-//     method:'get',
-//     responseType: 'json',
-//     data: td
-//   })
-// }
-// export function getBondPricingResult(type,td){
-//   return request({
-//     url:url_pre + '/getBondPricingResult?PricingType='+type,
-//     method:'get',
-//     responseType: 'json',
-//     data: td
-//   })
-// }
-// export function getSwaptionPricingresult(type,td){
-//   return request({
-//     url:url_pre + '/getSwaptionPricingresult?PricingType='+type,
-//     method:'get',
-//     responseType: 'json',
-//     data: td
-//   })
-// }
-// export function getFXDigitalPricingresult(type,td){
-//   return request({
-//     url:url_pre + '/getFXFWDPricingResult?PricingType='+type,
-//     method:'get',
-//     responseType: 'json',
-//     data: td
-//   })
-// }
 // *******************************
 export function cpus () {
   return request({

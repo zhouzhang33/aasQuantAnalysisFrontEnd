@@ -45,6 +45,7 @@
                             :controls="false"
                             class="oneContorls"
                             v-model="swaptionForm.xingQuanJia"
+                            :precision=5
                     >
                     </el-input-number>
                   </div>
@@ -156,6 +157,7 @@
                             :controls="false"
                             class="oneContorls"
                             v-model="swaptionForm.qiQuanFei"
+                            :precision=5
                     >
                     </el-input-number>
                   </div>
@@ -276,6 +278,7 @@
                             :controls="false"
                             class="oneContorls"
                             v-model="swaptionForm.piaoMianLiLv"
+                            :precision=5
                     >
                     </el-input-number>
                   </div>
@@ -401,6 +404,7 @@
                             :controls="false"
                             class="oneContorls"
                             v-model="swaptionForm.fuDongLiLvLiCha"
+                            :precision=5
                     >
                     </el-input-number>
                   </div>
@@ -433,6 +437,7 @@
                             :controls="false"
                             class="oneContorls"
                             v-model="swaptionForm.gangGanLv"
+                            :precision=5
                     >
                     </el-input-number>
                   </div>
@@ -570,6 +575,7 @@
                             :controls="false"
                             class="oneContorls"
                             v-model="swaptionResultForm.pingZhiXingQuanJia"
+                            :precision=5
                     >
                     </el-input-number>
                   </div>
@@ -578,6 +584,7 @@
                             :controls="false"
                             class="oneContorls"
                             v-model="swaptionResultForm.NPV"
+                            :precision=5
                     >
                     </el-input-number>
                   </div>
@@ -594,6 +601,7 @@
                             :controls="false"
                             class="oneContorls"
                             v-model="swaptionResultForm.shouYiLv"
+                            :precision=5
                     >
                     </el-input-number>
                   </div>
@@ -602,6 +610,7 @@
                             :controls="false"
                             class="oneContorls"
                             v-model="swaptionResultForm.NPVWuFeiYong"
+                            :precision=5
                     >
                     </el-input-number>
                   </div>
@@ -618,6 +627,7 @@
                             :controls="false"
                             class="oneContorls"
                             v-model="swaptionResultForm.yinHanBoDongLv"
+                            :precision=5
                     >
                     </el-input-number>
                   </div>
@@ -635,6 +645,7 @@
                             :controls="false"
                             class="oneContorls"
                             v-model="swaptionResultForm.qiQuanFei"
+                            :precision=5
                     >
                     </el-input-number>
                   </div>
@@ -654,6 +665,7 @@
                             :controls="false"
                             class="oneContorls"
                             v-model="swaptionResultForm.DV01"
+                            :precision=5
                     >
                     </el-input-number>
                   </div>
@@ -669,6 +681,7 @@
                             :controls="false"
                             class="oneContorls"
                             v-model="swaptionResultForm.Gamma"
+                            :precision=5
                     >
                     </el-input-number>
                   </div>
@@ -684,6 +697,7 @@
                             :controls="false"
                             class="oneContorls"
                             v-model="swaptionResultForm.Vega"
+                            :precision=5
                     >
                     </el-input-number>
                   </div>
@@ -699,6 +713,7 @@
                             :controls="false"
                             class="oneContorls"
                             v-model="swaptionResultForm.Theta"
+                            :precision=5
                     >
                     </el-input-number>
                   </div>
