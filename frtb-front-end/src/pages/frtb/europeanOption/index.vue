@@ -2841,7 +2841,8 @@
                 console.log(res, 'res')
                 var keys = Object.keys(res['Result']);
                 for(var i=0; i<keys.length; i++){
-                    this.europeanResultLeg1[keys[i]]=res['Result'][keys[i]];
+                    //this.europeanResultLeg1[keys[i]]=res['Result'][keys[i]];
+                    console.log(res['Result'][keys[i]],'response');
                 }
             }).catch(function (error) {
                 console.log(error);

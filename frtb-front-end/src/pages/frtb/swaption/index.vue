@@ -765,7 +765,8 @@
 
 import {
   getInterestCurve,
-  getSwaptionPricingResult
+  getSwaptionPricingResult,
+  SavePricing
 } from '@api/index'
 import survecurve from '../UIPara/surf'
 import {
@@ -842,6 +843,7 @@ export default {
     calcPricing(){
       console.log('call pricing')
       getSwaptionPricingResult('NPV',this.swaptionForm).then(res => {
+        console.log(res,'res')
         var keys = Object.keys(res['Result']);
         for(var i=0; i<keys.length; i++){
           this.swaptionResultForm[keys[i]]=res['Result'][keys[i]];

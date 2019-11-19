@@ -949,10 +949,11 @@
         calcPricing(){
             console.log('call pricing')
             var data={
+                'type':this.recordSelected,
                 'leg1':this.irsccsFormLeg1,
                 'leg2':this.irsccsFormLeg2
             }
-            getIRSCCSPricingResult(this.irsccsResultForm.calculationTarget,data).then(res => {
+            getIRSCCSPricingResult('NPV',data).then(res => {
                 console.log(res, 'res')
                 var keys = Object.keys(res['Result']);
                 for(var i=0; i<keys.length; i++){

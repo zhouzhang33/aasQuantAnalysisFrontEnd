@@ -165,8 +165,8 @@ export function SavePricing(foldername,td){
 var url_pre = 'http://127.0.0.1:8081'
 export function getFXFWDPricingResult(type,td){
   return request({
-    url:'/frtbdata/getFXFWDPricingResult?PricingType='+type,
-    method:'get',
+    url: url_pre + '/frtbdata/getFXFWDPricingResult?PricingType='+type,
+    method:'post',
     responseType: 'json',
     data: td
   })
@@ -174,15 +174,15 @@ export function getFXFWDPricingResult(type,td){
 export function getEuroOptionPricingResult(type,td){
   return request({
     url: url_pre + '/frtbdata/getEuroOptionPricingResult?PricingType='+type,
-    method:'get',
+    method:'post',
     responseType: 'json',
     data: td
   })
 }
 export function getIRSCCSPricingResult(type,td){
   return request({
-    url: '/frtbdata/getIRSCCSPricingResult?PricingType='+type,
-    method:'get',
+    url: url_pre + '/frtbdata/getIRSCCSPricingResult?PricingType='+type,
+    method:'post',
     responseType: 'json',
     data: td
   })
@@ -198,16 +198,16 @@ export function getBondPricingResult(type,td){
 }
 export function getSwaptionPricingResult(type,td){
   return request({
-    url: '/frtbdata/getSwaptionPricingResult?PricingType='+type,
-    method:'get',
+    url: url_pre + '/frtbdata/getSwaptionPricingResult?PricingType='+type,
+    method:'post',
     responseType: 'json',
     data: td
   })
 }
 export function getFXDigitalPricingResult(type,td){
   return request({
-    url: '/frtbdata/getFXDigitalPricingResult?PricingType='+type,
-    method:'get',
+    url: url_pre + '/frtbdata/getFXDigitalPricingResult?PricingType='+type,
+    method:'post',
     responseType: 'json',
     data: td
   })
