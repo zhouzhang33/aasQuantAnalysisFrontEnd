@@ -1,51 +1,32 @@
 package com.ey.pricingservice.server;
 
-import com.quant.release.api.ApiPricer;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-
-
-import com.ey.pricingservice.entity.FXFWDConstant;
-import com.ey.pricingservice.entity.TermStructureConstant;
+import com.ey.pricingservice.entity.*;
+import com.quant.release.api.ApiPricer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.util.ResourceUtils;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.io.File;
-import com.quant.release.api.ApiPricer;
-import com.ey.pricingservice.entity.BondConstant;
-import com.ey.pricingservice.entity.FX_EuropeanVanilla;
-import com.ey.pricingservice.entity.FX_ForwardConstant;
-import com.ey.pricingservice.entity.FX_DigitalConstant;
-import com.ey.pricingservice.entity.FX_SwaptionConstant;
-import com.ey.pricingservice.entity.IRSConstant;
-import com.ey.pricingservice.entity.CCSConstant;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
 // , targetNamespace = "http://com.ey.pricingservice"
 @RestController
 @CrossOrigin
 public class PricingServiceImpl implements PricingService {
 
-    static Logger log = LogManager.getLogger(WebserviceApplication.class.getName());
+    private static Logger log = LogManager.getLogger(PricingServiceImpl.class.getName());
     private final String ERR_MSG = " ERR_INF:=";
     private final String PROCESS_START = " Processing START para:=";
     private final String RPOCESS_SUCCESS_END = " Processing SUCCESS para:=";
     private final String PROCESS_FAILED_END = " Processing FAIL";
-    FXFWDConstant fxfwdConstant;
     TermStructureConstant termStructureConstant;
     BondConstant bondConstant;
     ApiPricer api;
 
-    PricingServiceImpl(){
+    PricingServiceImpl() {
 
         String pathTestMarketCsv = "./TestMarket.csv";
         // Change path to local file location of "TestFixings.csv".
@@ -59,11 +40,14 @@ public class PricingServiceImpl implements PricingService {
         String contextID = "Test api pricer";
         //String marketDataFilePath = new File(pathTestMarketCsv).getPath();
         //String fixingDataFilePath = new File(pathTestFixingsCsv).getPath();
-        String marketDataFilePath = this.getClass().getClassLoader().getResource("TestMarket.csv").getPath();
-        String fixingDataFilePath = this.getClass().getClassLoader().getResource("TestFixings.csv").getPath();
+        //  String marketDataFilePath = this.getClass().getClassLoader().getResource("TestMarket.csv").getPath();
+        //  String fixingDataFilePath = this.getClass().getClassLoader().getResource("TestFixings.csv").getPath();
+        String marketDataFilePath = "C:\\06 Code\\Test_Space\\aasQuantAnalysisFrontEnd\\frtb-back-end\\EYPricingService\\target\\classes\\TestMarket.csv";
+        String fixingDataFilePath = "C:\\06 Code\\Test_Space\\aasQuantAnalysisFrontEnd\\frtb-back-end\\EYPricingService\\target\\classes\\TestFixings.csv";
 
+        // Todo 最终给客户演示时，需要在具有License的机器上，把debugMode关掉，否则无法运行
         boolean debugMode = true;
-        api = new ApiPricer(contextID, marketDataFilePath, fixingDataFilePath,debugMode);
+        api = new ApiPricer(contextID, marketDataFilePath, fixingDataFilePath, debugMode);
         String[] mdSigs = api.getMarketDataSignatures();
         String[] fdSigs = api.getFixingsDataSignatures();
     }
@@ -73,8 +57,8 @@ public class PricingServiceImpl implements PricingService {
         return null;
     }
 
-    @RequestMapping(value ="/test")
-    public String test(){
+    @RequestMapping(value = "/test")
+    public String test() {
         System.out.println("================================================================================");
         return "status:ok";
     }
@@ -142,23 +126,24 @@ public class PricingServiceImpl implements PricingService {
     @Override
     @RequestMapping(value = "/frtbdata/getIRSCCSPricingResult")
     public JSONObject getIRSCCSPricingResult(@RequestParam(value = "PricingType", required = true) String pricingType, @RequestBody Object requestContent) {
-       JSONObject jRequestContent =(JSONObject) requestContent;
-       String pType = jRequestContent.getString("type");
+        JSONObject jRequestContent = (JSONObject) requestContent;
+        String pType = jRequestContent.getString("type");
 
-       if(pType.equals("IRS"))
-           return getIRSPricingResult(pricingType,jRequestContent);
-       else
-           return getCCSPricingResult(pricingType,jRequestContent);
+        if (pType.equals("IRS"))
+            return getIRSPricingResult(pricingType, jRequestContent);
+        else
+            return getCCSPricingResult(pricingType, jRequestContent);
 
     }
+
     @Override
-    public JSONObject getIRSPricingResult(String pricingType, Object requestContent){
-        JSONObject jRequestContent =(JSONObject) requestContent;
+    public JSONObject getIRSPricingResult(String pricingType, Object requestContent) {
+        JSONObject jRequestContent = (JSONObject) requestContent;
         Map<String, String> m = new HashMap<String, String>();
         String key;
         String value;
         String[] results;
-        JSONObject res =new JSONObject();
+        JSONObject res = new JSONObject();
         log.info(pricingType + " ----  Pricing Type");
         String prodCode = "Product_OISSwap_Generic";
         String csvParams = "ValuationDate,18-jun-2019\r\n" +
@@ -184,18 +169,18 @@ public class PricingServiceImpl implements PricingService {
                 "FloatLegIndexCurve,CURVE_USD_OIS#BLOOMBERG#MID\r\n" +
                 "FloatLegIndexFixings,FEDL01#BLOOMBERG#1";
         results = api.evaluate(prodCode, csvParams);
-        res.put("Result",IRSConstant.parseFromResults(results));
+        res.put("Result", IRSConstant.parseFromResults(results));
         return res;
     }
 
     @Override
-    public JSONObject getCCSPricingResult(String pricingType, Object requestContent){
-        JSONObject jRequestContent =(JSONObject) requestContent;
+    public JSONObject getCCSPricingResult(String pricingType, Object requestContent) {
+        JSONObject jRequestContent = (JSONObject) requestContent;
         Map<String, String> m = new HashMap<String, String>();
         String key;
         String value;
         String[] results;
-        JSONObject res =new JSONObject();
+        JSONObject res = new JSONObject();
         log.info(pricingType + " ----  Pricing Type");
         String prodCode = "Product_CCBasisSwap_Generic";
         String csvParams = "ValuationDate,18-jun-2019\r\n" +
@@ -220,7 +205,7 @@ public class PricingServiceImpl implements PricingService {
                 "FxSpot,FXSPOT_USD#BLOOMBERG#MID";
         results = api.evaluate(prodCode, csvParams);
 
-        res.put("Result",CCSConstant.parseFromResults(results));
+        res.put("Result", CCSConstant.parseFromResults(results));
         return res;
     }
 
@@ -231,7 +216,7 @@ public class PricingServiceImpl implements PricingService {
         String key;
         String value;
         String[] results;
-        JSONObject res =new JSONObject();
+        JSONObject res = new JSONObject();
         log.info(pricingType + " ----  Pricing Type");
         String prodCode = "Product_Swaption_Generic";
         String csvParams = "ValuationDate,18-jun-2019\r\n" +
@@ -253,7 +238,7 @@ public class PricingServiceImpl implements PricingService {
                 "SwapFloatLegIndexFixings,US0003M#BLOOMBERG#1\r\n" +
                 "Volatility,Vol_USD_SWAPTION_VCUB_LIBOR3M#BLOOMBERG#MID";
         results = api.evaluate(prodCode, csvParams);
-        res.put("Result",FX_SwaptionConstant.parseFromResults(results));
+        res.put("Result", FX_SwaptionConstant.parseFromResults(results));
         return res;
 
 
@@ -262,12 +247,12 @@ public class PricingServiceImpl implements PricingService {
 
     @Override
     @RequestMapping(value = "/frtbdata/getFXDigitalPricingResult")
-    public JSONObject getFXDigitalPricingResult(@RequestParam(value = "PricingType", required = true) String pricingType, @RequestBody Object requestContent){
+    public JSONObject getFXDigitalPricingResult(@RequestParam(value = "PricingType", required = true) String pricingType, @RequestBody Object requestContent) {
         Map<String, String> m = new HashMap<String, String>();
         String key;
         String value;
         String[] results;
-        JSONObject res =new JSONObject();
+        JSONObject res = new JSONObject();
         log.info(pricingType + " ----  Pricing Type");
         String prodCode = "Product_FX_Digital_Generic";
         String csvParams = "ValuationDate,18-jun-2019\r\n" +
@@ -289,45 +274,67 @@ public class PricingServiceImpl implements PricingService {
                 "Volatility,VOL_USDCNY_OPTIONVOL#BLOOMBERG#MID";
         results = api.evaluate(prodCode, csvParams);
         String[] sourceStrArray = results[1].split("\r\n");
-        res.put("Result",FX_DigitalConstant.parseFromResults(results));
+        res.put("Result", FX_DigitalConstant.parseFromResults(results));
         return res;
     }
 
 
+    /*Todo 需要根据品种修改自己的Function
+        1. 增加自己的Request实体Class，把自己前端传进来的报文，解析出来。 见下文包含 FXFWDRequest.class 这一行的代码
+        1.1 在编写 自己的Request实体Class时， 建议来到这个网址， http://www.bejson.com/json2javapojo/new/ 把顾博士示例用的Form 放进去，会自动生成Pojo实体 Class，注意事项见下文。
+        1.2 由于需要跟发送报文的格式匹配，强烈建议检查每个取值的 类型是否标准。
+        1.3 匹配过程最容易遇到的问题就是字符类型不匹配，所以强烈建议，日期类型用 Date，然后参考 DateStandardString 这一行的实现方法把他转成标准格式
+        1.4 数值类型用 Double， 字符类型就是 String
+        2. 在下文对自己报文与定价所需Input要素，做一一匹配
+        2.1 目标数据类型一定是 String
+        2.2 最简单的方法是直接用字符串拼接的方法 + + 就搞定了
+        3. 最后就是返回数值了，返回数值也是csv格式
+        3.1 To 顾博士，目前我发现返回值好像还有对应关系有问题的情况，明天可以再看一下，跟他们同步修改吧
+        以上是我能想到最快的修改方法了。。 供大家参考。
+    */
+
     @Override
     @RequestMapping(value = "/frtbdata/getFXFWDPricingResult")
-    public JSONObject getFXFWDPricingResult(@RequestParam(value = "PricingType", required = true) String pricingType, @RequestBody Object requestContent){
-        Map<String, String> m = new HashMap<String, String>();
-        String key;
-        String value;
+    public JSONObject getFXFWDPricingResult(@RequestParam(value = "PricingType", required = true) String pricingType, @RequestBody Object requestContent) {
+
         String[] results;
-        JSONObject res =new JSONObject();
+        JSONObject res = new JSONObject();
         log.info(pricingType + " ----  Pricing Type");
+
+        FXFWDRequest fxfwdRequest = JSON.parseObject(requestContent.toString(), FXFWDRequest.class);
+        String baseCurrency = fxfwdRequest.getCurrencyPair().substring(0, 3);
+        String termCurrency = fxfwdRequest.getCurrencyPair().substring(4, 7);
+        String deliveryDate = DateStandardString(fxfwdRequest.getYuanDuanJiaogeRi());
+        String valuationDate = DateStandardString(Calendar.getInstance().getTime());
+
+        log.info("baseCurrency:" + baseCurrency + "-----termCurrency:" + termCurrency + "-----deliveryDate:" + deliveryDate + "-----valuationDate:" + valuationDate);
         String prodCode = "Product_FX_Forward_Generic";
-        String csvParams = "ValuationDate,18-jun-2019\r\n" +
-                "BaseCurrency,USD\r\n" +
-                "Currency,CNY\r\n" +
-                "DeliveryDate,08-jan-2020\r\n" +
-                "ForwardRate,6.9099\r\n" +
-                "Notional,1000000\r\n" +
+        String csvParams = "ValuationDate," + valuationDate + "\r\n" +
+                "BaseCurrency," + baseCurrency + "\r\n" +
+                "Currency," + termCurrency + "\r\n" +
+                "DeliveryDate," + deliveryDate + "\r\n" +
+                "ForwardRate," + fxfwdRequest.getYuanDuanHuiLv() + "\r\n" +
+                "Notional," + fxfwdRequest.getWaiBiYuaDuanLiLv() + "\r\n" +
                 "BaseCcyDiscountCurve,CURVE_USD_IMPLIED_USDCNY#BLOOMBERG#MID\r\n" +
                 "DiscountCurve,CURVE_CNY_REPO7D#BLOOMBERG#MID\r\n" +
                 "FxSpot,FXSPOT_USD#BLOOMBERG#MID\r\n" +
                 "";
         results = api.evaluate(prodCode, csvParams);
+        log.info(results[1].toString());
         String[] sourceStrArray = results[1].split("\r\n");
-        res.put("Result",FX_ForwardConstant.parseFromResults(results));
+        res.put("Result", FX_ForwardConstant.parseFromResults(results));
+        log.info(res.toJSONString());
         return res;
     }
 
     @Override
     @RequestMapping(value = "/frtbdata/getEuroOptionPricingResult")
-    public JSONObject getFXEuropeanPricingResult(@RequestParam(value = "PricingType", required = true) String pricingType, @RequestBody Object requestContent){
+    public JSONObject getFXEuropeanPricingResult(@RequestParam(value = "PricingType", required = true) String pricingType, @RequestBody Object requestContent) {
         Map<String, String> m = new HashMap<String, String>();
         String key;
         String value;
         String[] results;
-        JSONObject res =new JSONObject();
+        JSONObject res = new JSONObject();
         log.info(pricingType + " ----  Pricing Type");
         String prodCode = "Product_FX_EuropeanVanilla_Generic";
         String csvParams = "ValuationDate,18-jun-2019\r\n" +
@@ -350,9 +357,11 @@ public class PricingServiceImpl implements PricingService {
                 "Volatility,VOL_USDCNY_OPTIONVOL#BLOOMBERG#MID";
         results = api.evaluate(prodCode, csvParams);
         String[] sourceStrArray = results[1].split("\r\n");
-        res.put("Result",FX_EuropeanVanilla.parseFromResults(results));
+        res.put("Result", FX_EuropeanVanilla.parseFromResults(results));
         return res;
-    };
+    }
+
+    ;
 
     @Override
     @RequestMapping(value = "/frtbdata/getBondPricingResult")
@@ -362,7 +371,7 @@ public class PricingServiceImpl implements PricingService {
         String key;
         String value;
         String[] results;
-        JSONObject res =new JSONObject();
+        JSONObject res = new JSONObject();
         log.info(pricingType + " ----  Pricing Type");
         String prodCode = "Product_Bond_Generic";
         String csvParams = "ValuationDate,10-oct-2011\r\n" +
@@ -394,10 +403,29 @@ public class PricingServiceImpl implements PricingService {
                 "CallPrice,120";
         results = api.evaluate(prodCode, csvParams);
         String[] sourceStrArray = results[1].split("\r\n");
-        res.put("Result",BondConstant.parseFromResults(results));
+        res.put("Result", BondConstant.parseFromResults(results));
         return res;
 
 
+    }
+
+    public String DateStandardString(Object date) {
+        SimpleDateFormat DateFormat = new SimpleDateFormat("dd-MMM-yyyy", Locale.US);
+        if (date instanceof Date) {
+            return DateFormat.format(date);
+        } else if (date instanceof String) {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy", Locale.US);
+            try {
+                Date petsDate = simpleDateFormat.parse((String) date);
+                return DateFormat.format(petsDate);
+            } catch (ParseException e) {
+                log.error("parse date error:{}  date:{}", e.getMessage(), date);
+                return DateFormat.format(new Date());
+            }
+        } else {
+            log.error("date:{} type:{} not supported", date, date.getClass());
+            return DateFormat.format(new Date());
+        }
     }
 
 }
