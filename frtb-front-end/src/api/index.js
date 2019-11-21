@@ -171,6 +171,14 @@ export function getFXFWDPricingResult(type,td){
     data: td
   })
 }
+export function getFXFWDSwapPricingResult(type,td){
+  return request({
+    url: url_pre + '/frtbdata/getFXFWDSwapPricingResult?PricingType='+type,
+    method:'post',
+    responseType: 'json',
+    data: td
+  })
+}
 export function getEuroOptionPricingResult(type,td){
   return request({
     url: url_pre + '/frtbdata/getEuroOptionPricingResult?PricingType='+type,

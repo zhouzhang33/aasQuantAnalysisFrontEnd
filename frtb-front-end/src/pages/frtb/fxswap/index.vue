@@ -418,7 +418,7 @@
                           class="controls-a-line"
                           disabled
                           :precision=5
-                          v-model="swapFormResult.PV1"
+                          v-model="swapFormResult.NPV"
                   >
                   </el-input-number>
                   <span>
@@ -547,7 +547,6 @@
                           </el-col>
                       </el-col>
                   </div>
-
               </div>
        </el-col>
       </div>
@@ -557,11 +556,9 @@
                     :visible.sync="interestialogTableVisible"
                     :append-to-body="true"
                     width="70%"
-
             >
                 <div class='box-card' style="height:100%">
                     <div class="box-card-title"></div>
-
                 <el-table
                         :data="interestCurveData"
                         :cell-style="rowstyle"
@@ -578,7 +575,6 @@
                 </div>
             </el-dialog>
       </div>
-
             <!--      </d2-grid-item>-->
     </d2-grid-layout>
   </d2-container>
@@ -589,7 +585,8 @@
   import {
     getFXFWDPricingResult,
     getInterestCurve,
-    SavePricing
+    SavePricing,
+    getFXFWDSwapPricingResult
   } from '@api/index'
   import {
       currencyPairOptions,
@@ -716,19 +713,38 @@
         },
         calcPricing() {
             console.log('call pricing')
-            getFXFWDPricingResult('NPV',this.swapForm).then(res => {
-                console.log(res, 'res')
-                var keys = Object.keys(res['Result']);
-                for(var i=0; i<keys.length; i++){
-                    // console.log({"key": keys[i], "value": res[keys[i]]})
-                    // this.resultData1[i] = {"key": keys[i], "value": res['FX'][keys[i]]}
-                    this.swapFormResult[keys[i]]=res['Result'][keys[i]];
-                }
+            if(this.swapForm.tradingType === '掉期') {
+                getFXFWDSwapPricingResult('NPV',this.swapForm).then(res => {
+                    console.log(res, 'res')
+                    let keys = Object.keys(res['Result']);
+                    for(let i=0; i<keys.length; i++){
 
-            }).catch(function (error) {
-                console.log(error);
-                vm.errorMsg = error;
-            });
+                        this.swapFormResult[keys[i]]=res['Result'][keys[i]];
+                    }
+
+                }).catch(function (error) {
+                    console.log(error);
+                    vm.errorMsg = error;
+                });
+
+            }else{
+                getFXFWDPricingResult('NPV',this.swapForm).then(res => {
+                    console.log(res, 'FX FWD')
+                    let keys = Object.keys(res['Result']);
+                    for(let i=0; i<keys.length; i++){
+                        // console.log({"key": keys[i], "value": res[keys[i]]})
+                        // this.resultData1[i] = {"key": keys[i], "value": res['FX'][keys[i]]}
+                        this.swapFormResult[keys[i]]=res['Result'][keys[i]];
+                    }
+
+                }).catch(function (error) {
+                    console.log(error);
+                    vm.errorMsg = error;
+                });
+
+            }
+
+
             var data={name:Date.now(),Input:this.swapForm,Result:this.swapFormResult};
             SavePricing('fxswap',data)
 
