@@ -1,9 +1,11 @@
 package com.ey.pricingservice.entity;
+
 import com.alibaba.fastjson.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-public class FX_ForwardConstant {
+
+public class FX_SwapConstant {
     public static String[][]  RequestMapping= {
             {"Price (CNY)","NPV"},
     };
@@ -19,18 +21,25 @@ public class FX_ForwardConstant {
         }
 
         for(istr=para_count;istr<lines.length;istr++){
-            if(lines[istr].indexOf("FX RATE CURRENCY PAY DATE   AMOUNT")>-1){
+            if(lines[istr].indexOf("DATE        FOREIGN PV       FOREIGN ACTUAL DOMESTIC PV       DOMESTIC ACTUAL SWAP PV           SWAP ACTUAL")>-1){
                 istr++;
                 break;
             }
         }
         String Cash_Flow_Table="";
-        for(;istr<lines.length;istr++){
+        int PV_line =0;
+        for(;istr<lines.length;istr++,PV_line++){
             if (lines[istr] == null || lines[istr] == "" ||lines[istr].length() ==0)
                 break;
             String[] para = lines[istr].split("\\s+");
-            String oneDataLine =String.format("{\"FX_RATE_CURRENCY\":\"%s\",\"PAY_DATE\":\"%s\",\"AMOUNT\":\"%s\"},",para[0],
-                    para[1],para[2]);
+            String oneDataLine =String.format("{\"DATE\":\"%s\",\"FOREIGN PV\":\"%s\",\"FOREIGN ACTUAL\":\"%s\",\"DOMESTIC PV\":\"%s\",\"DOMESTIC ACTUAL\":\"%s\",\"SWAP PV\":\"%s\",\"SWAP ACTUAL\":\"%s\"},",para[0],
+                    para[1],para[2],para[3],para[4],para[5],para[6]);
+
+            if(PV_line==0)
+                m.put("PV1",para[5]);
+            else if(PV_line==1)
+                m.put("PV2",para[5]);
+
             Cash_Flow_Table = Cash_Flow_Table + oneDataLine +"\r\n";
         }
         m.put("Cash_Flow",Cash_Flow_Table);

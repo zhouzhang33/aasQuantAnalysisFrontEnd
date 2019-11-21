@@ -6,6 +6,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FX_SwaptionConstant {
+    public static String[][]  RequestMapping= {
+                        {"ATM Strike","pingZhiXingQuanJia"},
+                        {"NPV","NPV"},
+                        {"Delta","DV01"},
+                        {"Gamma","Gamma"},
+                        {"Implied Vol","yinHanBoDongLv"},
+                        {"Vega","Vega"},
+                        {"Theta","Theta"}};
+
     public static JSONObject parseFromResults(String [] results){
         Map<String, Object> m = new HashMap<String, Object>();
         int para_count = 12;
@@ -17,6 +26,10 @@ public class FX_SwaptionConstant {
             m.put(para[0],para[1]);
         }
 
+        for (String[] strings : RequestMapping) {
+            m.put(strings[1], m.get(strings[0]));
+            m.remove(strings[0]);
+        }
 
         JSONObject res = new JSONObject(m);
         return res;

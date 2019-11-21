@@ -30,6 +30,7 @@ import com.ey.pricingservice.entity.FX_DigitalConstant;
 import com.ey.pricingservice.entity.FX_SwaptionConstant;
 import com.ey.pricingservice.entity.IRSConstant;
 import com.ey.pricingservice.entity.CCSConstant;
+import com.ey.pricingservice.entity.FX_SwapConstant;
 // , targetNamespace = "http://com.ey.pricingservice"
 @RestController
 @CrossOrigin
@@ -258,8 +259,33 @@ public class PricingServiceImpl implements PricingService {
 
 
     }
-
-
+    @Override
+    @RequestMapping(value = "/frtbdata/getFXFWDSwapPricingResult" )
+    public JSONObject getFXFWDSwapPricingResult(@RequestParam(value = "PricingType", required = true) String pricingType, @RequestBody Object requestContent){
+        Map<String, String> m = new HashMap<String, String>();
+        String key;
+        String value;
+        String[] results;
+        JSONObject res =new JSONObject();
+        log.info(pricingType + " ----  Pricing Type");
+        String prodCode = "Product_FX_Swap_Generic";
+        String csvParams = "ValuationDate,18-jun-2019\r\n" +
+                "BaseCurrency,USD\r\n" +
+                "Currency,CNY\r\n" +
+                "NearLegDate,18-jun-2019\r\n" +
+                "NearLegForwardRate,7\r\n" +
+                "NearLegNotional,1000000\r\n" +
+                "FarLegDate,08-jan-2020\r\n" +
+                "FarLegForwardRate,7.2\r\n" +
+                "FarLegNotional,1000000\r\n" +
+                "BaseCcyDiscountCurve,CURVE_USD_IMPLIED_USDCNY#BLOOMBERG#MID\r\n" +
+                "DiscountCurve,CURVE_CNY_REPO7D#BLOOMBERG#MID\r\n" +
+                "FxSpot,FXSPOT_USD#BLOOMBERG#MID\r\n" +
+                "";
+        results = api.evaluate(prodCode, csvParams);
+        res.put("Result",FX_SwapConstant.parseFromResults(results));
+        return res;
+    }
     @Override
     @RequestMapping(value = "/frtbdata/getFXDigitalPricingResult")
     public JSONObject getFXDigitalPricingResult(@RequestParam(value = "PricingType", required = true) String pricingType, @RequestBody Object requestContent){
@@ -288,7 +314,6 @@ public class PricingServiceImpl implements PricingService {
                 "FxSpot,FXSPOT_USD#BLOOMBERG#MID\r\n" +
                 "Volatility,VOL_USDCNY_OPTIONVOL#BLOOMBERG#MID";
         results = api.evaluate(prodCode, csvParams);
-        String[] sourceStrArray = results[1].split("\r\n");
         res.put("Result",FX_DigitalConstant.parseFromResults(results));
         return res;
     }

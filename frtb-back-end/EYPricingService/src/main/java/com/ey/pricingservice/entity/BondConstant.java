@@ -9,6 +9,17 @@ import java.util.List;
 import java.util.Map;
 
 public class BondConstant {
+   // public static Map<String,String> OutputMappint = {"[USD]PV":"quanJia","[USD]Clean":"jingJia"};
+      public static String[][]  RequestMapping= {
+                                                  {"[USD]PV","quanJia"},
+                                                  {"[USD]Clean","jingJia"},
+                                                  {"Accrued Daycount","yingJiLiXi"},
+                                                  {"[USD]DV01","DV01"},
+                                                  {"Macaulay Duration","maishiJiuQi"},
+                                                  {"Modified Duration","xiuZhengJiuQi"},
+                                                  {"Convexity","tuXing"} };
+
+
     public static JSONObject parseFromResults(String [] results){
         Map<String, Object> m = new HashMap<String, Object>();
         int para_count = 29;
@@ -57,7 +68,17 @@ public class BondConstant {
         m.put("Payment_Schedule",Payment_Schedule);
         m.put("Cash_Flow_Table",Cash_Flow_Table);
 
+        for (int i=0;i<RequestMapping.length;i++){
+            m.put(RequestMapping[i][1],m.get(RequestMapping[i][0]));
+            m.remove(RequestMapping[i][0]);
+        }
+
         JSONObject res = new JSONObject(m);
+
+
+
+
+
         return res;
     };
 
