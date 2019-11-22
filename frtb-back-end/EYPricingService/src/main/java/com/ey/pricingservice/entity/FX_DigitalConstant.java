@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 public class FX_DigitalConstant {
+    public static String[][]  RequestMapping= {
+            {"Price(CNY)","NPV"},
+    };
     public static JSONObject parseFromResults(String [] results){
         Map<String, Object> m = new HashMap<String, Object>();
         int para_count = 6;
@@ -17,7 +20,10 @@ public class FX_DigitalConstant {
             String[] para = lines[istr].split(",");
             m.put(para[0],para[1]);
         }
-
+        for (String[] strings : RequestMapping) {
+            m.put(strings[1], m.get(strings[0]));
+            m.remove(strings[0]);
+        };
         JSONObject res = new JSONObject(m);
         return res;
     };

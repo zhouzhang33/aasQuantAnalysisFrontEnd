@@ -6,6 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 public class IRSConstant {
+    public static String[][]  RequestMapping= {
+            {"Fixed Leg PV (USD)", "NPV"},
+            {"Fixed Leg Accrued (USD)", "yinJiLiXiLeg1"},
+            {"USD_DV01 (USD)", "DV01Leg1"}
+    };
+
     public static JSONObject parseFromResults(String [] results){
         Map<String, Object> m = new HashMap<String, Object>();
         int para_count = 14;
@@ -16,6 +22,12 @@ public class IRSConstant {
             String[] para = lines[istr].split(",",2);
             m.put(para[0],para[1]);
         }
+
+        for (String[] strings : RequestMapping) {
+            m.put(strings[1], m.get(strings[0]));
+            m.remove(strings[0]);
+        };
+
         JSONObject res = new JSONObject(m);
         return res;
     };

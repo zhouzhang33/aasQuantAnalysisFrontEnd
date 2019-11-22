@@ -19,7 +19,7 @@ public interface PricingService {
     public JSONObject getFXDigitalPricingResult(String pricingType, Object requestContent);
     public JSONObject getSwaptionPricingResult(String pricingType, Object requestContent);
     public JSONObject getIRSCCSPricingResult(String pricingType, Object requestContent);
-
+    public JSONObject getFXFWDSwapPricingResult(String pricingType,Object requestContent);
     public JSONObject getIRSPricingResult(String pricingType, Object requestContent);
     public JSONObject getCCSPricingResult(String pricingType, Object requestContent);
 }

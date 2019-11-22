@@ -27,7 +27,7 @@ export var swapForm = {
 }
 
 export var swapFormResult = {
-       PV1: '0',
+        PV1: '0',
         PV2: '0',
         NPV: '0',
         calcUnit:'CNY',
@@ -175,7 +175,7 @@ export var irsccsResultForm = {
 }
 
 export var bondForm={
-    jiXiTianShuFangshi:'ACT/365',
+        jiXiTianShuFangshi:'ACT/365',
         yingYeRiGuiZe:'调整至下一营业日',
         zhaiQuanShouYiLvQuXianMingCheng:'中债企业债到期收益率曲线',
         jiZhunLiLvCanKaoQuXian:'人民币FR007收益曲线',

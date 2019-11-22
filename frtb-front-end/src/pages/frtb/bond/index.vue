@@ -741,9 +741,9 @@ import bondPricing from "./bondPricing";
       calcPricing() {
         console.log('call pricing')
         getBondPricingResult('NPV',this.bondForm).then(res => {
-          var keys = Object.keys(res['Result']);
-          for(var i=0; i<keys.length; i++){
-            //this.bondResultForm[keys[i]]=res['Result'][keys[i]];
+          let keys = Object.keys(res['Result']);
+          for(let i=0; i<keys.length; i++){
+            this.bondResultForm[keys[i]]=res['Result'][keys[i]];
             console.log(res['Result'][keys[i]],'response');
           }
 
