@@ -87,5 +87,5 @@ export const menuHeader = [
     name: 'fxdigitaloption'
   },
   frtbanalysis,
-  frtbconfig,
+  //frtbconfig,
 ]

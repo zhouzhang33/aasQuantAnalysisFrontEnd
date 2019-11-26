@@ -2190,7 +2190,7 @@
                 <div style="margin:20px 0px 20px 5px">
                     <el-col :span="6">
                         <el-col :span="8">
-                            <div style="color:transparent">a</div>
+                            <div class="left-col1" style="color:transparent">a</div>
                         </el-col>
                         <el-col :span="16">
                             <div class="left-col1">
@@ -2202,7 +2202,7 @@
 
                     <el-col :span="6">
                         <el-col :span="8">
-                            <div style="color:transparent">a</div>
+                            <div class="left-col1" style="color:transparent">a</div>
                         </el-col>
                         <el-col :span="16">
                             <div class="left-col1">
@@ -2213,7 +2213,7 @@
 
                     <el-col :span="6">
                         <el-col :span="8">
-                            <div style="color:transparent">a</div>
+                            <div class="left-col1" style="color:transparent">a</div>
                         </el-col>
                         <el-col :span="16">
                             <div class="left-col1">
@@ -2224,7 +2224,7 @@
 
                     <el-col :span="6">
                         <el-col :span="8">
-                            <div style="color:transparent">a</div>
+                            <div class="left-col1" style="color:transparent">a</div>
                         </el-col>
                         <el-col :span="16">
                             <div class="left-col1">
@@ -2239,7 +2239,7 @@
                 <div class="box-card-title">
                     <span>计算结果</span>
                 </div>
-                <div style="margin:20px 0px 20px 0px">
+                <div style="margin:20px 0px 20px 0px" class="left-col1">
                     <el-row>
                         <el-col :span="4"><el-button style="margin-left:40px" type="info" class="curvebutton" @click="calcNPV">计算PV</el-button></el-col>
                         <el-col :span="4"><el-button style="margin-left:40px" type="info" class="curvebutton">倒算行权价</el-button></el-col>
@@ -2269,7 +2269,7 @@
                                     >
                                     </el-input-number>
                                 </div>
-                                <div class="left-col1" >
+                                <div class="left-col2" >
                                     <el-input-number
                                             :precision=5
                                             :controls="false"
@@ -2384,12 +2384,12 @@
                             <div class="box-card-title">
                                 <el-col :span="8">
                                     <el-col :span="8">
-                                        <el-checkbox-button class="left-col1" v-model="DeltaHedgeCalc" @click="clickDeltaHedgeCalc">
+                                        <el-checkbox-button class="left-col3" v-model="DeltaHedgeCalc" @click="clickDeltaHedgeCalc">
                                             Delta Hedge
                                         </el-checkbox-button>
                                     </el-col>
                                     <el-col :span="16">
-                                        <div  class="left-col1" v-show="DeltaHedgeCalc === true">
+                                        <div  class="left-col3" v-show="DeltaHedgeCalc === true">
                                             <el-button type='info' class="curvebutton" @click="calculateDeltaHedge">计算</el-button>
                                         </div>
                                     </el-col>
@@ -2463,12 +2463,12 @@
                         <div class="box-card-title">
                             <el-col :span="8">
                                 <el-col :span="8">
-                                    <el-checkbox-button class="left-col1" v-model="VegaHedgeCalc" @click="clickVegaHedgeCalc">
+                                    <el-checkbox-button class="left-col3" v-model="VegaHedgeCalc" @click="clickVegaHedgeCalc">
                                         Vega Hedge
                                     </el-checkbox-button>
                                 </el-col>
                                 <el-col :span="16">
-                                    <div  class="left-col1" v-show="VegaHedgeCalc === true">
+                                    <div  class="left-col3" v-show="VegaHedgeCalc === true">
                                         <el-button type='info' class="curvebutton" @click="calculateVegaHedge">计算</el-button>
                                     </div>
                                 </el-col>
@@ -2977,6 +2977,13 @@
     .left-col1{
         height:40px;
         background:#312E30;
+        margin:5px 0px 5px 0px;
+        padding-left:20px;
+        line-height: 40px;
+        vertical-align: center;
+    }
+    .left-col3{
+        height:40px;
         margin:5px 0px 5px 0px;
         padding-left:20px;
         line-height: 40px;

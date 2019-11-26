@@ -819,7 +819,7 @@
                                     <el-input-number
                                             class="oneContorls"
                                             :controls="false"
-                                            v-model="irsccsResultForm.NPVLeg1"
+                                            v-model="irsccsResultForm.NPVLeg2"
                                     >
                                     </el-input-number>
                                 </div>
@@ -827,7 +827,7 @@
                                     <el-input-number
                                             class="oneContorls"
                                             :controls="false"
-                                            v-model="irsccsResultForm.DV01Leg1"
+                                            v-model="irsccsResultForm.DV01Leg2"
                                     >
                                     </el-input-number>
                                 </div>
@@ -843,7 +843,7 @@
                                     <el-input-number
                                             class="oneContorls"
                                             :controls="false"
-                                            v-model="irsccsResultForm.yinJiLiXiLeg1"
+                                            v-model="irsccsResultForm.yinJiLiXiLeg2"
                                     >
                                     </el-input-number>
                                 </div>
@@ -959,7 +959,19 @@
                 for(var i=0; i<keys.length; i++){
                     // console.log({"key": keys[i], "value": res[keys[i]]})
                     // this.resultData1[i] = {"key": keys[i], "value": res['FX'][keys[i]]}
+
                     this.irsccsResultForm[keys[i]]=res['Result'][keys[i]];
+                    if (this.recordSelected === 'CCS'){
+                        this.irsccsResultForm.NPV=parseFloat(this.irsccsResultForm.NPVLeg1) + parseFloat(this.irsccsResultForm.NPVLeg2);
+                        this.irsccsResultForm.DV01=parseFloat(this.irsccsResultForm.DV01Leg1) + parseFloat(this.irsccsResultForm.DV01Leg2);
+                        this.irsccsResultForm.yinJiLiXi = parseFloat(this.irsccsResultForm.yinJiLiXiLeg1) + parseFloat(this.irsccsResultForm.yinJiLiXiLeg2);
+                    }else if (this.recordSelected === 'IRS'){
+                        this.irsccsResultForm.NPV=parseFloat(this.irsccsResultForm.NPVLeg1) + parseFloat(this.irsccsResultForm.NPVLeg2);
+                        //this.irsccsResultForm.DV01=parseFloat(this.irsccsResultForm.DV01Leg1) + parseFloat(this.irsccsResultForm.DV01Leg2);
+                        this.irsccsResultForm.yinJiLiXi = parseFloat(this.irsccsResultForm.yinJiLiXiLeg1) + parseFloat(this.irsccsResultForm.yinJiLiXiLeg2);
+
+                    }
+                    console.log(this.irsccsResultForm,"irsccsResultForm")
                 }
 
             }).catch(function (error) {

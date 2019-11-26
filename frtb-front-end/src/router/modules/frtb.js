@@ -14,7 +14,7 @@ export default {
       name: 'index',
       meta: {
         title: 'FRTB',
-        auth: false
+        auth: true
       },
       component: () => import('@/pages/frtb/fxswap/index')
     },
@@ -23,7 +23,7 @@ export default {
       name: 'europeanOption',
       meta: {
         title: 'European Option',
-        auth: false
+        auth: true
       },
       component: () => import('@/pages/frtb/europeanOption/index')
     },
@@ -32,7 +32,7 @@ export default {
       name: 'irsccs',
       meta: {
         title: 'IRS-CCS',
-        auth: false
+        auth: true
       },
       component: () => import('@/pages/frtb/irsccs/index')
     },
