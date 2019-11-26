@@ -8,7 +8,7 @@ export var swapForm = {
         intepolationType: '线性插值',
         jiXiTianShuFangshi: 'ACT/365',
         yingYeRiGuiZe: '调整至下一营业日',
-        jinDuanHuiLv: 6542.1,
+        jinDuanHuiLv:  6.5421,
         yuanDuanHuiLv: 6.5421,
         jinDuanQiXiRi:  Date.now(),
         jinDuanJiaoGeRi:  Date.now(),
