@@ -17,21 +17,14 @@
                 </el-col>
                 <el-col :span="16">
                   <div class="left-col1" >
-                    <el-select
-                            filterable
-                            allow-create
-                            default-first-option
+                    <el-input-number
+                            :controls="false"
                             class="oneContorls"
                             v-model="swaptionForm.touCun"
-                            placeholder="请选择">
-                      <el-option
-                              v-for="item in touCunOptions"
-                              :key="item.key"
-                              :label="item.label"
-                              :value="item.value"
-                      ></el-option>
-                    </el-select>
-                  </div>
+                            :precision=5
+                    >
+                    </el-input-number>
+                   </div>
                   <div class="left-col2" >
                     <el-date-picker
                             class="oneContorls"

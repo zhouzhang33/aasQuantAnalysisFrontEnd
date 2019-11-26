@@ -77,20 +77,20 @@ export var jiXiTianShuFangshiOptions=[
     value:'ACT/365',
   },
   {
+    key:'ACT/360',
+    label:'ACT/360',
+    value:'ACT/360',
+  },
+  {
     key:'ACT/365(fixed)',
-    label:'ACT/36(fixed)5',
+    label:'ACT/365(fixed)',
     value:'ACT/365(fixed)',
   },
-  {
-    key:'ACT/360',
-    label:'ACT/36',
-    value:'ACT/36',
-  },
-  {
-    key:'30/360',
-    label:'30/36',
-    value:'30/36',
-  },
+  // {
+  //   key:'30/360',
+  //   label:'30/36',
+  //   value:'30/36',
+  // },
 ];
 export var nearPeriodOption=[
   {
@@ -198,12 +198,12 @@ export var tradingDirectionOptions=[
   {
     key:'买入外币',
     label:'买入外币',
-    value:'买入外币',
+    value:'Buy',
   },
   {
     key:'卖出外币',
     label:'卖出外币',
-    value:'卖出外币',
+    value:'Sell',
   },
 ];
 export var directionOptions=[
@@ -240,12 +240,12 @@ export var currencyOptions=[
   {
     key:'人民币',
     label:'人民币',
-    value:'人民币',
+    value:'RMB',
   },
   {
     key:'美元',
     label:'美元',
-    value:'美元',
+    value:'USD',
   },
 ];
 

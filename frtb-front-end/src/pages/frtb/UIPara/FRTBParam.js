@@ -143,7 +143,7 @@ export var irsccsFormLeg2 = {
     direction: '支付利息',
     Amount: '',
     biZhong: '人民币',
-    xiPiaoLeiXing: '固定',
+    xiPiaoLeiXing: '浮动',
     fuXiPingLv: '1M',
     jiXiFangShi: '单利',
     xiPiaoLv: '0.05',

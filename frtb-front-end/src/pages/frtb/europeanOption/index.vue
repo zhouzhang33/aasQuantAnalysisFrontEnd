@@ -2831,12 +2831,13 @@
         },
         calcNPV(){
             var putForm=null;
-           if(this.collapsActiveName === 'leg1') {
-               putForm = this.europeanOptionLeg1Form;
-           }
-           else {
-               putForm = this.europeanOptionLeg2Form;
-           }
+           // if(this.collapsActiveName === 'leg1') {
+           //     putForm = this.europeanOptionLeg1Form;
+           // }
+           // else {
+           //     putForm = this.europeanOptionLeg2Form;
+           //}
+            putForm = this.europeanOptionLeg1Form;
             getEuroOptionPricingResult('NPV',putForm).then(res => {
                 console.log(res, 'res')
                 var keys = Object.keys(res['Result']);
