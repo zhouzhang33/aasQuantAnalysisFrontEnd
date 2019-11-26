@@ -6,6 +6,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CCSConstant {
+    public static String[][]  RequestMapping= {
+//            {"Leg1 Par Spread (%)", "NPV"},
+//            {"Leg2 Par Spread (%)", "yinJiLiXiLeg1"},
+//            {"Notional (USD)", "DV01Leg1"},
+            {"Leg1 Accrued (USD)","yinJiLiXiLeg1"},
+//            {"Leg1 Clean Price (USD)"},
+            {"Leg1 Dirty Price (USD)", "NPVLeg1"},
+            {"Leg2 Accrued (USD)", "yinJiLiXiLeg2"},
+//            {"Leg2 Clean Price (USD)", "DV01Leg1"},
+            {"Leg2 Dirty Price (USD)", "NPVLeg2"},
+//            {"Swap Accrued (USD)", "DV01Leg1"},
+//            {"Swap Clean Price (USD)", "DV01Leg1"},
+//            {"Swap Dirty Price (USD)", "DV01Leg1"},
+            {"USD_DV01 (USD)", "DV01Leg1"},
+            {"EUR_DV01 (USD)", "DV01Leg2"}
+    };
     public static JSONObject parseFromResults(String [] results){
         Map<String, Object> m = new HashMap<String, Object>();
         int para_count = 14;
@@ -40,6 +56,10 @@ public class CCSConstant {
             Cash_Flow_Table = Cash_Flow_Table + oneDataLine +"\r\n";
         }
         m.put("Cash_Flow",Cash_Flow_Table);
+        for (String[] strings : RequestMapping) {
+            m.put(strings[1], m.get(strings[0]));
+            m.remove(strings[0]);
+        };
         JSONObject res = new JSONObject(m);
         return res;
     };

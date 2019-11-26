@@ -88,6 +88,7 @@
             <artifactId>spring-boot</artifactId>
             <version>2.2.0.RELEASE</version>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -97,6 +98,34 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <!-- ******************** dll 等资源类 *******************-->
+<!--        <resources>-->
+<!--            <resource>-->
+<!--                <directory>src/main/lib</directory>-->
+<!--                &lt;!&ndash;<targetPath>BOOT-INF/lib/</targetPath>&ndash;&gt;-->
+<!--                <targetPath>BOOT-INF/lib/</targetPath>-->
+<!--                <includes>-->
+<!--                    <include>**/*.properties</include>-->
+<!--                    <include>**/*.yml</include>-->
+<!--                    <include>**/*.jar</include>-->
+<!--                </includes>-->
+<!--            </resource>-->
+<!--            <resource>-->
+<!--                <directory>src/main/bin</directory>-->
+<!--                &lt;!&ndash;<targetPath>BOOT-INF/lib/</targetPath>&ndash;&gt;-->
+<!--                <targetPath>BOOT-INF/lib/</targetPath>-->
+<!--                <includes>-->
+<!--                    <include>**/*.dll</include>-->
+<!--                </includes>-->
+<!--             </resource>-->
+<!--            <resource>-->
+<!--                <directory>src/main/lib</directory>-->
+<!--                &lt;!&ndash;<targetPath>BOOT-INF/lib/</targetPath>&ndash;&gt;-->
+<!--                <targetPath>BOOT-INF/lib/</targetPath>-->
+<!--                &lt;!&ndash;                <include>**/*.properties</include>&ndash;&gt;-->
+<!--                &lt;!&ndash;                <include>**/*.yml</include>&ndash;&gt;-->
+<!--            </resource>-->
+<!--        </resources>-->
     </build>
     <repositories>
         <repository>
@@ -112,5 +141,6 @@
         </repository>
 
     </repositories>
+
 
 </project>

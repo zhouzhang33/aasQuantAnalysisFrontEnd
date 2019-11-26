@@ -28,6 +28,10 @@ import com.ey.pricingservice.entity.FX_SwaptionConstant;
 import com.ey.pricingservice.entity.IRSConstant;
 import com.ey.pricingservice.entity.CCSConstant;
 import com.ey.pricingservice.entity.FX_SwapConstant;
+import com.ey.pricingservice.entity.IRSRequest;
+import com.ey.pricingservice.entity.EuropeanOptionRequest;
+import com.ey.pricingservice.entity.SWAPTIONRequest;
+import com.ey.pricingservice.entity.BONDRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -42,7 +46,6 @@ public class PricingServiceImpl implements PricingService {
     private final String PROCESS_START = " Processing START para:=";
     private final String RPOCESS_SUCCESS_END = " Processing SUCCESS para:=";
     private final String PROCESS_FAILED_END = " Processing FAIL";
-    FXFWDConstant fxfwdConstant;
     TermStructureConstant termStructureConstant;
     BondConstant bondConstant;
     ApiPricer api;
@@ -157,33 +160,42 @@ public class PricingServiceImpl implements PricingService {
     @Override
     public JSONObject getIRSPricingResult(String pricingType, Object requestContent){
         JSONObject jRequestContent =(JSONObject) requestContent;
+        JSONObject requestContentLeg1 = jRequestContent.getJSONObject("leg1");
+        JSONObject requestContentLeg2 = jRequestContent.getJSONObject("leg2");
         Map<String, String> m = new HashMap<String, String>();
         String key;
         String value;
         String[] results;
         JSONObject res =new JSONObject();
         log.info(pricingType + " ----  Pricing Type");
+        IRSRequest irsleg1Request = JSON.parseObject(requestContentLeg1.toString(), IRSRequest.class);
+        IRSRequest irsleg2Request = JSON.parseObject(requestContentLeg2.toString(), IRSRequest.class);
+        String leg1effectiveDate = DateStandardString(irsleg1Request.getQiXiRi());
+        String leg1maturityDate = DateStandardString(irsleg2Request.getDaoQiRi());
+        String valuationDate = DateStandardString(Calendar.getInstance().getTime());
+
+
         String prodCode = "Product_OISSwap_Generic";
-        String csvParams = "ValuationDate,18-jun-2019\r\n" +
-                "Currency,USD\r\n" +
-                "Notional,1000000\r\n" +
-                "EffectiveDate,27-mar-2018\r\n" +
-                "MaturityDate,27-mar-2023\r\n" +
-                "FixedLegCouponRate,0.035\r\n" +
-                "FixedLegPayFreq,3M\r\n" +
-                "FixedLegDayCount,ACT/365\r\n" +
-                "FixedLegPayLag,2bd\r\n" +
-                "FixedLegPayBusAdj,F\r\n" +
-                "FloatLegPayFreq,3M\r\n" +
-                "FloatLegDayCount,ACT/360\r\n" +
-                "FloatLegPayLag,2bd\r\n" +
-                "FloatLegPayBusAdj,F\r\n" +
-                "FloatLegAccrualFreq,1bd\r\n" +
-                "FloatLegAccrualBusAdj,F\r\n" +
-                "FloatLegFixingLag,0bd,\r\n" +
-                "FloatLegEndOfMonthRule,false\r\n" +
-                "FloatLegSpread,0\r\n" +
-                "SettlementLag,2bd\r\n" +
+        String csvParams = "ValuationDate," + valuationDate + "\r\n" +
+                "Currency,"+irsleg1Request.getBiZhong()+"\r\n" +
+                "Notional,"+irsleg1Request.getAmount()+"\r\n" +
+                "EffectiveDate,"+leg1effectiveDate+"\r\n" +
+                "MaturityDate,"+leg1maturityDate+"\r\n" +
+                "FixedLegCouponRate,"+irsleg1Request.getXiPiaoLv()+"\r\n" +
+                "FixedLegPayFreq,"+"3M"+"\r\n" +
+                "FixedLegDayCount,"+irsleg1Request.getJiXiJiZhun()+"\r\n" +
+                "FixedLegPayLag,"+"1bd"+"\r\n" +
+                "FixedLegPayBusAdj,"+"F"+"\r\n" +
+                "FloatLegPayFreq,"+"3M"+"\r\n" +
+                "FloatLegDayCount,"+irsleg2Request.getJiXiJiZhun()+"\r\n" +
+                "FloatLegPayLag,"+"1bd"+"\r\n" +
+                "FloatLegPayBusAdj,"+"F"+"\r\n" +
+                "FloatLegAccrualFreq,"+"2bd"+"\r\n" +
+                "FloatLegAccrualBusAdj,"+"F"+"\r\n" +
+                "FloatLegFixingLag,"+"0bd"+"\r\n" +
+                "FloatLegEndOfMonthRule,"+"false\r\n" +
+                "FloatLegSpread,"+"0.0005\r\n" +
+                "SettlementLag,"+"2bd\r\n" +
                 "FloatLegIndexCurve,CURVE_USD_OIS#BLOOMBERG#MID\r\n" +
                 "FloatLegIndexFixings,FEDL01#BLOOMBERG#1";
         results = api.evaluate(prodCode, csvParams);
@@ -194,26 +206,33 @@ public class PricingServiceImpl implements PricingService {
     @Override
     public JSONObject getCCSPricingResult(String pricingType, Object requestContent){
         JSONObject jRequestContent =(JSONObject) requestContent;
+        JSONObject requestContentLeg1 = jRequestContent.getJSONObject("leg1");
+        JSONObject requestContentLeg2 = jRequestContent.getJSONObject("leg2");
         Map<String, String> m = new HashMap<String, String>();
         String key;
         String value;
         String[] results;
         JSONObject res =new JSONObject();
         log.info(pricingType + " ----  Pricing Type");
+        IRSRequest irsleg1Request = JSON.parseObject(requestContentLeg1.toString(), IRSRequest.class);
+        IRSRequest irsleg2Request = JSON.parseObject(requestContentLeg2.toString(), IRSRequest.class);
+        String leg1effectiveDate = DateStandardString(irsleg1Request.getQiXiRi());
+        String leg1maturityDate = DateStandardString(irsleg1Request.getDaoQiRi());
+        String valuationDate = DateStandardString(Calendar.getInstance().getTime());
         String prodCode = "Product_CCBasisSwap_Generic";
-        String csvParams = "ValuationDate,18-jun-2019\r\n" +
-                "Currency1,USD\r\n" +
-                "Currency2,EUR\r\n" +
-                "Notional1,1000000\r\n" +
-                "Notional2,904428.9888\r\n" +
-                "EffectiveDate,27-mar-2018\r\n" +
-                "MaturityDate,27-mar-2023\r\n" +
-                "Currency1_Spread,0.0\r\n" +
-                "Currency1_PayFreq,3M\r\n" +
-                "Currency1_DayCount,ACT/360\r\n" +
-                "Currency2_Spread,-0.0020875\r\n" +
-                "Currency2_PayFreq,3M\r\n" +
-                "Currency2_DayCount,ACT/360\r\n" +
+        String csvParams = "ValuationDate,"+valuationDate+"\r\n" +
+                "Currency1,"+irsleg1Request.getBiZhong()+"\r\n" +
+                "Currency2,"+irsleg2Request.getBiZhong()+"\r\n" +
+                "Notional1,"+irsleg1Request.getAmount()+"\r\n" +
+                "Notional2,"+irsleg2Request.getAmount()+"\r\n" +
+                "EffectiveDate,"+leg1effectiveDate+"\r\n" +
+                "MaturityDate,"+leg1maturityDate+"\r\n" +
+                "Currency1_Spread,"+"0.0005"+"\r\n" +
+                "Currency1_PayFreq,"+"3M"+"\r\n" +
+                "Currency1_DayCount,"+irsleg1Request.getJiXiJiZhun()+"\r\n" +
+                "Currency2_Spread,"+"0.0005"+"\r\n" +
+                "Currency2_PayFreq,"+"3M"+"\r\n" +
+                "Currency2_DayCount,"+irsleg2Request.getJiXiJiZhun()+"\r\n" +
                 "Currency1_IndexCurve,CURVE_USD_LIBOR3M#BLOOMBERG#MID\r\n" +
                 "Currency2_IndexCurve,CURVE_EUR_EURIBOR6M#BLOOMBERG#MID\r\n" +
                 "Currency1_DiscountCurve,CURVE_USD_LIBOR6M#BLOOMBERG#MID\r\n" +
@@ -236,22 +255,24 @@ public class PricingServiceImpl implements PricingService {
         String[] results;
         JSONObject res =new JSONObject();
         log.info(pricingType + " ----  Pricing Type");
+        SWAPTIONRequest swaptionRequest = JSON.parseObject(requestContent.toString(), SWAPTIONRequest.class);
+        String valuationDate = DateStandardString(Calendar.getInstance().getTime());
         String prodCode = "Product_Swaption_Generic";
-        String csvParams = "ValuationDate,18-jun-2019\r\n" +
-                "Notional,10000000\r\n" +
-                "Currency,USD\r\n" +
-                "OptionStrike,0.01800624\r\n" +
+        String csvParams = "ValuationDate," + valuationDate + "\r\n" +
+                "Notional,"+swaptionRequest.getTouCun()+"\r\n" +
+                "Currency,"+swaptionRequest.getBiZhong()+"\r\n" +
+                "OptionStrike,"+swaptionRequest.getXingQuanJia()+"\r\n" +
                 "OptionPosition,LongReceiver\r\n" +
-                "OptionExpiryDate,18-jun-2020\r\n" +
-                "OptionNotificationDays,2bd\r\n" +
-                "SwapStartDate,22-jun-2020\r\n" +
-                "SwapEndDate,22-jun-2025\r\n" +
-                "SwapFixedLegPayFreq,6M\r\n" +
-                "SwapFixedLegDayCount,30/360\r\n" +
-                "SwapFloatLegResetFreq,3M\r\n" +
-                "SwapFloatLegPayFreq,3M\r\n" +
-                "SwapFloatLegDayCount,ACT/360\r\n" +
-                "SwapFloatLegSpread,0\r\n" +
+                "OptionExpiryDate,"+swaptionRequest.getQiQuanFeiJiaoFuRi()+"\r\n" +
+                "OptionNotificationDays,"+"2bd"+"\r\n" +
+                "SwapStartDate,"+swaptionRequest.getQiXiRi() +"\r\n" +
+                "SwapEndDate,"+swaptionRequest.getDaoQiRi()+"\r\n" +
+                "SwapFixedLegPayFreq,"+"6M"+"\r\n" +
+                "SwapFixedLegDayCount,"+swaptionRequest.getJiXiTianShuFangshi()+"\r\n" +
+                "SwapFloatLegResetFreq,"+"3M"+"\r\n" +
+                "SwapFloatLegPayFreq,"+"3M"+"\r\n" +
+                "SwapFloatLegDayCount,"+swaptionRequest.getJiXiTianShuFangShiFuDongDuan() +"\r\n" +
+                "SwapFloatLegSpread,"+"0.0005"+"\r\n" +
                 "SwapFloatLegIndexCurve,CURVE_USD_LIBOR3M#BLOOMBERG#MID\r\n" +
                 "SwapFloatLegIndexFixings,US0003M#BLOOMBERG#1\r\n" +
                 "Volatility,Vol_USD_SWAPTION_VCUB_LIBOR3M#BLOOMBERG#MID";
@@ -270,16 +291,26 @@ public class PricingServiceImpl implements PricingService {
         String[] results;
         JSONObject res =new JSONObject();
         log.info(pricingType + " ----  Pricing Type");
+       //FX SWAP 和 FX FWD 用了一个表单
+        FXFWDRequest fxfwdswapRequest = JSON.parseObject(requestContent.toString(), FXFWDRequest.class);
+        String valuationDate = DateStandardString(Calendar.getInstance().getTime());
+        String baseCurrency = fxfwdswapRequest.getCurrencyPair().substring(0, 3);
+        String termCurrency = fxfwdswapRequest.getCurrencyPair().substring(4, 7);
+        String deliveryDate = DateStandardString(fxfwdswapRequest.getYuanDuanJiaogeRi());
+        String nearlegDate = DateStandardString(fxfwdswapRequest.getJinDuanQiXiRi());
+        String nearlegEndDate = DateStandardString(fxfwdswapRequest.getJinDuanJiaoGeRi());
+        String farlegDate = DateStandardString(fxfwdswapRequest.getYuanDuanQixiRi());
+        String farlegEndDate = DateStandardString(fxfwdswapRequest.getYuanDuanJiaogeRi());
         String prodCode = "Product_FX_Swap_Generic";
-        String csvParams = "ValuationDate,18-jun-2019\r\n" +
-                "BaseCurrency,USD\r\n" +
-                "Currency,CNY\r\n" +
-                "NearLegDate,18-jun-2019\r\n" +
-                "NearLegForwardRate,7\r\n" +
-                "NearLegNotional,1000000\r\n" +
-                "FarLegDate,08-jan-2020\r\n" +
-                "FarLegForwardRate,7.2\r\n" +
-                "FarLegNotional,1000000\r\n" +
+        String csvParams = "ValuationDate,"+valuationDate+"\r\n" +
+                "BaseCurrency,"+baseCurrency+"\r\n" +
+                "Currency,"+termCurrency+"\r\n" +
+                "NearLegDate,"+nearlegDate+"\r\n" +
+                "NearLegForwardRate,"+fxfwdswapRequest.getJinDuanHuiLv()+"\r\n" +
+                "NearLegNotional,"+fxfwdswapRequest.getWaiBiJinDuanJingE()+"\r\n" +
+                "FarLegDate,"+farlegDate+"\r\n" +
+                "FarLegForwardRate,"+fxfwdswapRequest.getYuanDuanHuiLv()+"\r\n" +
+                "FarLegNotional,"+fxfwdswapRequest.getWaiBiYuanDuanJingE()+"\r\n" +
                 "BaseCcyDiscountCurve,CURVE_USD_IMPLIED_USDCNY#BLOOMBERG#MID\r\n" +
                 "DiscountCurve,CURVE_CNY_REPO7D#BLOOMBERG#MID\r\n" +
                 "FxSpot,FXSPOT_USD#BLOOMBERG#MID\r\n" +
@@ -297,20 +328,27 @@ public class PricingServiceImpl implements PricingService {
         String[] results;
         JSONObject res =new JSONObject();
         log.info(pricingType + " ----  Pricing Type");
+
+        FXDigitalRequest fxdigitalRequest = JSON.parseObject(requestContent.toString(), FXDigitalRequest.class);
+        String valuationDate = DateStandardString(Calendar.getInstance().getTime());
+        String baseCurrency = fxdigitalRequest.getCurrencyPair().substring(0, 3);
+        String termCurrency = fxdigitalRequest.getCurrencyPair().substring(4, 7);
+        String endDate = DateStandardString(fxdigitalRequest.getDaoQiRi());
+        String deliveryDate = DateStandardString(fxdigitalRequest.getJiaoGeRi());
         String prodCode = "Product_FX_Digital_Generic";
-        String csvParams = "ValuationDate,18-jun-2019\r\n" +
-                "BaseCurrency,USD\r\n" +
-                "Currency,CNY\r\n" +
-                "Direction,Buy\r\n" +
-                "CallPut,Call\r\n" +
-                "ExpiryDate,06-jan-2020\r\n" +
-                "DeliveryDate,08-jan-2020\r\n" +
-                "Strike,6.9099\r\n" +
-                "PayoutAmount,1\r\n" +
-                "PayoutCurrency,CNY\r\n" +
-                "ModelType,LocalVol\r\n" +
-                "MonteCarloPaths,10000\r\n" +
-                "MonteCarloSteps,100\r\n" +
+        String csvParams = "ValuationDate,"+valuationDate+"\r\n" +
+                "BaseCurrency,"+baseCurrency+"\r\n" +
+                "Currency,"+termCurrency+"\r\n" +
+                "Direction,"+"Buy"+"\r\n" +
+                "CallPut,"+fxdigitalRequest.getDigitalOptionType()+"\r\n" +
+                "ExpiryDate,"+endDate+"\r\n" +
+                "DeliveryDate,"+deliveryDate+"\r\n" +
+                "Strike,"+fxdigitalRequest.getXingQuanJia()+"\r\n" +
+                "PayoutAmount,"+fxdigitalRequest.getBenBiJingE()+"\r\n" +
+                "PayoutCurrency,"+"CNY"+"\r\n" +
+                "ModelType,"+"LocalVol"+"\r\n" +
+                "MonteCarloPaths,"+"10000"+"\r\n" +
+                "MonteCarloSteps,"+"100"+"\r\n" +
                 "BaseCcyDiscountCurve,CURVE_USD_IMPLIED_USDCNY#BLOOMBERG#MID\r\n" +
                 "DiscountCurve,CURVE_CNY_REPO7D#BLOOMBERG#MID\r\n" +
                 "FxSpot,FXSPOT_USD#BLOOMBERG#MID\r\n" +
@@ -377,21 +415,28 @@ public class PricingServiceImpl implements PricingService {
         String[] results;
         JSONObject res =new JSONObject();
         log.info(pricingType + " ----  Pricing Type");
+
+        EuropeanOptionRequest fxeuropeanRequest = JSON.parseObject(requestContent.toString(), EuropeanOptionRequest.class);
+        String valuationDate = DateStandardString(Calendar.getInstance().getTime());
+        String baseCurrency = fxeuropeanRequest.getCurrencyPair().substring(0, 3);
+        String termCurrency = fxeuropeanRequest.getCurrencyPair().substring(4, 7);
+        String expiryDate = DateStandardString(fxeuropeanRequest.getExpireDate());
+        String deliveryDate = DateStandardString(fxeuropeanRequest.getJiaoGeDate());
         String prodCode = "Product_FX_EuropeanVanilla_Generic";
-        String csvParams = "ValuationDate,18-jun-2019\r\n" +
-                "BaseCurrency,USD\r\n" +
-                "Currency,CNY\r\n" +
-                "Direction,Buy\r\n" +
-                "SettlementType,Physical\r\n" +
-                "CallPut,Call\r\n" +
-                "ExpiryDate,06-jan-2020\r\n" +
-                "DeliveryDate,08-jan-2020\r\n" +
-                "Strike,6.9099\r\n" +
-                "Delta,0.5\r\n" +
-                "DeltaType,Forward\r\n" +
-                "Notional,1000000\r\n" +
-                "ImpliedVol,0.1\r\n" +
-                "ModelType,Black-Scholes\r\n" +
+        String csvParams = "ValuationDate,"+valuationDate+"\r\n" +
+                "BaseCurrency,"+baseCurrency+"\r\n" +
+                "Currency,"+termCurrency+"\r\n" +
+                "Direction,"+fxeuropeanRequest.getDirection()+"\r\n" +
+                "SettlementType,"+"Physical"+"\r\n" +
+                "CallPut,"+fxeuropeanRequest.getOptionType()+"\r\n" +
+                "ExpiryDate,"+expiryDate+"\r\n" +
+                "DeliveryDate,"+deliveryDate+"\r\n" +
+                "Strike,"+fxeuropeanRequest.getXingQuanJia()+"\r\n" +
+                "Delta,"+"0.5"+"\r\n" +
+                "DeltaType,"+"Forward"+"\r\n" +
+                "Notional,"+fxeuropeanRequest.getWaibiQiQuanJingE()+"\r\n" +
+                "ImpliedVol,"+fxeuropeanRequest.getVolatility()+"\r\n" +
+                "ModelType,"+"Black-Scholes"+"\r\n" +
                 "BaseCcyDiscountCurve,CURVE_USD_IMPLIED_USDCNY#BLOOMBERG#MID\r\n" +
                 "DiscountCurve,CURVE_CNY_REPO7D#BLOOMBERG#MID\r\n" +
                 "FxSpot,FXSPOT_USD#BLOOMBERG#MID\r\n" +
@@ -412,34 +457,38 @@ public class PricingServiceImpl implements PricingService {
         String[] results;
         JSONObject res =new JSONObject();
         log.info(pricingType + " ----  Pricing Type");
+        BONDRequest bondRequest = JSON.parseObject(requestContent.toString(), BONDRequest.class);
+        String valuationDate = DateStandardString(Calendar.getInstance().getTime());
+        String effectiveDate = DateStandardString(bondRequest.getInterestStartDate());
+        String maturityDate = DateStandardString(bondRequest.getJieSuanRi());
         String prodCode = "Product_Bond_Generic";
-        String csvParams = "ValuationDate,10-oct-2011\r\n" +
-                "Currency,USD\r\n" +
-                "Notional,1000000\r\n" +
-                "CouponRate,0.035\r\n" +
-                "CouponBasis,Act/360\r\n" +
-                "PayPrincipalAtMaturity,true\r\n" +
-                "TradeDate,10-oct-2011\r\n" +
-                "EffectiveDate,12-apr-2011\r\n" +
-                "MaturityDate,10-oct-2030\r\n" +
-                "FirstCouponDate,9-may-2011\r\n" +
-                "PenultimateCouponDate,9-mar-2030\r\n" +
-                "PayFreq,6M\r\n" +
-                "CompoundingFreq,6M\r\n" +
+        String csvParams = "ValuationDate,"+valuationDate+"\r\n" +
+                "Currency,"+"CNY"+"\r\n" +
+                "Notional,"+bondRequest.getPiaoMianZongE()+"\r\n" +
+                "CouponRate,"+bondRequest.getPiaoMianLiLv()+"\r\n" +
+                "CouponBasis,"+bondRequest.getJiXiTianShuFangshi()+"\r\n" +
+                "PayPrincipalAtMaturity,"+"true"+"\r\n" +
+                "TradeDate,"+bondRequest.getExerciseDate() +"\r\n" +
+                "EffectiveDate,"+effectiveDate+"\r\n" +
+                "MaturityDate,"+maturityDate +"\r\n" +
+                "FirstCouponDate,"+effectiveDate+"\r\n" +
+                "PenultimateCouponDate,"+maturityDate+"\r\n" +
+                "PayFreq,"+"3M"+"\r\n" +
+                "CompoundingFreq,"+"3M"+"\r\n" +
                 "FrontStub,true\r\n" +
                 "LongStub,false\r\n" +
-                "AccrualDateBusAdj,MF\r\n" +
-                "PayDateBusAdj,F\r\n" +
-                "PrincipalPayDateBusAdj,F\r\n" +
+                "AccrualDateBusAdj,"+"MF"+"\r\n" +
+                "PayDateBusAdj,"+"F"+"\r\n" +
+                "PrincipalPayDateBusAdj,"+"F"+"\r\n" +
                 "CouponPaymentLag,2bd\r\n" +
                 "SettlementLag,2bd\r\n" +
-                "YieldToMaturity,0.021\r\n" +
+                "YieldToMaturity,"+bondRequest.getShouYiLv() +"\r\n" +
                 "SolvingYieldByPrice,false\r\n" +
                 "QuotedPrice,123.0919296\r\n" +
                 "IsDirtyPrice,true\r\n" +
                 "IsCallable,false\r\n" +
-                "CallDate,8-jun-2021\r\n" +
-                "CallPrice,120";
+                "CallDate,"+maturityDate+"\r\n" +
+                "CallPrice,100";
         results = api.evaluate(prodCode, csvParams);
         String[] sourceStrArray = results[1].split("\r\n");
         res.put("Result",BondConstant.parseFromResults(results));

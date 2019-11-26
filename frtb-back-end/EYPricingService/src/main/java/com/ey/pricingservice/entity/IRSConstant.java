@@ -7,9 +7,11 @@ import java.util.Map;
 
 public class IRSConstant {
     public static String[][]  RequestMapping= {
-            {"Fixed Leg PV (USD)", "NPV"},
+            {"Fixed Leg PV (USD)", "NPVLeg1"},
+            {"Float Leg PV (USD)", "NPVLeg2"},
             {"Fixed Leg Accrued (USD)", "yinJiLiXiLeg1"},
-            {"USD_DV01 (USD)", "DV01Leg1"}
+            {"Float Leg Accrued (USD)", "yinJiLiXiLeg2"},
+            {"USD_DV01 (USD)", "DV01"}
     };
 
     public static JSONObject parseFromResults(String [] results){

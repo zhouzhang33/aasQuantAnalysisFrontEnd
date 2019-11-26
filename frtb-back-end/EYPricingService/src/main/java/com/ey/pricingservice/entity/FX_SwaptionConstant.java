@@ -8,7 +8,7 @@ import java.util.Map;
 public class FX_SwaptionConstant {
     public static String[][]  RequestMapping= {
                         {"ATM Strike","pingZhiXingQuanJia"},
-                        {"NPV","NPV"},
+                        {"NPV (USD)","NPV"},
                         {"Delta","DV01"},
                         {"Gamma","Gamma"},
                         {"Implied Vol","yinHanBoDongLv"},
