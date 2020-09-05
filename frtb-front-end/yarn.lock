@@ -2066,6 +2066,10 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
+claygl@^1.2.1:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/claygl/-/claygl-1.3.0.tgz#7a6e2903210519ac358848f5d78070ed211685f3"
+
 clean-css@4.2.x:
   version "4.2.1"
   resolved "http://registry.npm.taobao.org/clean-css/download/clean-css-4.2.1.tgz#2d411ef76b8569b6d0c84068dabe85b0aa5e5c17"
@@ -2974,6 +2978,13 @@ echarts-amap@1.0.0-rc.6:
   version "1.0.0-rc.6"
   resolved "http://registry.npm.taobao.org/echarts-amap/download/echarts-amap-1.0.0-rc.6.tgz#5782a74daee52ed44ce3f8f62577561783f09e16"
 
+echarts-gl@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/echarts-gl/-/echarts-gl-1.1.1.tgz#3df321cd4df7fee774e9a09e4dd29c9fd7e9104f"
+  dependencies:
+    claygl "^1.2.1"
+    zrender "^4.0.4"
+
 echarts-liquidfill@^2.0.2:
   version "2.0.4"
   resolved "http://registry.npm.taobao.org/echarts-liquidfill/download/echarts-liquidfill-2.0.4.tgz#6cf9eb57017070da0641494f22b8f446e421ac31"
@@ -2982,11 +2993,11 @@ echarts-wordcloud@^1.1.3:
   version "1.1.3"
   resolved "http://registry.npm.taobao.org/echarts-wordcloud/download/echarts-wordcloud-1.1.3.tgz#07b140c8ba76b19c317b43c310f3d5dc99289ff2"
 
-echarts@^4.1.0:
-  version "4.1.0"
-  resolved "http://registry.npm.taobao.org/echarts/download/echarts-4.1.0.tgz#d588c95f73c1a9928b9c73d5b769751c3185bcdc"
+echarts@^4.3.0:
+  version "4.9.0"
+  resolved "https://registry.yarnpkg.com/echarts/-/echarts-4.9.0.tgz#a9b9baa03f03a2a731e6340c55befb57a9e1347d"
   dependencies:
-    zrender "4.0.4"
+    zrender "4.3.2"
 
 editorconfig@^0.15.2:
   version "0.15.2"
@@ -3815,6 +3826,10 @@ fs-write-stream-atomic@^1.0.8:
 fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/fs.realpath/download/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
+
+fs@0.0.1-security:
+  version "0.0.1-security"
+  resolved "https://registry.yarnpkg.com/fs/-/fs-0.0.1-security.tgz#8a7bd37186b6dddf3813f23858b57ecaaf5e41d4"
 
 fsevents@^1.2.3, fsevents@^1.2.7:
   version "1.2.7"
@@ -5116,6 +5131,10 @@ joi@^14.3.0:
     isemail "3.x.x"
     topo "3.x.x"
 
+jquery@^2.2.1:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-2.2.4.tgz#2c89d6889b5eac522a7eea32c14521559c6cbf02"
+
 js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.5.1"
   resolved "http://registry.npm.taobao.org/js-base64/download/js-base64-2.5.1.tgz#1efa39ef2c5f7980bb1784ade4a8af2de3291121"
@@ -5469,11 +5488,7 @@ locate-path@^3.0.0:
     p-locate "^3.0.0"
     path-exists "^3.0.0"
 
-lodash.assign@^4.2.0:
-  version "4.2.0"
-  resolved "http://registry.npm.taobao.org/lodash.assign/download/lodash.assign-4.2.0.tgz#0d99f3ccd7a6d261d19bdaeb9245005d285808e7"
-
-lodash.clonedeep@^4.3.2, lodash.clonedeep@^4.5.0:
+lodash.clonedeep@^4.5.0:
   version "4.5.0"
   resolved "http://registry.npm.taobao.org/lodash.clonedeep/download/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
 
@@ -5501,10 +5516,6 @@ lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "http://registry.npm.taobao.org/lodash.memoize/download/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
 
-lodash.mergewith@^4.6.0:
-  version "4.6.1"
-  resolved "http://registry.npm.taobao.org/lodash.mergewith/download/lodash.mergewith-4.6.1.tgz#639057e726c3afbdb3e7d42741caa8d6e4335927"
-
 lodash.set@^4.3.2:
   version "4.3.2"
   resolved "http://registry.npm.taobao.org/lodash.set/download/lodash.set-4.3.2.tgz#d8757b1da807dde24816b0d6a84bea1a76230b23"
@@ -5525,9 +5536,9 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "http://registry.npm.taobao.org/lodash.uniq/download/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-lodash@4, lodash@4.x, lodash@^4.0.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@~4.17.10:
-  version "4.17.11"
-  resolved "http://registry.npm.taobao.org/lodash/download/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
+lodash@4, lodash@4.x, lodash@^4.0.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.15, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@~4.17.10:
+  version "4.17.20"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
 
 log-symbols@^1.0.2:
   version "1.0.2"
@@ -5947,9 +5958,9 @@ mute-stream@0.0.7:
   version "0.0.7"
   resolved "http://registry.npm.taobao.org/mute-stream/download/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
 
-nan@^2.10.0, nan@^2.9.2:
-  version "2.12.1"
-  resolved "http://registry.npm.taobao.org/nan/download/nan-2.12.1.tgz#7b1aa193e9aa86057e3c7bbd0ac448e770925552"
+nan@^2.13.2, nan@^2.9.2:
+  version "2.14.1"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.1.tgz#d7be34dfa3105b91494c3147089315eff8874b01"
 
 nanomatch@^1.2.1, nanomatch@^1.2.9:
   version "1.2.13"
@@ -6096,9 +6107,9 @@ node-releases@^1.1.8:
   dependencies:
     semver "^5.3.0"
 
-node-sass@^4.9.0:
-  version "4.11.0"
-  resolved "http://registry.npm.taobao.org/node-sass/download/node-sass-4.11.0.tgz#183faec398e9cbe93ba43362e2768ca988a6369a"
+node-sass@^4.13.1:
+  version "4.13.1"
+  resolved "https://registry.yarnpkg.com/node-sass/-/node-sass-4.13.1.tgz#9db5689696bb2eec2c32b98bfea4c7a2e992d0a3"
   dependencies:
     async-foreach "^0.1.3"
     chalk "^1.1.1"
@@ -6107,12 +6118,10 @@ node-sass@^4.9.0:
     get-stdin "^4.0.1"
     glob "^7.0.3"
     in-publish "^2.0.0"
-    lodash.assign "^4.2.0"
-    lodash.clonedeep "^4.3.2"
-    lodash.mergewith "^4.6.0"
+    lodash "^4.17.15"
     meow "^3.7.0"
     mkdirp "^0.5.1"
-    nan "^2.10.0"
+    nan "^2.13.2"
     node-gyp "^3.8.0"
     npmlog "^4.0.0"
     request "^2.88.0"
@@ -6532,6 +6541,10 @@ parse5@4.0.0:
 parseurl@~1.3.2:
   version "1.3.2"
   resolved "http://registry.npm.taobao.org/parseurl/download/parseurl-1.3.2.tgz#fc289d4ed8993119460c156253262cdc8de65bf3"
+
+particles.js@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/particles.js/-/particles.js-2.0.0.tgz#21386c4328d6c7f96780a201e96eedfc09c736f6"
 
 pascalcase@^0.1.1:
   version "0.1.1"
@@ -8808,6 +8821,10 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-calendar-component@^2.8.2:
+  version "2.8.2"
+  resolved "https://registry.yarnpkg.com/vue-calendar-component/-/vue-calendar-component-2.8.2.tgz#8f60c05a72c8aacbdd224016f4e1a96664abd8aa"
+
 vue-eslint-parser@^2.0.3:
   version "2.0.3"
   resolved "http://registry.npm.taobao.org/vue-eslint-parser/download/vue-eslint-parser-2.0.3.tgz#c268c96c6d94cfe3d938a5f7593959b0ca3360d1"
@@ -8866,6 +8883,13 @@ vue-loader@^15.6.2:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
+vue-particles@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/vue-particles/-/vue-particles-1.0.9.tgz#29d9cc2be0157df1c0a87ec3b96c96f33279526e"
+  dependencies:
+    particles.js "^2.0.0"
+    vue "^2.2.6"
+
 vue-router@^3.0.1:
   version "3.0.2"
   resolved "http://registry.npm.taobao.org/vue-router/download/vue-router-3.0.2.tgz#dedc67afe6c4e2bc25682c8b1c2a8c0d7c7e56be"
@@ -8895,6 +8919,10 @@ vue-template-es2015-compiler@^1.6.0, vue-template-es2015-compiler@^1.9.0:
 vue-ueditor-wrap@^1.5.0:
   version "1.5.0"
   resolved "http://registry.npm.taobao.org/vue-ueditor-wrap/download/vue-ueditor-wrap-1.5.0.tgz#953a2eaadd59773d3a51da23e43d9fb00e889e8d"
+
+vue@^2.2.6:
+  version "2.6.12"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.12.tgz#f5ebd4fa6bd2869403e29a896aed4904456c9123"
 
 vue@^2.5.11, vue@^2.5.16, vue@^2.5.17, vue@^2.5.19:
   version "2.6.8"
@@ -9299,6 +9327,6 @@ yorkie@^2.0.0:
     normalize-path "^1.0.0"
     strip-indent "^2.0.0"
 
-zrender@4.0.4:
-  version "4.0.4"
-  resolved "http://registry.npm.taobao.org/zrender/download/zrender-4.0.4.tgz#910e60d888f00c9599073f23758dd23345fe48fd"
+zrender@4.3.2, zrender@^4.0.4:
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/zrender/-/zrender-4.3.2.tgz#ec7432f9415c82c73584b6b7b8c47e1b016209c6"
